@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\2013-UISuppression-ON.reg = Document\2013-UISuppression-ON.reg
 		How to  Join a Lync conversation.md = How to  Join a Lync conversation.md
 		Document\How to  Sign in to and out of Lync.md = Document\How to  Sign in to and out of Lync.md
-		How to Start a Lync IM conversation.md = How to Start a Lync IM conversation.md
-		install  lync2013  sdk  error.md = install  lync2013  sdk  error.md
-		Lync  account.md = Lync  account.md
+		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
+		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md
+		Document\Lync  account.md = Document\Lync  account.md
 		Document\The 6 things you need to know about UI Suppression Mode.md = Document\The 6 things you need to know about UI Suppression Mode.md
 	EndProjectSection
 EndProject
