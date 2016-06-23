@@ -1,0 +1,1 @@
+[How to: Sign in to and out of Lync](https://msdn.microsoft.com/library/office/jj937241.aspx)
