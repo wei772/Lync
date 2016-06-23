@@ -10,6 +10,9 @@ using Microsoft.Lync.Model;
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System;
+using Lync;
+using Lync.Service;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
@@ -21,6 +24,8 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		private bool subscribingToInformationUpdates = false;
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
 		private Command _placeCallCommand;
+
+		private ConversationService _service;
 
 		#endregion
 
@@ -87,21 +92,27 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		#region Commands
 
-		//public ICommand PlaceCallCommand
-		//{
-		//	get
-		//	{
-		//		//if (this._placeCallCommand == null)
-		//		//	this._placeCallCommand = new Command { Execute = ExecutePlaceCall };
-		//		//return this._placeCallCommand;
-		//	}
-		//}
+		public ICommand PlaceCallCommand
+		{
+			get
+			{
+				if (this._placeCallCommand == null)
+					this._placeCallCommand = new Command { Execute = ExecutePlaceCall };
+				return this._placeCallCommand;
+			}
+		}
+
+		private void ExecutePlaceCall(object obj)
+		{
+			_service.StartCall(SipUriOfRealPerson);
+		}
 
 		#endregion
 
 
 		public NoCallViewModel()
 		{
+			_service = ConversationService.Instance;
 		}
 
 	}

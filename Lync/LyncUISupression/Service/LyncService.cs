@@ -1,4 +1,5 @@
-﻿using Microsoft.Lync.Model;
+﻿using Lync;
+using Microsoft.Lync.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,14 +95,19 @@ namespace Lync.Service
 
 			try
 			{
+
 				_userUri = userUrl;
 				_userPassword = password;
+
+				_log.Info("Connect  userUrl:{0}",userUrl);
 
 				if (_lyncClient == null)
 				{
 					//If sideBySide == false, a standard endpoint is created
 					//Otherwise, a side-by-side endpoint is created
 					_lyncClient = LyncClient.GetClient(sideBySide);
+
+					_log.Info("Connect  _lyncClientState:{0}", _lyncClient.State.ToString());
 				}
 				_inSideBySideMode = sideBySide;
 

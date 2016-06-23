@@ -24,8 +24,9 @@ namespace SuperSimpleLyncKiosk
         {
             // Get Reference to the current Process
             Process me = Process.GetCurrentProcess();
-            // Check how many total processes have the same name as the current one
-            if (Process.GetProcessesByName(me.ProcessName).Length > 1)
+			var processCount = Process.GetProcessesByName(me.ProcessName).Length;
+			// Check how many total processes have the same name as the current one
+			if (processCount > 2)
             {
                 Application.Current.Shutdown();
                 return;
