@@ -1,0 +1,1 @@
+[How to: Join a Lync conversation](https://msdn.microsoft.com/en-us/library/office/jj937250.aspx)
