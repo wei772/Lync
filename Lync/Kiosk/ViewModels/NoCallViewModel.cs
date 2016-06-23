@@ -20,7 +20,6 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		private bool subscribingToInformationUpdates = false;
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
-		private LyncUISupressionWrapper.ILyncModel model;
 		private Command _placeCallCommand;
 
 		#endregion
@@ -88,71 +87,26 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		#region Commands
 
-		public ICommand PlaceCallCommand
-		{
-			get
-			{
-				if (this._placeCallCommand == null)
-					this._placeCallCommand = new Command { Execute = ExecutePlaceCall };
-				return this._placeCallCommand;
-			}
-		}
+		//public ICommand PlaceCallCommand
+		//{
+		//	get
+		//	{
+		//		//if (this._placeCallCommand == null)
+		//		//	this._placeCallCommand = new Command { Execute = ExecutePlaceCall };
+		//		//return this._placeCallCommand;
+		//	}
+		//}
 
 		#endregion
 
-		#region Constructor
 
 		public NoCallViewModel()
 		{
-			model = LyncUISupressionWrapper.LyncModel.Instance;
-			model.StateChanged += model_StateChanged;
-			model.PresenceChanged += model_PresenceChanged;
-			model.ActivityChanged += model_ActivityChanged;
-			model.DisplayNameChanged += model_DisplayNameChanged;
-			model.PhotoChanged += model_PhotoChanged;
-
 		}
-
-		void model_PhotoChanged(object sender, LyncUISupressionWrapper.PhotoChangedEventArgs e)
-		{
-			Photo = e.Photo;
-		}
-
-		void model_DisplayNameChanged(object sender, LyncUISupressionWrapper.StringValueInformationEventArgs e)
-		{
-			DisplayName = e.Value;
-		}
-
-		void model_ActivityChanged(object sender, LyncUISupressionWrapper.StringValueInformationEventArgs e)
-		{
-			Activity = e.Value;
-		}
-
-		#endregion
-
-		void ExecutePlaceCall(object param)
-		{
-			model.StartCall(SipUriOfRealPerson);
-		}
-
-		void model_PresenceChanged(object sender, LyncUISupressionWrapper.PresenceInformationEventArgs e)
-		{
-			Presence = e.Presence.ToString();
-		}
-
-		void model_StateChanged(object sender, LyncUISupressionWrapper.StateChangedEventArgs e)
-		{
-			if (e.State == LyncUISupressionWrapper.ApplicationState.NoCall && !subscribingToInformationUpdates)
-			{
-				model.SubscribeForInformationUpdates(SipUriOfRealPerson);
-				subscribingToInformationUpdates = true;
-
-
-			}
-		}
-
-
-
 
 	}
+
+
+
+
 }

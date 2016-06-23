@@ -227,9 +227,9 @@
     <Resource Include="Images\phone.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LyncUISupressionWrapper\LyncUISupressionWrapper.csproj">
-      <Project>{f643e277-cbaf-44c3-80e3-8b65014b135a}</Project>
-      <Name>LyncUISupressionWrapper</Name>
+    <ProjectReference Include="..\LyncUISupression\LyncUISupression.csproj">
+      <Project>{9fb97656-d74f-4ebe-9a98-58ff3492ac93}</Project>
+      <Name>LyncUISupression</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

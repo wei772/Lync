@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\The 6 things you need to know about UI Suppression Mode.md = Document\The 6 things you need to know about UI Suppression Mode.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperSimpleLyncKiosk - UI Suppressed", "Kiosk\SuperSimpleLyncKiosk - UI Suppressed.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk", "Kiosk\Kiosk.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

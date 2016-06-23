@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LyncUISupression.Service
+namespace Lync.Service
 {
 	public class LyncService
 	{
+		private ILog _log = LogManager.GetLog(typeof(LyncService));
 
 		public delegate void UserIsSignedInDelegate(LyncClient lyncClient);
 		//User has signed in to Lync
@@ -151,16 +152,16 @@ namespace LyncUISupression.Service
 			}
 			catch (NotInitializedException ni)
 			{
-
+				_log.ErrorException("Connect", ni);
 
 			}
 			catch (ClientNotFoundException cnf)
 			{
-
+				_log.ErrorException("Connect", cnf);
 			}
 			catch (Exception exc)
 			{
-
+				_log.ErrorException("Connect", exc);
 			}
 		}
 
@@ -176,6 +177,7 @@ namespace LyncUISupression.Service
 			string userUri = _userUri;
 			string userPassword = _userPassword;
 
+			_log.Info("SignUserIn  Start");
 
 			_userUri = userUri;
 			_lyncClient.BeginSignIn(
@@ -187,10 +189,12 @@ namespace LyncUISupression.Service
 					try
 					{
 						_lyncClient.EndSignIn(ar);
+						_log.Info("SignUserIn End");
+
 					}
 					catch (Exception exc)
 					{
-						throw exc;
+						_log.ErrorException("SignUserIn", exc);
 					}
 				},
 				null);
@@ -220,7 +224,7 @@ namespace LyncUISupression.Service
 				}
 				catch (Exception ex)
 				{
-
+					_log.ErrorException("OnLyncClientCredentialRequested", ex);
 				}
 			}
 			else
@@ -238,7 +242,7 @@ namespace LyncUISupression.Service
 			}
 			catch (LyncClientException lce)
 			{
-				//	MessageBox.Show("Exception on sign out in SignInDelayed event: " + lce.Message);
+				_log.ErrorException("LyncClientException", lce);
 			}
 		}
 

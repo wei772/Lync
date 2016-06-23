@@ -53,7 +53,7 @@ namespace SuperSimpleLyncKiosk.Views
             var vm = DataContext as MainViewModel;
 			if (vm != null)
 			{
-				vm.ShutDownLync();
+			//	vm.ShutDownLync();
 			}
 
         }

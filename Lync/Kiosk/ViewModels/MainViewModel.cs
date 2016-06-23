@@ -6,45 +6,50 @@
  * http://www.LyncAutoAnswer.com
 */
 
+using Lync.Service;
 using System;
-using LyncUISupressionWrapper;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
-    class MainViewModel : ViewModelBase
-    {
-        LyncUISupressionWrapper.ILyncModel _model = null;
+	class MainViewModel : ViewModelBase
+	{
+		private LyncService _lyncService = LyncService.Instance;
 
-        private string _currentVisualState;
+		private string _currentVisualState;
 
-        public string CurrentVisualState
-        {
-            get { return _currentVisualState; }
-            private set
-            {
-                _currentVisualState = value;
-                NotifyPropertyChanged("CurrentVisualState");
-            }
-        }
+		public string CurrentVisualState
+		{
+			get { return _currentVisualState; }
+			private set
+			{
+				_currentVisualState = value;
+				NotifyPropertyChanged("CurrentVisualState");
+			}
+		}
 
-        public MainViewModel()
-        {
-            _model = LyncModel.Instance;
-            _model.StateChanged += new EventHandler<StateChangedEventArgs>(_model_StateChanged);
+		public MainViewModel()
+		{
+			_lyncService.ClientStateChanged += OnLyncServiceClientStateChanged;
 
-            _model.SignIn(Properties.Settings.Default.LyncAccountEmail, Properties.Settings.Default.LyncAccountDomainUser, Properties.Settings.Default.LyncAccountPassword);
-        }
+			_lyncService.Connect(
+				Properties.Settings.Default.LyncAccountEmail
+				, Properties.Settings.Default.LyncAccountPassword
+				,false);
+		}
 
-        public void ShutDownLync()
-        {
-            _model.Shutdown();
-        }
+		private void   OnLyncServiceClientStateChanged(string newState)
+		{
+			if (newState == "SignedIn")
+			{
+				CurrentVisualState = "NoCall";
+			}
+			else  if(newState== "SigningIn")
+			{
+				CurrentVisualState = "SigningIn";
+			}
 
-        private void _model_StateChanged(object sender, EventArgs e)
-        {
-            CurrentVisualState = _model.State.ToString();
-        }
+		}
 
-    }
+	}
 
 }
