@@ -1,0 +1,32 @@
+﻿<!--/*=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================*/-->
+<Window x:Class="ContentModalitySample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sample for Content Modality" Height="431" Width="487" Loaded="Window_Loaded">
+    <Grid>
+        <TextBox Height="30" HorizontalAlignment="Left" Margin="12,12,0,0" Name="textBoxShareWith" VerticalAlignment="Top" Width="270" Text="Enter a sip address here" />
+        <TextBox Height="30" HorizontalAlignment="Left" Margin="12,56,0,0" Name="textBoxTitle" VerticalAlignment="Top" Width="270" Text="Some unique title here" />
+        <TextBox Height="30" HorizontalAlignment="Left" Margin="12,98,0,0" Name="textBoxPPTFilePath" VerticalAlignment="Top" Width="270" Text="Full path to the PowerPoint File" />
+        <Button Content="Share Whiteboard" Height="30" HorizontalAlignment="Left" Margin="300,56,0,0" Name="buttonShareWhiteBoard" VerticalAlignment="Top" Width="150" Click="buttonShareWhiteBoard_Click" />
+        <Button Content="Share PowerPoint" Height="30" HorizontalAlignment="Left" Margin="300,98,0,0" Name="buttonSharePPT" VerticalAlignment="Top" Width="150" Click="buttonSharePPT_Click" />
+        <Button Content="Forward" Height="30" HorizontalAlignment="Left" Margin="300,134,0,0" Name="buttonForward" VerticalAlignment="Top" Width="75" Click="buttonForward_Click" />
+        <Button Content="Backward" Height="30" HorizontalAlignment="Left" Margin="375,134,0,0" Name="buttonBackward" VerticalAlignment="Top" Width="75" Click="buttonBackward_Click" />
+        <Button Content="Accept Toast" Height="30" HorizontalAlignment="Left" Margin="132,181,0,0" Name="buttonAccept" VerticalAlignment="Top" Width="150" Click="buttonAccept_Click" />
+        <Button Content="Disconnect" Height="30" HorizontalAlignment="Left" Margin="300,181,0,0" Name="buttonDisconnect" VerticalAlignment="Top" Width="150" Click="buttonDisconnect_Click" />
+        <TextBox Height="154" HorizontalAlignment="Left" Margin="12,226,0,0" Name="textBoxLog" VerticalAlignment="Top" Width="438" IsReadOnly="True" />
+        <Button Content="Create Conversation" Height="30" HorizontalAlignment="Left" Margin="300,12,0,0" Name="buttonCreateConversation" VerticalAlignment="Top" Width="150" Click="buttonCreateConversation_Click" />
+    </Grid>
+</Window>

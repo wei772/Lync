@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head><link rel="stylesheet" type="text/css" href="description/Combined.css,0:HeaderFooterSprite,0:Header.NonMtps,1:LinkList;/Areas/Centers/Themes/StandardDevCenter/Content:0,/Areas/Epx/Themes/Base/Content:1&amp;amp;hashKey=C9973DA951AE6202C9B348379A1BE49D" xmlns="http://www.w3.org/1999/xhtml" />
+<link type="text/css" rel="stylesheet" xmlns="http://www.w3.org/1999/xhtml" />
+<link rel="stylesheet" type="text/css" href="description/0aac1760-b513-488a-ba57-e31d9413a075Combined.css,0:HeaderFooterSprite,0:Footer.NonMtps,1:LinkList;/Areas/Centers/Themes/StandardDevCenter/Content:0,/Areas/Epx/Themes/Base/Content:1&amp;amp;hashKey=F576C687BC536B84D6E5B3246EE39B49" xmlns="http://www.w3.org/1999/xhtml" />
+<link type="text/css" rel="stylesheet" xmlns="http://www.w3.org/1999/xhtml" />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Lync 2013 SDK: Share resources in UI suppression</title>
+        <link href="description/Galleries.css" type="text/css" rel="Stylesheet" /><link href="description/Layout.css" type="text/css" rel="Stylesheet" /><link href="description/Brand.css" type="text/css" rel="Stylesheet" />
+        <link href="description/iframedescription.css" rel="Stylesheet" type="text/css" />
+        <script src="description/offline.js" type="text/javascript"></script>
+        <style type="text/css">
+            #projectInfo {
+                overflow: auto;
+            }
+            #longDesc {
+                clear:both;
+                margin: 25px 0 10px 0;
+            }
+
+            #SampleIndexList{
+                margin-left: 15px;
+            }
+        </style>
+    </head>
+<body>
+    <div id="offlineDescription">
+        <h1>Lync 2013 SDK: Share resources in UI suppression</h1>
+        <br/>
+        <div id="projectInfo">
+            <div class="section">
+                    <div class="itemBarLong tagsContainer">
+                        <label for="Technologies">Technologies</label>
+                        <div id="Technologies">
+                            Lync Server 2013, Lync 2013, Lync 2013 SDK CU2
+                        </div>
+                    </div>
+                    <div class="itemBarLong tagsContainer">
+                        <label for="Topics">Topics</label>
+                        <div id="Topics">
+                            UI suppression, remote sharing
+                        </div>
+                    </div>
+                <div class="itemBarLong">
+                    <label for="Platforms">Platforms</label>
+                    <div id="Platforms">
+                        Desktop
+                    </div>
+                </div>
+                <div class="itemBarLong">
+                    <label for="Requirements">Requirements</label>
+                    <div id="Requirements">
+                        
+                    </div>
+                </div>
+                <div class="itemBar">
+                    <label for="LastUpdated">Primary language</label>
+                    <div id="LastUpdated">en-US</div>
+                </div>
+                <div class="itemBar">
+                    <label for="LastUpdated">Updated</label>
+                    <div id="LastUpdated">8/19/2013</div>
+                </div>
+                <div class="itemBarLong">
+                    <label for="License">License</label>
+                    <div id="License">
+                        <a href="license.rtf">Apache License, Version 2.0</a></div>
+                </div>
+                <div class="itemBar">
+                    <div class="viewonlinecont">
+                        <a data-link="online" href="http://code.msdn.microsoft.com/Lync-Client-2013-SDK-CU2-02f9292e">View this sample online</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                   
+<script type="text/javascript">
+    function initializePage() {
+        var otherTabClass = 'otherTab';
+        var hiddenPreClass = 'hidden';
+
+        var htmlDecode = function(encodedData) {
+            var decodedData = "";
+            if (encodedData) {
+                var div = document.createElement('div');
+                div.innerHTML = encodedData;
+                decodedData = div.firstChild.nodeValue.replace( /\\r\\n/ig , '\r\n');
+            }
+            return decodedData;
+        };
+                
+        Galleries.iterateElem(Galleries.findElem(null, 'div', 'scriptcode'), function (index, scriptBlock) {
+            var titleElem = Galleries.findElem(scriptBlock, 'div', 'title')[0];
+            var labelElems = Galleries.findElem(titleElem, 'span');
+            if (labelElems.length == 0) {
+                labelElems = titleElem;
+            }
+            var languageSpans = Galleries.findElem(scriptBlock, 'span', 'hidden');
+            var pres = Galleries.findElem(scriptBlock, 'pre');
+            if (languageSpans.length > 0 && pres.length > 1) {
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    var languageSpan = languageSpans[index];
+                            
+                    elem.code = codePre.innerHTML.replace( /(\r(\n)?)|((\r)?\n)/ig , '\\r\\n');
+                            
+                    codePre.className = codePre.className.replace(hiddenPreClass, '');
+                            
+                    languageSpan.parentNode.removeChild(languageSpan);
+                });
+
+                pres = Galleries.findElem(scriptBlock, 'pre');
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    if (index == 0) {
+                        scriptBlock.activeTab = 0;
+                    }
+                    else {
+                        labelSpan.className += otherTabClass;
+                        codePre.className += hiddenPreClass;
+                    }
+                    Galleries.attachEventHandler(labelSpan, 'click', function(e) {
+                        var activeTab = scriptBlock.activeTab;
+                        labelElems[activeTab].className += otherTabClass;
+                        pres[activeTab].className += hiddenPreClass;
+
+                        codePre.className = codePre.className.replace(hiddenPreClass, '');
+                        labelSpan.className = labelSpan.className.replace(otherTabClass, '');
+                        scriptBlock.activeTab = index;
+                    });
+                });
+
+                var preview = Galleries.findElem(scriptBlock, 'div', 'preview');
+                if (preview.length == 0) {
+                    preview.push(pres[pres.length - 1]);
+                }
+                Galleries.iterateElem(preview, function(index, elem) {
+                    elem.parentNode.removeChild(elem);
+                });
+
+                if (window.clipboardData && clipboardData.setData) {
+                    var copyLink = document.createElement('a');
+                    copyLink.href = 'javascript:void(0);';
+                    copyLink.className = 'copyCode';
+                    copyLink.innerHTML = 'Copy code';
+                    Galleries.attachEventHandler(copyLink, 'click', function (e) {
+                        clipboardData.setData("Text", htmlDecode(labelElems[scriptBlock.activeTab].code));
+                        return false;
+                    });
+                    scriptBlock.insertBefore(copyLink, scriptBlock.childNodes[0]);
+                }
+            }
+        });
+    }
+
+    Galleries.onWindowLoad(function(){
+        initializePage();
+    });
+
+</script>
+<div id="longDesc">
+    
+<div id="header">
+<table id="bottomTable" cellspacing="0" cellpadding="0">
+<tbody>
+<tr id="headerTableRow1">
+<td align="left">&nbsp;</td>
+</tr>
+<tr id="headerTableRow2">
+<td align="left"><span id="nsrTitle">Lync 2013 SDK: ShareResources in UI suppression</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mainSection">
+<div id="mainBody">
+<div>
+<p>This code sample shows you how to view a remotely shared application or share a local application in a Microsoft Lync 2013 API-enabled application in UI suppression mode.</p>
+<p><strong>Important!</strong> The sample will not work unless you have downloaded and installed the
+<a href="http://www.microsoft.com/en-us/download/details.aspx?id=36824" >
+cumulative update for the Lync 2013 SDK: July 2013</a>.</p>
+</div>
+<h1>Description of the sample</h1>
+<div id="sectionSection0">
+<p>This sample shows you how to build a Windows Forms application that signs in to Microsoft Lync 2013, starts a conversation with a user in your contact list, shows an application sharing stage when another user shares an application, and lets you share one
+ of your running applications.</p>
+<p>The Lync 2013 API now supports application sharing in UI suppression mode and this sample is optimized for this scenario. When sharing a local application, you can grant or deny another user's request to control the application. If you have granted a control
+ request, you can revoke it. To give a user a visual hint that an application is being shared, the sample creates a yellow border around the shared application window.</p>
+<p>If you accept an invitation to view a shared window, the sample window expands to show a sharing view of the remote application. You can configure the sample to adjust its dimensions to match the dimensions of the shared application. This feature lets you
+ keep the entire shared application workspace in view at all times. If you don't want to let the sample application dimensions change when the shared application dimensions change, you can configure the view to show the shared application in a different resolution
+ within a fixed view area. Figure 1 shows the sample hosting a conversation where the user is sharing an Excel workbook.</p>
+<strong>
+<div class="caption">Figure 1. Screen image of the sample and a shared Excel workbook.</div>
+</strong><br>
+&nbsp;
+<p><img src="description/image.png" alt=""></p>
+<h3>Prerequisites for running and compiling the sample in Visual Studio</h3>
+<div>
+<p>This sample requires the following:</p>
+<ul>
+<li>
+<p>.NET Framework 4.0 or newer versions of .NET Framework.</p>
+</li><li>
+<p>Visual Studio 2010 or newer versions of Visual Studio.</p>
+</li><li>
+<p>Microsoft Lync 2013 SDK, <a href="http://www.microsoft.com/en-us/download/details.aspx?id=36824" >
+cumulative update for Lync 2013 SDK: July 2013</a> or newer.</p>
+</li></ul>
+</div>
+<h3>Prerequisites for running installed sample on client computer</h3>
+<div>
+<p>This sample requires the following:</p>
+<ul>
+<li>
+<p>A running instance of Microsoft Lync 2013; <a href="http://support.microsoft.com/kb/2768004" >
+May, 2013 update</a>.</p>
+</li><li>
+<p>The Lync runtime that is installed in the <span>\Program files\Microsoft Office\Office15\LyncSDK\Redist</span> folder.</p>
+</li></ul>
+</div>
+<h3>Run and test the sample</h3>
+<div>
+<p>This sample was designed to be run locally on the computer running Lync 2013.</p>
+<ol>
+<li>
+<p>Open ShareResources.csproj.</p>
+</li><li>
+<p>In Visual Studio, press F5.</p>
+</li></ol>
+</div>
+</div>
+<h1>Additional resources</h1>
+<div id="sectionSection1">
+<ul>
+<li>
+<p><a href="http://msdn.microsoft.com/library/0a6f5019-cffe-4e0c-aeae-22878f48e868.aspx" >Lync 2013 SDK general reference</a></p>
+</li><li>
+<p><a href="http://msdn.microsoft.com/library/9626409f-cf49-4f1e-9212-045d990f1923.aspx" >How to: Get a shareable resource and share it in a conversation</a></p>
+</li><li>
+<p><a href="http://msdn.microsoft.com/library/d07626a9-aa8a-4331-8a60-17ec09d77020.aspx" >How to: Show a bright border around a locally shared resource</a></p>
+</li><li>
+<p><a href="http://code.msdn.microsoft.com/Displaying-a-highlighted-30039fd2" >Displaying a highlighted border around a process window or desktop</a></p>
+</li></ul>
+<p>&nbsp;</p>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+
+</div>
+
+
+    </div>
+</body>
+</html>
