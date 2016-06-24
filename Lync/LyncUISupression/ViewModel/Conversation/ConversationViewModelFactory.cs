@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lync.ViewModel
 {
-	public class ConversationFactory
+	public class ConversationViewModelFactory
 	{
 	}
 }

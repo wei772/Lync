@@ -15,7 +15,6 @@ namespace Lync.Service
 
 		private LyncService _lyncService;
 
-
 		internal ConversationManager ConversationManager
 		{
 			get
@@ -23,7 +22,6 @@ namespace Lync.Service
 				return LyncService.Instance.Client.ConversationManager;
 			}
 		}
-
 
 		private Dictionary<Guid, LyncConversation> _LyncConversationDictionary;
 
@@ -49,20 +47,18 @@ namespace Lync.Service
 
 		}
 
-		public void InitializeConversationEvent()
-		{
-			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
-			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
-		}
-
-
 		internal void AddConversation(LyncConversation lyncConversation)
 		{
+			if (_currentLyncConversation != null)
+			{
+				_currentLyncConversation.End();
+			}
 			_currentLyncConversation = lyncConversation;
+
+			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
+			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
 			ConversationManager.AddConversation();
 		}
-
-
 
 
 		private void OnConversationManagerConversationRemoved(object sender, ConversationManagerEventArgs e)
@@ -72,26 +68,40 @@ namespace Lync.Service
 
 		private void OnConversationManagerConversationAdded(object sender, ConversationManagerEventArgs e)
 		{
-			if (_currentLyncConversation != null)
+			Boolean addedByThisProcess = true;
+
+			try
 			{
-				_currentLyncConversation.End();
+				//Suspend hosting new conversations until this conversation is ended
+				ConversationManager.ConversationAdded -= OnConversationManagerConversationAdded;
+			}
+
+			catch (Exception ex)
+			{
+				_log.Error("ConversationAdded", ex);
 			}
 
 			var conversation = e.Conversation;
-
-			_currentLyncConversation.HandleAdded();
-
-			_log.Debug("OnConversationManagerConversationAdded");
-		}
-
-
-		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
-		{
-			if (e.NewState == ConversationState.Terminated)
+			if (_currentLyncConversation == null)
 			{
-				_currentLyncConversation.Terminate();
+				addedByThisProcess = false;
+				_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
 			}
+
+			_log.Debug("OnConversationManagerConversationAdded  addedByThisProcess:{0}",addedByThisProcess);
+
+			if (_currentLyncConversation != null)
+			{
+				_currentLyncConversation.Conversation = conversation;
+				_currentLyncConversation.HandleAdded();
+			}
+			else
+			{
+				_log.Debug("OnConversationManagerConversationAdded  none conversationType");
+			}
+
 		}
+
 
 
 	}

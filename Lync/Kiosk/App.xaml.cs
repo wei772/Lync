@@ -12,6 +12,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using System.Diagnostics;
+using GalaSoft.MvvmLight.Threading;
 
 namespace SuperSimpleLyncKiosk
 {
@@ -32,7 +33,9 @@ namespace SuperSimpleLyncKiosk
                 return;
             }
 
-            base.OnStartup(e);
+			DispatcherHelper.Initialize();
+
+			base.OnStartup(e);
         }
 
     }

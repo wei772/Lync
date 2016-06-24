@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19038, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Lync.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.dll</HintPath>
@@ -48,11 +56,19 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Office.Uc.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -65,23 +81,27 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncOperationHandler.cs" />
     <Compile Include="Control\VideoWindowHost.xaml.cs">
       <DependentUpon>VideoWindowHost.xaml</DependentUpon>
     </Compile>
     <Compile Include="Enum\ConversationType.cs" />
     <Compile Include="Enum\VideoDirection.cs" />
     <Compile Include="EventArg\VideoAvailabilityChangedEventArgs.cs" />
+    <Compile Include="LyncModelExceptionHelper.cs" />
     <Compile Include="Model\Conversation\AudioConversation.cs" />
+    <Compile Include="Model\Conversation\ConversationFactory.cs" />
     <Compile Include="Model\Conversation\LyncConversation.cs" />
     <Compile Include="Model\Conversation\ShareResourceConversation.cs" />
     <Compile Include="Model\Conversation\VideoConversation.cs" />
     <Compile Include="Model\LyncVideoWindow.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ContactService.cs" />
     <Compile Include="Service\ConversationService.cs" />
     <Compile Include="Service\LyncService.cs" />
-    <Compile Include="ViewModel\Conversation\ConversationFactory.cs" />
+    <Compile Include="ViewModel\Conversation\ConversationViewModelFactory.cs" />
     <Compile Include="ViewModel\Conversation\ConversationViewModelBase.cs" />
     <Compile Include="ViewModel\ParticipantViewModel.cs" />
     <Compile Include="ViewModel\Conversation\ShareFileConversationViewModel.cs" />
@@ -104,7 +124,9 @@
       <DependentUpon>VideoConversationView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Control\VideoWindowHost.xaml">
       <Generator>MSBuild:Compile</Generator>
