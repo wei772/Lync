@@ -65,16 +65,71 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\ConversationStatus.cs" />
+    <Compile Include="Control\VideoWindowHost.xaml.cs">
+      <DependentUpon>VideoWindowHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enum\ConversationType.cs" />
+    <Compile Include="Enum\VideoDirection.cs" />
+    <Compile Include="EventArg\VideoAvailabilityChangedEventArgs.cs" />
+    <Compile Include="Model\Conversation\AudioConversation.cs" />
+    <Compile Include="Model\Conversation\LyncConversation.cs" />
+    <Compile Include="Model\Conversation\ShareResourceConversation.cs" />
+    <Compile Include="Model\Conversation\VideoConversation.cs" />
     <Compile Include="Model\LyncVideoWindow.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ContactService.cs" />
     <Compile Include="Service\ConversationService.cs" />
     <Compile Include="Service\LyncService.cs" />
+    <Compile Include="ViewModel\Conversation\ConversationFactory.cs" />
+    <Compile Include="ViewModel\Conversation\ConversationViewModelBase.cs" />
+    <Compile Include="ViewModel\ParticipantViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\ShareFileConversationViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\VideoConversationViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\AudioConversationViewModel.cs" />
+    <Compile Include="View\Conversation\AudioConversationView.xaml.cs">
+      <DependentUpon>AudioConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ParticipantView.xaml.cs">
+      <DependentUpon>ParticipantView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conversation\ShareDesktopConversationView.xaml.cs">
+      <DependentUpon>ShareDesktopConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Conversation\ShareDesktopConversationViewModel.cs" />
+    <Compile Include="View\Conversation\ShareFileConversationView.xaml.cs">
+      <DependentUpon>ShareFileConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conversation\VideoConversationView.xaml.cs">
+      <DependentUpon>VideoConversationView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Control\" />
+    <Page Include="Control\VideoWindowHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conversation\AudioConversationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ParticipantView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Conversation\ShareDesktopConversationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Conversation\ShareFileConversationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Conversation\VideoConversationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

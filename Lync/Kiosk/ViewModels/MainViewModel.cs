@@ -35,6 +35,8 @@ namespace SuperSimpleLyncKiosk.ViewModels
 				Properties.Settings.Default.LyncAccountEmail
 				, Properties.Settings.Default.LyncAccountPassword
 				,false);
+
+			ConversationService.Instance.InitializeConversationEvent();
 		}
 
 		private void   OnLyncServiceClientStateChanged(string newState)

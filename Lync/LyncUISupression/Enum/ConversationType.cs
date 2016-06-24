@@ -5,10 +5,12 @@ using System.Text;
 
 namespace Lync.Enum
 {
-	public enum ConversationStatus
+	public enum ConversationType
 	{
 		None,
-		CallInProgress,
-
+		Audio,
+		Video,
+		ShareDesktop,
+		ShareFile
 	}
 }

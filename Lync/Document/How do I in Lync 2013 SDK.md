@@ -1,0 +1,1 @@
+[How do I in Lync 2013 SDK](https://msdn.microsoft.com/en-us/library/office/jj933118.aspx)

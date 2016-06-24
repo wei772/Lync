@@ -3,11 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LyncUISupression", "LyncUISupression\LyncUISupression.csproj", "{9FB97656-D74F-4EBE-9A98-58FF3492AC93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync", "LyncUISupression\Lync.csproj", "{9FB97656-D74F-4EBE-9A98-58FF3492AC93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B50A299-087A-4C1F-8E61-0F405DF4B92A}"
 	ProjectSection(SolutionItems) = preProject
-		How to  Join a Lync conversation.md = How to  Join a Lync conversation.md
+		Document\How do I in Lync 2013 SDK.md = Document\How do I in Lync 2013 SDK.md
+		Document\How to  Join a Lync conversation.md = Document\How to  Join a Lync conversation.md
 		Document\How to  Sign in to and out of Lync.md = Document\How to  Sign in to and out of Lync.md
 		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
 		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md

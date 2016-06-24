@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System;
 using Lync;
 using Lync.Service;
+using Lync.Model;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
@@ -25,7 +26,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
 		private Command _placeCallCommand;
 
-		private ConversationService _service;
+		private AudioConversation _audioConversation;
 
 		#endregion
 
@@ -104,7 +105,8 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		private void ExecutePlaceCall(object obj)
 		{
-			_service.StartCall(SipUriOfRealPerson);
+			var audio = new AudioConversation();
+			audio.Start(SipUriOfRealPerson);
 		}
 
 		#endregion
@@ -112,7 +114,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		public NoCallViewModel()
 		{
-			_service = ConversationService.Instance;
+		
 		}
 
 	}
