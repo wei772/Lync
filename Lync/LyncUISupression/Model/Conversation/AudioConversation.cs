@@ -53,7 +53,6 @@ namespace Lync.Model
 			//subscribes to the video channel state changes so that the status bar gets updated with the new state
 			_audioChannel.StateChanged += OnAudioChannelStateChanged;
 
-			ConnectAudio();
 		}
 
 
@@ -162,6 +161,7 @@ namespace Lync.Model
 			{
 				
 			}
+
 		}
 
 		private void OnAudioChannelActionAvailabilityChanged(object sender, ChannelActionAvailabilityEventArgs e)

@@ -155,7 +155,7 @@ namespace Lync.Model
 								IsCanRemoveParticipant = e.IsAvailable;
 								break;
 						}
-						_log.Debug("OnConversationActionAvailabilityChanged");
+						_log.Debug("OnConversationActionAvailabilityChanged  Action: {0}", e.Action.ToString());
 					}
 			);
 		}

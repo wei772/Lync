@@ -57,9 +57,18 @@ namespace Lync.Service
 
 			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
 			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
-			ConversationManager.AddConversation();
+
+			var conversation = ConversationManager.AddConversation();
+			conversation.StateChanged += OnConversationStateChanged;
 		}
 
+		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
+		{
+			if (e.NewState == ConversationState.Terminated)
+			{
+			}
+			_log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
+		}
 
 		private void OnConversationManagerConversationRemoved(object sender, ConversationManagerEventArgs e)
 		{
@@ -88,7 +97,7 @@ namespace Lync.Service
 				_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
 			}
 
-			_log.Debug("OnConversationManagerConversationAdded  addedByThisProcess:{0}",addedByThisProcess);
+			_log.Debug("OnConversationManagerConversationAdded  addedByThisProcess:{0}", addedByThisProcess);
 
 			if (_currentLyncConversation != null)
 			{
