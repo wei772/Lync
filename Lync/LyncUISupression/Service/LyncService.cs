@@ -268,10 +268,10 @@ namespace Lync.Service
 					}
 					if (e.OldState == ClientState.SigningOut)
 					{
-						_lyncClient.BeginShutdown((ar) =>
-						{
-							_lyncClient.EndShutdown(ar);
-						}, null);
+						//_lyncClient.BeginShutdown((ar) =>
+						//{
+						//	_lyncClient.EndShutdown(ar);
+						//}, null);
 					}
 					break;
 				case ClientState.Uninitialized:

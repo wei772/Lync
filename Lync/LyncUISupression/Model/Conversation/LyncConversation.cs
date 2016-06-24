@@ -107,10 +107,15 @@ namespace Lync.Model
 						var newPart = new ParticipantModel(e.Participant);
 						Participants.Add(newPart);
 						_log.Debug("OnConversationParticipantAdded  {0}", newPart);
+						OnConversationParticipantAddedCore(e.Participant);
 					}
 				);
 		}
 
+		protected virtual void OnConversationParticipantAddedCore(Participant participant)
+		{
+
+		}
 
 		private void OnConversationParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs e)
 		{

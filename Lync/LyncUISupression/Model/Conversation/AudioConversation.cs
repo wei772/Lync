@@ -224,6 +224,21 @@ namespace Lync.Model
 		#endregion
 
 
+		protected override void OnConversationParticipantAddedCore(Participant participant)
+		{
+			((AVModality)participant.Modalities[ModalityTypes.AudioVideo]).ActionAvailabilityChanged += OnParticipantAudioActionAvailabilityChanged;
+			if (participant.IsSelf)
+			{
+				ConnectAudio();
+			}
+
+		}
+
+		private void OnParticipantAudioActionAvailabilityChanged(object sender, ModalityActionAvailabilityChangedEventArgs e)
+		{
+		}
+
+
 		/// <summary>
 		/// Connects the modality (audio): AvModality.BeginConnect()
 		/// </summary>
