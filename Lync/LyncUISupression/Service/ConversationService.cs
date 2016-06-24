@@ -29,8 +29,6 @@ namespace Lync.Service
 
 		private LyncConversation _currentLyncConversation;
 
-		public ConversationType Type;
-
 
 		private static ConversationService _instance;
 		public static ConversationService Instance
@@ -48,7 +46,7 @@ namespace Lync.Service
 		private ConversationService()
 		{
 			_lyncService = LyncService.Instance;
-	
+
 		}
 
 		public void InitializeConversationEvent()
@@ -58,9 +56,9 @@ namespace Lync.Service
 		}
 
 
-		internal void AddConversation(ConversationType type)
+		internal void AddConversation(LyncConversation lyncConversation)
 		{
-			Type = type;
+			_currentLyncConversation = lyncConversation;
 			ConversationManager.AddConversation();
 		}
 
@@ -83,7 +81,7 @@ namespace Lync.Service
 
 			_currentLyncConversation.HandleAdded();
 
-			_log.Debug("OnConversationManagerConversationAdded  Type:{0}", Type.ToString());
+			_log.Debug("OnConversationManagerConversationAdded");
 		}
 
 
@@ -94,10 +92,6 @@ namespace Lync.Service
 				_currentLyncConversation.Terminate();
 			}
 		}
-
-
-
-
 
 
 	}

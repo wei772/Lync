@@ -27,7 +27,7 @@ namespace Lync.Model
 
 		public void CreateConversation()
 		{
-			ConversationService.AddConversation(Type);
+			ConversationService.AddConversation(this);
 		}
 
 		public virtual void HandleAdded()
