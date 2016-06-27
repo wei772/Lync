@@ -22,7 +22,7 @@ using Microsoft.Lync.Model.Group;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.Sharing;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace ShareResources
 {
@@ -713,6 +713,7 @@ namespace ShareResources
             {
                 return;
             }
+			Debug.WriteLine("StartSharingResource");
 
             //If there is no sharing modality stored locally on the active conversation, get it from the active conversation and store it.
             if (_sharingModality == null)
@@ -1148,6 +1149,7 @@ namespace ShareResources
             CanShareDetail sharingDetail;
             if (!_sharingModality.CanShare(selectedResourceType, out sharingDetail))
             {
+				Debug.WriteLine("sharingDetail:{0}", sharingDetail);
                 switch (sharingDetail)
                 {
                     case CanShareDetail.DisabledByOrganizerPolicy:
@@ -1163,6 +1165,9 @@ namespace ShareResources
                 return;
             }
             this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Stop sharing" });
+
+			Debug.WriteLine("selectedResourceType: {0}",selectedResourceType.ToString());
+
             if (selectedResourceType == SharingResourceType.Desktop)
             {
                 _sharingModality.BeginShareDesktop((ar) =>
