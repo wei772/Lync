@@ -90,10 +90,41 @@ namespace Lync.Model
 
 			//subscribes to the conversation action availability events (for the ability to add/remove participants)
 			Conversation.ActionAvailabilityChanged += OnConversationActionAvailabilityChanged;
+			Conversation.PropertyChanged += OnConversationPropertyChanged;
 
-			CreateConferenceKey();
 
 			HandleAddedCore();
+		}
+
+		private void OnConversationPropertyChanged(object sender, ConversationPropertyChangedEventArgs e)
+		{
+			Conversation conference = (Conversation)sender;
+
+			switch (e.Property)
+			{
+				case ConversationProperty.ConferenceAcceptingParticipant:
+					Contact acceptingContact = (Contact)e.Value;
+					break;
+				case ConversationProperty.ConferencingUri:
+					break;
+				case ConversationProperty.ConferenceAccessInformation:
+
+					try
+					{
+
+						var conferenceKey = CreateConferenceKey();
+					}
+					catch (System.NullReferenceException nr)
+					{
+						System.Diagnostics.Debug.WriteLine("Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
+					}
+					catch (LyncClientException lce)
+					{
+						System.Diagnostics.Debug.WriteLine("Exception on ConferenceAccessInformation changed " + lce.Message);
+					}
+					break;
+			}
+
 		}
 
 		protected virtual void HandleAddedCore()

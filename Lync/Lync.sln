@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync", "LyncUISupression\Ly
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B50A299-087A-4C1F-8E61-0F405DF4B92A}"
 	ProjectSection(SolutionItems) = preProject
+		Document\Creating a conference with Lync 2010 SDK.md = Document\Creating a conference with Lync 2010 SDK.md
 		Document\Creating a conference with only one user via Lync api - Meet Now.md = Document\Creating a conference with only one user via Lync api - Meet Now.md
+		Document\How can i get the Meeting URL and Conference ID in Assigned Conference Information by UCMA 4.0.md = Document\How can i get the Meeting URL and Conference ID in Assigned Conference Information by UCMA 4.0.md
 		Document\How do I in Lync 2013 SDK.md = Document\How do I in Lync 2013 SDK.md
 		Document\How to  Join a Lync conversation.md = Document\How to  Join a Lync conversation.md
 		Document\How to  Sign in to and out of Lync.md = Document\How to  Sign in to and out of Lync.md
@@ -17,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\Lync.md = Document\Lync.md
 		SIP.md = SIP.md
 		Document\The 6 things you need to know about UI Suppression Mode.md = Document\The 6 things you need to know about UI Suppression Mode.md
+		Document\UCMA.md = Document\UCMA.md
 		Document\UI suppression.md = Document\UI suppression.md
 		Document\UISuppression-OFF.reg = Document\UISuppression-OFF.reg
 		Document\UISuppression-ON.reg = Document\UISuppression-ON.reg

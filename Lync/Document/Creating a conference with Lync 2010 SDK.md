@@ -1,0 +1,1 @@
+[Creating a conference with Lync 2010 SDK](http://stackoverflow.com/questions/10494485/creating-a-conference-with-lync-2010-sdk)
