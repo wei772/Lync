@@ -1,0 +1,50 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:views="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.Views"
+	xmlns:viewmodels="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.ViewModels"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" 
+    x:Class="Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.Views.ParticipantConfirmationView"
+    mc:Ignorable="d"
+    d:DesignWidth="280" d:DesignHeight="280">
+	
+    <Grid x:Name="LayoutRoot">
+    	<Border BorderThickness="1" Margin="0" Background="{StaticResource MediumGray}">
+            <Grid Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="250"  Width="270">
+    			<Grid.RowDefinitions>
+    				<RowDefinition/>
+    				<RowDefinition Height="35"/>
+    			</Grid.RowDefinitions>
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="20"/>
+    				<ColumnDefinition/>
+    				<ColumnDefinition Width="170"/>
+    				<ColumnDefinition Width="20"/>
+    			</Grid.ColumnDefinitions>
+    			<Border BorderBrush="{StaticResource MediumGray}" BorderThickness="1" Grid.ColumnSpan="4" Background="{StaticResource FormBackgroundBrush}" CornerRadius="2" Grid.RowSpan="2" Margin="0,-4,0,-8">
+    				<Border.Effect>
+    					<DropShadowEffect Opacity="0.5"/>
+    				</Border.Effect>
+    			</Border>
+    			<Button Content="OK" Margin="0,1,0,10" Grid.Column="2" Style="{StaticResource ButtonStyle}" Height="Auto" Width="Auto" Grid.Row="1" Cursor="Hand">
+    				<i:Interaction.Triggers>
+    					<i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding ConfirmCommand}"></i:InvokeCommandAction>
+    					</i:EventTrigger>
+    				</i:Interaction.Triggers>
+    			</Button>
+    			<StackPanel Grid.ColumnSpan="2" Grid.Column="1" Margin="0,0,0,10" Orientation="Vertical" VerticalAlignment="Bottom">
+    				<views:ContosoBrandsLogoControl Grid.ColumnSpan="2" Grid.Column="1" Height="35" Margin="0" VerticalAlignment="Top"/>
+    				<TextBlock TextWrapping="Wrap" Text="Click ok to chat with one of our Experts!" Style="{StaticResource BaseFont}" Margin="0,0,0,15"/>
+    				<TextBlock TextWrapping="Wrap" Text="Name" Style="{StaticResource HeadingStyle}" Margin="0,0,0,5"/>
+                    <TextBox TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" VerticalAlignment="Bottom" Text="{Binding UserName, Mode=TwoWay}" IsReadOnly="{Binding IsUserNameReadonly, Mode=TwoWay}"/>
+    				<TextBlock TextWrapping="Wrap" Text="Phone Number" Style="{StaticResource HeadingStyle}" Margin="0,10,0,5"/>
+                    <TextBox TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" Text="{Binding PhoneNumber, Mode=TwoWay}" IsReadOnly="{Binding IsPhoneNumberReadOnly, Mode=TwoWay}"/>
+    			</StackPanel>
+    		</Grid>
+    	</Border>
+    </Grid>
+</UserControl>

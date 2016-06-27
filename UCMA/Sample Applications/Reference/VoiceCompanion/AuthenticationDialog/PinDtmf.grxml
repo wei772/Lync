@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--====================================================================
+  File:      PinDtmf.grxml
+
+  Summary:   Grammar rule definitions.
+
+***********************************************************************
+*                                                       *
+*   Copyright (C) Microsoft. All rights reserved.   *
+*                                                       *
+***********************************************************************/
+
+
+-->
+
+<grammar xml:lang="en-US" tag-format="semantics-ms/1.0" version="1.0" mode="dtmf" xmlns="http://www.w3.org/2001/06/grammar">
+
+  <rule id="fivedigits" scope="public">
+    <tag>$._value = '';</tag>
+    <item>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+    </item>
+  </rule>
+
+  <rule id="digit" scope="public">
+    <one-of>
+      <item>
+        <item>0</item>
+        <tag>$._value = "0"</tag>
+      </item>
+      <item>
+        <item>1</item>
+        <tag>$._value = "1"</tag>
+      </item>
+      <item>
+        <item>2</item>
+        <tag>$._value = "2"</tag>
+      </item>
+      <item>
+        <item>3</item>
+        <tag>$._value = "3"</tag>
+      </item>
+      <item>
+        <item>4</item>
+        <tag>$._value = "4"</tag>
+      </item>
+      <item>
+        <item>5</item>
+        <tag>$._value = "5"</tag>
+      </item>
+      <item>
+        <item>6</item>
+        <tag>$._value = "6"</tag>
+      </item>
+      <item>
+        <item>7</item>
+        <tag>$._value = "7"</tag>
+      </item>
+      <item>
+        <item>8</item>
+        <tag>$._value = "8"</tag>
+      </item>
+      <item>
+        <item>9</item>
+        <tag>$._value = "9"</tag>
+      </item>
+    </one-of>
+  </rule>
+
+
+</grammar>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--====================================================================
+  File:      PhoneNumberDtmf.grxml
+
+  Summary:   Grammar rule definitions.
+
+***********************************************************************
+*                                                       *
+*   Copyright (C) Microsoft. All rights reserved.   *
+*                                                       *
+***********************************************************************/
+
+
+-->
+
+<grammar xml:lang="en-US" tag-format="semantics-ms/1.0" version="1.0" mode="dtmf" xmlns="http://www.w3.org/2001/06/grammar">
+  <rule id="help" scope="public">
+    <tag>$._value = '';</tag>
+    <item repeat ="1">
+      <ruleref uri="#startRule" />
+      <tag>$._value = $._value</tag>
+    </item>
+  </rule>
+
+  <rule id="startRule" scope="public">
+    <one-of>
+      <item>
+        <item>*</item>
+        <tag>$._value = "*"</tag>
+      </item>
+    </one-of>
+  </rule>
+</grammar>

@@ -1,0 +1,88 @@
+﻿<!--=====================================================================
+    File:    AgentDashboardView.xaml
+
+    Summary: View for displaying Agents Dashboard.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:Views="clr-namespace:Microsoft.Lync.Samples.ContactCenterExtension.Views"
+             xmlns:Converters="clr-namespace:Microsoft.Lync.Samples.ContactCenterExtension.Converters" 
+             x:Name="userControl" x:Class="Microsoft.Lync.Samples.ContactCenterExtension.Views.AgentDashboardView"
+             d:DesignHeight="380" 
+             d:DesignWidth="385" mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Converters:VisibilityConverter x:Key="VisibilityConverter"/>
+        <Converters:NotVisibilityConverter x:Key="NotVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+         <Grid x:Name="OldLayoutRoot" Background="#FFE7E7EF" Margin="0,0,2,-101">
+             <Border BorderBrush="#FFD3D9D9" BorderThickness="1" Grid.Column="2" Margin="5" Background="White" CornerRadius="2" Padding="5" Effect="{StaticResource FormDropShadow}">
+                 <Grid>
+                     <Grid.RowDefinitions>
+                         <RowDefinition Height="49"/>
+                         <RowDefinition Height="Auto" MinHeight="34"/>
+                         <RowDefinition/>
+                         <RowDefinition Height="Auto"/>
+                     </Grid.RowDefinitions>
+                     <Border x:Name="TopGradient" BorderThickness="1" CornerRadius="2,2,0,0" Margin="-5,-5,-5,0">
+                         <Border.Background>
+                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                 <GradientStop Color="White"/>
+                                 <GradientStop Color="#FFEDEDED" Offset="1"/>
+                             </LinearGradientBrush>
+                         </Border.Background>
+                     </Border>
+                     <TextBlock TextWrapping="Wrap" Text="Contoso Customer Care Agent Console" HorizontalAlignment="Left" Margin="52,11,0,0" VerticalAlignment="Top" Style="{StaticResource TitleStyle}"/>
+                     <StackPanel x:Name="StatusStackPanel" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Width="310" d:LayoutOverrides="GridBox" Grid.Row="1" Margin="5">
+                         <TextBlock TextWrapping="Wrap" Text="Status:" HorizontalAlignment="Left" Style="{StaticResource InfoStyle}"/>
+                         <TextBlock TextWrapping="Wrap" Text="{Binding Status}" HorizontalAlignment="Left" Style="{StaticResource InfoStyle}" Margin="5,0,0,0"/>
+                     </StackPanel>
+                     <Views:ContextView Grid.Row="2" d:LayoutOverrides="Width" Margin="5,35,5,5"/>
+                     <Grid Grid.Row="1" Margin="5,30,5,10" Grid.RowSpan="2">
+                         <Grid.ColumnDefinitions>
+                             <ColumnDefinition Width="*"/>
+                             <ColumnDefinition Width="Auto"/>
+                             <ColumnDefinition Width="*"/>
+                         </Grid.ColumnDefinitions>
+                         <Button
+                             Content="Transfer Call" Width="Auto" Style="{StaticResource ButtonStyle}" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" d:LayoutOverrides="GridBox" Grid.Column="1" FontSize="12" Opacity="0"/>
+                         <CheckBox x:Name="HoldButton" 
+                             Style="{StaticResource CheckableButtonStyle}" Height="25" 
+                             VerticalAlignment="Top" d:LayoutOverrides="Height" Command="{Binding HoldRetrieveCommand}" 
+                             IsChecked="{Binding IsOnHold, Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="140">
+                            <Grid>
+                                <TextBlock Text="Hold Call" Visibility="{Binding IsChecked, ElementName=HoldButton, Converter={StaticResource NotVisibilityConverter}}"/>
+                                <TextBlock Text="Resume Call" Visibility="{Binding IsChecked, ElementName=HoldButton, Converter={StaticResource VisibilityConverter}}"/>
+                            </Grid>
+                         </CheckBox>
+                         <Button x:Name="EscalateButton"
+                             Content="Escalate Call" Width="140" Style="{StaticResource ButtonStyle}" Height="25" VerticalAlignment="Top" FontSize="12" Command="{Binding ShowEscalationViewCommand, ElementName=userControl, Mode=OneWay}" HorizontalAlignment="Right" Grid.Column="2"/>
+                         <Views:EscalationView x:Name="EscalationView" VerticalAlignment="Top" Grid.Column="1" Margin="0,25,0,0" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+                     </Grid>
+                     
+                 </Grid>
+             </Border>
+             <Canvas Margin="14,13,0,0" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="41">
+                 <Path Data="M32.6992,46.1899L18.4262,31.9159L32.6992,17.6429L46.9732,31.9159L32.6992,46.1899z" Fill="#FFF15A24" Height="33.547" Canvas.Left="3.818" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF999999" StrokeThickness="5" StrokeMiterLimit="4" StrokeLineJoin="Miter" Canvas.Top="3.727" Width="33.547" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+                 <Path Data="M46.8589,46.0767C39.0399,53.8967,26.3589,53.8957,18.5409,46.0767C10.7199,38.2557,10.7199,25.5767,18.5409,17.7567C26.3589,9.93670000000002,39.0399,9.93670000000002,46.8589,17.7567C54.6799,25.5767,54.6799,38.2557,46.8589,46.0767z" Height="41.05" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF666666" StrokeThickness="1" StrokeMiterLimit="4" StrokeLineJoin="Miter" Width="41.05" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+             </Canvas>
+         </Grid>
+    </Grid>
+</UserControl>

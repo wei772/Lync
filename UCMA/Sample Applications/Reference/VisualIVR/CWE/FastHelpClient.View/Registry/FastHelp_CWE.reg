@@ -1,0 +1,21 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Lync\Addins]   
+[HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Lync\Addins\{553C1CE2-0C73-51B6-81C7-75F2D071FCD2}]
+"Name"="NameOfApplication"
+"Path"=""
+"Parameters"="%AppData%"
+"InstallLink"=""
+"InternalURL"="http://ServerName:8081/FastHelp1TestPage.html"
+"ExternalURL"="http://ServerName:8081/FastHelp1TestPage.html"
+"ExtensibilityWindowSize"=dword:00000002
+"DefaultContextPackage"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\Lync\Security]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\Lync\Security\Trusted Sites]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\Lync\Security\Trusted Sites\ServerName]
+"http"=dword:00000001
+"https"=dword:00000001

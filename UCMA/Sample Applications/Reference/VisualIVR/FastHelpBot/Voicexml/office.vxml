@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0"
+      xmlns="http://www.w3.org/2001/vxml"
+      xml:lang="en-US"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+  <form id="main">
+    <field name="menu">
+      <prompt bargein="true"
+              bargeintype="hotword"
+              timeout="10s">
+        press 1 for Word.
+        press 2 for Excel.
+        press 3 for PowerPoint.
+        press 4 for Outlook.
+		press 5 for OneNote
+		press 6 for Office three six five
+      </prompt>
+      
+      <grammar version="1.0"  tag-format="semantics/1.0"
+               root="top">
+        <rule id="top">
+          <one-of>
+            <item>word</item>
+            <item>excel</item>
+            <item>powerpoint</item>
+			<item>outlook</item>
+            <item>onenote</item>
+			<item>office365</item>
+            <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>word</item>
+                <item>winword</item> 
+                <item>word processor</item>
+              </one-of>
+              <tag>out="word";</tag>
+            </item>
+			<item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>excel</item>
+                <item>spreadsheet</item> 
+              </one-of>
+              <tag>out="excel";</tag>
+            </item>
+			<item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>powerpoint</item>
+                </one-of>
+              <tag>out="powerpoint";</tag>
+            </item>
+			<item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>outlook</item>
+                <item>email</item> 
+              </one-of>
+              <tag>out="outlook";</tag>
+              </item>
+			     <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>onenote</item>
+              </one-of>
+              <tag>out="onenote";</tag>
+            </item>
+			<item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>office three six five</item>
+                <item>office online</item> 
+              </one-of>
+              <tag>out="office365";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      
+      <grammar mode="dtmf"
+               version="1.0"
+               root="dtmftop">
+        <rule id="dtmftop">
+          <one-of>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+			<item>5</item>
+			<item>6</item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <!-- Give user 3 changes else Exit -->
+      <catch event="noinput nomatch"
+             count="1">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="2">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="3">
+        Sorry!
+        I could not understand your request.
+        Please call us again later.
+        <exit/>
+      </catch>
+
+      <filled>
+        <prompt>
+            Please hold the line while we transfer you to  help desk agent.
+        </prompt>
+        <exit namelist="menu"/>
+      </filled>
+    </field>
+  </form>
+</vxml>

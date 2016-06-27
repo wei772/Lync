@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dialupConfiguration>
+  <qaGetNumber>
+    <mainPrompt>Please enter the number you want to dial.</mainPrompt>
+    <noRecognitionPrompt>Sorry, I could not understand.</noRecognitionPrompt>
+  </qaGetNumber>
+  <stmtNumberConfirmation>
+    <mainPrompt>Inviting </mainPrompt>
+  </stmtNumberConfirmation>
+  <stmtDialupFailure>
+    <mainPrompt>I am unable to connect you.</mainPrompt>
+  </stmtDialupFailure>
+  <stmtUserDeclined>
+    <mainPrompt>The other party has declined the call.</mainPrompt>
+  </stmtUserDeclined>
+</dialupConfiguration>

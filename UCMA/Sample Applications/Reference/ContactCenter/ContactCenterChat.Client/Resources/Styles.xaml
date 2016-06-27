@@ -1,0 +1,182 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="Brushes.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="ButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="#FF1F3B53"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Padding" Value="3"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush">
+			<Setter.Value>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FFA3AEB9" Offset="0"/>
+					<GradientStop Color="#FF8399A9" Offset="0.375"/>
+					<GradientStop Color="#FF718597" Offset="0.375"/>
+					<GradientStop Color="#FF617584" Offset="1"/>
+				</LinearGradientBrush>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="grid" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal">
+									<Storyboard>
+										<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="MouseOver"/>
+								<VisualState x:Name="Pressed"/>
+								<VisualState x:Name="Disabled">
+									<Storyboard>
+										<DoubleAnimation Duration="0" To="0.25" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused"/>
+								<VisualState x:Name="Unfocused"/>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Border x:Name="Background" Background="{StaticResource RedOrangeBrush}" CornerRadius="1">
+							<Grid Margin="0,8,29,4" HorizontalAlignment="Right" Width="100"/>
+						</Border>
+						<Border BorderThickness="0" Background="White" Opacity="0.25" CornerRadius="0,0,1,1" Margin="2,0,2,15"/>
+						<StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" OpacityMask="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,2"/>
+							<Path Data="M73,-79 L81,-79 L81,-71" Height="7.262" Stretch="Fill" Stroke="White" StrokeThickness="2.5" UseLayoutRounding="False" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Width="7.262" Margin="6,1,0,0" HorizontalAlignment="Center">
+								<Path.RenderTransform>
+									<TransformGroup>
+										<ScaleTransform/>
+										<SkewTransform/>
+										<RotateTransform Angle="45"/>
+										<TranslateTransform/>
+									</TransformGroup>
+								</Path.RenderTransform>
+							</Path>
+						</StackPanel>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Width" Value="150"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="FontSize" Value="13.333"/>
+		<Setter Property="FontWeight" Value="SemiBold"/>
+		<Setter Property="FontStyle" Value="Normal"/>
+		<Setter Property="Height" Value="25"/>
+	</Style>
+	
+	<ControlTemplate x:Key="ValidationToolTipTemplate">
+		<Grid x:Name="Root" Margin="6,0" Opacity="0" RenderTransformOrigin="0,0">
+			<Grid.RenderTransform>
+				<TranslateTransform x:Name="xform" X="-25"/>
+			</Grid.RenderTransform>
+			<VisualStateManager.VisualStateGroups>
+				<VisualStateGroup x:Name="OpenStates">
+					<VisualStateGroup.Transitions>
+						<VisualTransition GeneratedDuration="0"/>
+						<VisualTransition GeneratedDuration="0:0:0.2" To="Open">
+							<Storyboard>
+								<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="X" Storyboard.TargetName="xform">
+									<DoubleAnimation.EasingFunction>
+										<BackEase Amplitude=".3" EasingMode="EaseOut"/>
+									</DoubleAnimation.EasingFunction>
+								</DoubleAnimation>
+								<DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
+							</Storyboard>
+						</VisualTransition>
+					</VisualStateGroup.Transitions>
+					<VisualState x:Name="Closed">
+						<Storyboard>
+							<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
+						</Storyboard>
+					</VisualState>
+					<VisualState x:Name="Open">
+						<Storyboard>
+							<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="X" Storyboard.TargetName="xform"/>
+							<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Root"/>
+						</Storyboard>
+					</VisualState>
+				</VisualStateGroup>
+			</VisualStateManager.VisualStateGroups>
+			<Border Background="#152A2E31" CornerRadius="4" Margin="4,4,-4,-4"/>
+			<Border Background="#252A2E31" CornerRadius="4" Margin="3,3,-3,-3"/>
+			<Border Background="#352A2E31" CornerRadius="4" Margin="2,2,-2,-2"/>
+			<Border Background="#452A2E31" CornerRadius="4" Margin="1,1,-1,-1"/>
+			<Border Background="#FFDC000C" CornerRadius="4"/>
+			<Border CornerRadius="4">
+				<Border.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#66FFFFFF"/>
+						<GradientStop Color="#66000000" Offset="1"/>
+						<GradientStop Color="#00E5E5E5" Offset="0.1"/>
+						<GradientStop Color="#00161616" Offset="0.9"/>
+					</LinearGradientBrush>
+				</Border.Background>
+				<TextBlock Foreground="White" MaxWidth="250" Margin="8,4" TextWrapping="Wrap" Text="{Binding (Validation.Errors)[0].Exception.Message}" UseLayoutRounding="false"/>
+			</Border>
+		</Grid>
+	</ControlTemplate>
+	
+	<Style x:Key="TextBoxStyle" TargetType="TextBox">
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Background" Value="#FFFFFFFF"/>
+		<Setter Property="Foreground" Value="#FF626262"/>
+		<Setter Property="Padding" Value="5,8"/>
+		<Setter Property="BorderBrush" Value="#FFBCBCBC"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TextBox">
+					<Grid x:Name="RootElement">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal"/>
+								<VisualState x:Name="MouseOver"/>
+								<VisualState x:Name="Disabled"/>
+								<VisualState x:Name="ReadOnly"/>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="FocusStates">
+								<VisualState x:Name="Focused"/>
+								<VisualState x:Name="Unfocused"/>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="ValidationStates">
+								<VisualState x:Name="Valid"/>
+								<VisualState x:Name="InvalidUnfocused"/>
+								<VisualState x:Name="InvalidFocused"/>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="1" Opacity="1">
+							<ScrollViewer x:Name="ContentElement" BorderThickness="0" IsTabStop="False" Padding="{TemplateBinding Padding}" Margin="0"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+	<Style x:Key="BaseFont" TargetType="TextBlock">
+		<Setter Property="Foreground" Value="#FF232323"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="FontSize" Value="12"/>
+		<Setter Property="FontWeight" Value="Normal"/>
+	</Style>
+	
+	<Style x:Key="HeadingStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseFont}">
+		<Setter Property="FontSize" Value="13.333"/>
+		<Setter Property="FontWeight" Value="SemiBold"/>
+		
+	</Style>
+	
+	<Style x:Key="SmallTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseFont}">
+		<Setter Property="FontSize" Value="9.333"/>
+	</Style>
+	
+</ResourceDictionary>

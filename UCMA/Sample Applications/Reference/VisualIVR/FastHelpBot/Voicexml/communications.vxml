@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0"
+      xmlns="http://www.w3.org/2001/vxml"
+      xml:lang="en-US"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+  
+  <form id="main">
+    <field name="menu">
+      <prompt bargein="true"
+              bargeintype="hotword"
+              timeout="10s">
+        press 1 for Lync.
+        press 2 for Windows Phone.
+        press 3 for Audio Conferencing.
+      </prompt>
+      
+      <grammar version="1.0"  tag-format="semantics/1.0"
+               root="top">
+        <rule id="top">
+          <one-of>
+            <item>lync</item>
+            <item>windows phone</item>
+			<item>audio conferencing</item>
+                
+             <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>conferencing</item>
+                <item>audio conferencing</item>               
+              </one-of>
+              <tag>out="audio conferencing";</tag>
+            </item>
+
+            <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>phone</item>
+                <item>windows phone</item>               
+              </one-of>
+              <tag>out="windows phone";</tag>
+            </item>
+
+          </one-of>
+        </rule>
+      </grammar>
+      
+      <grammar mode="dtmf"
+               version="1.0"
+               root="dtmftop">
+        <rule id="dtmftop">
+          <one-of>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <!-- Give user 3 changes else Exit -->
+      <catch event="noinput nomatch"
+             count="1">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="2">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="3">
+        Sorry!
+        I could not understand your request.
+        Please call us again later.
+        <exit/>
+      </catch>
+
+      <filled>
+        <prompt>
+          Please hold the line while we transfer you to  help desk agent.
+        </prompt>
+        
+        <exit namelist="menu"/>
+        
+      </filled>
+    </field>
+  </form>
+</vxml>

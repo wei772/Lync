@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<conferenceServiceConfiguration>
+  <dtmfMenu>
+    <command purpose = "inviteContact" dtmfKey="#1" />
+    <command purpose = "inviteNumber" dtmfKey="#2" />
+    <command purpose = "shutDownConference" dtmfKey="#3" />
+    <command purpose = "recordConference" dtmfKey="#4"  />
+    <command purpose = "menu" dtmfKey="##" />
+ </dtmfMenu>
+  <stmtInstruction>
+    <mainPrompt>Press star at any time for help.</mainPrompt>
+  </stmtInstruction>
+  <stmtInviteUser>
+    <mainPrompt>Inviting {0}</mainPrompt>
+  </stmtInviteUser>
+  <stmtHelp>
+    <mainPrompt>
+      <![CDATA[Press <prosody rate="slow">pound 1</prosody>to invite someone from your contact list.<break strength="weak"/>Press <prosody rate="slow">pound 2</prosody>to invite a phone number.]]>      
+    </mainPrompt>
+  </stmtHelp>
+</conferenceServiceConfiguration>

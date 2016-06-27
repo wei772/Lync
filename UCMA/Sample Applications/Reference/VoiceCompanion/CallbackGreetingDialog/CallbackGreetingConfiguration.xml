@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<callbackGreetingConfiguration>
+  <stmtCallbackGreeting>
+    <mainPrompt>Hi, this is your automated callback system. Please wait while we connect you to {0}.</mainPrompt>
+  </stmtCallbackGreeting>
+  <stmtCannotReachUser>
+    <mainPrompt>Sorry, I am unable to connect you to {0}. Good bye.</mainPrompt>
+  </stmtCannotReachUser>
+  <stmtUserDeclined>
+    <mainPrompt>{0} declined your call. Please try later.</mainPrompt>
+  </stmtUserDeclined>
+</callbackGreetingConfiguration>

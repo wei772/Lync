@@ -1,0 +1,33 @@
+﻿.result
+{
+	text-align:left;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	height : 230px;
+}
+.result > div
+{
+	margin-left : 10px;
+	margin-right : 10px;
+	margin-bottom : -1px;
+}
+		
+.phone-column
+{
+	vertical-align : top;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	width: 150;
+}
+		
+.text-column
+{
+	vertical-align : top;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	width: 150px;
+}
+		
+.phone-image
+{
+	width : 150px;
+	height: 230px;
+	margin-bottom : -1px;
+}

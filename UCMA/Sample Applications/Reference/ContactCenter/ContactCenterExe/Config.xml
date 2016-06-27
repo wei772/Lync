@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<platform>
+	<applicationUserAgent>ContactCenterSampleApplication</applicationUserAgent>
+	<applicationUrn>urn:application:contactcenter</applicationUrn>
+	<matchMaker>
+		<uri>sip:contactcenter@contoso.com</uri>
+		<musicOnHoldFilePath>.\Resources\Music.wma</musicOnHoldFilePath>
+		<maxWaitTimeOut>3600</maxWaitTimeOut>
+		
+		<!-- Contoso Brands CWE Applications -->
+		<agentDashboardGuid>{63D37F02-47B3-4B9E-AA8E-FEF3665298DC}</agentDashboardGuid>
+		<supervisorDashboardGuid>{63D37F02-47B3-4B9E-AA8E-FEF3665298DD}</supervisorDashboardGuid>
+		<agentPrompts>
+			<finalMessageToAgent>Thank you for your assistance, the session ended.</finalMessageToAgent>
+			<mainPrompt>Hello {0}. A call was received requiring the following skills {1}. Do you want to take the call?</mainPrompt>
+			<noRecoPrompt>Sorry I did not understand your answer. Please respond with Yes or No.</noRecoPrompt>
+			<silencePrompt>I did not get any response. Assigning the call to another agent.</silencePrompt>
+		</agentPrompts>
+		<supervisorPrompts>
+			<finalMessageToSupervisor>Bye</finalMessageToSupervisor>
+			<welcomePrompt>Welcome Supervisor {0}</welcomePrompt>
+		</supervisorPrompts>
+		<agentMatchMakingPrompt>Please hold while we connect you.</agentMatchMakingPrompt>
+		<skills>
+			<skill name="Product">
+				<mainPrompt>What type of product do you need help with? CellPhones, Laptops, or Desktops.</mainPrompt>
+				<noRecoPrompt>I'm sorry, I did not understand that. What type of product do you need help with? CellPhones, Laptops, or Desktops.</noRecoPrompt>
+				<silencePrompt>Sorry I could not hear you. What type of product do you need help with? CellPhones, Laptops, or Desktops.</silencePrompt>
+				<skillRecognizedMainPrompt>You said you need help with {0}.</skillRecognizedMainPrompt>
+				<skillValues>
+					<skillValue>CellPhones</skillValue>
+					<skillValue>Laptops</skillValue>
+					<skillValue>Desktops</skillValue>
+				</skillValues>
+			</skill>
+			<skill name="Brand">
+				<mainPrompt>What brand of phones can we assist you with?  HTC, LG, or Samsung.</mainPrompt>
+				<noRecoPrompt>I'm sorry, I did not understand that. What brand of phones can we assist you with? Nokia, HTC, or Samsung.</noRecoPrompt>
+				<silencePrompt>Sorry I could not hear you. What brand of phones can we assist you with? Nokia, HTC, or Samsung.</silencePrompt>
+				<skillRecognizedMainPrompt>You said you need help with {0}.</skillRecognizedMainPrompt>
+				<skillValues>
+					<skillValue>Nokia</skillValue>
+					<skillValue>HTC</skillValue>
+					<skillValue>Samsung</skillValue>
+				</skillValues>
+			</skill>
+		</skills>
+		<agents>
+			<agent>
+				<signInAddress>sip:rl@contoso.com</signInAddress>
+				<publicName>ContosoAgent</publicName>
+				<instantMessageColor>red</instantMessageColor>
+				<supervisorUri>sip:hd@contoso.com</supervisorUri>
+				<agentSkills>
+					<agentSkill name="Product">Cellphones</agentSkill>
+					<agentSkill name="Product">Laptops</agentSkill>
+					<agentSkill name="Product">Desktops</agentSkill>
+					<agentSkill name="Brand">Nokia</agentSkill>
+					<agentSkill name="Brand">HTC</agentSkill>
+					<agentSkill name="Brand">Samsung</agentSkill>
+					<agentSkill name="MostPopular">Nokia</agentSkill>
+				</agentSkills>
+			</agent>
+			<agent>
+				<signInAddress>sip:fl@contoso.com</signInAddress>
+				<publicName>Expert1</publicName>
+				<instantMessageColor>green</instantMessageColor>
+				<supervisorUri>sip:hd@contoso.com</supervisorUri>
+				<agentSkills>
+					<agentSkill name="Product">Cellphones</agentSkill>
+					<agentSkill name="Brand">Nokia</agentSkill>
+					<agentSkill name="MostPopular">Nokia</agentSkill>
+				</agentSkills>
+			</agent>
+		</agents>
+		<supervisors>
+			<supervisor>
+				<signInAddress>sip:hd@contoso.com</signInAddress>
+				<publicName>Supervisor</publicName>
+				<instantMessageColor>purple</instantMessageColor>
+			</supervisor>
+		</supervisors>
+	</matchMaker>
+	<portals>
+		<portal>
+			<uri>sip:Helpdesk@contoso.com</uri>
+			<token>Helpdesk</token>
+			<voiceXmlEnabled>false</voiceXmlEnabled>
+			<voiceXmlPath>VoiceXml\helpdesk.vxml</voiceXmlPath>
+			<welcomeMessage>Welcome to the Help Desk</welcomeMessage>
+			<contextualWelcomeMessage> Welcome to the HelDesk. You requested the following services {0}.</contextualWelcomeMessage>
+			<timeOutNoAgentAvailableMessage>Sorry I could not find an available agent. Please call again.</timeOutNoAgentAvailableMessage>
+			<imBridgingMessage>You are now connected.</imBridgingMessage>
+			<imPleaseHoldMessage>On hold.</imPleaseHoldMessage>
+			<finalMessage>Thank you. The helpdesk session is over. Please call again.</finalMessage>
+			<portalSkills>
+				<portalSkill name="Product"></portalSkill>
+				<portalSkill name="Brand"></portalSkill>
+			</portalSkills>
+		</portal>
+    <portal>
+      <uri>sip:Sales@contoso.com</uri>
+      <token>Sales</token>
+      <voiceXmlEnabled>false</voiceXmlEnabled>
+      <voiceXmlPath>VoiceXml\sales.vxml</voiceXmlPath>
+      <welcomeMessage>Welcome to Contoso Sales.</welcomeMessage>
+      <contextualWelcomeMessage>Welcome to Contoso Sales. Thanks for your interest in {0}.</contextualWelcomeMessage>
+      <timeOutNoAgentAvailableMessage>Sorry I could not find an available agent. Please call again.</timeOutNoAgentAvailableMessage>
+      <imBridgingMessage>You are now connected.</imBridgingMessage>
+      <imPleaseHoldMessage>On hold.</imPleaseHoldMessage>
+      <finalMessage>Thank you. The session is over. Please call again.</finalMessage>
+      <portalSkills>
+        <portalSkill name="Product"></portalSkill>
+        <portalSkill name="Brand"></portalSkill>
+      </portalSkills>
+    </portal>
+	</portals>
+</platform>

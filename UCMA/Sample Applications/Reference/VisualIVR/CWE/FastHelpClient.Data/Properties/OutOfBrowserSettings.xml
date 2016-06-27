@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+  <Deployment.Parts>
+  </Deployment.Parts>
+  <Deployment.OutOfBrowserSettings>
+    <OutOfBrowserSettings
+        ShortName="Out-of-Browser Application"
+        EnableGPUAcceleration="True"
+        ShowInstallMenuItem="True">
+      <OutOfBrowserSettings.Blurb>
+        Demonstrates the out-of-browser feature.
+      </OutOfBrowserSettings.Blurb>
+      <OutOfBrowserSettings.Icons>
+        <Icon Size="16,16">icons/16x16.png</Icon>
+        <Icon Size="32,32">icons/32x32.png</Icon>
+        <Icon Size="48,48">icons/48x48.png</Icon>
+        <Icon Size="128,128">icons/128x128.png</Icon>
+      </OutOfBrowserSettings.Icons>
+      <OutOfBrowserSettings.WindowSettings>
+        <WindowSettings
+            Title="Out-of-Browser Example"
+            Height="600" Width="600"
+            Left="0" Top="0" WindowStartupLocation="Manual"
+            WindowStyle="SingleBorderWindow"/>
+      </OutOfBrowserSettings.WindowSettings>
+      <OutOfBrowserSettings.SecuritySettings>
+        <SecuritySettings ElevatedPermissions="Required" />
+      </OutOfBrowserSettings.SecuritySettings>
+    </OutOfBrowserSettings>
+  </Deployment.OutOfBrowserSettings>
+</Deployment>

@@ -1,0 +1,6 @@
+BUILD_PASS0_CONSUMES= \
+    src|PASS0 \
+
+BUILD_PASS2_CONSUMES= \
+    src\dev\server\ucma\samples\core\reference\contactcenter\contactcenterassembly|PASS2 \
+

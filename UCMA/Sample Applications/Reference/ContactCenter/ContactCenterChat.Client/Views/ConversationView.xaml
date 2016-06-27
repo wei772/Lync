@@ -1,0 +1,74 @@
+﻿<nav:Page
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:nav="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:WebClient_Views="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.Views"
+	xmlns:WebClient_ViewModels="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.ViewModels"
+	xmlns:WebClient="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient"
+	xmlns:WebClient_Helpers="clr-namespace:Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.Helpers"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	mc:Ignorable="d"
+	x:Class="Microsoft.Rtc.Collaboration.Samples.ContactCenter.WebClient.Views.ConversationView"
+	d:DesignWidth="280" d:DesignHeight="380">
+
+	<nav:Page.Resources>
+        <WebClient_Helpers:MessageColorConverter x:Key="MessageColorConverter"/>
+	</nav:Page.Resources>
+
+	<Grid x:Name="LayoutRoot" Background="#FFEDE6E0" Width="270">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="5"/>
+			<ColumnDefinition Width="161*" />
+			<ColumnDefinition Width="112"/>
+			<ColumnDefinition Width="5"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="49"/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto" MinHeight="70" />
+        </Grid.RowDefinitions>
+        <Button x:Name="CallMeButton" Content="Call Me" VerticalAlignment="Bottom" Width="75" Style="{StaticResource ButtonStyle}" Grid.Column="2" IsEnabled="{Binding IsCallMeCommandEnabled}" Margin="20,0,0,12" HorizontalAlignment="Left">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding CallMeCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <TextBox x:Name="UserInputTextBox" Grid.ColumnSpan="2" Grid.Column="1" Margin="0,28,0,8" Grid.Row="2" TextWrapping="Wrap" Style="{StaticResource TextBoxStyle}" d:LayoutOverrides="Height" BorderBrush="{StaticResource LightGrayBrush}" Foreground="{StaticResource MediumGray}" Text="{Binding WorkingMessage, Mode=TwoWay}" KeyUp="UserInputTextBox_KeyUp" IsEnabled="{Binding IsSendMessageCommandEnabled}" VerticalAlignment="Bottom">
+			<i:Interaction.Behaviors>
+				<WebClient_Helpers:UpdateBindingOnKeyUp/>
+			</i:Interaction.Behaviors>
+        </TextBox>
+        <Path Grid.ColumnSpan="2" Grid.Column="1" Data="M20,85 L365,85" Margin="0,51,0,0" Grid.Row="1" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" StrokeMiterLimit="10" StrokeLineJoin="Miter" UseLayoutRounding="False" VerticalAlignment="Top" StrokeDashArray="1 1"/>
+		<Path Grid.ColumnSpan="2" Grid.Column="1" Data="M20,85 L365,85" Fill="#FFF4F4F5" Grid.Row="2" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="{StaticResource LightGrayBrush}" StrokeThickness="2" StrokeMiterLimit="10" StrokeLineJoin="Miter" UseLayoutRounding="False" VerticalAlignment="Top" StrokeDashArray="1 1"/>
+		<StackPanel Grid.ColumnSpan="2" Grid.Column="1" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Top" Margin="0,7,0,0">
+			<TextBlock TextWrapping="Wrap" Text="Status:" Style="{StaticResource HeadingStyle}" Foreground="{StaticResource RedOrangeBrush}" FontSize="12" HorizontalAlignment="Left"/>
+			<TextBlock x:Name="StatusTextBox" TextWrapping="Wrap" Foreground="{StaticResource RedOrangeBrush}" Style="{StaticResource HeadingStyle}" FontSize="12" Margin="5,0,0,0" Text="{Binding Status}"/>
+		</StackPanel>
+		<Border BorderBrush="{StaticResource LightGrayBrush}" BorderThickness="1" Grid.ColumnSpan="2" Grid.Column="1" CornerRadius="1" Background="White" Margin="0,-6,0,6" Grid.Row="1">
+			<ScrollViewer x:Name="MessagesScrollViewer" Margin="0" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderThickness="0" BorderBrush="{x:Null}" Foreground="{x:Null}" VerticalContentAlignment="Top">
+				<ItemsControl ItemsSource="{Binding Messages}">
+					<ItemsControl.Resources>
+						<DataTemplate x:Key="DataTemplate">
+							<Grid Margin="0">
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Margin="0,4" Foreground="{StaticResource MediumGray}" ><Run Text="{Binding MessageSource.DisplayName}" Foreground="{Binding MessageSource.DisplayNameColor, Converter={StaticResource MessageColorConverter}}"/><Run Text=" "/><Run Text="{Binding DisplayMessage}" Foreground="{Binding DisplayColor, Converter={StaticResource MessageColorConverter}}"/></TextBlock>
+								<!--<Border BorderBrush="{StaticResource LightGrayBrush}" BorderThickness="0,0,0,1" Opacity="0.25"/>-->
+							</Grid>
+						</DataTemplate>
+					</ItemsControl.Resources>
+					<ItemsControl.ItemTemplate>
+						<StaticResource ResourceKey="DataTemplate"/>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+		</Border>
+        <WebClient_Views:ContosoBrandsLogoControl Grid.ColumnSpan="2" Grid.Column="1" Height="35" Margin="0,20,35,0" VerticalAlignment="Top">
+            <WebClient_Views:ContosoBrandsLogoControl.RenderTransform>
+                <ScaleTransform ScaleX=".65" ScaleY=".65"/>
+            </WebClient_Views:ContosoBrandsLogoControl.RenderTransform>
+        </WebClient_Views:ContosoBrandsLogoControl>
+    </Grid>
+</nav:Page>

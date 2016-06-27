@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ContextInformation" targetNamespace="http://tempuri.org/ContextInformation.xsd" elementFormDefault="unqualified" xmlns="http://tempuri.org/ContextInformation.xsd" xmlns:mstns="http://tempuri.org/ContextInformation.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="product" type="productType" />
+
+  <xs:complexType name="productType">
+    <xs:sequence>
+      <xs:element name="productGuid" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="productImage" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="productTitle" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="productDescription" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="productPrice" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="agentSkillsList" type="agentSkillEntryListType" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="agentSkillEntryListType">
+    <xs:sequence>
+      <xs:element name="agentSkills" type="agentSkillType" minOccurs ="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="agentSkillType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+
+  <var name="OperatingSystem"/>
+  <var name="Program"/>
+
+  <form id="OperatingSystemForm">
+    <field name="Menu" slot="option">
+      <property name="bargein" value="true"/>
+      <property name="timeout" value="30s"/>
+      <grammar mode="voice" type="application/srgs+xml" root="OperatingSystemGrammar" tag-format="semantics/1.0">
+        <rule id="OperatingSystemGrammar" scope="public">
+          <one-of>
+            <item>
+              Windows
+              <tag>out.option = "Windows";</tag>
+            </item>
+            <item>
+              Linux
+              <tag>out.option = "Linux";</tag>
+            </item>
+            <item>
+              Mac
+              <tag>out.option = "Mac";</tag>
+            </item>
+            <item>
+              Unix
+              <tag>out.option = "Unix";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      <grammar mode="dtmf" type="application/srgs+xml" root="OperatingSystemGrammarDtmf" tag-format="semantics/1.0">
+        <rule id="OperatingSystemGrammarDtmf" scope="public">
+          <one-of>
+            <item>
+              1
+              <tag>out.option = "Windows";</tag>
+            </item>
+            <item>
+              2
+              <tag>out.option = "Linux";</tag>
+            </item>
+            <item>
+              3
+              <tag>out.option = "Mac";</tag>
+            </item>
+            <item>
+              4
+              <tag>out.option = "Unix";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <prompt bargein="true" bargeintype="speech" timeout="30s">
+        Welcome to the Help Desk. What operating system  are you using? Microsoft Windows, Linux, Mac, or Unix.
+      </prompt>
+
+      <nomatch>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          I'm sorry, I did not understand that. What operating system are you using? Windows, Linux, Mac, or Unix
+        </prompt>
+      </nomatch>
+
+      <noinput>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          Sorry I could not hear you. What operating system are you using? Microsoft Windows, Linux, Mac, or Unix.
+        </prompt>
+      </noinput>
+
+      <filled>
+        <assign name="OperatingSystem" expr="Menu"/>
+        <goto next="#ProgramForm"/>
+      </filled>
+
+    </field>
+  </form>
+
+  <form id="ProgramForm">
+    <field name="Menu" slot="option">
+      <property name="bargein" value="true"/>
+      <property name="timeout" value="30s"/>
+      <grammar mode="voice" type="application/srgs+xml" root="ProgramGrammar" tag-format="semantics/1.0">
+        <rule id="ProgramGrammar" scope="public">
+          <one-of>
+            <item>
+              Word
+              <tag>out.option = "Word";</tag>
+            </item>
+            <item>
+              Excel
+              <tag>out.option = "Excel";</tag>
+            </item>
+            <item>
+              Powerpoint
+              <tag>out.option = "Powerpoint";</tag>
+            </item>
+            <item>
+              Visio
+              <tag>out.option = "Visio";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      <grammar mode="dtmf" type="application/srgs+xml" root="ProgramGrammarDtmf" tag-format="semantics/1.0">
+        <rule id="ProgramGrammarDtmf" scope="public">
+          <one-of>
+            <item>
+              1
+              <tag>out.option = "Word";</tag>
+            </item>
+            <item>
+              2
+              <tag>out.option = "Excel";</tag>
+            </item>
+            <item>
+              3
+              <tag>out.option = "Powerpoint";</tag>
+            </item>
+            <item>
+              4
+              <tag>out.option = "Visio";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <prompt bargein="true" bargeintype="speech" timeout="10s">
+        You said <value expr="OperatingSystem"/> is the operating system that you need help with. What program are you using? Word, Excel, Powerpoint, or Visio.
+      </prompt>
+
+      <nomatch>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          I'm sorry, I did not understand that. What program are you using? Word, Excel, Powerpoint, or Visio.
+        </prompt>
+      </nomatch>
+
+      <noinput>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          Sorry I could not hear you. What program are you using? Microsoft Word, Excel, Powerpoint, or Visio.
+        </prompt>
+      </noinput>
+
+      <filled>
+        <prompt>
+          You said <value expr="Menu"/> is the program that you need help with.
+        </prompt>
+        <assign name="Program" expr="Menu"/>
+        <goto next="#Operator"/>
+      </filled>
+
+    </field>
+  </form>
+
+  <form id="Operator">
+    <block>
+      <prompt>Please hold on the line as we are trying to connect you.</prompt>
+      <exit namelist="OperatingSystem Program"/>
+    </block>
+  </form>
+
+</vxml>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<callbackConfiguration>
+  <qaCallback>
+    <mainPrompt>{0} {1}. Would you like to setup a callback when {0} becomes available?</mainPrompt>
+    <noRecognitionPrompt>Sorry, I could not understand.</noRecognitionPrompt>
+  </qaCallback>
+  <stmtSetCallbackSucceeded>
+    <mainPrompt>A callback to {0} has been set.</mainPrompt>
+  </stmtSetCallbackSucceeded>
+  <stmtSetCallbackFailed>
+    <mainPrompt>The callback was not set. Please try again.</mainPrompt>
+  </stmtSetCallbackFailed>
+  <stmtConnectingToUser>
+    <mainPrompt>Connecting to {0}.</mainPrompt>
+  </stmtConnectingToUser>
+  <availabilityPrompts>
+    <online>is online</online>
+    <busy>is busy</busy>
+    <donotdisturb>does not want to be disturbed</donotdisturb>
+    <berightback>will be right back</berightback>
+    <away>is away at this moment</away>
+    <offline>is offline at this moment</offline>
+    <other>is not available</other>
+  </availabilityPrompts>
+</callbackConfiguration>

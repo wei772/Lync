@@ -1,0 +1,121 @@
+﻿.left-column
+{
+	width : 280px;
+}
+.left-column .content
+{
+	margin-right : 25px;
+}
+	
+.right-column
+{
+	width: 700px;
+}
+.right-column .content
+{
+	margin-left: 10px;
+	margin-right: 20px;
+}
+	
+.settings-left-column
+{
+	width: 300px;
+}
+	
+.agent-section
+{
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+		
+.account-settings div
+{
+	margin-bottom: 1em;
+}
+		
+.account-settings .label
+{
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+.sys-template { display:none; }
+a:active{ outline: none; }
+
+
+
+/* Presence Control layout */
+#contacts-wrapper{
+    width: 100%;
+    margin: 0;
+}
+#contacts-wrapper ul{
+    list-style-type: none;
+}
+#contacts-wrapper ul li{
+    border-top-color: #999999; /* Grey */
+	border-top-style: dotted;
+	border-top-width: 2px;
+    padding: 10px 0;
+    height: 40px;
+}
+#contacts-wrapper ul li button:hover{
+    cursor: pointer;
+}
+#contacts{
+    padding: 0;
+    margin: 0;    
+}
+#contacts-wrapper .availability{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    float: left;
+}
+#contacts-wrapper .name{
+    font-weight: bold;
+    font-size: 90%;
+    margin-left: 8px;
+    padding-top: 2px;
+    display: inline-block;
+    float: left;
+    height: 16px;
+}
+#contacts-wrapper .sip{
+    display: none;
+    font-size: 75%;
+}
+#contacts-wrapper .dept{
+    font-size: 75%;
+    margin-left: 24px;
+    clear: left;
+    display: inline-block;
+    width: 126px;            /* width = (name-status-wrapper.width) - (this.margin-left)  */
+}
+#contacts-wrapper .status{
+    display: none;
+}
+#contacts-wrapper .name-status-wrapper{
+    float: left;
+    width: 150px;
+    display: inline-block;
+    height: 40px;
+}
+#presence-error{
+    display: none;
+    padding: 15px;
+    border: 1px solid red;
+    background-color: pink;
+    font-weight: bold;
+    font-size: 75%;
+    margin-bottom: 15px;
+}
+/* end Control layout */
+
+
+/*  Presence Indicators  */
+.away{background-image: url('../Images/2010/Icon_gbl_pres_away_14.png');}
+.available{background-image: url('../Images/2010/Icon_gbl_pres_available_14.png');}
+.blocked{background-image: url('../Images/2010/Icon_gbl_pres_blocked_14.png');}
+.busy{background-image: url('../Images/2010/Icon_gbl_pres_busy_14.png');}
+.dnd{background-image: url('../Images/2010/Icon_gbl_pres_dnd_14.png');}
+.offline{background-image: url('../Images/2010/Icon_gbl_pres_offline_14.png');}
+.unknown{background-image: url('../Images/2010/Icon_gbl_pres_unknown_14.png');}

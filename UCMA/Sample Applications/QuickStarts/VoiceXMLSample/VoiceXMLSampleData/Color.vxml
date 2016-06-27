@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+  <form>
+    <field name="Color">
+      <prompt bargein="true" bargeintype="speech" timeout="10s">
+       What is your favorite color?
+      </prompt>
+
+        <grammar mode="voice" type="application/srgs+xml" root="Color">
+            <rule id="Color" scope="public">
+                <one-of>
+                    <item>Red</item>
+                    <item>Orange</item>
+                    <item>Yellow</item>
+                    <item>Green</item>
+                    <item>Blue</item>
+                    <item>Indigo</item>
+                    <item>Violet</item>
+                </one-of>
+            </rule>
+        </grammar>
+
+        <nomatch>
+            <prompt bargein="true" bargeintype="speech" timeout="3s">
+                Sorry, I don't know that color.
+            </prompt>
+        <exit/>
+      </nomatch>    
+
+      <noinput>
+          <prompt bargein="true" bargeintype="speech" timeout="3s">
+              I didn't hear you.
+          </prompt>
+        <exit/>
+      </noinput>
+
+      <filled>
+          <prompt>
+              You said, <value expr="Color$.utterance"/>.
+          </prompt>
+        <exit namelist="Color Color$.utterance"/> 
+      </filled> 
+
+     </field>
+  </form>
+</vxml>
+ 

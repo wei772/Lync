@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <entry number="+14254251111">
+    <Uri>sip:bob@contoso.com</Uri>
+  </entry>
+  <entry number="tel:12324">
+    <Uri>sip:barryj@fabrikam.com</Uri>
+  </entry>
+  <entry number="tel:+12065552464">
+    <Uri>sip:danb@fabrikam.com</Uri>
+  </entry>
+  <entry number="tel:+12065551394">
+    <Uri>sip:toshm@fabrikam.com</Uri>
+  </entry>
+  <entry number="tel:+12065551346">
+    <Uri>sip:amya@fabrikam.com</Uri>
+  </entry>
+  <entry number="tel:+18585550110">
+    <Uri>sip:AlexD@contoso.com</Uri>
+  </entry>
+  <entry number="tel:+19015550102">
+    <Uri>sip:TerryA@contoso.com</Uri>
+  </entry>
+</root>

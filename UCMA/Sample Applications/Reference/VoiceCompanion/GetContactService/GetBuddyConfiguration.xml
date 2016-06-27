@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<getBuddyConfiguration>
+  <qaGetContact>
+    <mainPrompt>Please give me the full name of the contact to reach.</mainPrompt>
+    <noRecognitionPrompt>Sorry, I could not understand.</noRecognitionPrompt>
+  </qaGetContact>
+  <stmtNoContacts>
+    <mainPrompt>Sorry, you have no available contacts.</mainPrompt>
+  </stmtNoContacts>
+  <stmtConnectingToUser>
+    <mainPrompt>Connectin to {0}</mainPrompt>
+  </stmtConnectingToUser>
+  <qaCallback>
+    <mainPrompt>{0} {1}. Would you like to setup a callback when {0} becomes online?</mainPrompt>
+    <noRecognitionPrompt>Sorry, I could not understand.</noRecognitionPrompt>
+  </qaCallback>
+  <stmtCallbackConfirmation>
+    <mainPrompt>A callback to {0} has been set.</mainPrompt>    
+  </stmtCallbackConfirmation>
+  <AvailabilityPrompts>
+    <online>is online</online>
+    <busy>is busy</busy>
+    <donotdisturb>does not want to be disturbed</donotdisturb>
+    <berightback>will be right back</berightback>
+    <away>is away at this moment</away>
+    <offline>is offline at this moment</offline>
+    <other>is not available</other>
+  </AvailabilityPrompts>
+</getBuddyConfiguration>

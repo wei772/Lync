@@ -1,0 +1,29 @@
+﻿.left-column
+{
+	width : 49%;
+	vertical-align : top;
+}
+.left-column > .content
+{
+	margin-right : 150px;
+}
+		
+.right-column
+{
+	width : 49%;
+	vertical-align : top;
+}
+.right-column > .content
+{
+	margin-right : 150px;
+}
+	
+.login-button
+{
+	float :right;
+}
+		
+.register-button
+{
+	float:right;
+}

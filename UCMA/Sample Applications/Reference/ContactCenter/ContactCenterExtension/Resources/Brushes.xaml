@@ -1,0 +1,161 @@
+﻿<!--=====================================================================
+    File:    Brushes.xaml
+
+    Summary: Templates for defining Brushes.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Resource dictionary entries should be defined here. -->
+    
+    <SolidColorBrush x:Key="LightGrayBrush" Color="#FFC2C2C2"/>
+    <SolidColorBrush x:Key="MediumGray" Color="Gray"/>
+    <RadialGradientBrush x:Key="FormBackgroundBrush" >
+        <GradientStop Color="White"/>
+        <GradientStop Color="#FFCECECE" Offset="1"/>
+    </RadialGradientBrush>
+    <SolidColorBrush x:Key="RedOrangeBrush" Color="#FFF15A24"/>
+    <RadialGradientBrush x:Key="DarkGradientBrush" RadiusX="0.331" RadiusY="1.022">
+        <GradientStop Color="#FF272727" Offset="1"/>
+        <GradientStop Color="#FF5A5A5A"/>
+    </RadialGradientBrush>
+    <SolidColorBrush x:Key="DarkGray" Color="#FF4D4D4D"/>
+    
+    <LinearGradientBrush x:Key="LightRowBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFE2E2E2" Offset="1"/>
+        <GradientStop Color="White"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="DrkRed" Color="#FF780000"/>
+    <LinearGradientBrush
+        x:Key="GlobalButtonBorderBrush.Secondary.Default" 
+        EndPoint="0.5,1" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FFB6BABF"/>
+        <GradientStop Color="#FF999EA4" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush  
+        x:Key="GlobalButtonBackgroundBrush.Secondary.Default" 
+        EndPoint="0.5,1" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="White" Offset="0.388"/>
+        <GradientStop Color="#FFEDEDED" Offset="0.868"/>
+    </LinearGradientBrush>
+    <!-- /2: Default backplane (optional) -->
+
+    <!-- 2: Selected -->
+    <SolidColorBrush     
+        x:Key="GlobalButtonBorderBrush.Secondary.Selected" 
+        Color="#FF77CDE5"
+        />
+    <LinearGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.SelectedA"
+        EndPoint="0.5,1" 
+        MappingMode="RelativeToBoundingBox" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FFAAE7F8"/>
+        <GradientStop Color="#FF78C9E0" Offset="0.294"/>
+        <GradientStop Color="#FF60BBD5" Offset="0.599"/>
+        <GradientStop Color="#FFB6EDFB" Offset="1"/>
+    </LinearGradientBrush>
+    <RadialGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.SelectedB" 
+        RadiusX="0.357" 
+        RadiusY="0.545"
+        Center="0.498,0.989" 
+        GradientOrigin="0.498,0.989"
+        >
+        <GradientStop Color="Transparent" Offset="1"/>
+        <GradientStop Color="White"/>
+    </RadialGradientBrush>
+    <!-- /2: Selected -->
+            
+    <!-- 2: Hover -->
+    <LinearGradientBrush 
+        x:Key="GlobalButtonBorderBrush.Secondary.Hover" 
+        EndPoint="0.5,1" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FFA3D9E8"/>
+        <GradientStop Color="#FF53AFC7" Offset="0.964"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush
+        x:Key="GlobalButtonBackgroundBrush.Secondary.HoverA" 
+        EndPoint="0.5,1" 
+        MappingMode="RelativeToBoundingBox" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FFF1FEFF" Offset="0.052"/>
+        <GradientStop Color="#FF7BD3E9" Offset="0.844"/>
+        <GradientStop Color="#FFA5E5F6" Offset="0.974"/>
+    </LinearGradientBrush>
+    <RadialGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.HoverB"
+        RadiusY="0.545" 
+        RadiusX="0.357" 
+        Center="0.498,0.989" 
+        GradientOrigin="0.498,0.989"
+        >
+        <GradientStop Color="Transparent" Offset="1"/>
+        <GradientStop Color="White"/>
+    </RadialGradientBrush>
+    <!-- /2: Hover -->
+
+    <!-- 2: Pressed -->
+    <LinearGradientBrush 
+        x:Key="GlobalButtonBorderBrush.Secondary.Press" 
+        EndPoint="0.5,1" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FF62C1DC"/>
+        <GradientStop Color="#FFC6ECF7" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.PressA"
+        EndPoint="0.5,1" 
+        MappingMode="RelativeToBoundingBox" 
+        StartPoint="0.5,0"
+        >
+        <GradientStop Color="#FFAFDFED"/>
+        <GradientStop Color="#FF4AB1D0" Offset="0.185"/>
+        <GradientStop Color="#FF39ADCC" Offset="0.525"/>
+        <GradientStop Color="#FF66C5DE" Offset="0.725"/>
+        <GradientStop Color="#FFC7F7FF" Offset="0.95"/>
+    </LinearGradientBrush>
+    <RadialGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.PressB"
+        RadiusY="0.545" 
+        RadiusX="0.357" 
+        Center="0.498,0.989" 
+        GradientOrigin="0.498,0.989"
+        >
+        <GradientStop Color="Transparent" Offset="1"/>
+        <GradientStop Color="White"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush 
+        x:Key="GlobalButtonBackgroundBrush.Secondary.PressC" 
+        RadiusY="0.895" 
+        RadiusX="0.423" 
+        Center="0.502,0.062" 
+        GradientOrigin="0.502,0.062"
+        >
+        <GradientStop Color="Transparent" Offset="1"/>
+        <GradientStop Color="#CCFFFFFF"/>
+    </RadialGradientBrush>
+    <DropShadowEffect x:Key="FormDropShadow" Direction="0" ShadowDepth="0" Opacity="0.155"/>
+</ResourceDictionary>

@@ -1,0 +1,97 @@
+﻿<!--=====================================================================
+    File:    Icons.xaml
+
+    Summary: Templates for styling Controls.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <Style x:Key="IconBaseStyle_16" TargetType="ContentControl">
+        <Style.Setters>
+            <Setter Property="Width" Value="16"/>
+            <Setter Property="Height" Value="16"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style.Setters>
+    </Style>
+    
+    <Style x:Key="IconStyle.ModalityIM" BasedOn="{StaticResource IconBaseStyle_16}" TargetType="ContentControl">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <Canvas Width="16" Height="15.9844" Clip="F1 M 0,0L 16,0L 16,15.9844L 0,15.9844L 0,0">
+                            <Rectangle Width="16" Height="15.9844" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#00E8EBF4"/>
+                            <Path Width="12.0065" Height="11.8519" Canvas.Left="2.01508" Canvas.Top="1.99268" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Fill="#FFFFFFFF" Data="F1 M 2.51508,9.76001L 2.51508,3.20764C 2.51508,2.81335 2.82326,2.4928 3.20148,2.4928L 12.8347,2.49268C 13.2134,2.49268 13.5216,2.81323 13.5216,3.20764L 13.5216,9.76001C 13.5216,10.1543 13.2133,10.4739 12.8346,10.4739L 9.48389,10.4739C 9.48389,10.4739 6.80469,13.0756 6.53125,13.3446C 6.53125,13.1202 6.53923,10.472 6.53923,10.472L 3.19577,10.4739C 2.82326,10.4739 2.51508,10.1543 2.51508,9.76001 Z "/>
+                            <Path Width="6.04199" Height="1.02502" Canvas.Left="5.02001" Canvas.Top="4.96716" Stretch="Fill" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Data="F1 M 5.52001,5.49219L 10.562,5.46716"/>
+                            <Path Width="6.01698" Height="1" Canvas.Left="5.01581" Canvas.Top="6.97131" Stretch="Fill" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Data="F1 M 5.51581,7.47131L 10.5328,7.47131"/>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="IconStyle.ModalityVoice" BasedOn="{StaticResource IconBaseStyle_16}" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate >
+                    <Canvas Width="16.0156" Height="16.0156" Clip="F1 M 0,0L 16.0156,0L 16.0156,16.0156L 0,16.0156L 0,0">
+                        <Rectangle Width="16.0156" Height="16.0156" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#0079839C"/>
+                        <Path Width="11.2237" Height="11.4307" Canvas.Left="4.56535" Canvas.Top="0.145874" Stretch="Fill" Fill="#FF0A96BE" Data="F1 M 15.7891,5.86145C 15.7891,9.01758 13.2758,11.5765 10.1774,11.5765C 7.07764,11.5765 4.56535,9.01758 4.56535,5.86145C 4.56535,2.7052 7.07764,0.145874 10.1774,0.145874C 13.2758,0.145874 15.7891,2.7052 15.7891,5.86145 Z "/>
+                        <Path Width="4.13314" Height="5.56152" Canvas.Left="6.97729" Canvas.Top="1.89185" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 9.94418,5.46204L 9.3183,4.32935C 9.3183,4.32935 8.20793,4.69763 7.7288,5.85803C 7.23994,7.04126 7.32061,7.45337 7.32061,7.45337C 7.32061,7.45337 6.56061,5.58008 7.30214,4.37549C 7.97954,3.27527 8.63653,3.05469 8.63653,3.05469L 8.06409,1.89185L 11.1104,2.68091L 9.94418,5.46204 Z "/>
+                        <Path Width="4.13198" Height="5.56152" Canvas.Left="9.16086" Canvas.Top="4.14514" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 10.3251,6.13647L 10.953,7.26917C 10.953,7.26917 12.0628,6.90088 12.541,5.73999C 13.0309,4.55725 12.9493,4.14514 12.9493,4.14514C 12.9493,4.14514 13.7092,6.01794 12.9687,7.22351C 12.2903,8.32324 11.6333,8.5448 11.6333,8.5448L 12.2067,9.70667L 9.16086,8.91699L 10.3251,6.13647 Z "/>
+                        <Path Width="12.3888" Height="12.7031" Canvas.Left="0.891661" Canvas.Top="2.53657" Stretch="Fill" Fill="#FFFFFFFF" Data="F1 M 3.57889,7.46838C 3.62749,7.52917 4.73251,9.03418 5.81518,10.1605C 6.89784,11.2869 8.34788,12.4697 8.4164,12.5212L 8.66131,12.7146L 9.79938,11.5726L 10.54,10.8602C 10.641,10.7534 10.7809,10.7164 10.9705,10.73C 11.4865,10.7699 12.1843,11.2316 12.5148,11.6359C 13.2242,12.5066 13.4497,13.217 13.1533,13.6097C 12.8161,14.0315 12.2747,14.7274 11.192,15.1335C 10.54,15.3795 9.83631,15.2162 8.30901,14.4495C 6.17963,13.3929 2.31934,9.26538 1.4364,7.09766L 1.30325,6.78662C 1.03647,6.16418 0.89409,5.81287 0.891661,4.927C 0.895062,4.27002 1.93836,3.33508 2.38446,2.93567L 2.65804,2.6825L 2.66825,2.66248C 2.67845,2.65283 2.83153,2.46667 3.29754,2.56531C 3.83304,2.67566 5.02115,3.49536 5.37637,4.64709C 5.54549,5.17822 5.31175,5.42212 5.28113,5.44165L 3.40444,7.22595L 3.57889,7.46838 Z "/>
+                        <Path Width="13.7884" Height="14.0942" Canvas.Left="0.195311" Canvas.Top="1.84539" Stretch="Fill" Fill="#FF3B3B3B" Data="F1 M 3.4404,1.89136C 4.23345,2.05652 5.61691,3.05908 6.04745,4.44153C 6.11306,4.66174 6.13881,4.8512 6.13589,5.02026C 6.12375,5.63733 5.75881,5.94885 5.7491,5.95862C 5.7491,5.95862 4.66351,6.98206 4.32869,7.3042C 4.67808,7.7688 5.51292,8.84021 6.31228,9.68237C 7.11215,10.5143 8.1501,11.4006 8.6103,11.7777C 8.86395,11.524 9.31052,11.0857 9.31052,11.0857L 10.0725,10.3442C 10.3155,10.11 10.6459,10.007 11.0239,10.0342C 11.7693,10.0886 12.6334,10.6727 13.061,11.1995C 14.2661,12.6864 14.0698,13.5582 13.7024,14.0383C 13.3448,14.4795 12.7014,15.3124 11.4379,15.7858C 10.4748,16.155 9.51558,15.8373 7.99801,15.0704C 5.7107,13.9412 1.74351,9.69214 0.793987,7.36389L 0.660354,7.06262C 0.384827,6.40027 0.194826,5.95813 0.195312,4.9231C 0.19434,3.95752 1.31881,2.96423 1.91699,2.41907L 2.12983,2.22412L 2.14003,2.21448C 2.31351,1.99878 2.74649,1.73828 3.4404,1.89136 Z M 5.28113,5.44165C 5.31175,5.42212 5.54549,5.17822 5.37637,4.64709C 5.02115,3.49536 3.83304,2.67566 3.29754,2.56531C 2.83153,2.46667 2.67845,2.65283 2.66825,2.66248L 2.65804,2.6825L 2.38446,2.93567C 1.93836,3.33508 0.895062,4.27002 0.891661,4.927C 0.89409,5.81287 1.03647,6.16418 1.30325,6.78662L 1.4364,7.09766C 2.31934,9.26538 6.17963,13.3929 8.30901,14.4495C 9.83631,15.2162 10.54,15.3795 11.192,15.1335C 12.2747,14.7274 12.8161,14.0315 13.1533,13.6097C 13.4497,13.217 13.2242,12.5066 12.5148,11.6359C 12.1843,11.2316 11.4865,10.7699 10.9705,10.73C 10.7809,10.7164 10.641,10.7534 10.54,10.8602L 9.79938,11.5726L 8.66131,12.7146L 8.4164,12.5212C 8.34788,12.4697 6.89784,11.2869 5.81518,10.1605C 4.73251,9.03418 3.62749,7.52917 3.57889,7.46838L 3.40444,7.22595L 5.28113,5.44165 Z " HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="IconStyle.ModalityAppSharing" BasedOn="{StaticResource IconBaseStyle_16}" TargetType="ContentControl">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <Canvas Width="16" Height="16" Clip="F1 M 0,0L 16,0L 16,16L 0,16L 0,0">
+                            <Rectangle Width="16" Height="16" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#00FFFFFF"/>
+                            <Path Width="15.0781" Height="8.125" Canvas.Left="0.453126" Canvas.Top="3.91663" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Fill="#FFFFFFFF" Data="F1 M 4.526,11.5416L 0.953126,7.97034L 4.52083,4.41663L 4.52083,6.45837L 11.5,6.45837L 11.5052,4.4375L 15.0313,7.96094L 11.5052,11.4584L 11.5,9.5L 4.52083,9.5L 4.526,11.5416 Z "/>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    
+    <Style x:Key="IconStyle.ModalityVideo" BasedOn="{StaticResource IconBaseStyle_16}" TargetType="ContentControl">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate >
+                        <Canvas  Width="16" Height="16.0182" Clip="F1 M 0,0L 16,0L 16,16.0182L 0,16.0182L 0,0">
+                            <Rectangle Width="16" Height="16.0182" Canvas.Left="0" Canvas.Top="0" Stretch="Fill" Fill="#00E8EBF4"/>
+                            <Path Width="10.3336" Height="10.3341" Canvas.Left="2.85868" Canvas.Top="1.63904" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Fill="#FFFFFFFF" Data="F1 M 3.35868,6.80579C 3.35868,4.23254 5.45221,2.13904 8.02548,2.13904C 10.5988,2.13904 12.6923,4.23254 12.6923,6.80579C 12.6923,9.37952 10.5988,11.4731 8.02548,11.4731C 5.45221,11.4731 3.35868,9.37952 3.35868,6.80579 Z "/>
+                            <Path Width="6.04951" Height="6.04956" Canvas.Left="5.00676" Canvas.Top="3.78674" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Data="F1 M 5.50676,6.81104C 5.50676,6.13684 5.76918,5.50281 6.246,5.026C 6.7233,4.54919 7.35728,4.28674 8.03152,4.28674C 8.70575,4.28674 9.33974,4.54919 9.81704,5.026C 10.2934,5.50281 10.5563,6.13684 10.5563,6.81104C 10.5563,8.20361 9.42414,9.3363 8.03152,9.3363C 6.63939,9.3363 5.50676,8.20361 5.50676,6.81104 Z "/>
+                            <Path Width="1.69676" Height="1.69666" Canvas.Left="7.18314" Canvas.Top="6.02527" Stretch="Fill" Fill="#FF3B3B3B" Data="F1 M 8.8799,6.87317C 8.8799,7.34265 8.50009,7.72192 8.03152,7.72192C 7.56294,7.72192 7.18314,7.34265 7.18314,6.87317C 7.18314,6.40454 7.56294,6.02527 8.03152,6.02527C 8.50009,6.02527 8.8799,6.40454 8.8799,6.87317 Z "/>
+                            <Path Width="9.96276" Height="3.01459" Canvas.Left="3.02628" Canvas.Top="10.9985" Stretch="Fill" StrokeMiterLimit="2.75" Stroke="#FF3B3B3B" Fill="#FFFFFFFF" Data="F1 M 7.07971,13.5131L 3.52628,13.5131C 3.52628,13.5131 4.13458,11.4762 6.71378,11.4987L 8.00763,11.5115L 9.30154,11.4987C 11.8807,11.4762 12.489,13.5131 12.489,13.5131L 8.9356,13.5131L 7.07971,13.5131 Z "/>
+                        </Canvas>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

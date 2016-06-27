@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MainMenuConfiguration>
+  <MainMenuPrompts>
+    <mainPrompt>
+      Main Menu.
+    </mainPrompt>
+  </MainMenuPrompts>
+  <Options>
+    <Option index ="1">
+      <DtmfCode>1</DtmfCode>
+      <Prompt>
+        Press one to search your contact list.
+      </Prompt>
+      <ServiceId>C979E103-B6C2-4b0d-ACAE-9A2B0B35E336</ServiceId>
+    </Option>
+    <Option index ="2">
+      <DtmfCode>2</DtmfCode>
+      <Prompt>
+        Press two to dial an international number.
+      </Prompt>
+      <ServiceId>95C8AAE9-427F-4580-A49D-A7FA814676CB</ServiceId>
+    </Option>
+    <Option index ="3">
+      <DtmfCode>3</DtmfCode>
+      <Prompt>
+        Press three to setup an audio conference.
+      </Prompt>
+      <ServiceId>01C400CB-E2DF-4970-A4D5-0FEEA4F46E3F</ServiceId>
+    </Option>
+  </Options>
+</MainMenuConfiguration>

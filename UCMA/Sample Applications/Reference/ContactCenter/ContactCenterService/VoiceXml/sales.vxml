@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+
+  <var name="ProductClassification"/>
+  <var name="ProductName"/>
+
+  <form id="ProductClassificationForm">
+    <field name="Menu" slot="option">
+      <property name="bargein" value="true"/>
+      <property name="timeout" value="30s"/>
+      <grammar mode="voice" type="application/srgs+xml" root="ProductClassificationGrammar" tag-format="semantics/1.0">
+        <rule id="ProductClassificationGrammar" scope="public">
+          <one-of>
+            <item>
+              CellPhones
+              <tag>out.option = "CellPhones";</tag>
+            </item>
+            <item>
+              Laptops
+              <tag>out.option = "Laptops";</tag>
+            </item>
+            <item>
+              Desktops
+              <tag>out.option = "Desktops";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      <grammar mode="dtmf" type="application/srgs+xml" root="ProductClassificationGrammarDtmf" tag-format="semantics/1.0">
+        <rule id="ProductClassificationGrammarDtmf" scope="public">
+          <one-of>
+            <item>
+              1
+              <tag>out.option = "CellPhones";</tag>
+            </item>
+            <item>
+              2
+              <tag>out.option = "Laptops";</tag>
+            </item>
+            <item>
+              3
+              <tag>out.option = "Desktops";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <prompt bargein="true" bargeintype="speech" timeout="30s">
+        Welcome to Contoso Sales. What is the type of product you are interested in? CellPhones, Laptops, or Desktops
+      </prompt>
+
+      <nomatch>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          I'm sorry, I did not understand that. What product type are you interested in? CellPhones, Laptops, or Desktops
+        </prompt>
+      </nomatch>
+
+      <noinput>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          Sorry I could not hear you. What product type are you interested in? CellPhones, Laptops, or Desktops
+        </prompt>
+      </noinput>
+
+      <filled>
+        <assign name="ProductClassification" expr="Menu"/>
+        <goto next="#ProductNameForm"/>
+      </filled>
+
+    </field>
+  </form>
+
+  <form id="ProductNameForm">
+    <field name="Menu" slot="option">
+      <property name="bargein" value="true"/>
+      <property name="timeout" value="30s"/>
+      <grammar mode="voice" type="application/srgs+xml" root="ProductNameGrammar" tag-format="semantics/1.0">
+        <rule id="ProductNameGrammar" scope="public">
+          <one-of>
+            <item>
+              Nokia
+              <tag>out.option = "Nokia";</tag>
+            </item>
+            <item>
+              HTC
+              <tag>out.option = "HTC";</tag>
+            </item>
+            <item>
+              Samsung
+              <tag>out.option = "Samsung";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+      <grammar mode="dtmf" type="application/srgs+xml" root="ProductNameGrammarDtmf" tag-format="semantics/1.0">
+        <rule id="ProductNameGrammarDtmf" scope="public">
+          <one-of>
+            <item>
+              1
+              <tag>out.option = "Nokia";</tag>
+            </item>
+            <item>
+              2
+              <tag>out.option = "HTC";</tag>
+            </item>
+            <item>
+              3
+              <tag>out.option = "Samsung";</tag>
+            </item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <prompt bargein="true" bargeintype="speech" timeout="30s">
+        You said <value expr="ProductClassification"/> is the product type that you need help with. What is the brand of the product you are interested in? Nokia, HTC or Samsung
+      </prompt>
+
+      <nomatch>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          I'm sorry, I did not understand that. What brand are you interested in? Nokia, HTC or Samsung
+        </prompt>
+      </nomatch>
+
+      <noinput>
+        <prompt bargein="true" bargeintype="speech" timeout="30s">
+          Sorry I could not hear you. What brand are you interested in? Nokia, HTC or Samsung
+        </prompt>
+      </noinput>
+
+      <filled>
+        <prompt>
+          You said <value expr="Menu"/> is the brand that you need help with.
+        </prompt>
+        <assign name="ProductName" expr="Menu"/>
+        <goto next="#Operator"/>
+      </filled>
+
+    </field>
+  </form>
+
+  <form id="Operator">
+    <block>
+      <prompt>Please hold on the line as we are trying to connect you.</prompt>
+      <exit namelist="ProductClassification ProductName"/>
+    </block>
+  </form>
+
+</vxml>

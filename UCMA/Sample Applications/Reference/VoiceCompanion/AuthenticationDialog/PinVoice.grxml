@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--====================================================================
+  File:      PinVoice.grxml
+
+  Summary:   Grammar rule definitions.
+
+***********************************************************************
+*                                                       *
+*   Copyright (C) Microsoft. All rights reserved.   *
+*                                                       *
+***********************************************************************/
+
+
+-->
+
+<grammar xmlns:sapi="http://schemas.microsoft.com/Speech/2002/06/SRGSExtensions" xml:lang="en-US" tag-format="semantics-ms/1.0" version="1.0" mode="voice" xmlns="http://www.w3.org/2001/06/grammar">
+
+  <rule id="fivedigits" scope="public">
+    <tag>$._value = '';</tag>
+    <item>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+      <ruleref uri="#digit" type="application/srgs+xml"/>
+      <tag>$._value = $._value + $$._value;</tag>
+    </item>
+  </rule>
+
+  <rule id="digit">
+    <one-of>
+      <item>
+        <item>zero</item>
+        <tag>$._value = "0"</tag>
+      </item>
+      <item>
+        <item>one</item>
+        <tag>$._value = "1"</tag>
+      </item>
+      <item>
+        <item>two</item>
+        <tag>$._value = "2"</tag>
+      </item>
+      <item>
+        <item>three</item>
+        <tag>$._value = "3"</tag>
+      </item>
+      <item>
+        <item>four</item>
+        <tag>$._value = "4"</tag>
+      </item>
+      <item>
+        <item>five</item>
+        <tag>$._value = "5"</tag>
+      </item>
+      <item>
+        <item>six</item>
+        <tag>$._value = "6"</tag>
+      </item>
+      <item>
+        <item>seven</item>
+        <tag>$._value = "7"</tag>
+      </item>
+      <item>
+        <item>eight</item>
+        <tag>$._value = "8"</tag>
+      </item>
+      <item>
+        <item>nine</item>
+        <tag>$._value = "9"</tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="Repeat" scope="public">
+    <one-of>
+      <item>repeat</item>
+      <item>again</item>
+    </one-of>
+  </rule>
+
+  <rule id="Help" scope="public">
+    <one-of>
+      <item>help</item>
+      <item>assistance</item>
+    </one-of>
+  </rule>
+
+</grammar>

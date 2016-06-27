@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<authenticationConfiguration>
+  <stmtWelcome>
+    <mainPrompt>Welcome {0}.</mainPrompt>
+  </stmtWelcome>
+  <qaPin>
+    <mainPrompt>Please enter or say your pin.</mainPrompt>
+    <noRecognitionPrompt>Sorry, I did not understand that.</noRecognitionPrompt>
+  </qaPin>
+  <stmtInvalidPin>
+    <mainPrompt>Invalid pin.</mainPrompt>
+  </stmtInvalidPin>
+  <stmtPinValidated>
+    <mainPrompt>Please hold</mainPrompt>
+  </stmtPinValidated>
+  <stmtDisconnect>
+    <mainPrompt>Sorry, I am unable to connect you. Good Bye.</mainPrompt>
+  </stmtDisconnect>
+</authenticationConfiguration>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<IVRMenu>
+	<TopLevelOptions>
+		<TopLevelOption id="1"
+						tel=""
+						name="Windows"
+						writtenText="Windows"
+						graphicalText="Windows"
+						color="#910091"
+						image="http://localhost:8081/images/windows.png">
+			<Options>
+				<Option id="1"
+						name="Windows 7"
+						writtenText="Windows 7"
+						graphicalText="Windows 7"
+						tel="tel:12345"
+						color="#910091"
+						image="http://localhost:8081/images/Windows/Windows7.png"/>
+				<Option id="2"
+						name="Windows 8"
+						writtenText="Windows 8"
+						graphicalText="Windows 8"
+						 tel="tel:12346"
+						color="#910091"
+						image="http://localhost:8081/images/Windows/Windows8.png"/>
+				<Option id="3"
+						name="Internet Explorer"
+						writtenText="Internet Explorer"
+						graphicalText="Internet Explorer"
+						tel="tel:12347"
+						color="#910091"
+						image="http://localhost:8081/images/Windows/InternetExplorer.png"/>
+				<Option id="4"
+						name="Windows Update and Security"
+						writtenText="Windows Update and Security"
+						graphicalText="Update and Security"
+						 tel="tel:12348"
+						color="#910091"
+						image="http://localhost:8081/images/Windows/WindowsUpdateandSecurity.png"/>
+
+			</Options>
+		</TopLevelOption>
+		<TopLevelOption id="2"
+						tel=""
+						name="Office"
+						writtenText="Office"
+						graphicalText="Office"
+						color="#FF8200"
+						image="http://localhost:8081/images/Office.png">
+			<Options>
+				<Option id="1"
+						name="Word"
+						writtenText="Word"
+						graphicalText="Word"
+						 tel="tel:23456"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/Word.png"/>
+				<Option id="2"
+						name="Excel"
+						writtenText="Excel"
+						graphicalText="Excel"
+						  tel="tel:23457"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/Excel.png"/>
+				<Option id="3"
+						name="PowerPoint"
+						writtenText="PowerPoint"
+						graphicalText="PowerPoint"
+						tel="tel:23458"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/PowerPoint.png"/>
+				<Option id="4"
+						name="Outlook"
+						writtenText="Outlook"
+						graphicalText="Outlook"
+						 tel="tel:23459"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/Outlook.png"/>
+				<Option id="5"
+						name="OneNote"
+						writtenText="OneNote"
+						graphicalText="OneNote"
+						 tel="tel:23450"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/OneNote.png"/>
+				<Option id="6"
+						name="Office365"
+						writtenText="Office 365"
+						graphicalText="Office 365"
+						 tel="tel:23451"
+						color="#ffbe00"
+						image="http://localhost:8081/images/Office/Office365.png"/>
+			</Options>
+		</TopLevelOption>
+		<TopLevelOption id="3"
+						tel=""
+						name="Communications"
+						writtenText="Communications"
+						graphicalText="Communications"
+						color="#0071BC"
+						image="http://localhost:8081/images/Communications.png">
+			<Options>
+				<Option id="1"
+						name="Lync"
+						writtenText="Lync"
+						graphicalText="Lync"
+						 tel="tel:34567"
+						color="#0071bc"
+						image="http://localhost:8081/images/Communications/Lync.png"/>
+				<Option id="2"
+						name="Windows Phone"
+						writtenText="Windows Phone"
+						graphicalText="Windows Phone"
+						tel="tel:34568"
+						color="#0071bc"
+						image="http://localhost:8081/images/Communications/WindowsPhone.png"/>
+				<Option id="3"
+						name="Conferencing"
+						writtenText="Audio Conferencing"
+						graphicalText="Audio Conferencing"
+						tel="tel:34567"
+						color="#0071bc"
+						image="http://localhost:8081/images/Communications/Conferencing.png" />
+			</Options>
+		</TopLevelOption>
+		<TopLevelOption id="4"
+						name="Connectivity"
+						writtenText="Connectivity"
+						graphicalText="Connectivity"
+						color="#FF0097"
+						tel="tel:45678"
+						image="http://localhost:8081/images/Connectivity.png">
+			<Options>
+				<Option id="1"
+						name="Remote Access"
+						writtenText="Remote Access"
+						graphicalText="Remote Access"
+						 tel="tel:45679"
+						color="#FF0097"
+						image="http://localhost:8081/images/Connectivity/RemoteAccess.png"/>
+			<Option id="2"
+						name="Smartcard"
+						writtenText="Smartcard and PIN"
+						graphicalText="Smartcard and PIN"
+						tel="tel:45670"
+						color="#FF0097"
+						image="http://localhost:8081/images/Connectivity/Smartcard.png"/>
+			<Option id="3"
+						name="Authentication"
+						writtenText="Password Reset"
+						graphicalText="Password Reset"
+						tel="tel:45671"
+						color="#FF0097"
+						image="http://localhost:8081/images/Connectivity/Authentication.png" />
+			</Options>
+		</TopLevelOption>
+	</TopLevelOptions>
+</IVRMenu>

@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelBot.MessageHandlers", "ExcelBot.MessageHandlers\ExcelBot.MessageHandlers.csproj", "{A5CE0505-4A2A-4692-AF54-6B439E0AF960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelBot.Util", "ExcelBot.Util\ExcelBot.Util.csproj", "{0012FADE-F597-46D1-A51F-D8168754663C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelBot.ConsoleLauncher", "ExcelBot.ConsoleLauncher\ExcelBot.ConsoleLauncher.csproj", "{BD9D2418-3993-42E2-8A32-52F5FA301088}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bin", "Bin", "{176DC9B5-1C9D-4E41-AE47-1392D1F2C229}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Debug|x64.ActiveCfg = Debug|x64
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A5CE0505-4A2A-4692-AF54-6B439E0AF960}.Release|x64.ActiveCfg = Release|x64
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Debug|x64.ActiveCfg = Debug|x64
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0012FADE-F597-46D1-A51F-D8168754663C}.Release|x64.ActiveCfg = Release|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Debug|x64.ActiveCfg = Debug|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Debug|x64.Build.0 = Debug|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Release|Any CPU.ActiveCfg = Release|x86
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Release|x64.ActiveCfg = Release|x64
+		{BD9D2418-3993-42E2-8A32-52F5FA301088}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,132 @@
+﻿<navigation:Page x:Class="FastHelpClientView.Views.Tickets"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:data="clr-namespace:FastHelpClient.Data;assembly=FastHelpClient.Data"
+                 xmlns:Toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"
+                 xmlns:utils="clr-namespace:FastHelpClient.View.Utils"
+                 xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                 xmlns:Navigation="clr-namespace:FastHelpClient.Data.Navigation;assembly=FastHelpClient.Data"
+                 Navigation:Navigator.Source="{Binding}"
+                 mc:Ignorable="d"
+                 Height="600"
+                 Width="802"
+                 Title="Welcome to Microsoft HelpDesk">
+
+    <UserControl.Resources>
+        <utils:ColorConverter x:Key="colorConverter" />
+        <utils:ImageBrushConverter x:Key="imgBrush" />
+
+        <!-- Comment out the below line(model) to view in designer . Don't forget to uncomment later-->
+        <data:TicketsViewModel  x:Key="TicketsViewModel"
+                               d:IsDataSource="True" />
+        
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot"
+          Background="#8CC600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="45" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="45" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1"
+                    VerticalAlignment="Center">
+                <Image Source="/FastHelpClient.View;component/Images/back.png"
+                       Stretch="None"
+                       VerticalAlignment="Bottom"
+                       ToolTipService.ToolTip="Back to Main Menu"
+                       MouseLeftButtonDown="BackButton_Click">
+                </Image>
+            </Border>
+
+            <Border Grid.Column="2"
+                    VerticalAlignment="Center">
+                <Image Source="/FastHelpClient.View;component/Images/alerts.png"
+                       Stretch="None"
+                       MouseLeftButtonDown="OnTicketClick"
+                       ToolTipService.ToolTip="Alert Center">
+                </Image>
+            </Border>
+            <Border Grid.Column="3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                <TextBlock x:Name="menuName"
+                           Text="Tickets"
+                           Foreground="White"
+                           Margin="0,0,0,0"
+                           FontSize="43"
+                           FontFamily="Segoe UI" />
+            </Border>
+        </Grid>
+
+        <!-- Content Image and Grid -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="35" />
+            </Grid.ColumnDefinitions>
+
+
+            <Border Grid.Column="1">
+                <Image x:Name="menuImage"
+                       Stretch="None"
+                       VerticalAlignment="Top" />
+            </Border>
+
+
+            <Border Height="92"
+                    VerticalAlignment="Bottom"
+                    Grid.Column="1">
+                <TextBlock TextAlignment="Center"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Text="HelpDesk"
+                           FontFamily="Segoe UI"
+                           Margin="0,0,0,0"
+                           FontSize="40">
+                </TextBlock>
+            </Border>
+
+
+            <Grid Grid.Column="2">
+                <TextBlock TextAlignment="Center"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Text="results"
+                           FontFamily="Segoe UI"
+                           Margin="0,0,0,0"
+                           FontSize="40">
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+
+        <!-- footer -->
+
+       
+        <Border Grid.Row="3"
+                Margin="10,0,0,0">
+            <TextBlock Text="designed and developed by ### systems private limited"
+                       Foreground="#00A600"
+                       FontSize="11"
+                       FontFamily="Segoe UI" />
+        </Border>
+    </Grid>
+</navigation:Page>

@@ -1,0 +1,164 @@
+﻿<!--=====================================================================
+    File:    SupervisorDashboardView.xaml
+
+    Summary: View for displaying Supervisor Dashboard.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:Microsoft.Lync.Samples.ContactCenterExtension.Views" xmlns:systemcontrols="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+    mc:Ignorable="d"
+    x:Class="Microsoft.Lync.Samples.ContactCenterExtension.Views.SupervisorDashboardView"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:Controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls" xmlns:Converters="clr-namespace:Microsoft.Lync.Samples.ContactCenterExtension.Converters" d:DesignWidth="385" d:DesignHeight="508" 
+    >
+    
+    <UserControl.Resources>
+        <Converters:VisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+
+    <!--Main Grid-->
+    <Grid x:Name="LayoutRoot" Background="{StaticResource FormBackgroundBrush}">
+        <systemcontrols:TabControl TabStripPlacement="Bottom" Padding="0">
+             <!--Supervisor TabItem-->
+            <systemcontrols:TabItem Header="Supervisor" Style="{StaticResource TabItemStyle}">
+                <Grid x:Name="OldLayoutRoot" Background="#FFE7E7EF">
+                    <Border BorderBrush="#FFD3D9D9" BorderThickness="1" Grid.Column="2" Margin="5" Background="White" CornerRadius="2" Padding="5" Effect="{StaticResource FormDropShadow}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="49"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="TopGradient" BorderThickness="1" CornerRadius="2,2,0,0" Margin="-5,-5,-5,0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FFEDEDED" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock TextWrapping="Wrap" Text="Contoso Agent Supervisor Console" HorizontalAlignment="Left" Margin="52,11,0,0" VerticalAlignment="Top" Style="{StaticResource TitleStyle}"/>
+                            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="{x:Null}" Padding="0" Style="{StaticResource ScrollViewerRetemplate}" Grid.Row="1" BorderThickness="0">
+                                <ItemsControl
+                                    ItemsSource="{Binding Agents}"
+                                    VerticalAlignment="Top">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid d:DesignWidth="350" Style="{StaticResource LightRowGridStyle}" Height="17" Background="Transparent" VerticalAlignment="Top">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="2*"/>
+                                                    <ColumnDefinition Width=".8*"/>
+                                                    <ColumnDefinition Width=".8*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border x:Name="CurrentlyMonitoring" BorderBrush="#FF41B1D1" BorderThickness="1" Grid.ColumnSpan="5" Margin="0,0,0,1" Background="#FFCAF2FC" Visibility="{Binding IsChecked, ElementName=radioButton, Converter={StaticResource VisibilityConverter}}"/>
+                                                <Button Content="Button" d:LayoutOverrides="Height" Grid.ColumnSpan="6" Style="{StaticResource ListContainerButton}" Margin="0,0,0,1"/>
+                                                <Controls:PresenceIndicator PhotoDisplayMode="Hidden" Source="{Binding Uri}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,2"/>
+                                                <TextBlock Text="{Binding DisplayName}" Grid.Column="1" VerticalAlignment="Center" TextTrimming="WordEllipsis" FontSize="12" Foreground="Black" Margin="0,0,4,0" IsHitTestVisible="False"/>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.ColumnSpan="2" FontSize="12" Foreground="#FF555555" Margin="0,0,4,0" IsHitTestVisible="False"><Run Text="{Binding Status}"/></TextBlock>
+                                                <TextBlock Grid.Column="3" VerticalAlignment="Center" FontSize="10.667" Foreground="#FF14667D" Margin="0,0,4,0" IsHitTestVisible="False"><Run Text=" "/><Run Text="{Binding Duration, StringFormat=#}"/></TextBlock>
+                                                <RadioButton x:Name="radioButton" Margin="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" GroupName="Monitor" Foreground="{StaticResource DarkGray}" Style="{StaticResource CheckableButtonNoBackplaneStyle}" IsChecked="{Binding IsMonitoring, Mode=TwoWay}" Cursor="Hand" Visibility="{Binding CanMonitor, Converter={StaticResource VisibilityConverter}}" Height="20" Width="63" Padding="0">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Canvas Margin="-6,0,0,0" Width="16" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                                            <Canvas.RenderTransform>
+                                                                <CompositeTransform ScaleX="0.9" ScaleY="0.9"/>
+                                                            </Canvas.RenderTransform>
+                                                            <Path Data="M2.2040224,15.417437 C2.124006,15.417437 2.0422218,15.414676 1.9604795,15.408462 C1.0831133,15.342813 0.38650078,14.927921 0,14.241245 C-0.41258228,13.507835 -0.39909935,12.558557 0.037752643,11.701508 L0.65262383,12.014366 C0.32178196,12.665075 0.30202115,13.371149 0.60134584,13.902913 C0.87104964,14.381935 1.3716522,14.671876 2.0125585,14.719992 C3.338414,14.822852 4.4836302,13.839954 5.307826,13.124423 C5.4434981,13.006238 5.5712094,12.895646 5.6907482,12.797274 C8.1923323,10.738353 8.9698544,8.3926668 9.1819944,6.787364 C9.4508104,4.7681026 9.061532,2.9896019 8.115015,1.9082972 C7.4066629,1.1001991 6.4233446,0.69031262 5.1918712,0.69031262 C2.074585,0.69031262 0.68582547,4.6727123 0.67230046,4.712779 L0.017949376,4.4916992 C0.079971746,4.3082433 1.5774338,-2.1067339E-05 5.1918712,-2.1067339E-05 C6.611177,-2.1067339E-05 7.8013272,0.50247687 8.63449,1.4534568 C9.7284632,2.7024505 10.165306,4.6292281 9.8669443,6.8781223 C9.6376848,8.6062555 8.804451,11.128531 6.1294551,13.330281 C6.0143833,13.424582 5.8920217,13.53172 5.7608995,13.645762 C4.9402442,14.358603 3.7212455,15.417437 2.2040224,15.417437 z M6.6543231,10.269133 L6.192275,9.7568359 C6.9248099,9.0951509 7.2960711,8.5150623 7.4308939,7.8178945 C7.6313663,6.7900214 7.6366816,5.6547399 7.4452524,4.7797761 C7.2718406,3.995018 6.6777115,3.2237837 5.9306188,2.8152444 C5.5217056,2.5914311 4.888,2.3792362 4.196692,2.6358817 C3.4821758,2.8988438 2.9024057,3.6970427 2.8169975,4.5334578 C2.6192584,6.4758644 4.0897598,6.8925781 4.1527042,6.9091392 L3.9746881,7.5760703 C3.9531562,7.5703406 1.8731799,6.9837637 2.1302464,4.4633408 C2.242619,3.3608084 2.9940891,2.3429177 3.9576643,1.9878098 C4.6893353,1.7177236 5.5081754,1.7982029 6.2614608,2.2098973 C7.1900363,2.7167819 7.9018393,3.644881 8.1195011,4.631886 C8.3297777,5.5941148 8.3261881,6.8345551 8.1085949,7.9496112 C7.8992162,9.031847 7.221446,9.7577333 6.6543231,10.269133 z M2.3612666,11.870501 C2.0134006,11.84406 1.8795449,11.460995 1.7814968,11.10416 C1.3302737,9.4642038 2.4888957,8.0102911 2.5383582,7.9491272 L3.0749893,8.3833475 C3.0651245,8.3954973 2.1213136,9.589982 2.4448593,10.831755 C2.6452978,10.385592 2.8727834,9.879508 3.2816958,9.6974669 C4.1159234,9.3257914 5.1504583,8.6777058 5.3203011,8.0732489 C5.4732027,7.531199 5.5109162,6.7810893 5.1603575,6.3002024 C4.9060316,5.9514112 4.4573836,5.7635784 3.8273427,5.7415428 L3.8524988,5.051209 C4.7046261,5.0813346 5.3319674,5.3644753 5.7176704,5.8929744 C6.343286,6.750072 6.0807862,7.9217205 5.9855204,8.2601919 C5.6978655,9.2808504 4.1949668,10.046155 3.5621443,10.328502 C3.3940687,10.402988 3.1936371,10.848461 3.0740576,11.115 C2.8925412,11.519949 2.7342887,11.872226 2.3999047,11.872226 z" 
+                                                                  Stretch="None"  Fill="{StaticResource DarkGray}" UseLayoutRounding="False" StrokeThickness="0" VerticalAlignment="Top" Width="11.045" Height="16" Canvas.Left="6.559"/>
+                                                        </Canvas>
+                                                        <TextBlock Text="Monitor" Margin="3,0,0,0"/>
+                                                    </StackPanel>
+                                                </RadioButton>
+                                                <Rectangle Grid.ColumnSpan="6" Height="1" VerticalAlignment="Bottom" Fill="#FFF7F7F7" Margin="5,0"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <views:SupervisorMonitorView Visibility="{Binding IsMonitoring, Converter={StaticResource VisibilityConverter}}" Grid.Row="2" VerticalAlignment="Top"/>
+                        </Grid>
+                    </Border>
+                    <Canvas Margin="14,13,0,0" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="41">
+                        <Path Data="M32.6992,46.1899L18.4262,31.9159L32.6992,17.6429L46.9732,31.9159L32.6992,46.1899z" Fill="#FFF15A24" Height="33.547" Canvas.Left="3.818" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF999999" StrokeThickness="5" StrokeMiterLimit="4" StrokeLineJoin="Miter" Canvas.Top="3.727" Width="33.547" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+                        <Path Data="M46.8589,46.0767C39.0399,53.8967,26.3589,53.8957,18.5409,46.0767C10.7199,38.2557,10.7199,25.5767,18.5409,17.7567C26.3589,9.93670000000002,39.0399,9.93670000000002,46.8589,17.7567C54.6799,25.5767,54.6799,38.2557,46.8589,46.0767z" Height="41.05" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF666666" StrokeThickness="1" StrokeMiterLimit="4" StrokeLineJoin="Miter" Width="41.05" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+                    </Canvas>
+                </Grid>
+            </systemcontrols:TabItem>
+
+            <!--Customer Detail TabItem-->
+            <systemcontrols:TabItem Header="Customer Detail">
+                <Grid Background="#FFE7E7EF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="77"/>
+                        <RowDefinition Height="150"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border BorderThickness="1" Margin="5" Grid.RowSpan="3" Background="White" Effect="{StaticResource FormDropShadow}" CornerRadius="2"/>
+                    <Border x:Name="TopGradient_Copy" BorderThickness="1" CornerRadius="2,2,0,0" Margin="5,5,5,0" Height="54" VerticalAlignment="Top">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="#FFEDEDED" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                     <Canvas Margin="14,13,0,0" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="41">
+                        <Path Data="M32.6992,46.1899L18.4262,31.9159L32.6992,17.6429L46.9732,31.9159L32.6992,46.1899z" Fill="#FFF15A24" Height="33.547" Canvas.Left="3.818" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF999999" StrokeThickness="5" StrokeMiterLimit="4" StrokeLineJoin="Miter" Canvas.Top="3.727" Width="33.547" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+                        <Path Data="M46.8589,46.0767C39.0399,53.8967,26.3589,53.8957,18.5409,46.0767C10.7199,38.2557,10.7199,25.5767,18.5409,17.7567C26.3589,9.93670000000002,39.0399,9.93670000000002,46.8589,17.7567C54.6799,25.5767,54.6799,38.2557,46.8589,46.0767z" Height="41.05" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="#FF666666" StrokeThickness="1" StrokeMiterLimit="4" StrokeLineJoin="Miter" Width="41.05" UseLayoutRounding="False" d:LayoutOverrides="HorizontalAlignment, Width, Height, GridBox" d:IsLocked="True"/>
+                    </Canvas>
+                    <TextBlock TextWrapping="Wrap" Text="Contoso Customer Care Agent Console" HorizontalAlignment="Left" Style="{StaticResource TitleStyle}" Margin="63,22,0,35" d:LayoutOverrides="Height"/>
+                    <Grid x:Name="CustomerInfo" Grid.Row="1" Height="150" Margin="20,0,8,0" VerticalAlignment="Top" Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, ElementName=CutomerRadio}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="8,35,0,0" HorizontalAlignment="Left" Width="102">
+                            <TextBlock TextWrapping="Wrap" Text="First Name:" Style="{StaticResource HeadingStyle}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="Last Name:" Style="{StaticResource HeadingStyle}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="Email Address:" Style="{StaticResource HeadingStyle}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="Phone Number:" Style="{StaticResource HeadingStyle}" Margin="0,3"/>
+                        </StackPanel>
+                        <StackPanel Margin="148,35,8,0">
+                            <TextBlock TextWrapping="Wrap" Text="Sean" Style="{StaticResource BaseFont}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="Chai" Style="{StaticResource BaseFont}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="seanchai@live.com" Style="{StaticResource BaseFont}" Margin="0,3"/>
+                            <TextBlock TextWrapping="Wrap" Text="(425) 555-1212" Style="{StaticResource BaseFont}" Margin="0,3"/>
+                        </StackPanel>
+                        <TextBlock TextWrapping="Wrap" Text="Customer Info" VerticalAlignment="Top" Margin="8,8,8,0" Style="{StaticResource HeadingStyle}" Foreground="{StaticResource RedOrangeBrush}"/>
+                    </Grid>
+                    <Grid x:Name="OrderHistory" Grid.Row="2" Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, ElementName=OrderRadio}" Margin="20,8,16,16">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Order History" VerticalAlignment="Top" Margin="8,8,0,0" Style="{StaticResource HeadingStyle}" Foreground="{StaticResource RedOrangeBrush}"/>
+                        <sdk:DataGrid Margin="8,37,8,8" AutoGenerateColumns="False" ItemsSource="{Binding Orders}" HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Top">
+                            <sdk:DataGrid.Columns>
+                                <sdk:DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                                <sdk:DataGridTextColumn Binding="{Binding OrderNumber}" Header="Order"/>
+                                <sdk:DataGridTextColumn Binding="{Binding Product}" Header="Product" />
+                                <sdk:DataGridTextColumn Binding="{Binding Status}" Header="Status" />
+                            </sdk:DataGrid.Columns>
+                        </sdk:DataGrid>
+                        </Grid>
+                </Grid>
+            </systemcontrols:TabItem>
+        </systemcontrols:TabControl>
+    </Grid>
+</UserControl>

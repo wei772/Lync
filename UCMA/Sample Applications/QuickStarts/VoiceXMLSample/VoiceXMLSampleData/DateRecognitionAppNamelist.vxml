@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0" xmlns="http://www.w3.org/2001/vxml" xml:lang="en-US" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+  <form>
+    <field name="recoResult">
+      <prompt bargein="true" bargeintype="speech" timeout="10s">
+          Welcome to Contoso.com.
+          Please speak the date.
+      </prompt>
+      <grammar mode="voice" type="application/srgs+xml" src="Library.EN-us.grxml#Date" />
+	<nomatch>
+        <prompt>
+            I'm sorry, I didn't understand you.
+            Please try again later.
+        </prompt>
+        <exit/>
+      </nomatch>    
+      <noinput>
+          <prompt>
+              I didn't hear anything.
+              Goodbye.
+          </prompt>
+        <exit/>
+      </noinput>
+      <filled>
+          <prompt>
+              I heard you say, <value expr="recoResult$.utterance"/>.
+      </prompt>
+        <exit namelist="recoResult$.utterance recoResult.Year recoResult.Month recoResult.Day"/> 
+      </filled> 
+     </field>
+  </form>
+</vxml>
+ 

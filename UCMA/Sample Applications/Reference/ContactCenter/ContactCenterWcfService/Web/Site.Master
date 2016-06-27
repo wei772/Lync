@@ -1,0 +1,95 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Microsoft.Rtc.Collaboration.Samples.ContactCenterWcfService.Web.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+	<link href="Styles/reset-min.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body xmlns:sys="javascript:Sys" xmlns:dataview="javascript:Sys.UI.DataView"  sys:activate="*">
+    <form id="form1" runat="server">
+    <div class="site-head">
+		<div class="header-left-column">
+			<div class="site-head-text" >
+				24/7 Customer Care Call 1.800.555.000
+			</div>
+			<div class="logo"></div>
+		</div>
+		<div class="header-right-column">
+			<div class="site-head-text">
+				<span>
+					Please log in to your account:
+				</span>
+				<ul class="site-menu">
+					<li>
+                        <asp:LoginStatus id="loginStatus" runat="server" />
+					</li>
+					<li>|</li>
+					<li>
+						<a href="~/Account/AccountOverview.aspx" runat="server">
+							My Account
+						</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">
+							Contact Us
+						</a>
+					</li>
+					<li>|</li>
+					<li>
+						<a href="#">
+							Help
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="search">
+				<input type="text" value="What do you need help with today?"/><span class="icon-search-button" style="float:right;"></span>
+			</div>
+		</div>
+    </div>
+	<div class="header">
+		<div class="site-buttons" style="margin-left:170px">
+			<ul class="horiz-menu">
+				<li>
+					<button type="button">Home</button>
+				</li>
+				<li>
+					<button type="button">About</button>
+				</li>
+				<li>
+					<button type="button" onclick="location = this.firstChild.getAttribute('href')"><a href="~/Default.aspx" runat="server">Products</a></button>
+				</li>
+				<li>
+					<button type="button">Contact</button>
+				</li>
+			</ul>
+		</div>
+		<div class="page-title">
+			<asp:ContentPlaceHolder ID="TitlePlaceholder" runat="server"></asp:ContentPlaceHolder>
+		</div>
+		<div class="page-menu">
+		</div>
+	</div>
+	<div>
+        <asp:ContentPlaceHolder ID="PageHeaderPlaceholder" runat="server"></asp:ContentPlaceHolder>
+    </div>
+	<div>
+		<div class="page-description">
+			<asp:ContentPlaceHolder ID="DescriptionPlaceholder" runat="server"></asp:ContentPlaceHolder>
+		</div>
+        <asp:ContentPlaceHolder ID="ContentPlaceholder" runat="server"></asp:ContentPlaceHolder>
+    </div>
+	<div class="foot">
+		
+	</div>
+    </form>
+</body>
+</html>

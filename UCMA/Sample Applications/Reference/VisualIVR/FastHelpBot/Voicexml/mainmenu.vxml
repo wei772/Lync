@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0"
+      xmlns="http://www.w3.org/2001/vxml"
+      xml:lang="en-US"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd"  >
+	<form id="main">
+    <field name="menu">
+      <prompt bargein="true"
+              bargeintype="hotword"
+              timeout="10s">
+		  Welcome to HelpDesk.
+		  press 1 for Windows.
+		  press 2 for Office.
+		  press 3 for Communications.
+		  press 4 for Connectivity.
+	  </prompt>
+
+      <!--voice recognition-->
+      <grammar version="1.0"
+               tag-format="semantics/1.0"
+               root="top">
+        <rule id="top">
+          <one-of>
+            <item>windows</item>
+            <item>office</item>
+            <item>communications</item>
+            <item>connectivity</item>
+
+            <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>windows</item>
+                <item>windows seven</item>
+                <item>windows eight</item>
+				<item>operating system</item>
+              </one-of>
+              <tag>out="windows";</tag>
+            </item>
+
+            <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>office</item>
+                <item>office three six five</item>
+				<item>word</item>
+				<item>excel</item>
+				<item>powerpoint</item>
+				<item>outlook</item>
+				<item>onenote</item>
+                </one-of>
+              <tag>out="office";</tag>
+            </item>
+
+            <item>
+              <!-- All possible utterances for this option . Add as item tag -->
+              <one-of>
+                <item>line</item>
+                <item>business</item>
+                <item>line of business</item>
+              </one-of>
+              <tag>out="line of business";</tag>
+            </item>
+
+          </one-of>
+        </rule>
+      </grammar>
+
+      <!-- dtmf recognition-->
+      <grammar mode="dtmf"
+               version="1.0"
+               root="dtmftop">
+        <rule id="dtmftop">
+          <one-of>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+         </one-of>
+        </rule>
+      </grammar>
+
+      <!-- Give user 3 changes else Exit -->
+      <catch event="noinput nomatch"
+             count="1">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="2">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="3">
+        Sorry!
+        I could not understand your request.
+        Please call us again later.
+        <exit/>
+      </catch>
+
+      <filled>
+        <prompt>
+          You have selected  <break/>  <value expr="menu"/>
+        </prompt>
+
+        <exit namelist="menu"/>
+
+      </filled>
+    </field>
+  </form>
+</vxml>

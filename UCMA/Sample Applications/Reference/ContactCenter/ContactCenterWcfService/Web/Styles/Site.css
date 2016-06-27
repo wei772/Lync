@@ -1,0 +1,412 @@
+﻿body,html
+{
+	background-color: White; /* LtGrey */
+}
+
+body,html,table
+{
+	cursor : default;
+}
+
+table th
+{
+	font-weight: bold;
+}
+
+table.data
+{
+	width : 100%;
+}
+
+table.data tbody tr.odd td
+{
+	background-color : #F2F2F2;
+}
+
+table.data tbody tr td
+{
+	padding : 6px;
+}
+
+table.data thead tr th
+{
+	padding : 8px;
+}
+
+body, input
+{
+	font-family: Segoe UI, Tahoma, Sans-Serif;
+	font-size: 12px;
+	color : #262626; /* BlkGrey */
+}
+
+.debug-box, .debug-box-all, .debug-box-all *
+{
+	outline: 1px dashed red;
+	*border: 1px dashed red;
+}
+
+.page
+{
+	margin-left: 40px;
+	width : 984px; /* 984 + 40 = 1024 */
+	background-color: White;
+}
+
+.inline-block
+{
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+	
+h1
+{
+	font-size: 18px;
+	color : #666666;
+}
+	
+h2
+{
+	font-size: 14px;
+	font-weight: 600; /* Semi-Bold */
+	margin-bottom: 10px;
+}
+		
+h3
+{
+	color : #F15A24; /* Red */
+	font-size: 12px;
+	font-weight: bold;
+}
+
+h4
+{
+	font-size: 12px;
+	font-weight: normal;
+	color: #999999; /* Grey */
+}
+		
+a
+{
+	text-decoration : none;
+}
+a:hover, a:active
+{
+	text-decoration : underline;
+}
+a, a:hover, a:link, a:visited, a:active
+{
+	font-weight: normal;
+	color: #999999; /* Grey */
+}
+.horiz-menu button a{
+    color: #fff;
+    font-weight: bold;
+}
+button:hover,
+input[type="submit"]{
+    cursor:pointer;
+}
+.detail a
+{
+	font-weight : bold;
+	color: inherit;
+}
+		
+.price
+{
+	font-size: 14px;
+	font-weight: bold;
+}
+		
+.slashed-price
+{
+	font-size: 12px;
+	text-decoration: line-through;
+}
+
+.form-label
+{
+	font-weight: bold;
+	font-size: 12px;
+	width: 9em;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+
+.form-foot
+{
+	margin-top: 20px;
+}
+
+.form-row
+{
+	margin-bottom: 5px;	
+}
+
+.form-break
+{
+	height: 15px;
+}
+
+.value, input[type=text],input[type=password]
+{
+	padding : 2px;
+}
+
+
+input[type=text],input[type=password]
+{
+	background-color: #EEEEEE;
+	border: 1px solid #D1D1D1; /* LtGrey */
+	width : 13em;
+	padding: 2px;
+}
+
+.detail
+{
+	font-size: 9px;
+}
+
+button, input[type='button'], input[type='submit'], .button
+{
+	background-repeat: repeat-x;
+	background-image : url(../images/button-bg.gif);
+	background-color : #F15A24; /* Red */
+	height : 30px;
+	color: White;
+	font-weight: bold;
+	text-align:center;
+	vertical-align : middle;
+	width : 170px;
+	border: 1px solid #F15A24; /* Red */
+	outline-color: White;
+}
+button.short, .button
+{
+	width : 100px;
+}
+
+.chevron
+{
+	background-repeat: no-repeat;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	margin-left : 2px;
+	width: 6px;
+	height : 9px;
+	background-image: url(../Images/chevron-grey.png);
+}
+button .chevron, .button .chevron
+{
+	background-image: url(../Images/chevron.png);
+}
+
+ul.horiz-menu
+{
+	margin : 0px;
+	padding : 0px;
+}
+
+ul.horiz-menu li
+{
+	margin : 0px;
+	padding : 0px;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+	
+div.dashed-rule
+{
+	border-width : 0px;
+	border-color: #999999; /* Grey */
+	border-style: dotted;
+}
+div.solid-rule
+{
+	border-width : 0px;
+	border-color: #D1D1D1; /* LtGrey */
+	border-style: solid;
+}
+
+div.solid-rule.horizontal-rule { border-top-width : 1px; }
+div.solid-rule.horizontal-rule-bottom { border-bottom-width : 1px; }
+div.solid-rule.vertical-rule { border-left-width : 1px; }
+div.solid-rule.vertical-rule-right { border-right-width : 1px; }
+
+div.dashed-rule.horizontal-rule { border-top-width : 2px; }
+div.dashed-rule.horizontal-rule-bottom { border-bottom-width : 2px; }
+div.dashed-rule.vertical-rule { border-left-width : 2px; }
+div.dashed-rule.vertical-rule-right { border-right-width : 2px; }
+
+.section
+{
+	margin-top: 25px;
+	margin-bottom: 20px;
+	margin-left: 15px;
+}
+
+.indented-section
+{
+	padding-left: 20px;
+}
+
+.chat-icon
+{
+	background-repeat: no-repeat;
+	background-image : url(../Images/chat.png);
+	width:17px;
+	height: 12px;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+
+.icon-4-stars
+{
+	background-repeat: no-repeat;
+	background-image : url(../Images/icon-4-stars.png);
+	width:61px;
+	height: 11px;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+
+.icon-search-button
+{
+	background-repeat : no-repeat;
+	background-image : url(../Images/search-button.png);
+	width : 91px;
+	height : 27px;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+
+.logo
+{
+	background-repeat:no-repeat;
+	background-image: url(../Images/logo.gif);
+	width : 342px;
+	height: 36px;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+		
+.header
+{
+	height: 108px;
+	background-repeat : repeat-x;
+	background-image : url(../Images/header-bg.gif);
+}
+
+.failureNotification
+{
+	color: #DD0000; /* Red */
+}
+.header-left-column
+{
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	width: 515px;
+	vertical-align:top;
+}
+		
+.header-right-column
+{
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	vertical-align:top;
+}
+		
+.site-head
+{
+	width: 1024px;
+}
+		
+ul.site-menu
+{
+	float :right;
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+	color : #F15A24; /* Red */
+}
+ul.site-menu li
+{
+	display:inline-block; zoom:1;*display:inline; /* HACK: Inline-Block */
+}
+ul.site-menu a
+{
+	font-size : 12px;
+	text-transform:uppercase;
+	color : #F15A24; /* Red */
+	font-weight: bold;
+}
+		
+.site-head-text
+{
+	margin-top : 10px;
+	color : #949494;
+}
+.site-head-text a:link
+{
+	font-weight: bold;
+}
+		
+.site-buttons
+{
+	height: 30px;
+}
+.site-buttons button, .site-buttons .button
+{
+	border-color : White;
+}
+		
+.logo, .page-description, .page-menu, .header-left-column .site-head-text
+{
+	margin-left: 65px;
+}
+		
+.page-title
+{
+	height: 77px;
+}
+		
+.page-description
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-size: 12px;
+	font-weight : 600;
+	color : #616161;
+}
+		
+.logo
+{
+	margin-bottom: 20px;
+}
+		
+.logo, .search
+{
+	margin-top: 25px;
+}
+		
+.search
+{
+	margin-bottom: 20px;
+	padding : 3px 0px 3px 0px;
+	background-color: #666666;
+	vertical-align : middle;
+}
+.search input[type=text]
+{
+	font-size : 14px;
+	color : #999999; /* Grey */
+	border : 0px none;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 15px;
+	padding-right: 4px;
+	margin-left: 3px;
+	width: 315px;
+}
+.search button
+{
+	width: 90px;
+	border : 0px none;
+	margin-right: 3px;
+}
+
+.foot
+{
+	margin-top: 30px;
+	height : 15px;
+	background-color : #D1D1D1;
+}

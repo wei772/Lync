@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+                    xmlns:controls="clr-namespace:FastHelpClient.View.Controls">
+    
+    <ControlTemplate x:Key="TransitioningFrame"
+                     TargetType="navigation:Frame">
+        <controls:TransitioningContentControl Content="{TemplateBinding Content}"
+                                              Cursor="{TemplateBinding Cursor}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Transition="SlideLeft" />
+    </ControlTemplate>
+
+</ResourceDictionary>

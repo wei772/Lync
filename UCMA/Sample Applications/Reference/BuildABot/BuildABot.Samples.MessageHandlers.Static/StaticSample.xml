@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<bot>
+  <parameterlessQAs>
+    <qa>
+      <question>hi</question>
+      <answer>hello</answer>
+    </qa>
+    <qa>
+      <question>how are you</question>
+      <answer>fine, thanks!</answer>
+      <answer>not bad...</answer>
+      <answer>good</answer>
+    </qa>
+    <qa>
+      <question>bye</question>
+      <answer>see you</answer>
+      <answer>good bye</answer>
+    </qa>
+  </parameterlessQAs>
+  <parameterizedQA regexPattern="what is [term]">
+    <match>
+      <term>UAC</term>
+      <reply>User Account Control</reply>
+    </match>
+    <match>
+      <term>QA</term>
+      <reply>Question and Answer</reply>
+    </match>
+    <match>
+      <term>TLA</term>
+      <reply>Three-letter acronym</reply>
+    </match>
+    <match>
+      <term>default</term>
+      <reply>sorry, I don't know what this is.</reply>
+    </match>
+  </parameterizedQA>
+</bot>

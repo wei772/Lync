@@ -1,0 +1,234 @@
+﻿<!--=====================================================================
+    File:    SupervisorMonitorView.xaml
+
+    Summary: View for displaying Supervisor Monitor.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls" 
+    xmlns:Converters="clr-namespace:Microsoft.Lync.Samples.ContactCenterExtension.Converters" 
+    x:Class="Microsoft.Lync.Samples.ContactCenterExtension.Views.SupervisorMonitorView"
+    mc:Ignorable="d"
+    d:DesignHeight="165" d:DesignWidth="363">
+
+
+    <UserControl.Resources>
+        <Converters:OpacityConverter x:Key="OpacityConverter"/>
+        <Converters:VisibilityConverter x:Key="VisibilityConverter"/>
+        <Converters:NotVisibilityConverter x:Key="NotVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot" DataContext="{Binding MonitoredConversation}" MinHeight="100" Height="350">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="White" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition/>
+                <RowDefinition Height="52"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="Divider" BorderThickness="0" Margin="0,0,0,1" Height="4">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="4" Opacity="0.8" Direction="0"/>
+                </Border.Effect>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="White"/>
+                        <GradientStop Color="#FFE2E2E2" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <ScrollViewer Margin="8,14,8,0" BorderBrush="{x:Null}" Foreground="{x:Null}" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Padding="0" Grid.Row="1">
+                <StackPanel Margin="0" Orientation="Vertical">
+                    <TextBlock x:Name="AgentsTextBlock" TextWrapping="Wrap" Text="Agent" Style="{StaticResource HeadingStyle}" Margin="0,0,0,4"/>
+                    <ItemsControl x:Name="AgentsItemsControl" ItemsSource="{Binding Agents}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid d:DesignWidth="292" Background="White" Height="30" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Controls:PresenceIndicator PhotoDisplayMode="Hidden"   Source="{Binding Uri}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" />
+                                    <Border x:Name="CurrentlyMonitoring" BorderBrush="#FF41B1D1" BorderThickness="1" Background="#FFCAF2FC" Visibility="{Binding IsChecked, Converter={StaticResource VisibilityConverter}, ElementName=radioButton}" Grid.ColumnSpan="4" Margin="0,0,-19,1"/>
+                                    <Button Grid.ColumnSpan="4" Style="{StaticResource ListContainerButton}" Margin="0,0,-19,1" d:LayoutOverrides="Height, GridBox"/>
+                                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityIM}" Margin="2" IsEnabled="{Binding IsOnInstantMessagingModality}" Opacity="{Binding IsOnInstantMessagingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityVoice}" Margin="2" IsEnabled="{Binding IsOnVoiceModality}" Opacity="{Binding IsOnVoiceModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityAppSharing}" Margin="2" IsEnabled="{Binding IsOnAppSharingModality}" Opacity="{Binding IsOnAppSharingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityVideo}" Margin="2" IsEnabled="{Binding IsOnVideoModality}" Opacity="{Binding IsOnVideoModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                    </StackPanel>
+
+                                    <RadioButton x:Name="radioButton" Margin="4,0,0,0" Grid.Column="3" Width="68" VerticalAlignment="Center" Foreground="{StaticResource DarkGray}" Cursor="Hand" GroupName="Whisper" IsChecked="{Binding IsWhispering, Mode=TwoWay}" HorizontalAlignment="Left" Style="{StaticResource CheckableButtonNoBackplaneStyle}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="22" VerticalAlignment="Center" Width="18" RenderTransformOrigin="0.5,0.5">
+                                                <Canvas.RenderTransform>
+                                                    <CompositeTransform ScaleX="0.6" ScaleY="0.6"/>
+                                                </Canvas.RenderTransform>
+                                                <Path Data="M 5.60822,3.05176e-005L 5.60822,1.52731C 8.74371,3.40964 10.853,6.83267 10.853,10.7475C 10.853,14.6622 8.74371,18.0854 5.60822,19.9675L 5.60822,21.4948C 9.508,19.4864 12.1863,15.4278 12.1863,10.7475C 12.1863,6.06711 9.508,2.00851 5.60822,3.05176e-005 Z M 2.94147,3.21426L 2.94147,4.67319C 5.22784,5.74936 6.82428,8.05801 6.82428,10.7475C 6.82428,13.4369 5.22784,15.7455 2.94147,16.8216L 2.94147,18.2807C 5.98444,17.1269 8.15765,14.1895 8.15765,10.7475C 8.15765,7.30533 5.98444,4.36789 2.94147,3.21426 Z M 0,6.37173L 0,7.70505C 1.60297,7.79947 2.883,9.12119 2.883,10.7475C 2.883,12.3737 1.60297,13.6953 0,13.7898L 0,15.1231C 2.33868,15.0273 4.21631,13.1088 4.21631,10.7475C 4.21631,8.38614 2.33868,6.4675 0,6.37173 Z" UseLayoutRounding="False" Fill="#FF4D4D4D" HorizontalAlignment="Left" VerticalAlignment="Top" Width="18" Height="22"/>
+                                            </Canvas>
+                                            <TextBlock Text="Whisper" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </RadioButton>
+                                    <TextBlock Text="{Binding DisplayName}" Grid.Column="1" d:LayoutOverrides="Width" TextTrimming="WordEllipsis" VerticalAlignment="Center" Foreground="{StaticResource DarkGray}" Margin="4,0" IsHitTestVisible="False"/>
+                                    <Border BorderBrush="{StaticResource GlobalButtonBackgroundBrush.Secondary.Default}" BorderThickness="0,0,0,1" Grid.ColumnSpan="4" IsHitTestVisible="False"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Path Data="M5,91 L332.15286,91" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="{StaticResource MediumGray}" StrokeThickness="2" StrokeMiterLimit="10" StrokeLineJoin="Miter" UseLayoutRounding="False" StrokeDashArray="1 1" VerticalAlignment="Center" Margin="0,5"/>
+                    <TextBlock x:Name="CustomerTextBlock" TextWrapping="Wrap" Text="Customer" Style="{StaticResource HeadingStyle}" Margin="0,0,0,4"/>
+                    <ItemsControl x:Name="CustomersItemsControl" ItemsSource="{Binding Customers}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                 <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid d:DesignWidth="275" Style="{StaticResource LightRowGridStyle}" Background="White" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Controls:PresenceIndicator PhotoDisplayMode="Hidden" Source="{Binding Uri}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" />
+                                    <Button Content="Button" Grid.ColumnSpan="4" Style="{StaticResource ListContainerButton}" Margin="0,0,-19,1" d:LayoutOverrides="Height, GridBox"/>
+                                    <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="2">
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityIM}" Margin="2" IsEnabled="{Binding IsOnInstantMessagingModality}" Opacity="{Binding IsOnInstantMessagingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityVoice}" Margin="2" IsEnabled="{Binding IsOnVoiceModality}" Opacity="{Binding IsOnVoiceModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityAppSharing}" Margin="2" IsEnabled="{Binding IsOnAppSharingModality}" Opacity="{Binding IsOnAppSharingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                        <ContentControl Style="{StaticResource IconStyle.ModalityVideo}" Margin="2" IsEnabled="{Binding IsOnVideoModality}" Opacity="{Binding IsOnVideoModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}"/>
+                                    </StackPanel>
+                                    <TextBlock HorizontalAlignment="Left" Margin="4,0,0,0" TextWrapping="Wrap" Grid.Column="1"  Text="{Binding DisplayName}" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Path Data="M5,91 L332.15286,91" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="{StaticResource MediumGray}" StrokeThickness="2" StrokeMiterLimit="10" StrokeLineJoin="Miter" UseLayoutRounding="False" StrokeDashArray="1 1" VerticalAlignment="Center" Margin="0,5"/>
+                    <TextBlock x:Name="ParticipatnsTextBlock" TextWrapping="Wrap" Text="Other Participants" Style="{StaticResource HeadingStyle}" Margin="0,0,0,4"/>
+                    <ItemsControl x:Name="ParticipantsItemsControl" ItemsSource="{Binding Participants}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    d:DesignWidth="292"
+                                    Background="White"
+                                    Height="30">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="80" />
+                                    </Grid.ColumnDefinitions>
+                                    <Controls:PresenceIndicator
+                                        PhotoDisplayMode="Hidden"
+                                        Source="{Binding Uri}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Grid.Column="0" />
+                                    <Button
+                                        Content="Button"
+                                        Grid.ColumnSpan="4"
+                                        Style="{StaticResource ListContainerButton}"
+                                        Margin="0,0,-55,1"
+                                        d:LayoutOverrides="Height, GridBox" />
+                                    <StackPanel
+                                        Orientation="Horizontal"
+                                        Grid.Column="2">
+                                        <ContentControl
+                                            Style="{StaticResource IconStyle.ModalityIM}"
+                                            Margin="2"
+                                            IsEnabled="{Binding IsOnInstantMessagingModality}"
+                                            Opacity="{Binding IsOnInstantMessagingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}" />
+                                        <ContentControl
+                                            Style="{StaticResource IconStyle.ModalityVoice}"
+                                            Margin="2"
+                                            IsEnabled="{Binding IsOnVoiceModality}"
+                                            Opacity="{Binding IsOnVoiceModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}" />
+                                        <ContentControl
+                                            Style="{StaticResource IconStyle.ModalityAppSharing}"
+                                            Margin="2"
+                                            IsEnabled="{Binding IsOnAppSharingModality}"
+                                            Opacity="{Binding IsOnAppSharingModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}" />
+                                        <ContentControl
+                                            Style="{StaticResource IconStyle.ModalityVideo}"
+                                            Margin="2"
+                                            IsEnabled="{Binding IsOnVideoModality}"
+                                            Opacity="{Binding IsOnVideoModality, ConverterParameter=.25, Converter={StaticResource OpacityConverter}}" />
+                                    </StackPanel>
+
+                                    <TextBlock
+                                        Text="{Binding DisplayName}"
+                                        Grid.Column="1"
+                                        d:LayoutOverrides="Width"
+                                        TextTrimming="WordEllipsis"
+                                        VerticalAlignment="Center"
+                                        Foreground="{StaticResource DarkGray}"
+                                        Margin="4,0"
+                                        IsHitTestVisible="False" />
+                                    <Border
+                                        BorderBrush="{StaticResource GlobalButtonBackgroundBrush.Secondary.Default}"
+                                        BorderThickness="0,0,0,1"
+                                        Grid.ColumnSpan="4"
+                                        IsHitTestVisible="False" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Column="1" Margin="0,3,0,0" Orientation="Horizontal" d:LayoutOverrides="Height, GridBox" HorizontalAlignment="Center" Grid.Row="2" Visibility="{Binding IsMonitoringReady, Converter={StaticResource VisibilityConverter}}">
+                <Button Content="Intervene" Width="100" Style="{StaticResource ButtonStyle}" Margin="0,0,2,0" Command="{Binding BargeInCommand}"/>
+                <Button Content="Leave" Margin="2,0,0,0" Width="100" Style="{StaticResource ButtonStyle}" Command="{Binding TerminateCommand}"/>
+
+            </StackPanel>
+            <Grid x:Name="Loading" Grid.RowSpan="2" 
+            Visibility="{Binding IsMonitoringReady, Converter={StaticResource NotVisibilityConverter}}" d:IsHidden="True">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ContentControl HorizontalAlignment="Left" Style="{StaticResource SpinningProgressAnimationIconStyle}" Width="15" Height="15" VerticalAlignment="Center"/>
+                    <TextBlock Foreground="#FF14667D" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0"><Run Text="Connecting to "/><Run Text="{Binding SomeDude, FallbackValue=Agent}"/></TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+

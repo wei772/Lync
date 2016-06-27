@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<vxml version="2.0"
+      xmlns="http://www.w3.org/2001/vxml"
+      xml:lang="en-US"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd" >
+  <form id="main">
+    <field name="menu">
+      <prompt bargein="true"
+              bargeintype="hotword"
+              timeout="10s">
+        press 1 for Windows Seven.
+        press 2 for Windows Eight.
+        press 3 for Internet Explorer.
+        press 4 for Windows Update and Security.
+      </prompt>
+      
+      <grammar version="1.0"
+               root="top">
+        <rule id="top">
+          <one-of>
+            <item>windows seven</item>
+            <item>windows eight</item>
+            <item>internet explorer</item>
+            <item>security and windows update</item>
+          </one-of>
+        </rule>
+      </grammar>
+      
+      <grammar mode="dtmf"
+               version="1.0"
+               root="dtmftop">
+        <rule id="dtmftop">
+          <one-of>
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+          </one-of>
+        </rule>
+      </grammar>
+
+      <!-- Give user 3 changes else Exit -->
+      <catch event="noinput nomatch"
+             count="1">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="2">
+        Sorry!
+        I could not understand your request.
+        Please try again.
+        <reprompt/>
+      </catch>
+
+      <catch event="noinput nomatch"
+             count="3">
+        Sorry!
+        I could not understand your request.
+        Please call us again later.
+        <exit/>
+      </catch>
+
+      <filled>
+        <prompt>
+          Please hold the line while we transfer you to  help desk agent.
+        </prompt>
+        <exit namelist="menu"/>
+      </filled>
+    </field>
+  </form>
+</vxml>
+
+

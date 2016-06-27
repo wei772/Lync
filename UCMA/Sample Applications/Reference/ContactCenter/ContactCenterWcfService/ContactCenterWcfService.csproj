@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA6D50EA-BED1-4D46-BFD9-F1A31839CDE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ContactCenterWcfService</RootNamespace>
+    <AssemblyName>ContactCenterWcfService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Compile Include="..\Common\AsyncNoResult.cs">
+      <Link>AsyncResults\AsyncNoResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\AsyncResult.cs">
+      <Link>AsyncResults\AsyncResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\CommonHelper.cs">
+      <Link>Utilities\CommonHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ContextInformation.cs">
+      <Link>Utilities\ContextInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\ProductStore.designer.cs">
+      <Link>ProductStore.designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductStore.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="..\Common\QueueUriMapping.cs">
+      <Link>Utilities\QueueUriMapping.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SqlExpressMemebershipProvider.cs">
+      <Link>Web\SqlExpressMemebershipProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SqlExpressProfileProvider.cs">
+      <Link>Web\SqlExpressProfileProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\SqlHelper.cs">
+      <Link>Utilities\SqlHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\UserProfile.cs">
+      <Link>UserProfile.cs</Link>
+    </Compile>
+    <Compile Include="AsyncResults\EstablishClickToCallAsyncResult.cs" />
+    <Compile Include="AsyncResults\ContactCenterDiscoveryAsyncResult.cs" />
+    <Compile Include="AsyncResults\SendInstantMessageAsyncResult.cs" />
+    <Compile Include="AsyncResults\TerminateConversationAsyncResult.cs" />
+    <Compile Include="ContactCenterWcfService.svc.cs">
+      <DependentUpon>ContactCenterWcfService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ContextInformationProvider\ContextInformationProviderFactory.cs" />
+    <Compile Include="ContextInformationProvider\IContextInformationProvider.cs" />
+    <Compile Include="ContextInformationProvider\ProductContextInformationProvider.cs" />
+    <Compile Include="Entities\ContactCenterEntityPresenceInformation.cs" />
+    <Compile Include="Entities\ConversationCallback.cs" />
+    <Compile Include="Entities\Faults\ArgumentFault.cs" />
+    <Compile Include="Entities\Faults\FaultSource.cs" />
+    <Compile Include="Entities\Faults\OperationFault.cs" />
+    <Compile Include="Entities\Notifications\AudioVideoCallTerminationNotification.cs" />
+    <Compile Include="Entities\Notifications\ConversationOperationNotification.cs" />
+    <Compile Include="Entities\Notifications\ConversationTerminationNotification.cs" />
+    <Compile Include="Entities\Notifications\InstantMessageCallTerminationNotification.cs" />
+    <Compile Include="Entities\Notifications\InstantMessageReceivedNotification.cs" />
+    <Compile Include="Entities\Notifications\RemoteComposingStatusReceivedNotification.cs" />
+    <Compile Include="Entities\PresenceInformation.cs" />
+    <Compile Include="Entities\Requests\ConversationOperationRequest.cs" />
+    <Compile Include="Entities\Requests\CreateConversationRequest.cs" />
+    <Compile Include="Entities\Requests\EstablishAudioVideoCallRequest.cs" />
+    <Compile Include="Entities\Requests\EstablishInstantMessagingCallRequest.cs" />
+    <Compile Include="Entities\Requests\LocalComposingStateRequest.cs" />
+    <Compile Include="Entities\Requests\OperationRequest.cs" />
+    <Compile Include="Entities\Requests\SendInstantMessageRequest.cs" />
+    <Compile Include="Entities\Requests\SessionTerminationRequest.cs" />
+    <Compile Include="Entities\Requests\TerminateConversationRequest.cs" />
+    <Compile Include="Entities\Responses\CreateConversationResponse.cs" />
+    <Compile Include="Entities\Responses\EstablishAudioVideoCallResponse.cs" />
+    <Compile Include="Entities\Responses\EstablishInstantMessagingCallResponse.cs" />
+    <Compile Include="Entities\Responses\OperationResponse.cs" />
+    <Compile Include="Entities\Responses\SendInstantMessageResponse.cs" />
+    <Compile Include="Entities\Responses\TerminateConversationResponse.cs" />
+    <Compile Include="Entities\WebAvCall.cs" />
+    <Compile Include="Entities\WebConversation.cs" />
+    <Compile Include="Entities\WebImCall.cs" />
+    <Compile Include="IContactCenterWcfService.cs" />
+    <Compile Include="ContactCenterServicePoller.cs" />
+    <Compile Include="SilverlightFaultBehavior.cs" />
+    <Compile Include="AsyncResults\EstablishInstantMessagingCallAsyncResult.cs" />
+    <Compile Include="AsyncResults\EstablishAudioVideoCallAsyncResult.cs" />
+    <Compile Include="Utilities\ApplicationConfig.cs" />
+    <Compile Include="Utilities\AudioVideoCallContext.cs" />
+    <Compile Include="Utilities\AvailabilityToStatusConverter.cs" />
+    <Compile Include="Utilities\DataStructures.cs" />
+    <Compile Include="Utilities\FailureStrings.cs" />
+    <Compile Include="Utilities\FaultHelper.cs" />
+    <Compile Include="Utilities\Helper.cs" />
+    <Compile Include="Utilities\InstantMessagingCallContext.cs" />
+    <Compile Include="Utilities\EventLogger.cs" />
+    <Compile Include="Utilities\Logger.cs" />
+    <Compile Include="Utilities\PresenceChangedEventArgs.cs" />
+    <Compile Include="Utilities\UcmaHelper.cs" />
+    <Compile Include="Utilities\UcPresenceCache.cs" />
+    <Compile Include="Utilities\UcPresenceProvider.cs" />
+    <Compile Include="WebConversationManager.cs" />
+    <Compile Include="Web\Account\AccountEditor.aspx.cs">
+      <DependentUpon>AccountEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Account\AccountEditor.aspx.designer.cs">
+      <DependentUpon>AccountEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Account\AccountOverview.aspx.cs">
+      <DependentUpon>AccountOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Account\AccountOverview.aspx.designer.cs">
+      <DependentUpon>AccountOverview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Web\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Common\ProductStore.mdf">
+      <Link>ProductStore.mdf</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\ProductStore_log.ldf">
+      <Link>ProductStore_log.ldf</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>ProductStore.mdf</DependentUpon>
+    </Content>
+    <Content Include="ContactCenterWcfService.svc" />
+    <Content Include="Web\Account\AccountEditor.aspx">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Web\Account\AccountOverview.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Web\Default.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Web\Global.asax" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_available_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_away_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_blocked_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_busy_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_dnd_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_offline_14.png" />
+    <Content Include="Web\Images\2010\Icon_gbl_pres_unknown_14.png" />
+    <Content Include="Web\Images\account.png" />
+    <Content Include="Web\Images\best-sellers.png" />
+    <Content Include="Web\Images\button-bg.gif" />
+    <Content Include="Web\Images\chat.png" />
+    <Content Include="Web\Images\chevron-grey.png" />
+    <Content Include="Web\Images\chevron.png" />
+    <Content Include="Web\Images\header-bg.gif" />
+    <Content Include="Web\Images\icon-4-stars.png" />
+    <Content Include="Web\Images\login.png" />
+    <Content Include="Web\Images\logo.gif" />
+    <Content Include="Web\Images\search-button.png" />
+    <Content Include="Web\Login.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Web\Scripts\ChatLauncher.js" />
+    <Content Include="Web\Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Web\Scripts\jquery-1.4.1.js" />
+    <Content Include="Web\Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjax.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjax.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxAdoNet.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxAdoNet.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxApplicationServices.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxComponentModel.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxCore.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxDataContext.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxDataContext.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxNetwork.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxSerialization.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxTemplates.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxTemplates.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxTimer.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxWebServices.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\Start.debug.js" />
+    <Content Include="Web\Scripts\MicrosoftAjax\Start.js" />
+    <Content Include="Web\Scripts\presence.helper.js" />
+    <Content Include="Web\Scripts\presence.timer.js" />
+    <Content Include="Web\Scripts\profile.js" />
+    <Content Include="Web\Scripts\test.js" />
+    <Content Include="Web\Styles\AccountOverview.css" />
+    <Content Include="Web\Styles\Default.css" />
+    <Content Include="Web\Styles\Login.css" />
+    <Content Include="Web\Styles\reset-min.css" />
+    <Content Include="Web\Styles\Site.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\ProductStore.dbml">
+      <Link>ProductStore.dbml</Link>
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ProductStore.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web\Site.Master">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Rtc.Collaboration, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\ProductStore.dbml.layout">
+      <Link>ProductStore.dbml.layout</Link>
+      <DependentUpon>ProductStore.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy web.config c:\inetpub\wwwroot\contactcenter\ /y /i
+xcopy ContactCenterWcfService.svc c:\inetpub\wwwroot\contactcenter\ /y /i
+xcopy clientaccesspolicy.xml c:\inetpub\wwwroot\contactcenter\ /y /i
+xcopy web\*.* c:\inetpub\wwwroot\contactcenter\ /y /s
+xcopy contactcenterwcfservice.dll  c:\inetpub\wwwroot\contactcenter\bin\ /y /i
+xcopy ..\Common\ProductStore.mdf c:\inetpub\wwwroot\contactcenter\App_Data\ /y /i
+xcopy ..\Common\ProductStore_log.ldf c:\inetpub\wwwroot\contactcenter\App_Data\ /y /i
+xcopy "%25PROGRAMFILES(x86)%25\Microsoft SDKs\Silverlight\v4.0\Libraries\Server\"System.ServiceModel.PollingDuplex.dll c:\inetpub\wwwroot\contactcenter\bin\ /y /i</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

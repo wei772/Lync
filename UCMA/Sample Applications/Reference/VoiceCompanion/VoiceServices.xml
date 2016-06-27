@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceServices>
+  <VoiceService Id="01C400CB-E2DF-4970-A4D5-0FEEA4F46E3F">
+    <Type>Microsoft.Rtc.Collaboration.Samples.VoiceCompanion.VoiceServices.ConferenceService</Type>
+    <Assembly><!--The type exists within the current assembly--></Assembly>
+  </VoiceService>
+  <VoiceService Id="C979E103-B6C2-4b0d-ACAE-9A2B0B35E336">
+    <Type>Microsoft.Rtc.Collaboration.Samples.VoiceCompanion.VoiceServices.GetContactService</Type>
+    <Assembly><!--The type exists within the current assembly--></Assembly>
+  </VoiceService>
+  <VoiceService Id="95C8AAE9-427F-4580-A49D-A7FA814676CB">
+    <Type>Microsoft.Rtc.Collaboration.Samples.VoiceCompanion.VoiceServices.DialupService</Type>
+    <Assembly><!--The type exists within the current assembly--></Assembly>
+  </VoiceService>
+</VoiceServices>
