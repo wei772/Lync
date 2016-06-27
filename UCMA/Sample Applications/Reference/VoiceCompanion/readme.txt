@@ -21,13 +21,13 @@ Setting up the application
 An application with ID "urn:application:voicecompanion" needs to be configured in the topology. Please check UCMA provisioning documentation to learn how to provision a UCMA application. 
 Power Shell Commands
 The power shell commands relevant for setting up the application are:
-•	New-CsTrustedApplication
+?New-CsTrustedApplication
 This helps to create a new application in the topology. You need to assign a listening port for the application using this command.
-•	New-CsTrustedApplicationPool
+?New-CsTrustedApplicationPool
 This helps to create a pool for this application. This can help to run many instances of the application as the demand increases for the application.
-•	New-CsTrustedApplicationComputer
+?New-CsTrustedApplicationComputer
 This helps to create a computer in the pool created above.
-•	new-cstrustedapplicationendpoint
+?new-cstrustedapplicationendpoint
 This helps to create the application endpoint for the application. Note that the same instance of the application endpoint can be run from different computers. However, any number of endpoints could be assigned to this application to allow different numbers to be used for contacting the application.
 
 Firewall Configuration
@@ -91,7 +91,7 @@ For speech/Dtmf recognition of the customer while in a conference, it is necessa
 
 Customer Endpoint
 -----------------
-The application is written to optimize the use of UserEndpoint to serve the customer. Only one endpoint is used so that users can use other endpoints (out of 8 allowed endpoints per user in Microsoft Lync Server) for their own use. The customer session uses the endpoint to publish online presence, followed by “InACall” presence. In addition, the user endpoint is used to create a conversation for joining the conference. This makes is possible to issue commands such as “conference invitations” to other contacts using the identity of the customer. 
+The application is written to optimize the use of UserEndpoint to serve the customer. Only one endpoint is used so that users can use other endpoints (out of 8 allowed endpoints per user in Microsoft Lync Server) for their own use. The customer session uses the endpoint to publish online presence, followed by “InACall?presence. In addition, the user endpoint is used to create a conversation for joining the conference. This makes is possible to issue commands such as “conference invitations?to other contacts using the identity of the customer. 
 
 Customer Contact Manager
 ------------------------
