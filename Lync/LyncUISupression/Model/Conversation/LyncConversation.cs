@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Threading;
 using Lync.Enum;
 using Lync.Service;
+using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using System;
 using System.Collections.Generic;
@@ -90,6 +91,7 @@ namespace Lync.Model
 			//subscribes to the conversation action availability events (for the ability to add/remove participants)
 			Conversation.ActionAvailabilityChanged += OnConversationActionAvailabilityChanged;
 
+			CreateConferenceKey();
 
 			HandleAddedCore();
 		}
@@ -183,6 +185,101 @@ namespace Lync.Model
 			}
 
 		}
+
+
+		/// <summary>
+		/// Returns the meet-now meeting access key as a string
+		/// </summary>
+		/// <returns></returns>
+		private string CreateConferenceKey()
+		{
+			string returnValue = string.Empty;
+			try
+			{
+
+				//These properties are used to invite people by creating an email (or text message, or IM)
+				//and adding the dial in number, external Url, internal Url, and conference Id
+				ConferenceAccessInformation conferenceAccess =
+					(ConferenceAccessInformation)Conversation.Properties[ConversationProperty.ConferenceAccessInformation];
+
+				if (conferenceAccess == null)
+				{
+					if (!Conversation.CanSetProperty(ConversationProperty.ConferenceAccessInformation))
+					{
+						return string.Empty;
+					}
+
+					//Conversation.BeginSetProperty(
+					//	ConversationProperty.ConferenceAccessInformation,
+					//	 new ConferenceAccessInformation() , (ar) =>
+					//	{
+					//		Conversation.EndSetProperty(ar);
+					//	},
+					//	null);
+				}
+
+				StringBuilder MeetingKey = new StringBuilder();
+
+				if (conferenceAccess.Id.Length > 0)
+				{
+					MeetingKey.Append("Meeting Id: " + conferenceAccess.Id);
+					MeetingKey.Append(System.Environment.NewLine);
+				}
+
+				if (conferenceAccess.AdmissionKey.Length > 0)
+				{
+					MeetingKey.Append(conferenceAccess.AdmissionKey);
+					MeetingKey.Append(System.Environment.NewLine);
+				}
+
+				string[] attendantNumbers = (string[])conferenceAccess.AutoAttendantNumbers;
+
+				StringBuilder sb2 = new StringBuilder();
+				sb2.Append(System.Environment.NewLine);
+				foreach (string aNumber in attendantNumbers)
+				{
+					sb2.Append("\t\t" + aNumber);
+					sb2.Append(System.Environment.NewLine);
+				}
+				if (sb2.ToString().Trim().Length > 0)
+				{
+					MeetingKey.Append("Auto attendant numbers:" + sb2.ToString());
+					MeetingKey.Append(System.Environment.NewLine);
+				}
+
+				if (conferenceAccess.ExternalUrl.Length > 0)
+				{
+					MeetingKey.Append("External Url: " + conferenceAccess.ExternalUrl);
+					MeetingKey.Append(System.Environment.NewLine);
+				}
+
+				if (conferenceAccess.InternalUrl.Length > 0)
+				{
+					MeetingKey.Append("Inner Url: " + conferenceAccess.InternalUrl);
+					MeetingKey.Append(System.Environment.NewLine);
+				}
+
+				MeetingKey.Append("Meeting access type: " + (
+					(ConferenceAccessType)Conversation.Properties[ConversationProperty.ConferencingAccessType])
+					.ToString());
+
+				MeetingKey.Append(System.Environment.NewLine);
+				returnValue = MeetingKey.ToString();
+
+			}
+			catch (System.NullReferenceException nr)
+			{
+				System.Diagnostics.Debug.WriteLine(
+					"Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
+			}
+			catch (LyncClientException lce)
+			{
+				System.Diagnostics.Debug.WriteLine(
+					"Exception on ConferenceAccessInformation changed " + lce.Message);
+			}
+			return returnValue;
+		}
+
 
 		internal void Terminate()
 		{

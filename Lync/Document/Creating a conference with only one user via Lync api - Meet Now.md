@@ -1,0 +1,1 @@
+[Creating a conference with only one user via Lync api - Meet Now](http://stackoverflow.com/questions/6423608/creating-a-conference-with-only-one-user-via-lync-api-meet-now)
