@@ -1,0 +1,81 @@
+<!--=====================================================================
+    File:    ProposalTeamControl.xaml
+
+    Summary: Control to display Proposal Team Control.
+    
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+    <UserControl
+    x:Class="ProposalTracker.Controls.ProposalTeamControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls"
+    xmlns:Converters="clr-namespace:ProposalTracker.Converters"
+    mc:Ignorable="d">
+
+    <!--Converters to change boolean to visibility and vise-versa-->
+    <UserControl.Resources>
+        <Converters:BooleanToVisibility x:Key="BooleanToVisibility"/>
+        <Converters:NotBooleanToVisibility x:Key="NotBooleanToVisibility"/>
+    </UserControl.Resources>
+
+    <Grid
+        x:Name="LayoutRoot">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--ContactSearchInputBox allows the user to type in the search parameter-->
+            <!--The ContactsearchResultlist is bound to this control to show the results returned-->
+            <controls:ContactSearchInputBox
+                x:Name="ocSearchInput"
+                MaxResults="10"
+                Grid.Row="0"
+                />
+
+            <!--ContactSearchResultList control will be available when a character is typed into the contact search input box above-->
+            <!--If there is any return, it will show up in the list. If there is no return a not found notice will appear.-->
+            <!--The Contact List will be displayed if the content of the SearchInputBox is cleared-->
+
+            <controls:ContactSearchResultList
+                x:Name="ocSearchResults"
+                Grid.Row="1"
+                ItemsSource="{Binding Results, ElementName=ocSearchInput}"
+                Visibility="{Binding
+                                    Path=SearchState,
+                                    ElementName=ocSearchInput,
+                                    Converter={StaticResource BooleanToVisibility},
+                                    ConverterParameter=cleared}"
+                />
+
+            <!--ContactList Control-->
+            <!--The ContactList Control will only be available if the search input box is cleared-->
+            <controls:ContactList
+                Grid.Row="0"
+                Background="White"
+                Visibility="{Binding
+                                    Path=SearchState,
+                                    ElementName=ocSearchInput,
+                                    Converter={StaticResource NotBooleanToVisibility},
+                                    ConverterParameter=cleared}"
+                Margin="0,40,0,0"
+                Grid.RowSpan="2"
+                />
+        </Grid>
+    </Grid>
+</UserControl>

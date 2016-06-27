@@ -1,0 +1,143 @@
+﻿<!--=====================================================================
+    File:    ButtonTemplates.xaml
+
+    Summary: Templates for styling buttons.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="MoreButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Width="50" Height="22" Background="Transparent" HorizontalAlignment="Left">
+                        <TextBlock Foreground="#FF73767B" FontWeight="Bold" Text="More >"  FontSize="11" FontFamily="Segoe UI"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AddressBookLinkButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#FF1F3B53"/>
+        <Setter Property="Foreground" Value="#FF000000"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="0,0,0,2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="Background" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="#FFF4F8FA"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                            <SplineColorKeyFrame KeyTime="0" Value="#FF6DBDD1"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused"/>
+                                <VisualState x:Name="Unfocused"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Background" Background="#FFD7EBF2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2"/>
+                        <TextBlock 
+							x:Name="contentPresenter" 
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+							Margin="{TemplateBinding Padding}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							Text="{TemplateBinding Content}" 
+							FontFamily="Segoe UI" 
+							FontSize="12" 
+							Foreground="#FF0A6682"
+							Grid.Column="1"
+							/>
+                        <Path x:Name="path" Stretch="Fill" Fill="#FF0A6682" Data="M 737.253,497.461L 732.854,494.921L 732.854,497.255L 733.21,497.461L 737.608,500.001L 733.21,502.542L 732.854,502.747L 732.854,505.081L 737.253,502.542L 741.649,500.001L 737.253,497.461 Z " UseLayoutRounding="False" Height="10.16" Width="8.796" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SalesTeamButton" TargetType="Button">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Background" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)">
+                                            <SplineColorKeyFrame KeyTime="0" Value="#FF6DBDD1"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Focused"/>
+                                <VisualState x:Name="Unfocused"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="Background" Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Path Stretch="Fill" Stroke="#FF8B9298" Height="1" Margin="0" VerticalAlignment="Bottom" UseLayoutRounding="False" Data="M5.4306569,27 L117,27" StrokeDashArray="1 1"/>
+                        </Border>
+                        <TextBlock 
+							Margin="{TemplateBinding Padding}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							Text="{TemplateBinding Content}" 
+							HorizontalAlignment="Left" 
+							/>
+                        <TextBlock 
+							Margin="{TemplateBinding Padding}" 
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+							Text="{TemplateBinding Tag}" 
+							HorizontalAlignment="Right" 
+							/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

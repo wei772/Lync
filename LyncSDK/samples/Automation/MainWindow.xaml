@@ -1,0 +1,174 @@
+﻿<!--=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================-->
+    
+<Window x:Class="Automation.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Automation Sample" ResizeMode="CanMinimize"
+    Height="433" Width="680"
+    Loaded="Window_Loaded">
+    
+    <!-- Main content area -->
+    <DockPanel Margin="5 0">
+        
+        <!-- Call Panel -->
+        <StackPanel DockPanel.Dock="Bottom" Height="33">
+            <Button Margin="5" HorizontalAlignment="Center" Width="60"
+                    IsEnabled="False"
+                    Name="callButton" Content="Call" Click="CallButton_Click" />
+        </StackPanel>
+
+        <!-- Participants panel -->
+        <Grid DockPanel.Dock="Left" MaxWidth="302">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="5"
+                       FontWeight="Bold" FontSize="14"
+                       Text="Participants" />
+            
+            <!-- Add participant area -->
+            <StackPanel Grid.Row="1" Margin="5"
+                        Orientation="Horizontal" >
+                <TextBlock Margin="0 0 3 0" Width="20"
+                            Text="Uri" />
+                <TextBox Margin="3 0" Width="200"
+                         Name="participantTextBox"/>
+                <Button  Margin="3 0 0 0" Width="60"
+                         Name="addParticipantButton" Content="Add"
+                         Click="AddParticipantButton_Click"/>
+            </StackPanel>
+            
+            <!-- Participants list -->
+            <ListBox Margin="5" Grid.Row="2"
+                     Name="participantsListBox"/>
+        </Grid>
+
+        <!-- Conversation settings panel -->
+        <Grid DockPanel.Dock="Right" Margin="15 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33" />
+                <RowDefinition Height="66" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="33" />
+                <RowDefinition Height="132" />
+                <RowDefinition Height="66" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Margin="5"
+                       FontWeight="Bold" FontSize="14"
+                       Text="Conversation Settings" />
+            
+            <!-- Instant Message modality -->
+            <StackPanel Grid.Row="1">
+                <CheckBox Margin="5" Width="150"
+                          HorizontalAlignment="Left" IsThreeState="False"
+                          Name="instantMessageCheckBox" Content="Instant Message"
+                          Click="InstantMessageCheckBox_Click"/>
+                
+                <!-- First instant message area -->
+                <StackPanel Margin="22 5 5 5" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 3 0" Width="90"
+                               Text="First message" />
+                    <TextBox Margin="3 0 0 0" Width="150"
+                             IsEnabled="False"
+                             Name="firstMessageTextBox"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Audio modality -->
+            <CheckBox Grid.Row="2" Margin="5" Width="150"
+                      HorizontalAlignment="Left" IsThreeState="False"
+                      Name="audioCheckBox" Content="Audio"
+                      Click="AudioCheckBox_Click"/>
+
+            <!-- Video modality -->
+            <CheckBox Grid.Row="3" Margin="5" Width="150"
+                      HorizontalAlignment="Left" IsThreeState="False"
+                      Name="videoCheckBox" Content="Video"
+                      Click="VideoCheckBox_Click"/>
+
+            <!-- Application Sharing modality -->
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Row="0" Margin="5" Width="150"
+                          HorizontalAlignment="Left" IsThreeState="False"
+                          Name="applicationSharingCheckBox" Content="Application Sharing"
+                          Click="ApplicationSharingCheckBox_Click"/>
+                
+                <!-- Resource type selection area -->
+                <StackPanel Grid.Row="1" Margin="22 5 5 5" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 3 0" Width="90"
+                               Text="Resource Type" />
+                    <ComboBox Margin="3 0 0 0" Width="150"
+                              IsEnabled="False"
+                              Name="resourceTypeComboBox" SelectedIndex="0">
+                        <TextBlock Text="Desktop" />
+                        <TextBlock Text="Monitor" />
+                        <TextBlock Text="Process" />
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Monitor selection area -->
+                <StackPanel Grid.Row="2" Margin="22 5 5 5" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 3 0" Width="90"
+                               Text="Monitor Number" />
+                    <ComboBox Margin="3 0 0 0" Width="150"
+                              IsEnabled="False"
+                              Name="monitorNumberComboBox"/>
+                </StackPanel>
+
+                <!-- Process selection area -->
+                <StackPanel Grid.Row="3" Margin="22 5 5 5" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 3 0" Width="90"
+                               Text="Process" />
+                    <ComboBox Margin="3 0 0 0" Width="150"
+                              IsEnabled="False"
+                              Name="processComboBox"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- File Transfer modality -->
+            <StackPanel Grid.Row="5" VerticalAlignment="Center">
+                <CheckBox Margin="5" Width="150"
+                          HorizontalAlignment="Left" IsThreeState="False"
+                          Name="fileTransferCheckBox" Content="File Transfer"
+                          Click="FileTransferCheckBox_Click"/>
+
+                <!-- File selection area -->
+                <StackPanel Margin="22 5 5 5" Orientation="Horizontal">
+                    <TextBlock Margin="0 0 3 0"  Width="90"
+                               Text="File Path" />
+                    <TextBox Margin="3 0" Width="150"
+                             IsEnabled="False"
+                             Name="filePathTextBox"/>
+                    <Button Margin="3 0 0 0" Width="60"
+                            IsEnabled="False"
+                            Name="browseButton" Content="Browse..."
+                            Click="BrowseButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

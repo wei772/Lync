@@ -1,0 +1,123 @@
+﻿<!--=====================================================================
+    File:    MainPage.xaml
+
+    Summary: Main entry page for the MiniProposalTracker Application.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+    <UserControl
+    x:Class="MiniProposalTracker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:ProposalTracker="clr-namespace:ProposalTracker.Controls;assembly=ProposalTracker"
+    xmlns:Converters="clr-namespace:ProposalTracker.Converters;assembly=ProposalTracker"
+    d:DesignHeight="400"
+    d:DesignWidth="400" >
+
+    <UserControl.Resources>
+        <!--Converters to change Boolean to Visibility-->
+        <Converters:BooleanToVisibility
+            x:Key="BooleanToVisibility"/>
+    </UserControl.Resources>
+
+    <Grid
+        x:Name="LayoutRoot"
+        Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ProposalTracker:PortletFrame x:Name="MainPortletFrame" Grid.RowSpan="8"/>
+        <TextBlock
+            x:Name="AppDataTextBlock"
+            HorizontalAlignment="Left"
+            Grid.RowSpan="2"
+            TextWrapping="Wrap"
+            Grid.Row="1"
+            Margin="10,5" 
+          />        
+        <StackPanel Grid.Row="5" Margin="10,5">
+            <!--Pie Chart Image whose visibility is bound to the checked event of the PieChartRadioButton-->
+            <Image
+                x:Name="PieChartImage"
+                Source="/MiniProposalTracker;component/Images/PieChart_Image.png"
+                Visibility="{Binding ElementName=PieChartRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibility}, ConverterParameter=cleared}" 
+              />
+        </StackPanel>
+        <StackPanel Grid.Row="5" Margin="10,5">
+            <!--Column Chart Image whose visibility is bound to the checked event of the ColumnChartRadioButton-->
+            <Image
+                x:Name="ColumnChartImage"
+                Source="/MiniProposalTracker;component/Images/ColumnChart_Image.png"
+                Visibility="{Binding ElementName=ColumnChartRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibility}, ConverterParameter=cleared}" 
+              />
+        </StackPanel>
+        <StackPanel Grid.Row="5" Margin="10,5">
+            <!--Bubble Chart Image whose visibility is bound to the checked event of the BubbleChartRadioButton-->
+            <Image
+                x:Name="BubbleChartImage"
+                Source="/MiniProposalTracker;component/Images/BubbleChart_Image.png"
+                Visibility="{Binding ElementName=BubbleChartRadioButton, Path=IsChecked, Converter={StaticResource BooleanToVisibility}, ConverterParameter=cleared}" 
+              />
+        </StackPanel>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="6"
+            Margin="10,0,10,10">
+            <TextBlock Text="Chart Type: "/>
+            <!--Radio buttons to choose chart image to display-->
+            <RadioButton
+                x:Name="PieChartRadioButton"
+                GroupName="ChartTypes"
+                Checked="SelectChartTypeRadioButtonChecked"
+                Content="Pie"
+                Margin="0,0,5,0" 
+              />
+            <RadioButton
+                x:Name="ColumnChartRadioButton"
+                GroupName="ChartTypes"
+                Checked="SelectChartTypeRadioButtonChecked"
+                Content="Column"
+                Margin="10,0,5,0" 
+              />
+            <RadioButton
+                x:Name="BubbleChartRadioButton"
+                GroupName="ChartTypes"
+                Checked="SelectChartTypeRadioButtonChecked"
+                Content="Bubble"
+                Margin="0,0,5,0" 
+              />
+        </StackPanel>
+        <!--TextBlock to display Error messages-->
+        <TextBlock
+            x:Name="ErrorTextBlock"
+            HorizontalAlignment="Left"
+            Foreground="Red"
+            FontWeight="Bold"
+            TextWrapping="Wrap"
+            Grid.Row="7"
+            Margin="15"
+            Visibility="Collapsed"
+          />        
+    </Grid>
+</UserControl>

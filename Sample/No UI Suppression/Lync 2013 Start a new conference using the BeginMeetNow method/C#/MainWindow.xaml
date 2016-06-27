@@ -1,0 +1,35 @@
+﻿<!--/*=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================*/-->
+<Window x:Class="MeetNow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:custom="clr-namespace:MeetNow"
+        Title="Start a MeetNow Conference" Height="150" Width="325" Loaded="Window_Loaded">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Meet Now Conference: " Margin="4"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" x:Name="MeetNowStatusTextBlock" Margin="4"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Meet Now"  Height="43" HorizontalAlignment="Center" Margin="14" Name="button1" VerticalAlignment="Center" Width="125" Click="button1_Click" />
+    </Grid>
+</Window>

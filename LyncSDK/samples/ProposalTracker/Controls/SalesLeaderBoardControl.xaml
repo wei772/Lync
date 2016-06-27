@@ -1,0 +1,69 @@
+<!--=====================================================================
+    File:    SalesLeaderBoardControl.xaml
+
+    Summary: Control to display Sales Leaders board.
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+    <UserControl
+    x:Class="ProposalTracker.Controls.SalesLeaderBoardControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="LayoutRoot">
+        <Grid>
+            <!--This ListBox shows each sales person with his own PresenceIndicatorControl 
+            and TotalSales. The total sales property is bound to the width of the rectangle.-->
+            <ListBox
+                x:Name="SalesPersonsListbox"
+                Style="{StaticResource ListBoxStyle1}"
+                ItemContainerStyle="{StaticResource ListBoxItemStyle1}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <controls:PresenceIndicator
+                                x:Name="presenceIndicatorControl"
+                                Source="{Binding Path=SalesPersonUri}"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                />
+                            <Rectangle
+                                Fill="#FF9DC9D6"
+                                Width="{Binding Path=TotalSales}"
+                                Style="{StaticResource BarChartBarStyle}"
+                                Height="25"
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                />
+                            <TextBlock
+                                Text="{Binding ElementName=presenceIndicatorControl, Path=DisplayName}"
+                                Grid.Column="1"
+                                Margin="6"
+                                />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

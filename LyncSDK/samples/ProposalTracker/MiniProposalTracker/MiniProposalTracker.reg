@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+
+; - This is for Lync 2010
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\ZoneMap\Domains\ServerName]
+"file"=dword:00000002
+
+[HKEY_CURRENT_USER\Software\Microsoft\Communicator\ContextPackages\{AFCFD912-E1B7-4CB4-92EE-174D5E7A35DD}]
+"Name"="Proposal Registration Tool"
+"InternalURL"="\\\\SharedFilesPath\\MiniProposalTrackerTestPage.html"
+"ExternalURL"="\\\\SharedFilesPath\\MiniProposalTrackerTestPage.html"
+"InstallLink"="\\\\SharedFilesPath\\MiniProposalTracker.reg"
+"ExtensibilityWindowSize"=dword:00000000
+
+
+; - This is for Lync 2013
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\Lync\Security\Trusted Sites\ServerName]
+"file"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Microsoft\Office\15.0\Lync\Addins\{AFCFD912-E1B7-4CB4-92EE-174D5E7A35DD}]
+"Name"="Proposal Registration Tool"
+"InternalURL"="\\\\SharedFilesPath\\MiniProposalTrackerTestPage.html"
+"ExternalURL"="\\\\SharedFilesPath\\MiniProposalTrackerTestPage.html"
+"InstallLink"="\\\\SharedFilesPath\\MiniProposalTracker.reg"
+"ExtensibilityWindowSize"=dword:00000000

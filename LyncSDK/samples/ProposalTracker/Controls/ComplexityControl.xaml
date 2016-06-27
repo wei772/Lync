@@ -1,0 +1,98 @@
+﻿<!--=====================================================================
+    File:    ComplexityControl.xaml
+
+    Summary: View for displaying ComplexityControl. 
+
+    This file is part of the Microsoft Lync SDK Code Samples
+
+        Copyright (C) 2010 Microsoft Corporation.  All rights reserved.
+
+    This source code is intended only as a supplement to Microsoft
+    Development Tools and/or on-line documentation.  See these other
+    materials for detailed information regarding Microsoft code samples.
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+    PARTICULAR PURPOSE.
+=====================================================================*/-->
+    <UserControl
+    x:Class="ProposalTracker.Controls.ComplexityControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Viewbox>
+        <Grid>
+            <Path
+                Width="50"
+                Stretch="Fill"
+                Fill="#FF5FCCED"
+                Data="M 430.629,576.839C 433.249,576.839 435.393,578.981 435.393,581.601L 435.393,680.738C 435.393,683.359 433.249,685.503 430.629,685.503L 347.686,685.503C 345.066,685.503 342.923,683.359 342.923,680.738L 342.923,581.601C 342.923,578.981 345.066,576.839 347.686,576.839L 430.629,576.839 Z "
+                HorizontalAlignment="Left"
+                Margin="10,63.509,0,0"
+                UseLayoutRounding="False"
+                />
+            <Path
+                Height="42.82"
+                Stretch="Fill"
+                StrokeThickness="1.33333"
+                StrokeLineJoin="Round"
+                Stroke="#FF7F7F7F"
+                Fill="#FFFFFFFF"
+                Data="M 570.787,543.355L 353.952,543.355C 352.206,543.355 350.777,544.785 350.777,546.531L 350.777,567.174C 350.777,568.921 352.206,570.35 353.952,570.35L 369.365,570.35L 376.595,584.842L 382.715,570.35L 570.787,570.35C 572.535,570.35 573.963,568.921 573.963,567.174L 573.963,546.531C 573.963,544.785 572.535,543.355 570.787,543.355 Z "
+                Margin="29.11,16.689,22.37,0"
+                VerticalAlignment="Top"
+                UseLayoutRounding="False"
+                />
+
+            <Path
+                Width="50"
+                Stretch="Fill"
+                Fill="#FF6EBC95"
+                Data="M 530.805,617.165C 533.424,617.165 535.568,619.308 535.568,621.928L 535.568,680.739C 535.568,683.359 533.424,685.503 530.805,685.503L 447.862,685.503C 445.242,685.503 443.098,683.359 443.098,680.739L 443.098,621.928C 443.098,619.308 445.242,617.165 447.862,617.165L 530.805,617.165 Z "
+                Margin="143.331,93.509,82.669,0"
+                UseLayoutRounding="False"
+                d:LayoutOverrides="VerticalAlignment"
+                />
+            <Path
+                Width="50"
+                Stretch="Fill"
+                Fill="#FFC7B299"
+                Data="M 630.936,664.635C 633.555,664.635 635.7,666.778 635.7,669.4L 635.7,680.738C 635.7,683.358 633.555,685.502 630.936,685.502L 547.993,685.502C 545.373,685.502 543.229,683.358 543.229,680.738L 543.229,669.4C 543.229,666.778 545.373,664.635 547.993,664.635L 630.936,664.635 Z "
+                HorizontalAlignment="Right"
+                Margin="0,0,12,0"
+                UseLayoutRounding="False"
+                Height="16.066"
+                VerticalAlignment="Bottom"
+                RenderTransformOrigin="1.132,0.44"
+                />
+
+            <Grid
+                x:Name="LayoutRoot">
+                <Path
+                    Width="50"
+                    Stretch="Fill"
+                    Fill="#FF9FA1A4"
+                    Data="M 530.805,617.165C 533.424,617.165 535.568,619.308 535.568,621.928L 535.568,680.739C 535.568,683.359 533.424,685.503 530.805,685.503L 447.862,685.503C 445.242,685.503 443.098,683.359 443.098,680.739L 443.098,621.928C 443.098,619.308 445.242,617.165 447.862,617.165L 530.805,617.165 Z "
+                    Margin="74.662,110.048,0,0"
+                    UseLayoutRounding="False"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    d:LayoutOverrides="Width"
+                    />
+            </Grid>
+            <TextBlock
+                Height="28"
+                Margin="39,20,12,0"
+                VerticalAlignment="Top"
+                Text="High/partner involvement"
+                TextWrapping="Wrap"
+                FontFamily="Fonts/Fonts.zip#Segoe UI"
+                FontSize="13.333"
+                />
+        </Grid>
+    </Viewbox>
+</UserControl>
