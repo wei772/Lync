@@ -53,6 +53,13 @@ namespace Lync.Model
 			//subscribes to the video channel state changes so that the status bar gets updated with the new state
 			_audioChannel.StateChanged += OnAudioChannelStateChanged;
 
+			AddParticipant();
+		}
+
+		private void AddParticipant()
+		{
+			var contact = ContactService.GetContactByUri(_sipUriOfRealPerson);
+			Conversation.AddParticipant(contact);
 		}
 
 
@@ -227,7 +234,7 @@ namespace Lync.Model
 		protected override void OnConversationParticipantAddedCore(Participant participant)
 		{
 			((AVModality)participant.Modalities[ModalityTypes.AudioVideo]).ActionAvailabilityChanged += OnParticipantAudioActionAvailabilityChanged;
-			if (participant.IsSelf)
+			if (!participant.IsSelf)
 			{
 				ConnectAudio();
 			}
@@ -256,7 +263,7 @@ namespace Lync.Model
 			{
 				_log.ErrorException("",lyncClientException);
 			}
-			catch (SystemException systemException)
+			catch (Exception systemException)
 			{
 				_log.ErrorException("", systemException);
 			}
