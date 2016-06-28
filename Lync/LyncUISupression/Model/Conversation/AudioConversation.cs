@@ -59,7 +59,10 @@ namespace Lync.Model
 		private void AddParticipant()
 		{
 			var contact = ContactService.GetContactByUri(_sipUriOfRealPerson);
-			Conversation.AddParticipant(contact);
+			if (contact != null)
+			{
+				Conversation.AddParticipant(contact);
+			}
 		}
 
 
@@ -231,7 +234,7 @@ namespace Lync.Model
 		#endregion
 
 
-		protected override void OnConversationParticipantAddedCore(Participant participant)
+		protected override void ConversationParticipantAddedCore(Participant participant)
 		{
 			((AVModality)participant.Modalities[ModalityTypes.AudioVideo]).ActionAvailabilityChanged += OnParticipantAudioActionAvailabilityChanged;
 			if (!participant.IsSelf)

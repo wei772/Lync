@@ -49,6 +49,8 @@ namespace Lync.Model
 		}
 
 		private bool _isCanRemoveParticipant;
+
+
 		public bool IsCanRemoveParticipant
 		{
 			get
@@ -96,6 +98,78 @@ namespace Lync.Model
 			HandleAddedCore();
 		}
 
+		protected virtual void HandleAddedCore()
+		{
+
+		}
+
+
+		internal void End()
+		{
+			//ends the conversation which will disconnect all modalities
+			try
+			{
+				Conversation.End();
+			}
+			catch (LyncClientException lyncClientException)
+			{
+				_log.ErrorException("Close", lyncClientException);
+			}
+			catch (SystemException systemException)
+			{
+				if (LyncModelExceptionHelper.IsLyncException(systemException))
+				{
+					// Log the exception thrown by the Lync Model API.
+					_log.ErrorException("Error: ", systemException);
+				}
+				else
+				{
+					// Rethrow the SystemException which did not come from the Lync Model API.
+					throw;
+				}
+			}
+		}
+
+		/// <summary>
+		/// Ends the conversation if the user closes the window.
+		/// </summary>
+		public void Close()
+		{
+			//need to remove event listeners otherwide events may be received after the form has been unloaded
+			Conversation.StateChanged -= OnConversationStateChanged;
+			Conversation.ParticipantAdded -= OnConversationParticipantAdded;
+			Conversation.ParticipantRemoved -= OnConversationParticipantRemoved;
+			Conversation.ActionAvailabilityChanged -= OnConversationActionAvailabilityChanged;
+
+			//if the conversation is active, will end it
+			if (Conversation.State != ConversationState.Terminated)
+			{
+				//ends the conversation which will disconnect all modalities
+				try
+				{
+					Conversation.End();
+				}
+				catch (LyncClientException lyncClientException)
+				{
+					_log.ErrorException("Close", lyncClientException);
+				}
+				catch (SystemException systemException)
+				{
+					if (LyncModelExceptionHelper.IsLyncException(systemException))
+					{
+						// Log the exception thrown by the Lync Model API.
+						_log.ErrorException("Error: ", systemException);
+					}
+					else
+					{
+						// Rethrow the SystemException which did not come from the Lync Model API.
+						throw;
+					}
+				}
+			}
+		}
+
+
 		private void OnConversationPropertyChanged(object sender, ConversationPropertyChangedEventArgs e)
 		{
 			Conversation conference = (Conversation)sender;
@@ -127,10 +201,6 @@ namespace Lync.Model
 
 		}
 
-		protected virtual void HandleAddedCore()
-		{
-
-		}
 
 		private void OnConversationParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
 		{
@@ -140,12 +210,12 @@ namespace Lync.Model
 						var newPart = new ParticipantModel(e.Participant);
 						Participants.Add(newPart);
 						_log.Debug("OnConversationParticipantAdded  {0}", newPart);
-						OnConversationParticipantAddedCore(e.Participant);
+						ConversationParticipantAddedCore(e.Participant);
 					}
 				);
 		}
 
-		protected virtual void OnConversationParticipantAddedCore(Participant participant)
+		protected virtual void ConversationParticipantAddedCore(Participant participant)
 		{
 
 		}
@@ -168,11 +238,6 @@ namespace Lync.Model
 
 		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
 		{
-			if (e.NewState == ConversationState.Terminated)
-			{
-				Terminate();
-			}
-
 			_log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
 		}
 
@@ -198,24 +263,6 @@ namespace Lync.Model
 			);
 		}
 
-
-
-		internal void End()
-		{
-			try
-			{
-				if (Conversation != null)
-				{
-					Conversation.End();
-				}
-			}
-
-			catch (Exception ex)
-			{
-				_log.Error("End: " + ex.Message);
-			}
-
-		}
 
 
 		/// <summary>
@@ -312,8 +359,9 @@ namespace Lync.Model
 		}
 
 
-		internal void Terminate()
-		{
-		}
+
 	}
+
+
+
 }

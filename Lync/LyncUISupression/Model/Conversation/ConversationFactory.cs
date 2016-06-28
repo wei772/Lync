@@ -9,8 +9,11 @@ namespace Lync.Model
 {
 	public class ConversationFactory
 	{
+
 		public static LyncConversation CreateLyncConversation(Conversation conversation)
 		{
+			LyncConversation current = null;
+
 			if (conversation.Modalities.ContainsKey(ModalityTypes.AudioVideo))
 			{
 				var avModality = (AVModality)conversation.Modalities[ModalityTypes.AudioVideo];
@@ -18,22 +21,22 @@ namespace Lync.Model
 				var videoChannel = avModality.VideoChannel;
 				if (videoChannel != null)
 				{
-					return new VideoConversation();
+					current = new VideoAudioConversation();
 				}
 				else
 				{
-					return new VideoConversation();
+					current = new AudioConversation();
 				}
 			}
 
 			else if (conversation.Modalities.ContainsKey(ModalityTypes.ContentSharing))
 			{
-				return new ShareResourceConversation();
+				current = new ShareResourceConversation();
 			}
 
 			//show the current conversation and modality states in the UI
 
-			return null;
+			return current;
 		}
 	}
 }

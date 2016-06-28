@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lync.Model
 {
-	public class VideoConversation : LyncConversation
+	public class VideoAudioConversation : AudioConversation
 	{
 	}
 }

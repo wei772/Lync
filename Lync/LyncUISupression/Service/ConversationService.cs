@@ -72,7 +72,10 @@ namespace Lync.Service
 
 		private void OnConversationManagerConversationRemoved(object sender, ConversationManagerEventArgs e)
 		{
-			_currentLyncConversation = null;
+			if (_currentLyncConversation != null)
+			{
+				_currentLyncConversation.Conversation = null;
+			}
 		}
 
 		private void OnConversationManagerConversationAdded(object sender, ConversationManagerEventArgs e)
@@ -111,6 +114,13 @@ namespace Lync.Service
 
 		}
 
+		public void Close()
+		{
+			if (_currentLyncConversation != null)
+			{
+				_currentLyncConversation.Close();
+			}
+		}
 
 
 	}

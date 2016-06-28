@@ -22,42 +22,44 @@ using SuperSimpleLyncKiosk.ViewModels;
 
 namespace SuperSimpleLyncKiosk.Views
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
-    public partial class MainView : Window
-    {
-        public MainView()
-        {
-            InitializeComponent();
-            
-            ResizeMode = ResizeMode.CanResize;
-            WindowState = WindowState.Maximized;
-        }
+	/// <summary>
+	/// Interaction logic for MainView.xaml
+	/// </summary>
+	public partial class MainView : Window
+	{
+		public MainView()
+		{
+			InitializeComponent();
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                DataContext = new MainViewModel();
-            }
-            catch (ApplicationException ex)
-            {
-                MessageBox.Show(ex.ToString(), "FATAL ERROR");
-                Application.Current.Shutdown(1);
-            }
-        }
+			ResizeMode = ResizeMode.CanResize;
+			WindowState = WindowState.Maximized;
+			Loaded += OnLoaded;
+			Closing += OnClosing;
+		}
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            var vm = DataContext as MainViewModel;
+		private void OnLoaded(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				DataContext = new MainViewModel();
+			}
+			catch (ApplicationException ex)
+			{
+				//MessageBox.Show(ex.ToString(), "FATAL ERROR");
+				//Application.Current.Shutdown(1);
+			}
+		}
+
+		private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			var vm = DataContext as MainViewModel;
 			if (vm != null)
 			{
-			//	vm.ShutDownLync();
+				vm.Close();
 			}
 
-        }
-    }
+		}
+	}
 }
 
 

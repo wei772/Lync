@@ -51,6 +51,10 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		}
 
+		internal void Close()
+		{
+			ConversationService.Instance.Close();
+		}
 	}
 
 }

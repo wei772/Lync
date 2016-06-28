@@ -40,7 +40,14 @@ namespace Lync.Service
 
 		public Contact GetContactByUri(string sipUri)
 		{
-			return ContactManager.GetContactByUri(sipUri);
+			if (!string.IsNullOrEmpty(sipUri))
+			{
+				return ContactManager.GetContactByUri(sipUri);
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }
