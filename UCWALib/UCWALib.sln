@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCWALib", "UCWALib\UCWALib.csproj", "{9F12DA36-4E50-4D84-8E00-1217B10717A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCWALib.Demo", "UCWALib.Demo\UCWALib.Demo.csproj", "{AC64D910-44E0-4BA1-86C0-E12D4E172DB3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F12DA36-4E50-4D84-8E00-1217B10717A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F12DA36-4E50-4D84-8E00-1217B10717A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F12DA36-4E50-4D84-8E00-1217B10717A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F12DA36-4E50-4D84-8E00-1217B10717A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC64D910-44E0-4BA1-86C0-E12D4E172DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC64D910-44E0-4BA1-86C0-E12D4E172DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC64D910-44E0-4BA1-86C0-E12D4E172DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC64D910-44E0-4BA1-86C0-E12D4E172DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
