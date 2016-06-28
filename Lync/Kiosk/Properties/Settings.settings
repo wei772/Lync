@@ -6,16 +6,16 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="sipEmailAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sip:scottha@microsoft.com</Value>
+      <Value Profile="(Default)">sip:li772555190@outlook.com</Value>
     </Setting>
     <Setting Name="LyncAccountDomainUser" Type="System.String" Scope="User">
-      <Value Profile="(Default)">domain\user</Value>
+      <Value Profile="(Default)">o365ms\tonyxia</Value>
     </Setting>
     <Setting Name="LyncAccountEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)">user@domain.com</Value>
+      <Value Profile="(Default)">tonyxia@o365ms.com</Value>
     </Setting>
     <Setting Name="LyncAccountPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">P@ssword</Value>
+      <Value Profile="(Default)">Abcd1234!</Value>
     </Setting>
   </Settings>
 </SettingsFile>
