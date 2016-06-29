@@ -24,7 +24,7 @@ namespace Lync.Model
         public ConversationType Type;
 
         public string ExternalUrl { get; set; }
-
+        public string ExternalId { get; set; }
 
         private List<Participant> _participants;
         public List<Participant> Participants

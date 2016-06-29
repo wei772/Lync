@@ -14,6 +14,7 @@ using System;
 using Lync;
 using Lync.Service;
 using Lync.Model;
+using BlueOfficeLync.Service;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
@@ -105,9 +106,11 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		private void ExecutePlaceCall(object obj)
 		{
-			var audio = new AudioConversation();
-			audio.Start(SipUriOfRealPerson);
-		}
+            var service = new BlueOfficeLyncService();
+            service.GetSkypeMeeting(null);
+            //var audio = new AudioConversation();
+            //audio.Start(SipUriOfRealPerson);
+        }
 
 		#endregion
 
