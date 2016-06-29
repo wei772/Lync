@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\How to  Sign in to and out of Lync.md = Document\How to  Sign in to and out of Lync.md
 		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
 		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md
+		Document\Join a Lync Meeting from your Windows Phone without a Lync account.md = Document\Join a Lync Meeting from your Windows Phone without a Lync account.md
 		Document\Lync  account.md = Document\Lync  account.md
 		Document\Lync.md = Document\Lync.md
 		SIP.md = SIP.md
@@ -23,7 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\UI suppression.md = Document\UI suppression.md
 		Document\UISuppression-OFF.reg = Document\UISuppression-OFF.reg
 		Document\UISuppression-ON.reg = Document\UISuppression-ON.reg
-		Document\在无需 Skype for Business (Lync) 帐户的情况下从 Windows Phone 加入 Skype for Business (Lync) 会议.md = Document\在无需 Skype for Business (Lync) 帐户的情况下从 Windows Phone 加入 Skype for Business (Lync) 会议.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk", "Kiosk\Kiosk.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"

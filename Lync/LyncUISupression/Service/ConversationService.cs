@@ -4,6 +4,7 @@ using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -41,7 +42,6 @@ namespace Lync.Service
 			}
 		}
 
-        public static Action<Guid, Action> CreateExternalUrl { get; set; }
 
         private ConversationService()
 		{
@@ -49,9 +49,22 @@ namespace Lync.Service
 
 		}
 
-        public void CreateConversationUseExternalUrl()
+        public void CreateConversationUseExternalUrl(string url, LyncConversation lyncConversation)
         {
+            Process.Start(url);
+       
+            if (_currentLyncConversation != null)
+            {
+                _currentLyncConversation.End();
+            }
+            _currentLyncConversation = lyncConversation;
 
+            ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
+            ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
+            _currentLyncConversation = lyncConversation;
+
+           // var conversation = ConversationManager.JoinConference(url);
+          //  conversation.StateChanged += OnConversationStateChanged;
         }
 
 
@@ -66,9 +79,10 @@ namespace Lync.Service
 			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
 			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
 
-			var conversation = ConversationManager.AddConversation();
-			conversation.StateChanged += OnConversationStateChanged;
-		}
+            var conversation = ConversationManager.AddConversation();
+            conversation.StateChanged += OnConversationStateChanged;
+       
+        }
 
 		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
 		{

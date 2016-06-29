@@ -26,10 +26,10 @@ namespace Lync.Model
 			Type = ConversationType.Audio;
 		}
 
-		public void Start(string sipUriOfRealPerson)
+		public void Init(string sipUriOfRealPerson)
 		{
 			_sipUriOfRealPerson = sipUriOfRealPerson;
-			CreateConversation();
+			//CreateConversation();
 		}
 
 

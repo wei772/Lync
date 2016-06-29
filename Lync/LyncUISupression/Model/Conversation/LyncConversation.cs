@@ -24,7 +24,7 @@ namespace Lync.Model
         public ConversationType Type;
 
         public string ExternalUrl { get; set; }
-        public string ExternalId { get; set; }
+        public Guid ExternalId { get; set; }
 
         private List<Participant> _participants;
         public List<Participant> Participants
@@ -111,7 +111,10 @@ namespace Lync.Model
             //ends the conversation which will disconnect all modalities
             try
             {
-                Conversation.End();
+                if (Conversation != null)
+                {
+                    Conversation.End();
+                }
             }
             catch (LyncClientException lyncClientException)
             {
