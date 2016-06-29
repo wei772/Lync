@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BlueOfficeLync.ViewModel
+namespace BlueOfficeSkype.ViewModel
 {
 	public class ShareDesktopConversationViewModel
 	{

@@ -91,10 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Service\GetSkypeMeetingResult.cs" />
-    <Compile Include="Model\LyncConversationModel.cs" />
+    <Compile Include="Model\SkypeConversationModel.cs" />
     <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\BlueOfficeLyncService.cs" />
+    <Compile Include="Service\BlueOfficeSkypeService.cs" />
     <Compile Include="ViewModel\Conversation\AudioConversationViewModel.cs" />
     <Compile Include="ViewModel\Conversation\ConversationViewModelBase.cs" />
     <Compile Include="ViewModel\Conversation\ConversationViewModelFactory.cs" />

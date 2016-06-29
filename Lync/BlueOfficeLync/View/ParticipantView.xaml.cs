@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BlueOfficeLync.View
+namespace BlueOfficeSkype.View
 {
 	/// <summary>
 	/// Interaction logic for ParticipantView.xaml

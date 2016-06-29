@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace BlueOfficeLync.Service
+namespace BlueOfficeSkype.Service
 {
-    public class BlueOfficeLyncService
+    public class BlueOfficeSkypeService
     {
 
         private string _baseUrl = "http://bocorp-test.ioffice100.net/tt";

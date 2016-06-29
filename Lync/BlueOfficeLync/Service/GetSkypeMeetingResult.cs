@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BlueOfficeLync.Service
+namespace BlueOfficeSkype.Service
 {
     public class GetSkypeMeetingResult
     {

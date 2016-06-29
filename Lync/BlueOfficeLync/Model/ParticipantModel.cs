@@ -19,7 +19,7 @@ using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using GalaSoft.MvvmLight;
 
-namespace BlueOfficeLync.Model
+namespace BlueOfficeSkype.Model
 {
     /// <summary>
     /// Helper class for displaying a participant's name in a listbox.
@@ -33,7 +33,7 @@ namespace BlueOfficeLync.Model
         }
 
         /// <summary>
-        /// Gets / Sets the Lync Participant.
+        /// Gets / Sets the Skype Participant.
         /// </summary>
         public Participant Participant { get; private set; }
 
@@ -54,20 +54,20 @@ namespace BlueOfficeLync.Model
             {
                 displayName = Participant.Contact.GetContactInformation(ContactInformationType.DisplayName) as string;
             }
-            catch (LyncClientException lyncClientException)
+            catch (LyncClientException SkypeClientException)
             {
-                Console.WriteLine(lyncClientException);
+                Console.WriteLine(SkypeClientException);
             }
             catch (SystemException systemException)
             {
-                //if (LyncModelExceptionHelper.IsLyncException(systemException))
+                //if (SkypeModelExceptionHelper.IsSkypeException(systemException))
                 //{
-                //    // Log the exception thrown by the Lync Model API.
+                //    // Log the exception thrown by the Skype Model API.
                 //    Console.WriteLine("Error: " + systemException);
                 //}
                 //else
                 //{
-                //    // Rethrow the SystemException which did not come from the Lync Model API.
+                //    // Rethrow the SystemException which did not come from the Skype Model API.
                 //    throw;
                 //}
             }

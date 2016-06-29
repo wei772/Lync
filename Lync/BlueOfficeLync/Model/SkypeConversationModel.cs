@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlueOfficeLync.Model
+namespace BlueOfficeSkype.Model
 {
-    public class LyncConversationModel
+    public class SkypeConversationModel
     {
-        public LyncConversation LyncConversation { get; set; }
+        public LyncConversation SkypeConversation { get; set; }
     }
 }

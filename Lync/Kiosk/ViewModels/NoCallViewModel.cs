@@ -14,7 +14,7 @@ using System;
 using Lync;
 using Lync.Service;
 using Lync.Model;
-using BlueOfficeLync.Service;
+using BlueOfficeSkype.Service;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
