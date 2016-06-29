@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9FB97656-D74F-4EBE-9A98-58FF3492AC93}</ProjectGuid>
+    <ProjectGuid>{9960A915-A5A8-4C65-98E4-D32CE947B6FC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lync</RootNamespace>
-    <AssemblyName>LyncUISupression</AssemblyName>
+    <RootNamespace>BlueOfficeLync</RootNamespace>
+    <AssemblyName>BlueOfficeLync</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -30,24 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19038, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
@@ -57,9 +39,17 @@
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Lync.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Lync.Controls.Framework, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Office\Office15\LyncSDK\Assemblies\Desktop\Microsoft.Lync.Controls.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Lync.Model, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -82,50 +72,77 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AsyncOperationHandler.cs" />
-    <Compile Include="Control\VideoWindowHost.xaml.cs">
-      <DependentUpon>VideoWindowHost.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Enum\ConversationType.cs" />
-    <Compile Include="Enum\VideoDirection.cs" />
-    <Compile Include="EventArg\VideoAvailabilityChangedEventArgs.cs" />
-    <Compile Include="LyncModelExceptionHelper.cs" />
-    <Compile Include="Model\Conversation\AudioConversation.cs" />
-    <Compile Include="Model\Conversation\ConversationFactory.cs" />
-    <Compile Include="Model\Conversation\LyncConversation.cs" />
-    <Compile Include="Model\Conversation\ShareResourceConversation.cs" />
-    <Compile Include="Model\Conversation\VideoAudioConversation.cs" />
-    <Compile Include="Model\LyncVideoWindow.cs" />
-    <Compile Include="Logging.cs" />
+    <Compile Include="Model\LyncConversationModel.cs" />
+    <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\ContactService.cs" />
-    <Compile Include="Service\ConversationService.cs" />
-    <Compile Include="Service\LyncService.cs" />
+    <Compile Include="ViewModel\Conversation\AudioConversationViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\ConversationViewModelBase.cs" />
+    <Compile Include="ViewModel\Conversation\ConversationViewModelFactory.cs" />
+    <Compile Include="ViewModel\Conversation\ShareDesktopConversationViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\ShareFileConversationViewModel.cs" />
+    <Compile Include="ViewModel\Conversation\VideoConversationViewModel.cs" />
+    <Compile Include="ViewModel\ParticipantViewModel.cs" />
+    <Compile Include="View\Conversation\AudioConversationView.xaml.cs">
+      <DependentUpon>AudioConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conversation\ShareDesktopConversationView.xaml.cs">
+      <DependentUpon>ShareDesktopConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conversation\ShareFileConversationView.xaml.cs">
+      <DependentUpon>ShareFileConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Conversation\VideoConversationView.xaml.cs">
+      <DependentUpon>VideoConversationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ParticipantView.xaml.cs">
+      <DependentUpon>ParticipantView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Control\VideoWindowHost.xaml">
+    <Page Include="View\Conversation\AudioConversationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Conversation\ShareDesktopConversationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conversation\ShareFileConversationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Conversation\VideoConversationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ParticipantView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LyncUISupression\Lync.csproj">
+      <Project>{9fb97656-d74f-4ebe-9a98-58ff3492ac93}</Project>
+      <Name>Lync</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

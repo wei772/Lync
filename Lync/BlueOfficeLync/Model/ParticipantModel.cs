@@ -19,7 +19,7 @@ using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using GalaSoft.MvvmLight;
 
-namespace Lync.Model
+namespace BlueOfficeLync.Model
 {
     /// <summary>
     /// Helper class for displaying a participant's name in a listbox.

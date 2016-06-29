@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Lync.View
+namespace BlueOfficeLync.View
 {
 	/// <summary>
 	/// Interaction logic for ShareFileConversationView.xaml

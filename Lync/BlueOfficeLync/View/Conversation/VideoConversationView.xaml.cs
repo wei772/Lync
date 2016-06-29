@@ -12,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Lync.View
+namespace BlueOfficeLync.View
 {
 	/// <summary>
-	/// Interaction logic for AudioConversation.xaml
+	/// Interaction logic for VideoConversation.xaml
 	/// </summary>
-	public partial class AudioConversationView : UserControl
+	public partial class VideoConversationView : UserControl
 	{
-		public AudioConversationView()
+		public VideoConversationView()
 		{
 			InitializeComponent();
 		}

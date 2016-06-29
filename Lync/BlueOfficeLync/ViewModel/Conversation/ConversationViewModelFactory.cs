@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lync.ViewModel
+namespace BlueOfficeLync.ViewModel
 {
-	public class ShareDesktopConversationViewModel
+	public class ConversationViewModelFactory
 	{
 	}
 }

@@ -41,13 +41,21 @@ namespace Lync.Service
 			}
 		}
 
-		private ConversationService()
+        public static Action<Guid, Action> CreateExternalUrl { get; set; }
+
+        private ConversationService()
 		{
 			_lyncService = LyncService.Instance;
 
 		}
 
-		internal void AddConversation(LyncConversation lyncConversation)
+        public void CreateConversationUseExternalUrl()
+        {
+
+        }
+
+
+        internal void AddConversation(LyncConversation lyncConversation)
 		{
 			if (_currentLyncConversation != null)
 			{

@@ -12,355 +12,357 @@ using System.Text;
 
 namespace Lync.Model
 {
-	public class LyncConversation : ObservableObject
-	{
-		private ILog _log = LogManager.GetLog(typeof(LyncConversation));
+    public class LyncConversation : ObservableObject
+    {
+        private ILog _log = LogManager.GetLog(typeof(LyncConversation));
 
-		protected ConversationService ConversationService { get; set; }
-		protected ContactService ContactService { get; set; }
+        protected ConversationService ConversationService { get; set; }
+        protected ContactService ContactService { get; set; }
 
-		public Conversation Conversation { get; set; }
+        public Conversation Conversation { get; set; }
 
-		public ConversationType Type;
+        public ConversationType Type;
 
-
-		private ObservableCollection<ParticipantModel> _participants;
-		public ObservableCollection<ParticipantModel> Participants
-		{
-			get { return _participants; }
-			set
-			{
-				Set("Participants", ref _participants, value);
-			}
-
-		}
-
-		private bool _isCanAddParticipant;
-		public bool IsCanAddParticipant
-		{
-			get
-			{
-				return _isCanAddParticipant;
-			}
-			set
-			{
-				Set("IsCanAddParticipant", ref _isCanAddParticipant, value);
-			}
-		}
-
-		private bool _isCanRemoveParticipant;
+        public string ExternalUrl { get; set; }
 
 
-		public bool IsCanRemoveParticipant
-		{
-			get
-			{
-				return _isCanRemoveParticipant;
-			}
-			set
-			{
-				Set("IsCanRemoveParticipant", ref _isCanRemoveParticipant, value);
-			}
-		}
+        private List<Participant> _participants;
+        public List<Participant> Participants
+        {
+            get { return _participants; }
+            set
+            {
+                Set("Participants", ref _participants, value);
+            }
+
+        }
+
+        private bool _isCanAddParticipant;
+        public bool IsCanAddParticipant
+        {
+            get
+            {
+                return _isCanAddParticipant;
+            }
+            set
+            {
+                Set("IsCanAddParticipant", ref _isCanAddParticipant, value);
+            }
+        }
+
+        private bool _isCanRemoveParticipant;
 
 
-		public Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
+        public bool IsCanRemoveParticipant
+        {
+            get
+            {
+                return _isCanRemoveParticipant;
+            }
+            set
+            {
+                Set("IsCanRemoveParticipant", ref _isCanRemoveParticipant, value);
+            }
+        }
 
 
-		public LyncConversation()
-		{
-			ContactService = ContactService.Instance;
-			ConversationService = ConversationService.Instance;
-			Participants = new ObservableCollection<ParticipantModel>();
-		}
-
-		public void CreateConversation()
-		{
-			ConversationService.AddConversation(this);
-		}
-
-		public void HandleAdded()
-		{
-			//registers for participant events
-			foreach (var participant in Conversation.Participants)
-			{
-				Participants.Add(new ParticipantModel(participant));
-			}
-			Conversation.ParticipantAdded += OnConversationParticipantAdded;
-			Conversation.ParticipantRemoved += OnConversationParticipantRemoved;
-			Conversation.StateChanged += OnConversationStateChanged;
-
-			//subscribes to the conversation action availability events (for the ability to add/remove participants)
-			Conversation.ActionAvailabilityChanged += OnConversationActionAvailabilityChanged;
-			Conversation.PropertyChanged += OnConversationPropertyChanged;
+        public Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
 
 
-			HandleAddedCore();
-		}
+        public LyncConversation()
+        {
+            ContactService = ContactService.Instance;
+            ConversationService = ConversationService.Instance;
+            Participants = new List<Participant>();
+        }
 
-		protected virtual void HandleAddedCore()
-		{
+        public void CreateConversation()
+        {
+            ConversationService.AddConversation(this);
+        }
 
-		}
+        public void HandleAdded()
+        {
+            //registers for participant events
+            foreach (var participant in Conversation.Participants)
+            {
+                Participants.Add(participant);
+            }
+            Conversation.ParticipantAdded += OnConversationParticipantAdded;
+            Conversation.ParticipantRemoved += OnConversationParticipantRemoved;
+            Conversation.StateChanged += OnConversationStateChanged;
 
-
-		internal void End()
-		{
-			//ends the conversation which will disconnect all modalities
-			try
-			{
-				Conversation.End();
-			}
-			catch (LyncClientException lyncClientException)
-			{
-				_log.ErrorException("Close", lyncClientException);
-			}
-			catch (SystemException systemException)
-			{
-				if (LyncModelExceptionHelper.IsLyncException(systemException))
-				{
-					// Log the exception thrown by the Lync Model API.
-					_log.ErrorException("Error: ", systemException);
-				}
-				else
-				{
-					// Rethrow the SystemException which did not come from the Lync Model API.
-					throw;
-				}
-			}
-		}
-
-		/// <summary>
-		/// Ends the conversation if the user closes the window.
-		/// </summary>
-		public void Close()
-		{
-			//need to remove event listeners otherwide events may be received after the form has been unloaded
-			Conversation.StateChanged -= OnConversationStateChanged;
-			Conversation.ParticipantAdded -= OnConversationParticipantAdded;
-			Conversation.ParticipantRemoved -= OnConversationParticipantRemoved;
-			Conversation.ActionAvailabilityChanged -= OnConversationActionAvailabilityChanged;
-
-			//if the conversation is active, will end it
-			if (Conversation.State != ConversationState.Terminated)
-			{
-				//ends the conversation which will disconnect all modalities
-				try
-				{
-					Conversation.End();
-				}
-				catch (LyncClientException lyncClientException)
-				{
-					_log.ErrorException("Close", lyncClientException);
-				}
-				catch (SystemException systemException)
-				{
-					if (LyncModelExceptionHelper.IsLyncException(systemException))
-					{
-						// Log the exception thrown by the Lync Model API.
-						_log.ErrorException("Error: ", systemException);
-					}
-					else
-					{
-						// Rethrow the SystemException which did not come from the Lync Model API.
-						throw;
-					}
-				}
-			}
-		}
+            //subscribes to the conversation action availability events (for the ability to add/remove participants)
+            Conversation.ActionAvailabilityChanged += OnConversationActionAvailabilityChanged;
+            Conversation.PropertyChanged += OnConversationPropertyChanged;
 
 
-		private void OnConversationPropertyChanged(object sender, ConversationPropertyChangedEventArgs e)
-		{
-			Conversation conference = (Conversation)sender;
+            HandleAddedCore();
+        }
 
-			switch (e.Property)
-			{
-				case ConversationProperty.ConferenceAcceptingParticipant:
-					Contact acceptingContact = (Contact)e.Value;
-					break;
-				case ConversationProperty.ConferencingUri:
-					break;
-				case ConversationProperty.ConferenceAccessInformation:
+        protected virtual void HandleAddedCore()
+        {
 
-					try
-					{
-
-						var conferenceKey = CreateConferenceKey();
-					}
-					catch (System.NullReferenceException nr)
-					{
-						System.Diagnostics.Debug.WriteLine("Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
-					}
-					catch (LyncClientException lce)
-					{
-						System.Diagnostics.Debug.WriteLine("Exception on ConferenceAccessInformation changed " + lce.Message);
-					}
-					break;
-			}
-
-		}
+        }
 
 
-		private void OnConversationParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
-		{
-			RunAtUI
-				(() =>
-					{
-						var newPart = new ParticipantModel(e.Participant);
-						Participants.Add(newPart);
-						_log.Debug("OnConversationParticipantAdded  {0}", newPart);
-						ConversationParticipantAddedCore(e.Participant);
-					}
-				);
-		}
+        internal void End()
+        {
+            //ends the conversation which will disconnect all modalities
+            try
+            {
+                Conversation.End();
+            }
+            catch (LyncClientException lyncClientException)
+            {
+                _log.ErrorException("Close", lyncClientException);
+            }
+            catch (SystemException systemException)
+            {
+                if (LyncModelExceptionHelper.IsLyncException(systemException))
+                {
+                    // Log the exception thrown by the Lync Model API.
+                    _log.ErrorException("Error: ", systemException);
+                }
+                else
+                {
+                    // Rethrow the SystemException which did not come from the Lync Model API.
+                    throw;
+                }
+            }
+        }
 
-		protected virtual void ConversationParticipantAddedCore(Participant participant)
-		{
+        /// <summary>
+        /// Ends the conversation if the user closes the window.
+        /// </summary>
+        public void Close()
+        {
+            //need to remove event listeners otherwide events may be received after the form has been unloaded
+            Conversation.StateChanged -= OnConversationStateChanged;
+            Conversation.ParticipantAdded -= OnConversationParticipantAdded;
+            Conversation.ParticipantRemoved -= OnConversationParticipantRemoved;
+            Conversation.ActionAvailabilityChanged -= OnConversationActionAvailabilityChanged;
 
-		}
-
-		private void OnConversationParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs e)
-		{
-			RunAtUI
-				(() =>
-					{
-
-						var removePart = Participants.Where(p => p.Participant.Equals(e.Participant)).SingleOrDefault();
-						if (removePart != null)
-						{
-							Participants.Remove(removePart);
-						}
-						_log.Debug("OnConversationParticipantRemoved  {0}", removePart);
-					}
-				);
-		}
-
-		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
-		{
-			_log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
-		}
-
-		private void OnConversationActionAvailabilityChanged(object sender, ConversationActionAvailabilityEventArgs e)
-		{
-			//posts the execution into the UI thread
-			RunAtUI
-				(() =>
-					{
-						//each action is mapped to a button in the UI
-						switch (e.Action)
-						{
-							case ConversationAction.AddParticipant:
-								IsCanAddParticipant = e.IsAvailable;
-								break;
-
-							case ConversationAction.RemoveParticipant:
-								IsCanRemoveParticipant = e.IsAvailable;
-								break;
-						}
-						_log.Debug("OnConversationActionAvailabilityChanged  Action: {0}", e.Action.ToString());
-					}
-			);
-		}
+            //if the conversation is active, will end it
+            if (Conversation.State != ConversationState.Terminated)
+            {
+                //ends the conversation which will disconnect all modalities
+                try
+                {
+                    Conversation.End();
+                }
+                catch (LyncClientException lyncClientException)
+                {
+                    _log.ErrorException("Close", lyncClientException);
+                }
+                catch (SystemException systemException)
+                {
+                    if (LyncModelExceptionHelper.IsLyncException(systemException))
+                    {
+                        // Log the exception thrown by the Lync Model API.
+                        _log.ErrorException("Error: ", systemException);
+                    }
+                    else
+                    {
+                        // Rethrow the SystemException which did not come from the Lync Model API.
+                        throw;
+                    }
+                }
+            }
+        }
 
 
+        private void OnConversationPropertyChanged(object sender, ConversationPropertyChangedEventArgs e)
+        {
+            Conversation conference = (Conversation)sender;
 
-		/// <summary>
-		/// Returns the meet-now meeting access key as a string
-		/// </summary>
-		/// <returns></returns>
-		private string CreateConferenceKey()
-		{
-			string returnValue = string.Empty;
-			try
-			{
+            switch (e.Property)
+            {
+                case ConversationProperty.ConferenceAcceptingParticipant:
+                    Contact acceptingContact = (Contact)e.Value;
+                    break;
+                case ConversationProperty.ConferencingUri:
+                    break;
+                case ConversationProperty.ConferenceAccessInformation:
 
-				//These properties are used to invite people by creating an email (or text message, or IM)
-				//and adding the dial in number, external Url, internal Url, and conference Id
-				ConferenceAccessInformation conferenceAccess =
-					(ConferenceAccessInformation)Conversation.Properties[ConversationProperty.ConferenceAccessInformation];
+                    try
+                    {
 
-				if (conferenceAccess == null)
-				{
-					if (!Conversation.CanSetProperty(ConversationProperty.ConferenceAccessInformation))
-					{
-						return string.Empty;
-					}
+                        var conferenceKey = CreateConferenceKey();
+                    }
+                    catch (System.NullReferenceException nr)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
+                    }
+                    catch (LyncClientException lce)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Exception on ConferenceAccessInformation changed " + lce.Message);
+                    }
+                    break;
+            }
 
-					//Conversation.BeginSetProperty(
-					//	ConversationProperty.ConferenceAccessInformation,
-					//	 new ConferenceAccessInformation() , (ar) =>
-					//	{
-					//		Conversation.EndSetProperty(ar);
-					//	},
-					//	null);
-				}
+        }
 
-				StringBuilder MeetingKey = new StringBuilder();
 
-				if (conferenceAccess.Id.Length > 0)
-				{
-					MeetingKey.Append("Meeting Id: " + conferenceAccess.Id);
-					MeetingKey.Append(System.Environment.NewLine);
-				}
+        private void OnConversationParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
+        {
+            RunAtUI
+                (() =>
+                    {
+                        var newPart = e.Participant;
+                        Participants.Add(newPart);
+                        _log.Debug("OnConversationParticipantAdded  {0}", newPart);
+                        ConversationParticipantAddedCore(e.Participant);
+                    }
+                );
+        }
 
-				if (conferenceAccess.AdmissionKey.Length > 0)
-				{
-					MeetingKey.Append(conferenceAccess.AdmissionKey);
-					MeetingKey.Append(System.Environment.NewLine);
-				}
+        protected virtual void ConversationParticipantAddedCore(Participant participant)
+        {
 
-				string[] attendantNumbers = (string[])conferenceAccess.AutoAttendantNumbers;
+        }
 
-				StringBuilder sb2 = new StringBuilder();
-				sb2.Append(System.Environment.NewLine);
-				foreach (string aNumber in attendantNumbers)
-				{
-					sb2.Append("\t\t" + aNumber);
-					sb2.Append(System.Environment.NewLine);
-				}
-				if (sb2.ToString().Trim().Length > 0)
-				{
-					MeetingKey.Append("Auto attendant numbers:" + sb2.ToString());
-					MeetingKey.Append(System.Environment.NewLine);
-				}
+        private void OnConversationParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs e)
+        {
+            RunAtUI
+                (() =>
+                    {
 
-				if (conferenceAccess.ExternalUrl.Length > 0)
-				{
-					MeetingKey.Append("External Url: " + conferenceAccess.ExternalUrl);
-					MeetingKey.Append(System.Environment.NewLine);
-				}
+                        var removePart = Participants.Where(p => p.Equals(e.Participant)).SingleOrDefault();
+                        if (removePart != null)
+                        {
+                            Participants.Remove(removePart);
+                        }
+                        _log.Debug("OnConversationParticipantRemoved  {0}", removePart);
+                    }
+                );
+        }
 
-				if (conferenceAccess.InternalUrl.Length > 0)
-				{
-					MeetingKey.Append("Inner Url: " + conferenceAccess.InternalUrl);
-					MeetingKey.Append(System.Environment.NewLine);
-				}
+        private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
+        {
+            _log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
+        }
 
-				MeetingKey.Append("Meeting access type: " + (
-					(ConferenceAccessType)Conversation.Properties[ConversationProperty.ConferencingAccessType])
-					.ToString());
+        private void OnConversationActionAvailabilityChanged(object sender, ConversationActionAvailabilityEventArgs e)
+        {
+            //posts the execution into the UI thread
+            RunAtUI
+                (() =>
+                    {
+                        //each action is mapped to a button in the UI
+                        switch (e.Action)
+                        {
+                            case ConversationAction.AddParticipant:
+                                IsCanAddParticipant = e.IsAvailable;
+                                break;
 
-				MeetingKey.Append(System.Environment.NewLine);
-				returnValue = MeetingKey.ToString();
-
-			}
-			catch (System.NullReferenceException nr)
-			{
-				System.Diagnostics.Debug.WriteLine(
-					"Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
-			}
-			catch (LyncClientException lce)
-			{
-				System.Diagnostics.Debug.WriteLine(
-					"Exception on ConferenceAccessInformation changed " + lce.Message);
-			}
-			return returnValue;
-		}
+                            case ConversationAction.RemoveParticipant:
+                                IsCanRemoveParticipant = e.IsAvailable;
+                                break;
+                        }
+                        _log.Debug("OnConversationActionAvailabilityChanged  Action: {0}", e.Action.ToString());
+                    }
+            );
+        }
 
 
 
-	}
+        /// <summary>
+        /// Returns the meet-now meeting access key as a string
+        /// </summary>
+        /// <returns></returns>
+        private string CreateConferenceKey()
+        {
+            string returnValue = string.Empty;
+            try
+            {
+
+                //These properties are used to invite people by creating an email (or text message, or IM)
+                //and adding the dial in number, external Url, internal Url, and conference Id
+                ConferenceAccessInformation conferenceAccess =
+                    (ConferenceAccessInformation)Conversation.Properties[ConversationProperty.ConferenceAccessInformation];
+
+                if (conferenceAccess == null)
+                {
+                    if (!Conversation.CanSetProperty(ConversationProperty.ConferenceAccessInformation))
+                    {
+                        return string.Empty;
+                    }
+
+                    //Conversation.BeginSetProperty(
+                    //	ConversationProperty.ConferenceAccessInformation,
+                    //	 new ConferenceAccessInformation() , (ar) =>
+                    //	{
+                    //		Conversation.EndSetProperty(ar);
+                    //	},
+                    //	null);
+                }
+
+                StringBuilder MeetingKey = new StringBuilder();
+
+                if (conferenceAccess.Id.Length > 0)
+                {
+                    MeetingKey.Append("Meeting Id: " + conferenceAccess.Id);
+                    MeetingKey.Append(System.Environment.NewLine);
+                }
+
+                if (conferenceAccess.AdmissionKey.Length > 0)
+                {
+                    MeetingKey.Append(conferenceAccess.AdmissionKey);
+                    MeetingKey.Append(System.Environment.NewLine);
+                }
+
+                string[] attendantNumbers = (string[])conferenceAccess.AutoAttendantNumbers;
+
+                StringBuilder sb2 = new StringBuilder();
+                sb2.Append(System.Environment.NewLine);
+                foreach (string aNumber in attendantNumbers)
+                {
+                    sb2.Append("\t\t" + aNumber);
+                    sb2.Append(System.Environment.NewLine);
+                }
+                if (sb2.ToString().Trim().Length > 0)
+                {
+                    MeetingKey.Append("Auto attendant numbers:" + sb2.ToString());
+                    MeetingKey.Append(System.Environment.NewLine);
+                }
+
+                if (conferenceAccess.ExternalUrl.Length > 0)
+                {
+                    MeetingKey.Append("External Url: " + conferenceAccess.ExternalUrl);
+                    MeetingKey.Append(System.Environment.NewLine);
+                }
+
+                if (conferenceAccess.InternalUrl.Length > 0)
+                {
+                    MeetingKey.Append("Inner Url: " + conferenceAccess.InternalUrl);
+                    MeetingKey.Append(System.Environment.NewLine);
+                }
+
+                MeetingKey.Append("Meeting access type: " + (
+                    (ConferenceAccessType)Conversation.Properties[ConversationProperty.ConferencingAccessType])
+                    .ToString());
+
+                MeetingKey.Append(System.Environment.NewLine);
+                returnValue = MeetingKey.ToString();
+
+            }
+            catch (System.NullReferenceException nr)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    "Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
+            }
+            catch (LyncClientException lce)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    "Exception on ConferenceAccessInformation changed " + lce.Message);
+            }
+            return returnValue;
+        }
+
+
+
+    }
 
 
 
