@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync", "LyncUISupression\Lync.csproj", "{9FB97656-D74F-4EBE-9A98-58FF3492AC93}"
 EndProject
@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\Lync  account.md = Document\Lync  account.md
 		Document\Lync.md = Document\Lync.md
 		SIP.md = SIP.md
+		Document\Skype.md = Document\Skype.md
 		Document\The 6 things you need to know about UI Suppression Mode.md = Document\The 6 things you need to know about UI Suppression Mode.md
 		Document\UCMA.md = Document\UCMA.md
 		Document\UI suppression.md = Document\UI suppression.md
@@ -29,6 +30,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk", "Kiosk\Kiosk.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueOfficeLync", "BlueOfficeLync\BlueOfficeLync.csproj", "{9960A915-A5A8-4C65-98E4-D32CE947B6FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{A7DF4CDC-8AE8-480A-ACD5-BD3D0051494A}"
+	ProjectSection(SolutionItems) = preProject
+		Document\Image\1.png = Document\Image\1.png
+		Document\Image\2.png = Document\Image\2.png
+		Document\Image\3.png = Document\Image\3.png
+		Document\Image\4.png = Document\Image\4.png
+		Document\Image\5.png = Document\Image\5.png
+		Document\Image\6.png = Document\Image\6.png
+		Document\Image\7.png = Document\Image\7.png
+		Document\Image\signin_1.png = Document\Image\signin_1.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,5 +106,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A7DF4CDC-8AE8-480A-ACD5-BD3D0051494A} = {2B50A299-087A-4C1F-8E61-0F405DF4B92A}
 	EndGlobalSection
 EndGlobal
