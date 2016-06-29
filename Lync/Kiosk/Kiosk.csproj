@@ -154,6 +154,7 @@
     <Compile Include="Converters\LyncPresenceColourConverter.cs" />
     <Compile Include="Converters\LyncPresenceTextConverter.cs" />
     <Compile Include="Extensions\ControlExtension.cs" />
+    <Compile Include="Service\BlueOfiiceLyncService.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\IncomingCallViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
