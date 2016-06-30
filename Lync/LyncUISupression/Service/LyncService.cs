@@ -351,7 +351,7 @@ namespace Lync.Service
                         }
                         catch (InvalidOperationException oe)
                         {
-                            System.Diagnostics.Debug.WriteLine("Invalid operation exception on close: " + oe.Message);
+                            _log.Debug("Invalid operation exception on close: " + oe.Message);
                         }
                     }
                     break;

@@ -6,7 +6,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="sipEmailAddress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">sip:li772555190@outlook.com</Value>
+      <Value Profile="(Default)">sip:vickybai@shlinker.com</Value>
     </Setting>
     <Setting Name="LyncAccountDomainUser" Type="System.String" Scope="User">
       <Value Profile="(Default)">o365ms\tonyxia</Value>

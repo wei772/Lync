@@ -31,23 +31,26 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		{
 			_lyncService.ClientStateChanged += OnLyncServiceClientStateChanged;
 
-			_lyncService.Connect(
-				Properties.Settings.Default.LyncAccountEmail
-				, Properties.Settings.Default.LyncAccountPassword
-				,false);
+            _lyncService.Connect(
+                Properties.Settings.Default.LyncAccountEmail
+                , Properties.Settings.Default.LyncAccountPassword
+                , false);
 
-		}
+
+            CurrentVisualState = "NoCall";
+        }
 
 		private void   OnLyncServiceClientStateChanged(string newState)
 		{
-			if (newState == "SignedIn")
-			{
-				CurrentVisualState = "NoCall";
-			}
-			else  if(newState== "SigningIn")
-			{
-				CurrentVisualState = "SigningIn";
-			}
+            CurrentVisualState = "NoCall";
+   //         if (newState == "SignedIn")
+			//{
+			//	CurrentVisualState = "NoCall";
+			//}
+			//else  if(newState== "SigningIn")
+			//{
+			//	CurrentVisualState = "SigningIn";
+			//}
 
 		}
 

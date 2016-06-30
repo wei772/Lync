@@ -37,7 +37,7 @@ namespace SuperSimpleLyncKiosk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("sip:li772555190@outlook.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("sip:vickybai@shlinker.com")]
         public string sipEmailAddress {
             get {
                 return ((string)(this["sipEmailAddress"]));

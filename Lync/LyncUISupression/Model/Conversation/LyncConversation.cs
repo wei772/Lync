@@ -97,54 +97,34 @@ namespace Lync.Model
             Conversation.PropertyChanged += OnConversationPropertyChanged;
 
 
-            HandleAddedCore();
+            HandleAddedInternal();
         }
 
-        protected virtual void HandleAddedCore()
+        protected virtual void HandleAddedInternal()
         {
 
         }
 
 
-        internal void End()
-        {
-            //ends the conversation which will disconnect all modalities
-            try
-            {
-                if (Conversation != null)
-                {
-                    Conversation.End();
-                }
-            }
-            catch (LyncClientException lyncClientException)
-            {
-                _log.ErrorException("Close", lyncClientException);
-            }
-            catch (SystemException systemException)
-            {
-                if (LyncModelExceptionHelper.IsLyncException(systemException))
-                {
-                    // Log the exception thrown by the Lync Model API.
-                    _log.ErrorException("Error: ", systemException);
-                }
-                else
-                {
-                    // Rethrow the SystemException which did not come from the Lync Model API.
-                    throw;
-                }
-            }
-        }
 
         /// <summary>
         /// Ends the conversation if the user closes the window.
         /// </summary>
         public void Close()
         {
+            if (Conversation == null)
+            {
+                return;
+            }
+
+            _log.Debug("Close");
             //need to remove event listeners otherwide events may be received after the form has been unloaded
             Conversation.StateChanged -= OnConversationStateChanged;
             Conversation.ParticipantAdded -= OnConversationParticipantAdded;
             Conversation.ParticipantRemoved -= OnConversationParticipantRemoved;
             Conversation.ActionAvailabilityChanged -= OnConversationActionAvailabilityChanged;
+
+            CloseInternal();
 
             //if the conversation is active, will end it
             if (Conversation.State != ConversationState.Terminated)
@@ -172,6 +152,13 @@ namespace Lync.Model
                     }
                 }
             }
+
+            Conversation = null;
+        }
+
+        protected virtual void CloseInternal()
+        {
+
         }
 
 
@@ -193,13 +180,13 @@ namespace Lync.Model
 
                         var conferenceKey = CreateConferenceKey();
                     }
-                    catch (System.NullReferenceException nr)
+                    catch (NullReferenceException nr)
                     {
-                        System.Diagnostics.Debug.WriteLine("Null ref Eception on ConferenceAccessInformation changed " + nr.Message);
+                        _log.ErrorException("Null ref Eception on ConferenceAccessInformation changed ", nr);
                     }
                     catch (LyncClientException lce)
                     {
-                        System.Diagnostics.Debug.WriteLine("Exception on ConferenceAccessInformation changed " + lce.Message);
+                        _log.ErrorException("Exception on ConferenceAccessInformation changed ", lce);
                     }
                     break;
             }
@@ -215,12 +202,12 @@ namespace Lync.Model
                         var newPart = e.Participant;
                         Participants.Add(newPart);
                         _log.Debug("OnConversationParticipantAdded  {0}", newPart);
-                        ConversationParticipantAddedCore(e.Participant);
+                        ConversationParticipantAddedInternal(e.Participant);
                     }
                 );
         }
 
-        protected virtual void ConversationParticipantAddedCore(Participant participant)
+        protected virtual void ConversationParticipantAddedInternal(Participant participant)
         {
 
         }
@@ -236,9 +223,18 @@ namespace Lync.Model
                         {
                             Participants.Remove(removePart);
                         }
+                        ConversationParticipantRemovedInternal(removePart);
+
                         _log.Debug("OnConversationParticipantRemoved  {0}", removePart);
                     }
                 );
+        }
+
+
+
+        protected virtual void ConversationParticipantRemovedInternal(Participant participant)
+        {
+
         }
 
         private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)

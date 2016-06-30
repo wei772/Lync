@@ -107,17 +107,30 @@ namespace SuperSimpleLyncKiosk.ViewModels
         private void ExecutePlaceCall(object obj)
         {
 
-            var service = new BlueOfficeSkypeService();
-            service.GetSkypeMeeting(GetSkypeMeetingHander);
+            //var service = new BlueOfficeSkypeService();
+            //service.GetSkypeMeeting(GetSkypeMeetingHander);
 
+            //var audio = new AudioConversation();
+            //audio.Init(SipUriOfRealPerson);
+            //audio.CreateConversation();
+
+            var share = new ShareResourceConversation();
+            share.Init(SipUriOfRealPerson);
+            share.CreateConversation();
         }
 
         private void GetSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
         {
-            var audio = new AudioConversation();
-            audio.Init(SipUriOfRealPerson);
-            audio.ExternalId = result.TalkId;
-            ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, audio);
+            //var audio = new AudioConversation();
+            //audio.Init(SipUriOfRealPerson);
+            //audio.ExternalId = result.TalkId;
+
+            
+            var share = new ShareResourceConversation();
+           // share.Init(SipUriOfRealPerson);
+            share.ExternalId = result.TalkId;
+
+            ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
         }
 
         #endregion

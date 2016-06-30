@@ -49,13 +49,18 @@ namespace Lync.Service
 
 		}
 
+        private string GetConferenceUrl(string meetingUrl)
+        {
+            var id = meetingUrl.Split('/').Last();
+
+            return string.Format("sip:tonyxia@o365ms.com;gruu;opaque=app:conf:focus:id:{0}?",id);
+        }
         public void CreateConversationUseExternalUrl(string url, LyncConversation lyncConversation)
         {
-            Process.Start(url);
        
             if (_currentLyncConversation != null)
             {
-                _currentLyncConversation.End();
+                _currentLyncConversation.Close();
             }
             _currentLyncConversation = lyncConversation;
 
@@ -63,8 +68,12 @@ namespace Lync.Service
             ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
             _currentLyncConversation = lyncConversation;
 
-           // var conversation = ConversationManager.JoinConference(url);
-          //  conversation.StateChanged += OnConversationStateChanged;
+            var conferUrl = GetConferenceUrl(url);
+
+            _log.Info("ConferenceUrl:{0}  ExternalUrl:{1}", conferUrl,url);
+
+            var conversation = ConversationManager.JoinConference(conferUrl);
+            conversation.StateChanged += OnConversationStateChanged;
         }
 
 
@@ -72,7 +81,7 @@ namespace Lync.Service
 		{
 			if (_currentLyncConversation != null)
 			{
-				_currentLyncConversation.End();
+				_currentLyncConversation.Close();
 			}
 			_currentLyncConversation = lyncConversation;
 
@@ -96,7 +105,7 @@ namespace Lync.Service
 		{
 			if (_currentLyncConversation != null)
 			{
-				_currentLyncConversation.Conversation = null;
+			//	_currentLyncConversation.Close();
 			}
 		}
 
