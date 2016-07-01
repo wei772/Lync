@@ -31,7 +31,7 @@ namespace Lync.Model
 
 			else if (conversation.Modalities.ContainsKey(ModalityTypes.ContentSharing))
 			{
-				current = new ShareResourceConversation();
+				current = new ApplicationSharingConversation();
 			}
 
 			//show the current conversation and modality states in the UI

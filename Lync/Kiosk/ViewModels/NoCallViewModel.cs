@@ -136,6 +136,21 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		}
 
 
+		private Command _sharePPTCommand;
+
+		public ICommand SharePPTCommand
+		{
+			get
+			{
+				if (this._sharePPTCommand == null)
+					this._sharePPTCommand = new Command { Execute = SharePPT };
+				return this._sharePPTCommand;
+			}
+		}
+
+
+
+
 
 
 
@@ -203,9 +218,23 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		private void ShareResourceSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
 		{
-			var share = new ShareResourceConversation();
+			var share = new ApplicationSharingConversation();
 			share.ExternalId = result.TalkId;
 
+			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+		}
+
+
+		private void SharePPT(object obj)
+		{
+			var service = new BlueOfficeSkypeService();
+			service.GetSkypeMeeting(SharePPTSkypeMeetingHander);
+		}
+
+		private void SharePPTSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		{
+			var share = new ContentSharingConversation();
+			share.ExternalId = result.TalkId;
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
 		}
 	}

@@ -40,12 +40,12 @@ namespace Lync.Model
         internal int _originalPanelHeight;
 
     }
-    public partial class ShareResourceConversation : LyncConversation
+    public partial class ApplicationSharingConversation : LyncConversation
     {
 
         #region class field declarations
 
-        private ILog _log = LogManager.GetLog(typeof(ShareResourceConversation));
+        private ILog _log = LogManager.GetLog(typeof(ApplicationSharingConversation));
 
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Lync.Model
 
         #endregion
 
-        public ShareResourceConversation()
+        public ApplicationSharingConversation()
         {
 
         }
