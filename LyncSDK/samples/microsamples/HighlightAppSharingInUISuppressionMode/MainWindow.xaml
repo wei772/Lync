@@ -1,0 +1,16 @@
+﻿<Window x:Class="HighlightAppSharingInUISuppressionMode.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Highlight AppSharing" Height="350" Width="525" Loaded="Window_Loaded_1">
+    <Grid>
+        <Button x:Name="StartConversationButton" Content="Start Conversation with:" HorizontalAlignment="Left" Margin="37,92,0,0" VerticalAlignment="Top" Width="138" Click="StartConversationButton_Click"/>
+        <Button x:Name="StartSharingButton" Content="Start Sharing" HorizontalAlignment="Left" Margin="37,279,0,0" VerticalAlignment="Top" Width="75" Click="StartSharingButton_Click"/>
+        <Button x:Name="SignInButton" Content="Sign In" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top" Width="75" Click="SignInButton_Click"/>
+        <ListBox x:Name="ShareableResourcesListBox" HorizontalAlignment="Left" Height="100" Margin="37,152,0,0" VerticalAlignment="Top" Width="431"/>
+        <TextBox x:Name="RemoteParticipantUriTextBox" HorizontalAlignment="Left" Height="23" Margin="180,89,0,0" TextWrapping="Wrap" Text="addy@contoso.com" VerticalAlignment="Top" Width="287"/>
+        <Button Content="Stop Sharing" HorizontalAlignment="Left" Margin="145,279,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="37,130,0,0" Name="textBlock1" Text="Shareable Resources:" VerticalAlignment="Top" />
+        <TextBlock x:Name="StatusTextBlock" HorizontalAlignment="Left" Margin="181,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="287"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="126,21,0,0" TextWrapping="Wrap" Text="Status:" VerticalAlignment="Top" Width="49"/>
+    </Grid>
+</Window>

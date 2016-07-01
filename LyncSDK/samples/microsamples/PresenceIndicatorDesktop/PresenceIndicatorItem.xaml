@@ -1,0 +1,31 @@
+﻿<!--=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================-->
+
+<UserControl x:Class="PresenceIndicatorDesktop.PresenceIndicatorItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="88" d:DesignWidth="337" xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Height="64" HorizontalAlignment="Left" Margin="12,12,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="313">
+            <controls:PresenceIndicator Name="presenceIndicator1" PhotoDisplayMode="Large" />
+            <TextBlock Height="23" Name="textBlockDisplayName"  Text="{Binding DisplayName, ElementName=presenceIndicator1}" Margin="4,0,0,0" />
+            <TextBlock Height="23" Name="textBlockAvailabilityState"  Text="{Binding AvailabilityState, ElementName=presenceIndicator1}" Margin="4,0,0,0" />
+            <TextBlock Height="23" Name="textBlockActivityStatus"  Text="{Binding ActivityStatus, ElementName=presenceIndicator1}" Margin="4,0,0,0" />
+        </StackPanel>
+    </Grid>
+</UserControl>

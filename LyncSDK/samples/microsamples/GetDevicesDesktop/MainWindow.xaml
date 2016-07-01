@@ -1,0 +1,41 @@
+﻿<!--/*=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================*/-->
+<Window x:Class="Devices_Scenarios.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sample for Lync Device related APIs" Height="416" Width="624" Loaded="Window_Loaded" ResizeMode="CanMinimize">
+    <Grid Height="379" Width="602">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="182*" />
+            <RowDefinition Height="238*" />
+        </Grid.RowDefinitions>
+        <ListBox Height="101" HorizontalAlignment="Left" Margin="165,126,0,0" Name="listBoxDevices" VerticalAlignment="Top" Width="341" DataContext="{Binding}" ItemsSource="{Binding}" Grid.RowSpan="2" />
+        <Label Content="Active Audio Device" HorizontalAlignment="Left" Margin="22,20,0,117" Name="labelActiveDevice" Width="127" FontWeight="Bold" />
+        <TextBlock Height="21" HorizontalAlignment="Left" Margin="165,26,0,0" Name="textBlockActiveAudioDevice" Text="" VerticalAlignment="Top" Width="341" />
+        <Label Content="Available Devices" Height="27" HorizontalAlignment="Left" Margin="22,119,0,0" Name="labelDevices" VerticalAlignment="Top" Width="127" FontWeight="Bold" />
+        <Button Content="Set as Active Device" Height="26" HorizontalAlignment="Left" Margin="165,69,0,0" Name="buttonSetActiveDevice" VerticalAlignment="Top" Width="140" Click="buttonSetActiveDevice_Click" Grid.Row="1" />
+        <TextBlock Height="49" HorizontalAlignment="Left" Margin="165,155,0,0" Name="textBlockLog" Text="" VerticalAlignment="Top" Width="425" Grid.Row="1" />
+        <Label Content="Debug Output" Height="27" HorizontalAlignment="Left" Margin="25,149,0,0" Name="labelLog" VerticalAlignment="Top" Width="116" FontWeight="Bold" Grid.Row="1" />
+        <Button Content="Play Audio File" Height="26" HorizontalAlignment="Left" Margin="22,118,0,0" Name="buttonPlayAudioFile" VerticalAlignment="Top" Width="100" Click="buttonPlayAudioFile_Click" Grid.Row="1" />
+        <TextBox Height="24" HorizontalAlignment="Left" Margin="165,119,0,0" Name="textBoxAudioFilePath" VerticalAlignment="Top" Width="341" Grid.Row="1" />
+        <Button Content="Refresh" Height="26" HorizontalAlignment="Left" Margin="366,69,0,0" Name="buttonRefresh" VerticalAlignment="Top" Width="140" Click="buttonRefresh_Click" Grid.Row="1" />
+        <Label Content="Active Video Device" FontWeight="Bold" Height="27" HorizontalAlignment="Left" Margin="23,42,0,0" Name="labelActiveVideoDevice" VerticalAlignment="Top" Width="127" />
+        <TextBlock Height="21" HorizontalAlignment="Left" Margin="165,48,0,0" Name="textBlockActiveVideoDevice" Text="" VerticalAlignment="Top" Width="341" />
+        <StackPanel Height="19" HorizontalAlignment="Left" Margin="165,101,0,0" Name="stackPanelAudioOrVideo" VerticalAlignment="Top" Width="341" Orientation="Horizontal">
+            <RadioButton Content="Audio Devices" Height="24" Name="radioButtonAudio" Width="117" IsChecked="True" Checked="buttonRefresh_Click" />
+            <RadioButton Content="Video Devices" Height="24" Name="radioButtonVideo" Width="117" Checked="buttonRefresh_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

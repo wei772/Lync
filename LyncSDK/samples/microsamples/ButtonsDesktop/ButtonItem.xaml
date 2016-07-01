@@ -1,0 +1,35 @@
+﻿<!--====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================-->
+
+<UserControl x:Class="ButtonsDesktop.ButtonItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls">
+    <Grid>
+        <StackPanel Orientation="Horizontal" Height="87" HorizontalAlignment="Left" Margin="12,12,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="276">
+            <controls:StartInstantMessagingButton Name="startInstantMessagingButton1" />
+            <controls:StartAudioCallButton Name="startAudioCallButton1" />
+            <controls:StartVideoCallButton Name="startVideoCallButton1" />
+            <controls:ShareDesktopButton Name="shareDesktopButton1" />
+            <controls:SendFileButton Name="sendFileButton1" />
+            <controls:SendEmailButton Name="sendEmailButton1" />
+            <controls:ScheduleMeetingButton Name="scheduleMeetingButton1" />
+            <TextBlock Height="23" Name="textBlockName" Text="" />
+        </StackPanel>
+    </Grid>
+</UserControl>

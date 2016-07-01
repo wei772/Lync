@@ -1,0 +1,56 @@
+﻿<!--/*=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================*/-->
+<Window x:Class="AddRemoveContacts.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:custom="clr-namespace:AddRemoveContacts"
+        Title="Add Custom Group" Height="350" Width="425" Loaded="Window_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="ContactInfoTemplate" DataType="AddRemoveContacts.ContactInfo">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Path=DisplayName}" Margin="3"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Contact Sip Uri:" Margin="4"/>
+            <TextBox Grid.Column="1" x:Name="ContactSipUriTextBox" Margin="4"/>
+            <Button Grid.Column="2" x:Name="AddContactButton" Content="Add" Width="60" Margin="4" Click="AddContactButton_Click" />
+            <Button Grid.Column="3" x:Name="RemoveContactButton" Content="Remove" Width="60" Margin="4" Click="RemoveContactButton_Click" />
+        </Grid>
+        <TextBlock Grid.Row="2" Text="Other Contacts Group:"/>
+        <ListBox Grid.Row="3"  x:Name="otherContactsListBox" Margin="4" ItemsSource="{Binding Path=OtherContacts}" ItemTemplate="{StaticResource ContactInfoTemplate}"  VerticalAlignment="Stretch" SelectionChanged="otherContactsListBox_SelectionChanged" />
+    </Grid>
+</Window>

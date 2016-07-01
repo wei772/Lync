@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactCardDesktop", "ContactCardDesktop.csproj", "{6C72139C-92A4-45FD-BBC9-7BB42F417247}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C72139C-92A4-45FD-BBC9-7BB42F417247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C72139C-92A4-45FD-BBC9-7BB42F417247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C72139C-92A4-45FD-BBC9-7BB42F417247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C72139C-92A4-45FD-BBC9-7BB42F417247}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

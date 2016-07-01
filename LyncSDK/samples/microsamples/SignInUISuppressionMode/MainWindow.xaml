@@ -1,0 +1,22 @@
+﻿<Window x:Class="SignInOut.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sign In/Out Demo" Height="402" Width="328" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,0,0,0" Name="textBlock1" Text="Sign-in Address:" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,17,0,0" Name="signInAddressTextBox" VerticalAlignment="Top" Width="282" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,46,0,0" Text="Username:" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="12,62,0,0" Name="usernameTextBox" VerticalAlignment="Top" Width="282" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,91,0,0" Name="textBlock2" Text="Password:" VerticalAlignment="Top" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,143,0,0" Name="textBlock3" Text="UI Suppression: " VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="133,143,0,0" Name="isInUISuppressionModeTextBlock" Text="false" Height="23" VerticalAlignment="Top" />
+        <Button Content="Sign In" Height="23" HorizontalAlignment="Left" Margin="12,197,0,0" Name="signInButton" VerticalAlignment="Top" Width="112" Click="signInButton_Click" />
+        <Button Content="Sign Out" Height="23" HorizontalAlignment="Left" Margin="148,197,0,0" Name="signOutButton" VerticalAlignment="Top" Width="75" Click="signOutButton_Click" />
+        <TextBox Height="112" HorizontalAlignment="Left" Margin="12,239,0,0" Name="logTextBox" VerticalAlignment="Top" Width="282" VerticalScrollBarVisibility="Auto" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="20,168,0,0" Name="textBlock4" Text="Lync client state:" VerticalAlignment="Top" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="133,168,0,0" Name="isLyncSignedInTextBlock" Text="error" VerticalAlignment="Top" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="12,106,0,0" Name="passwordBox" VerticalAlignment="Top" Width="282" />
+        <Button Content="initialize" Height="23" HorizontalAlignment="Left" Margin="219,139,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+        <Button Content="shutdown" Height="23" HorizontalAlignment="Left" Margin="219,168,0,0" Name="button2" VerticalAlignment="Top" Width="75" Click="button2_Click" />
+    </Grid>
+</Window>

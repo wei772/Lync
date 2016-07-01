@@ -1,0 +1,30 @@
+<!--=====================================================================
+This file is part of the Microsoft Unified Communications Code Samples.
+
+Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================-->
+    
+<UserControl x:Class="MyStatusAreaSilverlight.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480" Loaded="UserControl_Loaded">
+    <Grid x:Name="LayoutRoot">
+        <controls:MyStatusArea HorizontalAlignment="Left" Margin="12,12,0,0" Name="myStatusArea1" VerticalAlignment="Top" Height="86" Width="227" />
+        <StackPanel Height="71" HorizontalAlignment="Left" Margin="18,182,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="438">
+            <TextBlock Height="23" Name="textBlockDisplayName" Text="{Binding DisplayName, ElementName=myStatusArea1}" />
+            <TextBlock Height="23" Name="textBlockAvailabilityStatus" Text="{Binding AvailabilityState, ElementName=myStatusArea1}" />
+            <TextBlock Height="23" Name="textBlockNote" Text="{Binding PersonalNote, ElementName=myStatusArea1}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

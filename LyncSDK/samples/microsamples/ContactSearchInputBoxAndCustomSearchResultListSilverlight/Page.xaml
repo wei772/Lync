@@ -1,0 +1,26 @@
+<!--=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================-->
+    
+<UserControl x:Class="ContactSearchInputBoxAndContactSearchResultListSilverlight.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="clr-namespace:Microsoft.Lync.Controls;assembly=Microsoft.Lync.Controls" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480" Loaded="UserControl_Loaded">
+    <Grid x:Name="LayoutRoot">
+        <controls:ContactSearchResultList Height="297" HorizontalAlignment="Left" Margin="24,75,0,0" Name="contactSearchResultList1" VerticalAlignment="Top" Width="522" />
+        <controls:ContactSearchInputBox HorizontalAlignment="Left" Margin="12,12,0,0" Name="contactSearchInputBox1" VerticalAlignment="Top" Width="534" />
+    </Grid>
+</UserControl>

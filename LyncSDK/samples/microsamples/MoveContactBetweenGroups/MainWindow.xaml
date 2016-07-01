@@ -1,0 +1,58 @@
+﻿<!--/*=====================================================================
+  This file is part of the Microsoft Unified Communications Code Samples.
+
+  Copyright (C) 2012 Microsoft Corporation.  All rights reserved.
+
+This source code is intended only as a supplement to Microsoft
+Development Tools and/or on-line documentation.  See these other
+materials for detailed information regarding Microsoft code samples.
+
+THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+PARTICULAR PURPOSE.
+=====================================================================*/-->
+<Window x:Class="MoveContactBetweenGroups.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:custom="clr-namespace:MoveContactBetweenGroups"
+        Title="Move Contacts" Height="350" Width="525" Loaded="Window_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="ContactInfoTemplate" DataType="MoveContactBetweenGroups.ContactInfo">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Path=DisplayName}" Margin="3" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="GroupInfoTemplate" DataType="MoveContactBetweenGroups.GroupInfo">
+                <TextBlock Text="{Binding Path=Name}" Margin="3" />
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Text="Move contacts between custom groups." Margin="4"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Select a source group:" Margin="4"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Select a target group:" Margin="4"/>
+        <ComboBox Grid.Row="2" Grid.Column="0" x:Name="groupComboBox1" Margin="4" ItemsSource="{Binding Path=LeftGroupList}" SelectedItem="{Binding Path=LeftCurrentGroup}" ItemTemplate="{StaticResource GroupInfoTemplate}" SelectionChanged="groupComboBox1_SelectionChanged" />
+        <ComboBox Grid.Row="2" Grid.Column="2" x:Name="groupComboBox2" Margin="4" ItemsSource="{Binding Path=RightGroupList}" SelectedItem="{Binding Path=RightCurrentGroup}" ItemTemplate="{StaticResource GroupInfoTemplate}" SelectionChanged="groupComboBox2_SelectionChanged" />
+        <ListBox Grid.Row="3" Grid.Column="0" x:Name="contactListBox1" Margin="4" ItemsSource="{Binding ElementName=groupComboBox1, Path=SelectedItem.Contacts}" ItemTemplate="{StaticResource ContactInfoTemplate}"  VerticalAlignment="Stretch" AllowDrop="True" SelectionChanged="LeftContactsListBox_SelectionChanged" />
+        <ListBox Grid.Row="3" Grid.Column="2" x:Name="contactListBox2" Margin="4" ItemsSource="{Binding ElementName=groupComboBox2, Path=SelectedItem.Contacts}" ItemTemplate="{StaticResource ContactInfoTemplate}"  VerticalAlignment="Stretch" AllowDrop="True" />
+        <Button Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="==&gt;" Height="23" HorizontalAlignment="Left" Margin="4" Name="moveToRightButton" IsEnabled="{Binding Path=IsMoveButtonEnabled}" Width="75" Click="moveToRightButton_Click" />
+    </Grid>
+</Window>
