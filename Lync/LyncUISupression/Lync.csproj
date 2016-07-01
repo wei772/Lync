@@ -106,11 +106,10 @@
     <Compile Include="Enum\VideoDirection.cs" />
     <Compile Include="EventArg\VideoAvailabilityChangedEventArgs.cs" />
     <Compile Include="LyncModelExceptionHelper.cs" />
-    <Compile Include="Model\Conversation\AudioConversation.cs" />
+    <Compile Include="Model\Conversation\VideoAudioConversation.cs" />
     <Compile Include="Model\Conversation\ConversationFactory.cs" />
     <Compile Include="Model\Conversation\LyncConversation.cs" />
     <Compile Include="Model\Conversation\ShareResourceConversation.cs" />
-    <Compile Include="Model\Conversation\VideoAudioConversation.cs" />
     <Compile Include="Model\LyncVideoWindow.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

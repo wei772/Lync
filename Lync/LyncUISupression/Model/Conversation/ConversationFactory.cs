@@ -25,7 +25,7 @@ namespace Lync.Model
 				}
 				else
 				{
-					current = new AudioConversation();
+					current = new VideoAudioConversation();
 				}
 			}
 

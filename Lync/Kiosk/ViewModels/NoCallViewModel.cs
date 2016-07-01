@@ -27,7 +27,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
 
-		private AudioConversation _audioConversation;
+		private VideoAudioConversation _audioConversation;
 
         #endregion
 
@@ -154,7 +154,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			//audio.ExternalId = result.TalkId;
 
 
-			var share = new AudioConversation();
+			var share = new VideoAudioConversation();
 			// share.Init(SipUriOfRealPerson);
 			share.ExternalId = result.TalkId;
 
