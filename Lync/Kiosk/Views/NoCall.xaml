@@ -57,40 +57,19 @@
 					VerticalAlignment="Top"
 					>
 					
+				
 					<Button 
-						Command="{Binding Path=PlaceCallCommand}" Margin="10,0">
-						<Button.Template>
-							<ControlTemplate>
-								<Grid Cursor="Hand">
-									<StackPanel Orientation="Horizontal" Margin="10,2">
-										<Grid>
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="Auto" />
-												<ColumnDefinition Width="*" />
-											</Grid.ColumnDefinitions>
+						Content="StartAudio"
+						Height="36"
+						Command="{Binding StartAudioCommand}"
+						/>
 
-											<Image Grid.Column="0" Source="/SuperSimpleLyncKioskUISuppressed;component/Images/phone.png" Height="48" Width="48" />
-
-											<TextBlock Grid.Column="1" FontFamily="Segoe UI" FontWeight="Light" FontSize="48" Margin="10,0,0,10" Foreground="#333333">Start a video call</TextBlock>
-										</Grid>
-									</StackPanel>
-									<Rectangle Grid.Row="1" Grid.Column="1" Fill="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-										<Rectangle.Style>
-											<Style TargetType="Rectangle">
-												<Setter Property="Opacity" Value="0.1"/>
-												<Style.Triggers>
-													<Trigger Property="IsMouseOver" Value="True">
-														<Setter Property="Opacity" Value="0.2"/>
-													</Trigger>
-												</Style.Triggers>
-											</Style>
-										</Rectangle.Style>
-									</Rectangle>
-								</Grid>
-							</ControlTemplate>
-						</Button.Template>
-					</Button>
-
+					<Button 
+						Content="StartVideo"
+						Height="36"
+						Command="{Binding StartVideoCommand}"
+						/>
+					
 					<Button 
 						Content="ShareResource"
 						Height="36"

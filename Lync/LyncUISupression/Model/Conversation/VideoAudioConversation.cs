@@ -457,8 +457,14 @@ namespace Lync.Model
 			((AVModality)participant.Modalities[ModalityTypes.AudioVideo]).ActionAvailabilityChanged += OnParticipantAudioActionAvailabilityChanged;
 			if (!participant.IsSelf)
 			{
-				StartVideo();
-				//ConnectAudio();
+				if (Type == ConversationType.Audio)
+				{
+					ConnectAudio();
+				}
+				else
+				{
+					StartVideo();
+				}
 			}
 
 		}

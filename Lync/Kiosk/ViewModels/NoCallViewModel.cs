@@ -15,6 +15,7 @@ using Lync;
 using Lync.Service;
 using Lync.Model;
 using BlueOfficeSkype.Service;
+using Lync.Enum;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
@@ -95,17 +96,32 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		#region Commands
 
 
-		private Command _placeCallCommand;
+		private Command _startAudioCommand;
 
-		public ICommand PlaceCallCommand
-        {
+		public ICommand StartAudioCommand
+		{
             get
             {
-                if (this._placeCallCommand == null)
-                    this._placeCallCommand = new Command { Execute = ExecutePlaceCall };
-                return this._placeCallCommand;
+                if (this._startAudioCommand == null)
+                    this._startAudioCommand = new Command { Execute = StartAudio };
+                return this._startAudioCommand;
             }
         }
+
+
+		private Command _startVideoCommand;
+
+		public ICommand StartVideoCommand
+		{
+			get
+			{
+				if (this._startVideoCommand == null)
+					this._startVideoCommand = new Command { Execute = StartVideo };
+				return this._startVideoCommand;
+			}
+		}
+
+
 
 		private Command _shareResourceCommand;
 
@@ -132,11 +148,11 @@ namespace SuperSimpleLyncKiosk.ViewModels
         }
 
 
-		private void ExecutePlaceCall(object obj)
+		private void StartAudio(object obj)
 		{
 
 			var service = new BlueOfficeSkypeService();
-			service.GetSkypeMeeting(ExecutePlaceCallSkypeMeetingHander);
+			service.GetSkypeMeeting(StartAudioSkypeMeetingHander);
 
 			//var audio = new AudioConversation();
 			//audio.Init(SipUriOfRealPerson);
@@ -147,7 +163,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			//share.CreateConversation();
 		}
 
-		private void ExecutePlaceCallSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		private void StartAudioSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
 		{
 			//var audio = new AudioConversation();
 			//audio.Init(SipUriOfRealPerson);
@@ -155,12 +171,29 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 
 			var share = new VideoAudioConversation();
+			share.Type = ConversationType.Audio;
 			// share.Init(SipUriOfRealPerson);
 			share.ExternalId = result.TalkId;
 
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
 		}
 
+
+		private void StartVideo(object obj)
+		{
+			var service = new BlueOfficeSkypeService();
+			service.GetSkypeMeeting(StartVideoSkypeMeetingHander);
+		}
+
+		private void StartVideoSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		{
+			var share = new VideoAudioConversation();
+			share.Type = ConversationType.Video;
+			// share.Init(SipUriOfRealPerson);
+			share.ExternalId = result.TalkId;
+
+			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+		}
 
 		private void ShareResource(object  obj)
 		{
