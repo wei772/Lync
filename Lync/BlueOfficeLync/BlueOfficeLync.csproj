@@ -114,6 +114,9 @@
     <Compile Include="View\Conversation\VideoConversationView.xaml.cs">
       <DependentUpon>VideoConversationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\VideoParticipantView.xaml.cs">
+      <DependentUpon>VideoParticipantView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ParticipantView.xaml.cs">
       <DependentUpon>ParticipantView.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Conversation\VideoConversationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VideoParticipantView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

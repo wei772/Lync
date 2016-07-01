@@ -9,129 +9,140 @@
 using Lync.Enum;
 using Lync.EventArg;
 using Lync.Model;
+using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LyncUI.Control
+namespace Lync.Control
 {
-    public partial class VideoWindowHost : UserControl
-    {
+	public partial class VideoWindowHost : UserControl
+	{
+
+		#region Properties
+
+		public static DependencyProperty PlayingProperty = DependencyProperty.Register("Playing", typeof(bool), typeof(VideoWindowHost), new PropertyMetadata(OnPlayingPropertyChanged));
+		public bool Playing
+		{
+			get { return (bool)GetValue(PlayingProperty); }
+			set { SetValue(PlayingProperty, value); }
+		}
+
+		public static DependencyProperty VideoWindowProperty = DependencyProperty.Register("VideoWindowFeed", typeof(VideoWindow), typeof(VideoWindowHost), new PropertyMetadata(OnVideoWindowPropertyChanged));
+		public VideoWindow VideoWindowFeed
+		{
+			get { return (VideoWindow)GetValue(VideoWindowProperty); }
+			set { SetValue(VideoWindowProperty, value); }
+		}
+
+		public static DependencyProperty DirectionProperty = DependencyProperty.Register("Direction", typeof(VideoDirection), typeof(VideoWindowHost), new PropertyMetadata());
+		public VideoDirection Direction
+		{
+			get { return (VideoDirection)GetValue(DirectionProperty); }
+			set
+			{
+				SetValue(DirectionProperty, value);
+			}
+		}
 
 
-        #region Properties
+		public static DependencyProperty VideoHeightProperty = DependencyProperty.Register("VideoHeight", typeof(int), typeof(VideoWindowHost), new PropertyMetadata());
+		public int VideoHeight
+		{
+			get { return (int)GetValue(VideoHeightProperty); }
+			set
+			{
+				SetValue(VideoHeightProperty, value);
+			}
+		}
 
-        public static DependencyProperty PlayingProperty = DependencyProperty.Register("Playing", typeof(bool), typeof(VideoWindowHost), new PropertyMetadata(OnPlayingPropertyChanged));
-        public bool Playing
-        {
-            get { return (bool)GetValue(PlayingProperty); }
-            set { SetValue(PlayingProperty, value); }
-        }
 
-        public static DependencyProperty VideoWindowProperty = DependencyProperty.Register("VideoWindowFeed", typeof(LyncVideoWindow), typeof(VideoWindowHost), new PropertyMetadata(OnVideoWindowPropertyChanged));
-        public LyncVideoWindow VideoWindowFeed
-        {
-            get { return (LyncVideoWindow)GetValue(VideoWindowProperty); }
-            set { SetValue(VideoWindowProperty, value); }
-        }
+		public static DependencyProperty VideoWidthProperty = DependencyProperty.Register("VideoWidth", typeof(int), typeof(VideoWindowHost), new PropertyMetadata());
+		public int VideoWidth
+		{
+			get { return (int)GetValue(VideoWidthProperty); }
+			set
+			{
+				SetValue(VideoWidthProperty, value);
+			}
+		}
 
-        public static DependencyProperty DirectionProperty = DependencyProperty.Register("Direction", typeof(VideoDirection), typeof(VideoWindowHost), new PropertyMetadata());
-        public VideoDirection Direction
-        {
-            get { return (VideoDirection)GetValue(DirectionProperty); }
-            set
-            {
-                SetValue(DirectionProperty, value);
-            }
-        }
+		#endregion
 
-        #endregion
+		#region Constructor
 
-        #region Constructor
+		public VideoWindowHost()
+		{
+			InitializeComponent();
 
-        public VideoWindowHost()
-        {
-            InitializeComponent();
 
-            VisualStateManager.GoToElementState(grdControl, Idle.Name, true);
+		}
 
-        }
+		#endregion
 
-        #endregion
+		#region Event callbacks
 
-        #region Event callbacks
+		void model_VideoAvailabilityChanged(object sender, VideoAvailabilityChangedEventArgs e)
+		{
+			SetVideoControlProperties(e);
+		}
 
-        void model_VideoAvailabilityChanged(object sender, VideoAvailabilityChangedEventArgs e)
-        {
-            SetVideoControlProperties(e);
-        }
+		#endregion
 
-        #endregion
+		#region UI Events
 
-        #region UI Events
+		private void videoPanel_Layout(object sender, System.Windows.Forms.LayoutEventArgs e)
+		{
+			if (VideoWindowFeed != null && Playing)
+				VideoWindowFeed.SetWindowPosition(0, 0, VideoWidth, VideoHeight);
+		}
 
-        private void videoPanel_Layout(object sender, System.Windows.Forms.LayoutEventArgs e)
-        {
-            if (VideoWindowFeed != null && Playing)
-                VideoWindowFeed.SetWindowPosition(0, 0, videoPanel.Width, videoPanel.Height);
-        }
+		#endregion
 
-        #endregion
+		#region Property setter callbacks
 
-        #region Property setter callbacks
+		private static void OnPlayingPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
+		{
+			var thisControl = (VideoWindowHost)sender;
+			var isPlaying = (bool)args.NewValue;
 
-        private static void OnPlayingPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
-        {
-            var thisControl = (VideoWindowHost)sender;
-            var isPlaying = (bool)args.NewValue;
-            string stateName = GetStateName(thisControl, isPlaying);
+		}
 
-            VisualStateManager.GoToElementState(thisControl.grdControl, stateName, true);
-        }
+		private static void OnVideoWindowPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
+		{
+			var thisControl = (VideoWindowHost)sender;
+			var videoWindow = (VideoWindow)args.NewValue;
 
-        private static void OnVideoWindowPropertyChanged(object sender, DependencyPropertyChangedEventArgs args)
-        {
-            var thisControl = (VideoWindowHost)sender;
-            var videoWindow = (LyncVideoWindow)args.NewValue;
+			if (videoWindow != null)
+			{
+				videoWindow.Owner = thisControl.videoPanel.Handle.ToInt32();
+				thisControl.videoPanel.Width = thisControl.VideoWidth;
+				thisControl.videoPanel.Height = thisControl.VideoHeight;
+				videoWindow.SetWindowPosition(0, 0, thisControl.VideoWidth, thisControl.VideoHeight);
+			}
+		}
 
-            if (videoWindow != null)
-            {
-                videoWindow.Owner = thisControl.videoPanel.Handle.ToInt32();
-                videoWindow.SetWindowPosition(0, 0, thisControl.videoPanel.Width, thisControl.videoPanel.Height);
-            }
-        }
+		#endregion
 
-        #endregion
+		#region Private Methods
 
-        #region Private Methods
 
-        private static string GetStateName(VideoWindowHost window, bool isPlaying)
-        {
-            if (isPlaying)
-            {
-                return window.PlayingVideo.Name;
-            }
-            else
-            {
-                return window.Idle.Name;
-            }
-        }
 
-        private void SetVideoControlProperties(VideoAvailabilityChangedEventArgs e)
-        {
-            Dispatcher.Invoke((Action)delegate()
-            {
-                if (e.Direction == Direction)
-                {
-                    Playing = e.IsAvailable;
-                    VideoWindowFeed = e.IsAvailable ? e.VideoWindow : null;
-                }
-            }
-            );
-        }
+		private void SetVideoControlProperties(VideoAvailabilityChangedEventArgs e)
+		{
+			Dispatcher.Invoke((Action)delegate ()
+			{
+				if (e.Direction == Direction)
+				{
+					Playing = e.IsAvailable;
+					VideoWindowFeed = e.IsAvailable ? e.VideoWindow : null;
+				}
+			}
+			);
+		}
 
-     
 
-        #endregion
-    }
+
+		#endregion
+	}
 }

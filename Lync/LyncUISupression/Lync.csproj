@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lync</RootNamespace>
-    <AssemblyName>LyncUISupression</AssemblyName>
+    <AssemblyName>Lync</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -111,8 +111,8 @@
     <Compile Include="Model\Conversation\ConversationFactory.cs" />
     <Compile Include="Model\Conversation\LyncConversation.cs" />
     <Compile Include="Model\Conversation\ApplicationSharingConversation.cs" />
-    <Compile Include="Model\LyncVideoWindow.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="Model\ParticipantVideoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ContactService.cs" />
     <Compile Include="Service\ConversationService.cs" />

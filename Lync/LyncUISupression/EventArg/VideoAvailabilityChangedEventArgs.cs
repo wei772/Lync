@@ -8,6 +8,7 @@
 
 using Lync.Enum;
 using Lync.Model;
+using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 
 namespace Lync.EventArg
@@ -16,10 +17,10 @@ namespace Lync.EventArg
     {
         public VideoDirection Direction { get; private set; }
         public bool IsAvailable { get; private set; }
-        public LyncVideoWindow VideoWindow { get; private set; }        
+        public VideoWindow VideoWindow { get; private set; }        
 
         private VideoAvailabilityChangedEventArgs() { }
-        internal VideoAvailabilityChangedEventArgs(LyncVideoWindow videoWindow, VideoDirection direction, bool isAvailable)
+        internal VideoAvailabilityChangedEventArgs(VideoWindow videoWindow, VideoDirection direction, bool isAvailable)
         {
             VideoWindow = videoWindow;
             Direction = direction;

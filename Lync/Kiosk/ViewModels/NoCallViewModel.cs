@@ -16,6 +16,8 @@ using Lync.Service;
 using Lync.Model;
 using BlueOfficeSkype.Service;
 using Lync.Enum;
+using BlueOfficeSkype.View;
+using System.Windows;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
@@ -208,6 +210,12 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			share.ExternalId = result.TalkId;
 
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+
+			var videoView = new VideoConversationView();
+			videoView.OnNavigateTo(share);
+			var window = new Window();
+			window.Content = videoView;
+			window.Show();
 		}
 
 		private void ShareResource(object  obj)

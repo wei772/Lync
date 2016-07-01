@@ -16,24 +16,17 @@ using System.Windows.Shapes;
 namespace BlueOfficeSkype.View
 {
 	/// <summary>
-	/// Interaction logic for VideoConversation.xaml
+	/// Interaction logic for ParticipantView.xaml
 	/// </summary>
-	public partial class VideoConversationView : UserControl
+	public partial class VideoParticipantView : UserControl
 	{
-		public VideoConversationViewModel ViewModel { get; set; }
 
-
-		public VideoConversationView()
+		public VideoParticipantView()
 		{
 			InitializeComponent();
 		}
 
-		public void OnNavigateTo(object args)
-		{
-			ViewModel = new VideoConversationViewModel();
-			DataContext = ViewModel;
-			ViewModel.OnNavigateTo(args);
-		}
+
 
 	}
 }

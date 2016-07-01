@@ -4,6 +4,7 @@ using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -22,6 +23,27 @@ namespace Lync.Model
 		private VideoChannel _videoChannel;
 
 		private AVModality _avModality;
+
+
+		private ObservableCollection<ParticipantVideoModel> _participantVideoModels = new ObservableCollection<ParticipantVideoModel>();
+
+		public ObservableCollection<ParticipantVideoModel> ParticipantVideoModels
+		{
+			get
+			{
+				return _participantVideoModels;
+			}
+			set
+			{
+				Set("ParticipantVideoModels", ref _participantVideoModels, value);
+			}
+		}
+
+		/// <summary>
+		/// The Application sharing modality of the local participant.
+		/// </summary>
+		ParticipantVideoModel _localParticipantVideoModel;
+
 
 		public VideoAudioConversation()
 		{
@@ -236,7 +258,6 @@ namespace Lync.Model
 						//even though the Action IsAvailable is set to true *AND* CanInvoke is true, sometimes the channel isn't ready. There's no good
 						//way of knowing when it'll become ready, and if you try and call it when it isn't ready, it won't error. However, the call back (videoChannelEndStart
 						//in this case) never gets hit. The only thing I can think of in this situation is to wait..
-						System.Threading.Thread.Sleep(2000);
 
 						audioChannel.BeginStart(OnAudioChannelEndStart, audioChannel);
 
@@ -290,6 +311,8 @@ namespace Lync.Model
 			   // The window will be available when the video channel state is either Receive or SendReceive.
 			   //
 			   //*****************************************************************************************
+
+			   _log.Debug("OnVideoChannelStateChanged  OldState:{0} NewState:{1}", e.OldState.ToString(), e.NewState.ToString());
 
 			   //if the outgoing video is now active, show the video (which is only available in UI Suppression Mode)
 			   if ((e.NewState == ChannelState.Send
@@ -389,7 +412,7 @@ namespace Lync.Model
 		/// <summary>
 		/// Starts the video channel: VideoChannel.BeginStart()
 		/// </summary>
-		private void   StartVideo()
+		private void StartVideo()
 		{
 			_log.Debug("StartVideo");
 
@@ -408,7 +431,7 @@ namespace Lync.Model
 				if (LyncModelExceptionHelper.IsLyncException(systemException))
 				{
 					// Log the exception thrown by the Lync Model API.
-					_log.ErrorException("Error: " ,systemException);
+					_log.ErrorException("Error: ", systemException);
 				}
 				else
 				{
@@ -421,7 +444,7 @@ namespace Lync.Model
 		/// <summary>
 		/// Starts the video channel: VideoChannel.BeginStop()
 		/// </summary>
-		private void   StopVideo()
+		private void StopVideo()
 		{
 			//removes video from the conversation
 			AsyncCallback callback = new AsyncOperationHandler(_videoChannel.EndStop).Callback;
@@ -451,12 +474,47 @@ namespace Lync.Model
 		#endregion
 
 
+		#region Participant
 
 		protected override void ConversationParticipantAddedInternal(Participant participant)
 		{
-			((AVModality)participant.Modalities[ModalityTypes.AudioVideo]).ActionAvailabilityChanged += OnParticipantAudioActionAvailabilityChanged;
-			if (!participant.IsSelf)
+
+			if (participant.IsSelf)
 			{
+
+				var localpPartAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+
+				_localParticipantVideoModel = new ParticipantVideoModel()
+				{
+					Modality = localpPartAVModality
+					,
+					Id = participant.Contact.Uri
+				};
+
+			}
+
+			else
+			{
+				var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+				partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
+				partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
+
+				var partVideoChannel = partAVModality.VideoChannel;
+				partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
+
+				var partModel = new ParticipantVideoModel()
+				{
+					Modality = partAVModality
+					,
+					Id = participant.Contact.Uri
+					,VideoChannel=partVideoChannel
+				};
+
+
+				ParticipantVideoModels.Add(partModel);
+
+
+
 				if (Type == ConversationType.Audio)
 				{
 					ConnectAudio();
@@ -469,9 +527,57 @@ namespace Lync.Model
 
 		}
 
-		private void OnParticipantAudioActionAvailabilityChanged(object sender, ModalityActionAvailabilityChangedEventArgs e)
+		protected override void ConversationParticipantRemovedInternal(Participant participant)
+		{
+
+			var model = ParticipantVideoModels.Where(p => p.Id == participant.Contact.Uri).SingleOrDefault();
+			//get the application sharing modality of the removed participant out of the class modalty dicitonary
+			AVModality removedModality = model.Modality;
+
+			//Un-register for modality events on this participant's application sharing modality.
+			removedModality.ActionAvailabilityChanged -= OnParticipantActionAvailabilityChanged;
+			removedModality.ModalityStateChanged -= OnParticipantModalityStateChanged;
+
+			//Remove the modality from the dictionary.
+			ParticipantVideoModels.Remove(model);
+		}
+
+
+		private void OnParticipantVideoChannelStateChanged(object sender, ChannelStateChangedEventArgs e)
+		{
+			//posts the execution into the UI thread
+			RunAtUI(() =>
+			{
+				_log.Debug("OnParticipantVideoChannelStateChanged  OldState:{0} NewState:{1}", e.OldState.ToString(), e.NewState.ToString());
+
+				var channel = sender as VideoChannel;
+
+				//if the outgoing video is now active, show the video (which is only available in UI Suppression Mode)
+				if ((e.NewState == ChannelState.Send
+				   || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
+				{
+					SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
+				}
+
+				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
+				if ((e.NewState == ChannelState.Receive
+				   || e.NewState == ChannelState.SendReceive) && _videoChannel.RenderVideoWindow != null)
+				{
+					SetParticipantVideoWindow(channel, _videoChannel.RenderVideoWindow);
+				}
+
+			});
+		}
+
+		private void OnParticipantModalityStateChanged(object sender, ModalityStateChangedEventArgs e)
 		{
 		}
+
+		private void OnParticipantActionAvailabilityChanged(object sender, ModalityActionAvailabilityChangedEventArgs e)
+		{
+		}
+
+		#endregion
 
 		/// <summary>
 		/// Connects the modality (audio): AvModality.BeginConnect()
@@ -496,6 +602,19 @@ namespace Lync.Model
 			}
 		}
 
+
+		#region helper
+
+		private void SetParticipantVideoWindow(VideoChannel channel,VideoWindow window)
+		{
+			var model = ParticipantVideoModels.Where(p => p.VideoChannel == channel).SingleOrDefault();
+			if (model != null)
+			{
+				model.View = window;
+			}
+		}
+
+		#endregion
 
 	}
 }
