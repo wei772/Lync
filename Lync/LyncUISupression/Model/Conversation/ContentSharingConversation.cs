@@ -192,10 +192,12 @@ namespace Lync.Model
 
 			if (participant.IsSelf != true)
 			{
-				if (_contentModality == null)
-				{
-					_contentModality = (ContentSharingModality)(Conversation.Modalities[ModalityTypes.ContentSharing]);
-				}
+				//if (_contentModality == null)
+				//{
+				//	_contentModality = (ContentSharingModality)(Conversation.Modalities[ModalityTypes.ContentSharing]);
+				//}
+
+				_contentModality = (ContentSharingModality)(Conversation.Modalities[ModalityTypes.ContentSharing]);
 
 				if (_contentModality.CanInvoke(ModalityAction.Connect))
 				{
