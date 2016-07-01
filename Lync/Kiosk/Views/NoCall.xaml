@@ -7,93 +7,104 @@
              xmlns:converters ="clr-namespace:SuperSimpleLyncKiosk.Converters"
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <converters:LyncPresenceTextConverter x:Key="LyncPresenceTextConverter"/>
-        <converters:LyncPresenceColourConverter x:Key="LyncPresenceColourConverter"/>
-    </UserControl.Resources>
-
-   
-
-    <Grid Background="{Binding Path=Presence, Converter={StaticResource LyncPresenceColourConverter}}">
-
-        <Grid Margin="20">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="50"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+	<UserControl.Resources>
+		<converters:LyncPresenceTextConverter x:Key="LyncPresenceTextConverter"/>
+		<converters:LyncPresenceColourConverter x:Key="LyncPresenceColourConverter"/>
+	</UserControl.Resources>
 
 
-            <Image Grid.Row="0" Grid.Column="0" Source="/SuperSimpleLyncKioskUISuppressed;component/Images/contact.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="66" Width="66" />
 
-            <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MaxHeight="100" Margin="0,0,0,15" >
-                <TextBlock Text="{Binding Path=DisplayName}" FontFamily="Segoe UI" FontWeight="Light"  FontSize="48" Foreground="#333333"/>
-            </Viewbox>
+	<Grid Background="{Binding Path=Presence, Converter={StaticResource LyncPresenceColourConverter}}">
 
-            <Rectangle Grid.Row="1" Grid.Column="1" Fill="White" Opacity="0.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+		<Grid Margin="20">
 
-            <Grid Grid.Row="1" Grid.Column="1" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="80"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="50"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
 
-                <Viewbox Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="500" Margin="30,30" >
-                    <Image Source="{Binding Path=Photo}" />
-                </Viewbox>
+			<Image Grid.Row="0" Grid.Column="0" Source="/SuperSimpleLyncKioskUISuppressed;component/Images/contact.png" VerticalAlignment="Center" HorizontalAlignment="Left" Height="66" Width="66" />
 
-                <Viewbox VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" MaxHeight="100" MinWidth="180" >
-                    <Button Command="{Binding Path=PlaceCallCommand}" Margin="10,0">
-                        <Button.Template>
-                            <ControlTemplate>
-                                <Grid Cursor="Hand">
-                                    <StackPanel Orientation="Horizontal" Margin="10,2">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+			<Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MaxHeight="100" Margin="0,0,0,15" >
+				<TextBlock Text="{Binding Path=DisplayName}" FontFamily="Segoe UI" FontWeight="Light"  FontSize="48" Foreground="#333333"/>
+			</Viewbox>
 
-                                            <Image Grid.Column="0" Source="/SuperSimpleLyncKioskUISuppressed;component/Images/phone.png" Height="48" Width="48" />
+			<Rectangle Grid.Row="1" Grid.Column="1" Fill="White" Opacity="0.1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 
-                                            <TextBlock Grid.Column="1" FontFamily="Segoe UI" FontWeight="Light" FontSize="48" Margin="10,0,0,10" Foreground="#333333">Start a video call</TextBlock>
-                                        </Grid>
-                                    </StackPanel>
-                                    <Rectangle Grid.Row="1" Grid.Column="1" Fill="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-                                        <Rectangle.Style>
-                                            <Style TargetType="Rectangle">
-                                                <Setter Property="Opacity" Value="0.1"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Opacity" Value="0.2"/>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Rectangle.Style>
-                                    </Rectangle>
-                                </Grid>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Viewbox>
-            </Grid>
+			<Grid Grid.Row="1" Grid.Column="1" >
 
-            <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <Viewbox  HorizontalAlignment="Left" MaxHeight="50" Margin="0,20,0,0" >
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
 
-                        <TextBlock
+				<Image Source="{Binding Path=Photo}" />
+
+				<StackPanel
+					Grid.Column="1" 
+					Grid.Row="1"
+					VerticalAlignment="Top"
+					>
+					
+					<Button 
+						Command="{Binding Path=PlaceCallCommand}" Margin="10,0">
+						<Button.Template>
+							<ControlTemplate>
+								<Grid Cursor="Hand">
+									<StackPanel Orientation="Horizontal" Margin="10,2">
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto" />
+												<ColumnDefinition Width="*" />
+											</Grid.ColumnDefinitions>
+
+											<Image Grid.Column="0" Source="/SuperSimpleLyncKioskUISuppressed;component/Images/phone.png" Height="48" Width="48" />
+
+											<TextBlock Grid.Column="1" FontFamily="Segoe UI" FontWeight="Light" FontSize="48" Margin="10,0,0,10" Foreground="#333333">Start a video call</TextBlock>
+										</Grid>
+									</StackPanel>
+									<Rectangle Grid.Row="1" Grid.Column="1" Fill="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+										<Rectangle.Style>
+											<Style TargetType="Rectangle">
+												<Setter Property="Opacity" Value="0.1"/>
+												<Style.Triggers>
+													<Trigger Property="IsMouseOver" Value="True">
+														<Setter Property="Opacity" Value="0.2"/>
+													</Trigger>
+												</Style.Triggers>
+											</Style>
+										</Rectangle.Style>
+									</Rectangle>
+								</Grid>
+							</ControlTemplate>
+						</Button.Template>
+					</Button>
+
+					<Button 
+						Content="ShareResource"
+						Height="36"
+						Command="{Binding ShareResourceCommand}"
+						/>
+				</StackPanel>
+
+			</Grid>
+
+			<Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+				<Viewbox  HorizontalAlignment="Left" MaxHeight="50" Margin="0,20,0,0" >
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+						<TextBlock
                             Text="{Binding Path=Presence, Converter={StaticResource LyncPresenceTextConverter}}" 
                             FontFamily="Segoe UI"
                            
@@ -101,7 +112,7 @@
                             Foreground="#333333"
                          />
 
-                        <TextBlock Margin="6,0,0,0"
+						<TextBlock Margin="6,0,0,0"
                            MaxWidth="300"
                             VerticalAlignment="Top"
                             HorizontalAlignment="Left"
@@ -111,14 +122,14 @@
                             FontFamily="Segoe UI" 
                             FontWeight="Light"
                             Foreground="#333333"/>
-                    </StackPanel>
-                </Viewbox>
+					</StackPanel>
+				</Viewbox>
 
-            </Grid>
+			</Grid>
 
-      
 
-        </Grid>
-    </Grid>
+
+		</Grid>
+	</Grid>
 </UserControl>
 

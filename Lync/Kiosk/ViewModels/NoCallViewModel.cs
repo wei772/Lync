@@ -24,10 +24,10 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 
         private bool subscribingToInformationUpdates = false;
-        private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
-        private Command _placeCallCommand;
 
-        private AudioConversation _audioConversation;
+		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
+
+		private AudioConversation _audioConversation;
 
         #endregion
 
@@ -90,11 +90,14 @@ namespace SuperSimpleLyncKiosk.ViewModels
             }
         }
 
-        #endregion
+		#endregion
 
-        #region Commands
+		#region Commands
 
-        public ICommand PlaceCallCommand
+
+		private Command _placeCallCommand;
+
+		public ICommand PlaceCallCommand
         {
             get
             {
@@ -104,44 +107,75 @@ namespace SuperSimpleLyncKiosk.ViewModels
             }
         }
 
-        private void ExecutePlaceCall(object obj)
-        {
+		private Command _shareResourceCommand;
 
-            //var service = new BlueOfficeSkypeService();
-            //service.GetSkypeMeeting(GetSkypeMeetingHander);
-
-            //var audio = new AudioConversation();
-            //audio.Init(SipUriOfRealPerson);
-            //audio.CreateConversation();
-
-            var share = new ShareResourceConversation();
-            share.Init(SipUriOfRealPerson);
-            share.CreateConversation();
-        }
-
-        private void GetSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
-        {
-            //var audio = new AudioConversation();
-            //audio.Init(SipUriOfRealPerson);
-            //audio.ExternalId = result.TalkId;
-
-            
-            var share = new ShareResourceConversation();
-           // share.Init(SipUriOfRealPerson);
-            share.ExternalId = result.TalkId;
-
-            ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
-        }
-
-        #endregion
+		public ICommand ShareResourceCommand
+		{
+			get
+			{
+				if (this._shareResourceCommand == null)
+					this._shareResourceCommand = new Command { Execute = ShareResource };
+				return this._shareResourceCommand;
+			}
+		}
 
 
-        public NoCallViewModel()
+
+
+
+		#endregion
+
+
+		public NoCallViewModel()
         {
 
         }
 
-    }
+
+		private void ExecutePlaceCall(object obj)
+		{
+
+			var service = new BlueOfficeSkypeService();
+			service.GetSkypeMeeting(ExecutePlaceCallSkypeMeetingHander);
+
+			//var audio = new AudioConversation();
+			//audio.Init(SipUriOfRealPerson);
+			//audio.CreateConversation();
+
+			//var share = new ShareResourceConversation();
+			//share.Init(SipUriOfRealPerson);
+			//share.CreateConversation();
+		}
+
+		private void ExecutePlaceCallSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		{
+			//var audio = new AudioConversation();
+			//audio.Init(SipUriOfRealPerson);
+			//audio.ExternalId = result.TalkId;
+
+
+			var share = new AudioConversation();
+			// share.Init(SipUriOfRealPerson);
+			share.ExternalId = result.TalkId;
+
+			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+		}
+
+
+		private void ShareResource(object  obj)
+		{
+			var service = new BlueOfficeSkypeService();
+			service.GetSkypeMeeting(ShareResourceSkypeMeetingHander);
+		}
+
+		private void ShareResourceSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		{
+			var share = new ShareResourceConversation();
+			share.ExternalId = result.TalkId;
+
+			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+		}
+	}
 
 
 
