@@ -13,6 +13,7 @@ using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Lync.Control
 {
@@ -117,11 +118,8 @@ namespace Lync.Control
 			var thisControl = (VideoWindowHost)sender;
 			var videoWindow = (VideoWindow)args.NewValue;
 
-			//var oldVideoWindow = (VideoWindow)args.OldValue;
-			//if (oldVideoWindow != null)
-			//{
-			//	oldVideoWindow.Visible = -1;
-			//}
+			
+
 
 			if (videoWindow != null)
 			{
@@ -143,10 +141,15 @@ namespace Lync.Control
 
 			try
 			{
-		
+				videoPanel.Width = videoWidth;
+				videoPanel.Height = videoHeight;
+				videoWindow.Width = videoWidth;
+				videoWindow.Height = videoHeight;
+
 				//sets the properties required for the native video window to draw itself
 				videoWindow.Owner = videoPanel.Handle.ToInt32();
 				videoWindow.SetWindowPosition(0, 0, videoWidth, videoHeight);
+				//videoWindow.SetWindowForeground(new SolidColorBrush());
 
 				//gets the current window style to modify it
 				long currentStyle = videoWindow.WindowStyle;

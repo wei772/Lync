@@ -334,13 +334,13 @@ namespace Lync.Model
 				  || e.NewState == ChannelState.SendReceive) && _videoChannel.RenderVideoWindow != null)
 			   {
 				   //presents the video in the panel
-				   SetParticipantVideoWindow(_videoChannel, _videoChannel.RenderVideoWindow);
+				   // SetParticipantVideoWindow(_videoChannel, _videoChannel.RenderVideoWindow);
 			   }
 
 		   });
 		}
 
-	
+
 
 		private void OnVideoChannelActionAvailabilityChanged(object sender, ChannelActionAvailabilityEventArgs e)
 		{
@@ -561,7 +561,7 @@ namespace Lync.Model
 				if ((e.NewState == ChannelState.Send
 				   || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 				{
-					SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
+					//SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
 				}
 
 				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
