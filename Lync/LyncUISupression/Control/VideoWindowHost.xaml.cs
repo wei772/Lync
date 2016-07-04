@@ -143,10 +143,7 @@ namespace Lync.Control
 
 			try
 			{
-				if (videoWindow.Owner != 0)
-				{
-					return;
-				}
+		
 				//sets the properties required for the native video window to draw itself
 				videoWindow.Owner = videoPanel.Handle.ToInt32();
 				videoWindow.SetWindowPosition(0, 0, videoWidth, videoHeight);
@@ -168,7 +165,7 @@ namespace Lync.Control
 			}
 			catch (Exception exception)
 			{
-				Console.WriteLine(exception);
+				_log.ErrorException("",exception);
 			}
 		}
 

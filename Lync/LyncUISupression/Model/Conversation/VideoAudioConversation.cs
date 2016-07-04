@@ -610,12 +610,19 @@ namespace Lync.Model
 
 		#region helper
 
+		private List<ParticipantVideoModel> _HasSetWindowParticipants = new List<ParticipantVideoModel>();
+
 		private void SetParticipantVideoWindow(VideoChannel channel, VideoWindow window)
 		{
 			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
 			if (model != null)
 			{
+				if (_HasSetWindowParticipants.Contains(model))
+				{
+					return;
+				}
 				model.View = window;
+				_HasSetWindowParticipants.Add(model);
 			}
 		}
 
