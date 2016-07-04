@@ -64,7 +64,24 @@ namespace SuperSimpleLyncKiosk.ViewModels
             }
         }
 
-        private string _activity;
+
+		private string _meetUrl;
+		public string MeetUrl
+		{
+			get
+			{
+				return _meetUrl;
+			}
+			set
+			{
+				_meetUrl = value;
+				NotifyPropertyChanged("MeetUrl");
+			}
+		}
+
+		
+
+		private string _activity;
         public string Activity
         {
             get
@@ -152,7 +169,19 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 
 
+		private Command _joinVideoCommand;
 
+		public ICommand JoinVideoCommand
+		{
+			get
+			{
+				if (this._joinVideoCommand == null)
+					this._joinVideoCommand = new Command { Execute = JoinVideo };
+				return this._joinVideoCommand;
+			}
+		}
+
+	
 
 
 
@@ -245,6 +274,24 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			share.ExternalId = result.TalkId;
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
 		}
+
+
+		private void JoinVideo(object obj)
+		{
+			var share = new VideoAudioConversation();
+			share.Type = ConversationType.Video;
+			// share.Init(SipUriOfRealPerson);
+			//share.ExternalId = result.TalkId;
+
+			ConversationService.Instance.CreateConversationUseExternalUrl(MeetUrl, share);
+
+			var videoView = new VideoConversationView();
+			videoView.OnNavigateTo(share);
+			var window = new Window();
+			window.Content = videoView;
+			window.Show();
+		}
+
 	}
 
 

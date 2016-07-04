@@ -20,7 +20,9 @@
 		<ItemsControl  
 			ItemsSource="{Binding SkypeConversation.ParticipantVideoModels}"
 			ItemTemplate="{StaticResource ParticipantVideoDataTemplate}"
-			/>
+		>
+		
+		</ItemsControl>
 
 	</Grid>
 </UserControl>

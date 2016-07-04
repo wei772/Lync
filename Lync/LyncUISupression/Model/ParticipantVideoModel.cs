@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Collections.Generic;
@@ -60,5 +61,12 @@ namespace Lync.Model
 		public VideoChannel VideoChannel { get; set; }
 
 		public int VideoChannelKey { get; set; }
+
+		public Participant Participant { get; set; }
+
+		public bool IsMatch(VideoChannel channel)
+		{
+			return channel.GetHashCode() == VideoChannel.GetHashCode();
+		}
 	}
 }

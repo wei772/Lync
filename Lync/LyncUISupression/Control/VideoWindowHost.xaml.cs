@@ -19,6 +19,8 @@ namespace Lync.Control
 	public partial class VideoWindowHost : UserControl
 	{
 
+		private static ILog _log = LogManager.GetLog(typeof(VideoWindowHost));
+
 		#region Properties
 
 		public static DependencyProperty PlayingProperty = DependencyProperty.Register("Playing", typeof(bool), typeof(VideoWindowHost), new PropertyMetadata(OnPlayingPropertyChanged));
@@ -115,16 +117,61 @@ namespace Lync.Control
 			var thisControl = (VideoWindowHost)sender;
 			var videoWindow = (VideoWindow)args.NewValue;
 
+			//var oldVideoWindow = (VideoWindow)args.OldValue;
+			//if (oldVideoWindow != null)
+			//{
+			//	oldVideoWindow.Visible = -1;
+			//}
+
 			if (videoWindow != null)
 			{
-				videoWindow.Owner = thisControl.videoPanel.Handle.ToInt32();
-				thisControl.videoPanel.Width = thisControl.VideoWidth;
-				thisControl.videoPanel.Height = thisControl.VideoHeight;
-				//videoWindow.Width= thisControl.VideoWidth;
-				//videoWindow.Height = thisControl.VideoHeight;
-				videoWindow.SetWindowPosition(0, 0, thisControl.VideoWidth, thisControl.VideoHeight);
+				ShowVideo(thisControl.videoPanel, videoWindow, thisControl.VideoWidth, thisControl.VideoHeight);
 			}
 		}
+
+
+		private static void ShowVideo(System.Windows.Forms.Panel videoPanel, VideoWindow videoWindow, int videoWidth, int videoHeight)
+		{
+
+			_log.Debug("ShowVideo  videoPanel:{0}", videoPanel.Handle.ToInt32());
+
+			//Win32 constants:                  WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
+			const long lEnableWindowStyles = 0x40000000L | 0x02000000L | 0x04000000L;
+			//Win32 constants:                   WS_POPUP| WS_CAPTION | WS_SIZEBOX
+			const long lDisableWindowStyles = 0x80000000 | 0x00C00000 | 0x00040000L;
+			const int OATRUE = -1;
+
+			try
+			{
+				if (videoWindow.Owner != 0)
+				{
+					return;
+				}
+				//sets the properties required for the native video window to draw itself
+				videoWindow.Owner = videoPanel.Handle.ToInt32();
+				videoWindow.SetWindowPosition(0, 0, videoWidth, videoHeight);
+
+				//gets the current window style to modify it
+				long currentStyle = videoWindow.WindowStyle;
+
+				//disables borders, sizebox, close button
+				currentStyle = currentStyle & ~lDisableWindowStyles;
+
+				//enables styles for a child window
+				currentStyle = currentStyle | lEnableWindowStyles;
+
+				//updates the current window style
+				videoWindow.WindowStyle = (int)currentStyle;
+
+				//updates the visibility
+				videoWindow.Visible = OATRUE;
+			}
+			catch (Exception exception)
+			{
+				Console.WriteLine(exception);
+			}
+		}
+
 
 		#endregion
 

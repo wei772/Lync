@@ -46,14 +46,33 @@
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
 					<RowDefinition Height="30"/>
+					<RowDefinition Height="auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
 				<Image Source="{Binding Path=Photo}" />
 
-				<StackPanel
+				<Grid 	
 					Grid.Column="1" 
 					Grid.Row="1"
+					>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="auto"/>
+
+					</Grid.ColumnDefinitions>
+					<TextBox 
+						Text="{Binding  MeetUrl,UpdateSourceTrigger=PropertyChanged}" />
+					<Button 
+						Grid.Column="1"
+						Content="Join Video" 
+						Command="{Binding JoinVideoCommand}"
+						/>
+				</Grid>
+
+				<StackPanel
+					Grid.Column="1" 
+					Grid.Row="2"
 					VerticalAlignment="Top"
 					>
 					

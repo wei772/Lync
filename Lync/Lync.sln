@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\UI suppression.md = Document\UI suppression.md
 		Document\UISuppression-OFF.reg = Document\UISuppression-OFF.reg
 		Document\UISuppression-ON.reg = Document\UISuppression-ON.reg
+		Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md = Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk", "Kiosk\Kiosk.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"
@@ -42,7 +43,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{A7DF4CDC
 		Document\Image\6.png = Document\Image\6.png
 		Document\Image\7.png = Document\Image\7.png
 		Document\Image\signin_1.png = Document\Image\signin_1.png
-		Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md = Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md
 	EndProjectSection
 EndProject
 Global

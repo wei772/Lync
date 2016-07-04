@@ -312,12 +312,19 @@ namespace Lync.Model
 			   //
 			   //*****************************************************************************************
 
-			   _log.Debug("OnVideoChannelStateChanged  OldState:{0} NewState:{1}", e.OldState.ToString(), e.NewState.ToString());
+			   _log.Debug("OnVideoChannelStateChanged  OldState:{0} NewState:{1} channel:{2}  channelCode:{3}"
+					, e.OldState.ToString()
+					, e.NewState.ToString()
+					, sender.ToString()
+					, sender.GetHashCode()
+				   );
+
 
 			   //if the outgoing video is now active, show the video (which is only available in UI Suppression Mode)
 			   if ((e.NewState == ChannelState.Send
 				  || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 			   {
+				   SetParticipantVideoWindow(_videoChannel, _videoChannel.CaptureVideoWindow);
 				   //presents the video in the panel
 				   //  ShowVideo(panelOutgoingVideo, _videoChannel.CaptureVideoWindow);
 			   }
@@ -327,46 +334,13 @@ namespace Lync.Model
 				  || e.NewState == ChannelState.SendReceive) && _videoChannel.RenderVideoWindow != null)
 			   {
 				   //presents the video in the panel
-				   //  ShowVideo(panelIncomingVideo, _videoChannel.RenderVideoWindow);
+				   SetParticipantVideoWindow(_videoChannel, _videoChannel.RenderVideoWindow);
 			   }
 
 		   });
 		}
 
-		private void   RaiseVideoAvailable( VideoWindow videoWindow)
-		{
-			//Win32 constants:                  WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
-			const long lEnableWindowStyles = 0x40000000L | 0x02000000L | 0x04000000L;
-			//Win32 constants:                   WS_POPUP| WS_CAPTION | WS_SIZEBOX
-			const long lDisableWindowStyles = 0x80000000 | 0x00C00000 | 0x00040000L;
-			const int OATRUE = -1;
-
-			try
-			{
-				if (videoWindow.Visible == OATRUE)
-				{
-					return;
-				}
-				//gets the current window style to modify it
-				long currentStyle = videoWindow.WindowStyle;
-
-				//disables borders, sizebox, close button
-				currentStyle = currentStyle & ~lDisableWindowStyles;
-
-				//enables styles for a child window
-				currentStyle = currentStyle | lEnableWindowStyles;
-
-				//updates the current window style
-				videoWindow.WindowStyle = (int)currentStyle;
-
-				//updates the visibility
-				videoWindow.Visible = OATRUE;
-			}
-			catch (Exception exception)
-			{
-				Console.WriteLine(exception);
-			}
-		}
+	
 
 		private void OnVideoChannelActionAvailabilityChanged(object sender, ChannelActionAvailabilityEventArgs e)
 		{
@@ -479,6 +453,16 @@ namespace Lync.Model
 		protected override void ConversationParticipantAddedInternal(Participant participant)
 		{
 
+			var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+			partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
+			partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
+
+			var partVideoChannel = partAVModality.VideoChannel;
+			partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
+
+			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
+
+
 			if (participant.IsSelf)
 			{
 
@@ -491,23 +475,39 @@ namespace Lync.Model
 					Id = participant.Contact.Uri
 				};
 
+				var partModel = new ParticipantVideoModel()
+				{
+					Modality = partAVModality,
+					Id = participant.Contact.Uri,
+					VideoChannel = partVideoChannel,
+					Participant = participant,
+					DisplayName = displayName,
+				};
+
+
+				ParticipantVideoModels.Add(partModel);
+
 			}
 
 			else
 			{
-				var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
-				partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
-				partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
+				//var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+				//partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
+				//partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
 
-				var partVideoChannel = partAVModality.VideoChannel;
-				partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
+				//var partVideoChannel = partAVModality.VideoChannel;
+				//partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
 
 				var partModel = new ParticipantVideoModel()
 				{
 					Modality = partAVModality
 					,
 					Id = participant.Contact.Uri
-					,VideoChannel=partVideoChannel
+					,
+					VideoChannel = partVideoChannel
+					,
+					Participant = participant,
+					DisplayName = displayName,
 				};
 
 
@@ -548,7 +548,12 @@ namespace Lync.Model
 			//posts the execution into the UI thread
 			RunAtUI(() =>
 			{
-				_log.Debug("OnParticipantVideoChannelStateChanged  OldState:{0} NewState:{1}", e.OldState.ToString(), e.NewState.ToString());
+				_log.Debug("OnParticipantVideoChannelStateChanged  OldState:{0} NewState:{1} Channel:{2} ChannelCode:{3}"
+					, e.OldState.ToString()
+					, e.NewState.ToString()
+					, sender.ToString()
+					, sender.GetHashCode()
+					);
 
 				var channel = sender as VideoChannel;
 
@@ -605,12 +610,11 @@ namespace Lync.Model
 
 		#region helper
 
-		private void SetParticipantVideoWindow(VideoChannel channel,VideoWindow window)
+		private void SetParticipantVideoWindow(VideoChannel channel, VideoWindow window)
 		{
-			var model = ParticipantVideoModels.Where(p => p.VideoChannel == channel).SingleOrDefault();
+			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
 			if (model != null)
 			{
-				RaiseVideoAvailable(window);
 				model.View = window;
 			}
 		}
