@@ -116,8 +116,10 @@ namespace Lync.Control
 			if (videoWindow != null)
 			{
 				videoWindow.Owner = thisControl.videoPanel.Handle.ToInt32();
-				thisControl.videoPanel.Width = thisControl.VideoWidth;
-				thisControl.videoPanel.Height = thisControl.VideoHeight;
+				//thisControl.videoPanel.Width = thisControl.VideoWidth;
+				//thisControl.videoPanel.Height = thisControl.VideoHeight;
+				videoWindow.Width= thisControl.VideoWidth;
+				videoWindow.Height = thisControl.VideoHeight;
 				videoWindow.SetWindowPosition(0, 0, thisControl.VideoWidth, thisControl.VideoHeight);
 			}
 		}

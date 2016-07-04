@@ -11,7 +11,7 @@
 
 	<UserControl.Resources>
 		<DataTemplate x:Key="ParticipantVideoDataTemplate">
-			<local:VideoParticipantView DataContext="{Binding}"  Width="100" Height="100" Background="AliceBlue"/>
+			<local:VideoParticipantView DataContext="{Binding}"  Width="200" Height="200" />
 		</DataTemplate>
 
 	</UserControl.Resources>

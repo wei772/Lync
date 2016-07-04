@@ -333,7 +333,7 @@ namespace Lync.Model
 		   });
 		}
 
-		private void ShowVideo(System.Windows.Forms.Panel videoPanel, VideoWindow videoWindow)
+		private void   RaiseVideoAvailable( VideoWindow videoWindow)
 		{
 			//Win32 constants:                  WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
 			const long lEnableWindowStyles = 0x40000000L | 0x02000000L | 0x04000000L;
@@ -343,9 +343,6 @@ namespace Lync.Model
 
 			try
 			{
-				//sets the properties required for the native video window to draw itself
-				videoWindow.Owner = videoPanel.Handle.ToInt32();
-				videoWindow.SetWindowPosition(0, 0, videoPanel.Width, videoPanel.Height);
 
 				//gets the current window style to modify it
 				long currentStyle = videoWindow.WindowStyle;
@@ -610,6 +607,7 @@ namespace Lync.Model
 			var model = ParticipantVideoModels.Where(p => p.VideoChannel == channel).SingleOrDefault();
 			if (model != null)
 			{
+				RaiseVideoAvailable(window);
 				model.View = window;
 			}
 		}
