@@ -74,27 +74,29 @@ namespace Lync.Control
 		public VideoWindowHost()
 		{
 			InitializeComponent();
-
+			videoPanel.Layout += OnVideoPanelLayout;
 
 		}
 
 		#endregion
 
-		#region Event callbacks
+		//#region Event callbacks
 
-		void model_VideoAvailabilityChanged(object sender, VideoAvailabilityChangedEventArgs e)
-		{
-			SetVideoControlProperties(e);
-		}
+		//void model_VideoAvailabilityChanged(object sender, VideoAvailabilityChangedEventArgs e)
+		//{
+		//	SetVideoControlProperties(e);
+		//}
 
-		#endregion
+		//#endregion
 
 		#region UI Events
 
-		private void videoPanel_Layout(object sender, System.Windows.Forms.LayoutEventArgs e)
+		private void OnVideoPanelLayout(object sender, System.Windows.Forms.LayoutEventArgs e)
 		{
-			if (VideoWindowFeed != null && Playing)
+			if (VideoWindowFeed != null)
+			{
 				VideoWindowFeed.SetWindowPosition(0, 0, VideoWidth, VideoHeight);
+			}
 		}
 
 		#endregion
@@ -116,10 +118,10 @@ namespace Lync.Control
 			if (videoWindow != null)
 			{
 				videoWindow.Owner = thisControl.videoPanel.Handle.ToInt32();
-				//thisControl.videoPanel.Width = thisControl.VideoWidth;
-				//thisControl.videoPanel.Height = thisControl.VideoHeight;
-				videoWindow.Width= thisControl.VideoWidth;
-				videoWindow.Height = thisControl.VideoHeight;
+				thisControl.videoPanel.Width = thisControl.VideoWidth;
+				thisControl.videoPanel.Height = thisControl.VideoHeight;
+				//videoWindow.Width= thisControl.VideoWidth;
+				//videoWindow.Height = thisControl.VideoHeight;
 				videoWindow.SetWindowPosition(0, 0, thisControl.VideoWidth, thisControl.VideoHeight);
 			}
 		}

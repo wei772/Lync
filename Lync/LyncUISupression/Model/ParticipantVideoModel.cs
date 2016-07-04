@@ -24,11 +24,11 @@ namespace Lync.Model
 				return _displayName;
 			}
 		}
-		
+
 
 		private bool _isPined;
 
-		public bool   IsPined
+		public bool IsPined
 		{
 			set
 			{
@@ -58,5 +58,7 @@ namespace Lync.Model
 		public AVModality Modality { get; set; }
 
 		public VideoChannel VideoChannel { get; set; }
+
+		public int VideoChannelKey { get; set; }
 	}
 }

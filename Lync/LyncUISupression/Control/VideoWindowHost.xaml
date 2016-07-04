@@ -11,7 +11,7 @@
 	<Grid x:Name="grdControl" >
 
 		<WindowsFormsHost x:Name="windowsFormsHost" Margin="1" >
-			<wf:Panel x:Name="videoPanel" AutoSize="True" Layout="videoPanel_Layout" />
+			<wf:Panel x:Name="videoPanel" AutoSize="True" />
 		</WindowsFormsHost>
 
 	</Grid>

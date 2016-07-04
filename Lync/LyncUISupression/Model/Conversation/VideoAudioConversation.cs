@@ -343,7 +343,10 @@ namespace Lync.Model
 
 			try
 			{
-
+				if (videoWindow.Visible == OATRUE)
+				{
+					return;
+				}
 				//gets the current window style to modify it
 				long currentStyle = videoWindow.WindowStyle;
 

@@ -9,6 +9,6 @@
 	mc:Ignorable="d" 
 	d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-		<lync:VideoWindowHost VideoWindowFeed="{Binding View}"  VideoHeight="200" VideoWidth="200"  />
+		<lync:VideoWindowHost VideoWindowFeed="{Binding View}"  VideoHeight="200" VideoWidth="200"  Background="LightGray" />
 	</Grid>
 </UserControl>
