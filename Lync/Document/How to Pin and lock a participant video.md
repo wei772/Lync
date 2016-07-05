@@ -1,0 +1,1 @@
+[How to: Pin and lock a participant video](https://msdn.microsoft.com/en-us/library/office/jj933201.aspx)

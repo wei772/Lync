@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\How do I in Lync 2013 SDK.md = Document\How do I in Lync 2013 SDK.md
 		Document\How to  Join a Lync conversation.md = Document\How to  Join a Lync conversation.md
 		Document\How to  Sign in to and out of Lync.md = Document\How to  Sign in to and out of Lync.md
+		Document\How to Pin and lock a participant video.md = Document\How to Pin and lock a participant video.md
 		Document\How to Start a content sharing conversation (Meeting content sharing is not supported in Lync UI suppression mode).md = Document\How to Start a content sharing conversation (Meeting content sharing is not supported in Lync UI suppression mode).md
 		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
 		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md
