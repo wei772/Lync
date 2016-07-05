@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\UI suppression.md = Document\UI suppression.md
 		Document\UISuppression-OFF.reg = Document\UISuppression-OFF.reg
 		Document\UISuppression-ON.reg = Document\UISuppression-ON.reg
+		Document\Unable to detect Modality for 3rd user in a video conference .md = Document\Unable to detect Modality for 3rd user in a video conference .md
 		Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md = Document\Walkthrough Start a Video Conversation (Lync 2010 SDK).md
 	EndProjectSection
 EndProject
