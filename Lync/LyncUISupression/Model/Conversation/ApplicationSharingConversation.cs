@@ -254,8 +254,8 @@ namespace Lync.Model
 					participantSharingModality.ModalityStateChanged += OnSharingModalityModalityStateChanged;
 
 
-					Thread.Sleep(1000);
-					StartSharingResource();
+					//Thread.Sleep(1000);
+					//StartSharingResource();
 				}
 
 
@@ -332,22 +332,17 @@ namespace Lync.Model
 			if (e.NewState == ModalityState.Connected)
 			{
 
-				if (thisModality == Conversation.Modalities[ModalityTypes.ApplicationSharing])
+				//ShowStage_Button
+				//If the local user is not resource sharer, then dock the view to see
+				//the resource shared by a remote user
+				if (thisModality.Sharer != Conversation.SelfParticipant)
 				{
-					//ShowStage_Button
-					//If the local user is not resource sharer, then dock the view to see
-					//the resource shared by a remote user
-					if (thisModality.Sharer != Conversation.SelfParticipant)
-					{
-						SharingView = thisModality.View;
-						//   this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Hide sharing stage" });
-					}
-					else
-					{
-						//    this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Stop sharing" });
-					}
-
-
+					SharingView = thisModality.View;
+					//   this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Hide sharing stage" });
+				}
+				else
+				{
+					//    this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Stop sharing" });
 				}
 
 			}
