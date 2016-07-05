@@ -1,0 +1,1 @@
+[Unable to detect Modality for 3rd user in a video conference ](https://social.msdn.microsoft.com/Forums/lync/en-US/abac675d-9b08-4215-95be-71ddca569715/unable-to-detect-modality-for-3rd-user-in-a-video-conference?forum=communicatorsdk)

@@ -22,4 +22,4 @@ that has no federation relationship with the actual conference server.
 
 4. UI Suppression Mode  not  supprot  contentsharing
 
-5. Video是否支持多个participate? 目前看是不支持的。
+5. Video是否支持多个participate? 目前看是不支持的，只支持显示一个视频。

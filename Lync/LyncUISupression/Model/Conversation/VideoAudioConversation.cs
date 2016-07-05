@@ -550,7 +550,7 @@ namespace Lync.Model
 				   || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 				{
 					Repository.UpdateVideoWindow(channel, _videoChannel.CaptureVideoWindow, true);
-					SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
+					//SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
 				}
 
 				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
