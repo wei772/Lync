@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\Join a Lync Meeting from your Windows Phone without a Lync account.md = Document\Join a Lync Meeting from your Windows Phone without a Lync account.md
 		Document\Lync  account.md = Document\Lync  account.md
 		Document\Lync.md = Document\Lync.md
+		Document\Multiparty conference with video in UI Suppression mode.md = Document\Multiparty conference with video in UI Suppression mode.md
 		SIP.md = SIP.md
 		Document\Skype.md = Document\Skype.md
 		Document\The 6 things you need to know about UI Suppression Mode.md = Document\The 6 things you need to know about UI Suppression Mode.md

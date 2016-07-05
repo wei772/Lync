@@ -1,4 +1,5 @@
 ﻿using Lync.Enum;
+using Lync.Repository;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
@@ -462,10 +463,32 @@ namespace Lync.Model
 
 			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
 
+			var partModel = new ParticipantVideoModel()
+			{
+				Modality = partAVModality,
+				Id = participant.Contact.Uri,
+				VideoChannel = partVideoChannel,
+				Participant = participant,
+				DisplayName = displayName,
+			};
+
+
+			ParticipantVideoModels.Add(partModel);
+
+			var partItem = new VideoParticipantItem()
+			{
+				Modality = partAVModality,
+				Id = participant.Contact.Uri,
+				VideoChannel = partVideoChannel,
+				Participant = participant,
+				DisplayName = displayName,
+			};
+
+			Repository.AddVideoParticipantItem(partItem);
+
 
 			if (participant.IsSelf)
 			{
-
 				var localpPartAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
 
 				_localParticipantVideoModel = new ParticipantVideoModel()
@@ -475,45 +498,10 @@ namespace Lync.Model
 					Id = participant.Contact.Uri
 				};
 
-				var partModel = new ParticipantVideoModel()
-				{
-					Modality = partAVModality,
-					Id = participant.Contact.Uri,
-					VideoChannel = partVideoChannel,
-					Participant = participant,
-					DisplayName = displayName,
-				};
-
-
-				ParticipantVideoModels.Add(partModel);
-
 			}
 
 			else
 			{
-				//var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
-				//partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
-				//partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
-
-				//var partVideoChannel = partAVModality.VideoChannel;
-				//partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
-
-				var partModel = new ParticipantVideoModel()
-				{
-					Modality = partAVModality
-					,
-					Id = participant.Contact.Uri
-					,
-					VideoChannel = partVideoChannel
-					,
-					Participant = participant,
-					DisplayName = displayName,
-				};
-
-
-				ParticipantVideoModels.Add(partModel);
-
-
 
 				if (Type == ConversationType.Audio)
 				{
@@ -561,13 +549,16 @@ namespace Lync.Model
 				if ((e.NewState == ChannelState.Send
 				   || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 				{
-					//SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
+					Repository.UpdateVideoWindow(channel, _videoChannel.CaptureVideoWindow, true);
+					SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
 				}
 
 				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
 				if ((e.NewState == ChannelState.Receive
 				   || e.NewState == ChannelState.SendReceive) && _videoChannel.RenderVideoWindow != null)
 				{
+					Repository.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow,false);
+
 					SetParticipantVideoWindow(channel, _videoChannel.RenderVideoWindow);
 				}
 

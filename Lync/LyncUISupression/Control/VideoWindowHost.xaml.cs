@@ -149,7 +149,7 @@ namespace Lync.Control
 				//sets the properties required for the native video window to draw itself
 				videoWindow.Owner = videoPanel.Handle.ToInt32();
 				videoWindow.SetWindowPosition(0, 0, videoWidth, videoHeight);
-				//videoWindow.SetWindowForeground(new SolidColorBrush());
+				videoWindow.SetWindowForeground(videoPanel.Handle.ToInt32());
 
 				//gets the current window style to modify it
 				long currentStyle = videoWindow.WindowStyle;

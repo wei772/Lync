@@ -11,7 +11,7 @@
 
 	<UserControl.Resources>
 		<DataTemplate x:Key="ParticipantVideoDataTemplate">
-			<local:VideoParticipantView DataContext="{Binding}"  Width="200" Height="220" />
+			<local:VideoParticipantView DataContext="{Binding}"  Width="200" Height="200"  Margin="4 4 4 4" />
 		</DataTemplate>
 
 	</UserControl.Resources>
@@ -21,7 +21,12 @@
 			ItemsSource="{Binding SkypeConversation.ParticipantVideoModels}"
 			ItemTemplate="{StaticResource ParticipantVideoDataTemplate}"
 		>
-		
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+
 		</ItemsControl>
 
 	</Grid>

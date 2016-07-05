@@ -19,3 +19,7 @@ e functionality that Lync Attendee is using to Join anonymously is not exposed t
 
 To join a conf anonymously you need to either dial into the server directly or try to join using Lync API while signing into a different server 
 that has no federation relationship with the actual conference server.
+
+4. UI Suppression Mode  not  supprot  contentsharing
+
+5. Video是否支持多个participate? 目前看是不支持的。

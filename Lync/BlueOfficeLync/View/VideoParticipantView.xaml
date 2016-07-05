@@ -11,13 +11,13 @@
 	<Grid Background="LightBlue">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="auto"/>
+			<RowDefinition Height="20"/>
 		</Grid.RowDefinitions>
 
 		<lync:VideoWindowHost 
 			Grid.Row="0"
 			VideoWindowFeed="{Binding View}"  
-			VideoHeight="200" VideoWidth="200"  
+			VideoHeight="180" VideoWidth="200"  
 			 />
 
 		<TextBlock 
