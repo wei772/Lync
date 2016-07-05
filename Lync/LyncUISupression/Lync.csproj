@@ -99,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncOperationHandler.cs" />
+    <Compile Include="Control\ApplicationSharingViewHost.xaml.cs">
+      <DependentUpon>ApplicationSharingViewHost.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Control\VideoWindowHost.xaml.cs">
       <DependentUpon>VideoWindowHost.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Control\ApplicationSharingViewHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\VideoWindowHost.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

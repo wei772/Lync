@@ -21,48 +21,48 @@ using System.Windows;
 
 namespace SuperSimpleLyncKiosk.ViewModels
 {
-    class NoCallViewModel : ViewModelBase
-    {
-        #region Fields
+	class NoCallViewModel : ViewModelBase
+	{
+		#region Fields
 
 
-        private bool subscribingToInformationUpdates = false;
+		private bool subscribingToInformationUpdates = false;
 
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
 
 		private VideoAudioConversation _audioConversation;
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        private string _presence;
-        public string Presence
-        {
-            get
-            {
-                return _presence;
-            }
-            set
-            {
-                _presence = value;
-                NotifyPropertyChanged("Presence");
-            }
-        }
+		private string _presence;
+		public string Presence
+		{
+			get
+			{
+				return _presence;
+			}
+			set
+			{
+				_presence = value;
+				NotifyPropertyChanged("Presence");
+			}
+		}
 
-        private string _displayName;
-        public string DisplayName
-        {
-            get
-            {
-                return _displayName;
-            }
-            set
-            {
-                _displayName = value;
-                NotifyPropertyChanged("DisplayName");
-            }
-        }
+		private string _displayName;
+		public string DisplayName
+		{
+			get
+			{
+				return _displayName;
+			}
+			set
+			{
+				_displayName = value;
+				NotifyPropertyChanged("DisplayName");
+			}
+		}
 
 
 		private string _meetUrl;
@@ -79,36 +79,36 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			}
 		}
 
-		
+
 
 		private string _activity;
-        public string Activity
-        {
-            get
-            {
-                return _activity;
-            }
-            set
-            {
-                _activity = value;
-                NotifyPropertyChanged("Activity");
-            }
-        }
+		public string Activity
+		{
+			get
+			{
+				return _activity;
+			}
+			set
+			{
+				_activity = value;
+				NotifyPropertyChanged("Activity");
+			}
+		}
 
 
-        private BitmapImage _photo;
-        public BitmapImage Photo
-        {
-            get
-            {
-                return _photo;
-            }
-            set
-            {
-                _photo = value;
-                NotifyPropertyChanged("Photo");
-            }
-        }
+		private BitmapImage _photo;
+		public BitmapImage Photo
+		{
+			get
+			{
+				return _photo;
+			}
+			set
+			{
+				_photo = value;
+				NotifyPropertyChanged("Photo");
+			}
+		}
 
 		#endregion
 
@@ -119,13 +119,13 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 		public ICommand StartAudioCommand
 		{
-            get
-            {
-                if (this._startAudioCommand == null)
-                    this._startAudioCommand = new Command { Execute = StartAudio };
-                return this._startAudioCommand;
-            }
-        }
+			get
+			{
+				if (this._startAudioCommand == null)
+					this._startAudioCommand = new Command { Execute = StartAudio };
+				return this._startAudioCommand;
+			}
+		}
 
 
 		private Command _startVideoCommand;
@@ -181,7 +181,19 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			}
 		}
 
-	
+
+		private Command _joinShareViewCommand;
+
+		public ICommand JoinShareViewCommand
+		{
+			get
+			{
+				if (this._joinShareViewCommand == null)
+					this._joinShareViewCommand = new Command { Execute = JoinShareView };
+				return this._joinShareViewCommand;
+			}
+		}
+
 
 
 
@@ -189,9 +201,9 @@ namespace SuperSimpleLyncKiosk.ViewModels
 
 
 		public NoCallViewModel()
-        {
+		{
 
-        }
+		}
 
 
 		private void StartAudio(object obj)
@@ -247,7 +259,7 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			window.Show();
 		}
 
-		private void ShareResource(object  obj)
+		private void ShareResource(object obj)
 		{
 			var service = new BlueOfficeSkypeService();
 			service.GetSkypeMeeting(ShareResourceSkypeMeetingHander);
@@ -259,6 +271,13 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			share.ExternalId = result.TalkId;
 
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
+
+			//var shareView = new ShareDesktopConversationView();
+			//shareView.OnNavigateTo(share);
+			//var window = new Window();
+			//window.Content = shareView;
+			//window.Show();
+
 		}
 
 
@@ -289,6 +308,20 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			videoView.OnNavigateTo(share);
 			var window = new Window();
 			window.Content = videoView;
+			window.Show();
+		}
+
+
+		private void JoinShareView(object obj)
+		{
+			var share = new ApplicationSharingConversation();
+
+			ConversationService.Instance.CreateConversationUseExternalUrl(MeetUrl, share);
+
+			var shareView = new ShareDesktopConversationView();
+			shareView.OnNavigateTo(share);
+			var window = new Window();
+			window.Content = shareView;
 			window.Show();
 		}
 

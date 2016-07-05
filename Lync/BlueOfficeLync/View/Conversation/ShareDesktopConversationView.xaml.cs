@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueOfficeSkype.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,20 @@ namespace BlueOfficeSkype.View
 	/// </summary>
 	public partial class ShareDesktopConversationView : UserControl
 	{
+		public ShareDesktopConversationViewModel ViewModel { get; set; }
+
+
 		public ShareDesktopConversationView()
 		{
 			InitializeComponent();
 		}
+
+		public void OnNavigateTo(object args)
+		{
+			ViewModel = new ShareDesktopConversationViewModel();
+			DataContext = ViewModel;
+			ViewModel.OnNavigateTo(args);
+		}
+
 	}
 }

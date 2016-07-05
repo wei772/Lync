@@ -59,7 +59,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="auto"/>
-
+						<ColumnDefinition Width="auto"/>
 					</Grid.ColumnDefinitions>
 					<TextBox 
 						Text="{Binding  MeetUrl,UpdateSourceTrigger=PropertyChanged}" />
@@ -68,6 +68,14 @@
 						Content="Join Video" 
 						Command="{Binding JoinVideoCommand}"
 						/>
+					
+					<Button 
+						Grid.Column="2"
+						Content="Join ShareView" 
+						Command="{Binding JoinShareViewCommand}"
+						/>
+
+					
 				</Grid>
 
 				<StackPanel

@@ -8,7 +8,7 @@
              xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-	<Grid x:Name="grdControl" >
+	<Grid>
 
 		<WindowsFormsHost x:Name="windowsFormsHost" Margin="1" >
 			<wf:Panel x:Name="videoPanel" />
