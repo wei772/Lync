@@ -255,7 +255,7 @@ namespace Lync.Model
 
 
 					//Thread.Sleep(1000);
-					//StartSharingResource();
+					StartSharingResource();
 				}
 
 
