@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\How to Start a content sharing conversation (Meeting content sharing is not supported in Lync UI suppression mode).md = Document\How to Start a content sharing conversation (Meeting content sharing is not supported in Lync UI suppression mode).md
 		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
 		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md
+		Document\install.md = Document\install.md
 		Document\Join a Lync Meeting from your Windows Phone without a Lync account.md = Document\Join a Lync Meeting from your Windows Phone without a Lync account.md
 		Document\Lync  account.md = Document\Lync  account.md
 		Document\Lync.md = Document\Lync.md
@@ -45,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{A7DF4CDC
 		Document\Image\5.png = Document\Image\5.png
 		Document\Image\6.png = Document\Image\6.png
 		Document\Image\7.png = Document\Image\7.png
+		Document\Image\install basic error.png = Document\Image\install basic error.png
 		Document\Image\signin_1.png = Document\Image\signin_1.png
 	EndProjectSection
 EndProject
