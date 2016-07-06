@@ -61,7 +61,7 @@ namespace SuperSimpleLyncKiosk.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("jrtonyxia@o365ms.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("tonyxia@o365ms.com")]
         public string LyncAccountEmail {
             get {
                 return ((string)(this["LyncAccountEmail"]));

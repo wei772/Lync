@@ -254,7 +254,7 @@ namespace Lync.Model
 					participantSharingModality.ModalityStateChanged += OnSharingModalityModalityStateChanged;
 
 
-					//Thread.Sleep(1000);
+					Thread.Sleep(1000);
 					StartSharingResource();
 				}
 

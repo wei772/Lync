@@ -12,7 +12,7 @@
       <Value Profile="(Default)">o365ms\tonyxia</Value>
     </Setting>
     <Setting Name="LyncAccountEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)">jrtonyxia@o365ms.com</Value>
+      <Value Profile="(Default)">tonyxia@o365ms.com</Value>
     </Setting>
     <Setting Name="LyncAccountPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Abcd1234!</Value>
