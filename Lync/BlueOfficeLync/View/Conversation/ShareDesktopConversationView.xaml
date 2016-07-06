@@ -12,6 +12,7 @@
     <Grid>
 		<lync:ApplicationSharingViewHost
 			View="{Binding SkypeConversation.SharingView}"
+            SharingModality="{Binding  SkypeConversation.SharingModality}"
 			/>
 	</Grid>
 </UserControl>
