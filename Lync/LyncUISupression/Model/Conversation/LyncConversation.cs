@@ -206,7 +206,7 @@ namespace Lync.Model
 					{
 						var newPart = e.Participant;
 						Participants.Add(newPart);
-						_log.Debug("OnConversationParticipantAdded  {0}", newPart);
+						_log.Debug("OnConversationParticipantAdded  uri:{0}", newPart.Contact.Uri);
 						ConversationParticipantAddedInternal(e.Participant);
 					}
 				);
@@ -230,7 +230,7 @@ namespace Lync.Model
 						}
 						ConversationParticipantRemovedInternal(removePart);
 
-						_log.Debug("OnConversationParticipantRemoved  {0}", removePart);
+						_log.Debug("OnConversationParticipantRemoved  uri:{0}", removePart.Contact.Uri);
 					}
 				);
 		}
