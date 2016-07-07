@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 		Document\How to Start a Lync IM conversation.md = Document\How to Start a Lync IM conversation.md
 		Document\install  lync2013  sdk  error.md = Document\install  lync2013  sdk  error.md
 		Document\install.md = Document\install.md
+		Document\Installed Skype for Business, now get an Outlook error every time I start up .md = Document\Installed Skype for Business, now get an Outlook error every time I start up .md
 		Document\Join a Lync Meeting from your Windows Phone without a Lync account.md = Document\Join a Lync Meeting from your Windows Phone without a Lync account.md
 		Document\Lync  account.md = Document\Lync  account.md
 		Document\Lync.md = Document\Lync.md
