@@ -14,7 +14,3 @@ Skype Meetings App可以用匿名登录，但是只有视频和语音通信功能。
 
 匿名登录的用户也是能使用共享共享桌面和PPT的功能，只是权限的问题。
 设置为Presenter就可以了。
-
-install  address
-
-https://support.microsoft.com/en-us/kb/3139711
