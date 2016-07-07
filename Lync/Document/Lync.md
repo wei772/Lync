@@ -23,3 +23,5 @@ that has no federation relationship with the actual conference server.
 4. UI Suppression Mode  not  supprot  contentsharing
 
 5. Video是否支持多个participate? 目前看是不支持的。
+
+6. 需要安装Skype for bussiness 2016，才能正常使用分享桌面的功能。

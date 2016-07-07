@@ -43,19 +43,21 @@ namespace Lync.Control
         public ApplicationSharingViewHost()
         {
             InitializeComponent();
+            applicaionViewPanel.Layout += OnApplicaionViewPanelLayout;
         }
 
 
 
         #region UI Events
 
-        //private void OnVideoPanelLayout(object sender, System.Windows.Forms.LayoutEventArgs e)
-        //{
-        //	if (VideoWindowFeed != null)
-        //	{
-        //		VideoWindowFeed.SetWindowPosition(0, 0, VideoWidth, VideoHeight);
-        //	}
-        //}
+        private void OnApplicaionViewPanelLayout(object sender, System.Windows.Forms.LayoutEventArgs e)
+        {
+            //Microsoft.Lync.Model.LyncClientException
+            if (View != null)
+            {
+                View.SyncRectangle();
+            }
+        }
 
         #endregion
 
