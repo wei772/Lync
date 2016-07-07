@@ -608,10 +608,10 @@ namespace Lync.Model
 			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
 			if (model != null)
 			{
-				if (_HasSetWindowParticipants.Contains(model))
-				{
-					return;
-				}
+				//if (_HasSetWindowParticipants.Contains(model))
+				//{
+				//	return;
+				//}
 				model.View = window;
 				_HasSetWindowParticipants.Add(model);
 			}
