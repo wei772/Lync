@@ -263,20 +263,20 @@ namespace Lync.Model
                 }
                 else
                 {
-                    //The self participant application sharing modality is also the conversation application sharing modality.
-                    //to avoid registering an event handler for the conversation modality twice, we do not register it on the
-                    //self participant
+					//The self participant application sharing modality is also the conversation application sharing modality.
+					//to avoid registering an event handler for the conversation modality twice, we do not register it on the
+					//self participant
 
-                    //Get the application sharing modality of the added participant and store it in a class dictionary field for easy access later.
-                 
+					//Get the application sharing modality of the added participant and store it in a class dictionary field for easy access later.
 
-                    //if (participant.Properties[ParticipantProperty.IsPresenter] != null)
-                    //{
-                    //    Thread.Sleep(1000);
-                    //    StartSharingResource();
-                    //}
 
-                }
+					//if (participant.Properties[ParticipantProperty.IsPresenter] != null)
+					//{
+					//    Thread.Sleep(1000);
+					//    StartSharingResource();
+					//}
+					StartSharingResource();
+				}
 
 
 
