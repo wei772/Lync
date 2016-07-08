@@ -16,8 +16,9 @@
 
 		<lync:VideoWindowHost 
 			Grid.Row="0"
+			x:Name="windowHost"
 			VideoWindowFeed="{Binding View}"  
-			VideoHeight="180" VideoWidth="200"  
+			SnapsToDevicePixels="True"
 			 />
 
 		<TextBlock 

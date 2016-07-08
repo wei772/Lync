@@ -35,6 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document", "Document", "{2B
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiosk", "Kiosk\Kiosk.csproj", "{D19814DB-FAD0-43B0-89DB-BA3AA88239B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9960A915-A5A8-4C65-98E4-D32CE947B6FC} = {9960A915-A5A8-4C65-98E4-D32CE947B6FC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueOfficeLync", "BlueOfficeLync\BlueOfficeLync.csproj", "{9960A915-A5A8-4C65-98E4-D32CE947B6FC}"
 EndProject

@@ -40,10 +40,39 @@ namespace Lync.Model
 			}
 		}
 
+
+
 		/// <summary>
 		/// The Application sharing modality of the local participant.
 		/// </summary>
-		ParticipantVideoModel _localParticipantVideoModel;
+		private ParticipantVideoModel _localParticipantVideoModel;
+
+		public ParticipantVideoModel LocalParticipantVideoModel
+		{
+			get
+			{
+				return _localParticipantVideoModel;
+			}
+			set
+			{
+				Set("LocalParticipantVideoModel", ref _localParticipantVideoModel, value);
+			}
+		}
+
+
+		private ParticipantVideoModel _remoteConnectParticipantVideoModel;
+
+		public ParticipantVideoModel RemoteConnectParticipantVideoModel
+		{
+			get
+			{
+				return _remoteConnectParticipantVideoModel;
+			}
+			set
+			{
+				Set("RemoteConnectParticipantVideoModel", ref _remoteConnectParticipantVideoModel, value);
+			}
+		}
 
 
 		public VideoAudioConversation()
@@ -201,7 +230,10 @@ namespace Lync.Model
 					//wire up to action availability events to know when the channel is ready to be started.
 					//videoChannel.StateChanged += OnVideoChannelStateChanged;
 					//videoChannel.ActionAvailabilityChanged += OnVideoChannelActionAvailabilityChanged;
-
+					if (Type == ConversationType.Video)
+					{
+						StartVideo();
+					}
 				}
 			}
 			catch (Exception ex)
@@ -325,7 +357,7 @@ namespace Lync.Model
 			   if ((e.NewState == ChannelState.Send
 				  || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 			   {
-				   SetParticipantVideoWindow(_videoChannel, _videoChannel.CaptureVideoWindow);
+				   LocalParticipantVideoModel.View = _videoChannel.CaptureVideoWindow;
 				   //presents the video in the panel
 				   //  ShowVideo(panelOutgoingVideo, _videoChannel.CaptureVideoWindow);
 			   }
@@ -390,6 +422,12 @@ namespace Lync.Model
 		private void StartVideo()
 		{
 			_log.Debug("StartVideo");
+
+			if (!_videoChannel.CanInvoke(ChannelAction.Start))
+			{
+				_log.Debug("StartVideo  can't  start");
+				return;
+			}
 
 			//starts a video call or the video stream in a audio call
 			AsyncCallback callback = new AsyncOperationHandler(_videoChannel.EndStart).Callback;
@@ -463,39 +501,22 @@ namespace Lync.Model
 
 			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
 
-			var partModel = new ParticipantVideoModel()
+			if (_avModality.CanInvoke(ModalityAction.Connect))
 			{
-				Modality = partAVModality,
-				Id = participant.Contact.Uri,
-				VideoChannel = partVideoChannel,
-				Participant = participant,
-				DisplayName = displayName,
-			};
-
-
-			ParticipantVideoModels.Add(partModel);
-
-			var partItem = new VideoParticipantItem()
-			{
-				Modality = partAVModality,
-				Id = participant.Contact.Uri,
-				VideoChannel = partVideoChannel,
-				Participant = participant,
-				DisplayName = displayName,
-			};
-
-			Repository.AddVideoParticipantItem(partItem);
-
+				Connect();
+			}
 
 			if (participant.IsSelf)
 			{
 				var localpPartAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
 
-				_localParticipantVideoModel = new ParticipantVideoModel()
+				LocalParticipantVideoModel = new ParticipantVideoModel()
 				{
-					Modality = localpPartAVModality
-					,
-					Id = participant.Contact.Uri
+					Modality = partAVModality,
+					Id = participant.Contact.Uri,
+					VideoChannel = partVideoChannel,
+					Participant = participant,
+					DisplayName = displayName,
 				};
 
 			}
@@ -503,14 +524,31 @@ namespace Lync.Model
 			else
 			{
 
-				if (Type == ConversationType.Audio)
+
+				var partModel = new ParticipantVideoModel()
 				{
-					ConnectAudio();
-				}
-				else
+					Modality = partAVModality,
+					Id = participant.Contact.Uri,
+					VideoChannel = partVideoChannel,
+					Participant = participant,
+					DisplayName = displayName,
+				};
+
+
+				ParticipantVideoModels.Add(partModel);
+
+				var partItem = new VideoParticipantItem()
 				{
-					StartVideo();
-				}
+					Modality = partAVModality,
+					Id = participant.Contact.Uri,
+					VideoChannel = partVideoChannel,
+					Participant = participant,
+					DisplayName = displayName,
+				};
+
+				Repository.AddVideoParticipantItem(partItem);
+
+
 			}
 
 		}
@@ -553,14 +591,27 @@ namespace Lync.Model
 					//SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
 				}
 
-				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
-				if ((e.NewState == ChannelState.Receive
-				   || e.NewState == ChannelState.SendReceive) && _videoChannel.RenderVideoWindow != null)
+
+				if (e.NewState == ChannelState.Receive && _videoChannel.RenderVideoWindow != null)
 				{
-					Repository.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow,false);
+					if (RemoteConnectParticipantVideoModel != null)
+					{
+						RemoteConnectParticipantVideoModel.View = null;
+					}
+					RemoteConnectParticipantVideoModel = null;
+				}
+
+
+				//if the incoming video is now active, show the video (which is only available in UI Suppression Mode)
+				if (
+					e.NewState == ChannelState.SendReceive && _videoChannel.RenderVideoWindow != null)
+				{
+					Repository.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow, false);
 
 					SetParticipantVideoWindow(channel, _videoChannel.RenderVideoWindow);
 				}
+
+
 
 			});
 		}
@@ -578,7 +629,7 @@ namespace Lync.Model
 		/// <summary>
 		/// Connects the modality (audio): AvModality.BeginConnect()
 		/// </summary>
-		private void ConnectAudio()
+		private void Connect()
 		{
 			//starts an audio call or conference by connecting the AvModality
 			try
@@ -601,19 +652,14 @@ namespace Lync.Model
 
 		#region helper
 
-		private List<ParticipantVideoModel> _HasSetWindowParticipants = new List<ParticipantVideoModel>();
 
 		private void SetParticipantVideoWindow(VideoChannel channel, VideoWindow window)
 		{
 			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
 			if (model != null)
 			{
-				//if (_HasSetWindowParticipants.Contains(model))
-				//{
-				//	return;
-				//}
+				RemoteConnectParticipantVideoModel = model;
 				model.View = window;
-				_HasSetWindowParticipants.Add(model);
 			}
 		}
 

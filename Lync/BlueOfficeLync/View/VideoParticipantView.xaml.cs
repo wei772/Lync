@@ -24,9 +24,13 @@ namespace BlueOfficeSkype.View
 		public VideoParticipantView()
 		{
 			InitializeComponent();
+			Loaded += OnLoaded;
 		}
 
-
-
+		private void OnLoaded(object sender, RoutedEventArgs e)
+		{
+			windowHost.VideoWidth = (int)Width;
+			windowHost.VideoHeight = (int)(Height - 20);
+		}
 	}
 }

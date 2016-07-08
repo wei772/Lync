@@ -8,26 +8,34 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
 
-
 	<UserControl.Resources>
-		<DataTemplate x:Key="ParticipantVideoDataTemplate">
-			<local:VideoParticipantView DataContext="{Binding}"  Width="200" Height="200"  Margin="4 4 4 4" />
-		</DataTemplate>
 
 	</UserControl.Resources>
 	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-		<ItemsControl  
-			ItemsSource="{Binding SkypeConversation.ParticipantVideoModels}"
-			ItemTemplate="{StaticResource ParticipantVideoDataTemplate}"
-		>
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Horizontal"/>
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
+		<local:VideoParticipantView 
+			DataContext="{Binding SkypeConversation.RemoteConnectParticipantVideoModel}" 
+			Grid.Row="1" Grid.Column="1"
+			Width="400" Height="400"  
+			Margin="4 4 4 4" />
 
-		</ItemsControl>
-
+		<local:VideoParticipantView
+			DataContext="{Binding SkypeConversation.LocalParticipantVideoModel}" 
+			Grid.Row="1" Grid.Column="2"
+			VerticalAlignment="Bottom"
+			Width="200" Height="200"  
+			Margin="4 4 4 4" />
+		
 	</Grid>
 </UserControl>

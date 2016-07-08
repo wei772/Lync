@@ -10,8 +10,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid>
 
-		<WindowsFormsHost x:Name="windowsFormsHost" Margin="1" >
-			<wf:Panel x:Name="videoPanel" />
+		<WindowsFormsHost x:Name="windowsFormsHost"  >
+			<wf:Panel x:Name="videoPanel"    AutoSize="True" />
 		</WindowsFormsHost>
 
 	</Grid>
