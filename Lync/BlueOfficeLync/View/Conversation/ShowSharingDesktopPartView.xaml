@@ -1,5 +1,5 @@
 ﻿<UserControl
-	x:Class="BlueOfficeSkype.View.ShareDesktopConversationView"
+	x:Class="BlueOfficeSkype.View.ShowSharingDesktopPartView"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,8 @@
 	
     <Grid>
 		<lync:ApplicationSharingViewHost
-			View="{Binding SkypeConversation.SharingView}"
-            SharingModality="{Binding  SkypeConversation.SharingModality}"
+			View="{Binding SkypeConversation.ApplicationSharingPart.SharingView}"
+            SharingModality="{Binding  SkypeConversation.ApplicationSharingPart.SharingModality}"
 			/>
 	</Grid>
 </UserControl>

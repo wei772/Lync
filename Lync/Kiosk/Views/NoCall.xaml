@@ -65,17 +65,9 @@
 						Text="{Binding  MeetUrl,UpdateSourceTrigger=PropertyChanged}" />
 					<Button 
 						Grid.Column="1"
-						Content="Join Video" 
-						Command="{Binding JoinVideoCommand}"
+						Content="Join Conversation" 
+						Command="{Binding JoinConversationCommand}"
 						/>
-					
-					<Button 
-						Grid.Column="2"
-						Content="Join ShareView" 
-						Command="{Binding JoinShareViewCommand}"
-						/>
-
-					
 				</Grid>
 
 				<StackPanel
@@ -83,31 +75,13 @@
 					Grid.Row="2"
 					VerticalAlignment="Top"
 					>
-					
 				
 					<Button 
-						Content="StartAudio"
+						Content="Start Conversation"
 						Height="36"
-						Command="{Binding StartAudioCommand}"
-						/>
-
-					<Button 
-						Content="StartVideo"
-						Height="36"
-						Command="{Binding StartVideoCommand}"
+						Command="{Binding StartConversationCommand}"
 						/>
 					
-					<Button 
-						Content="ShareResource"
-						Height="36"
-						Command="{Binding ShareResourceCommand}"
-						/>
-
-					<Button 
-						Content="SharePPT"
-						Height="36"
-						Command="{Binding SharePPTCommand}"
-						/>
 				</StackPanel>
 
 			</Grid>

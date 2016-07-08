@@ -18,19 +18,19 @@ namespace BlueOfficeSkype.View
 	/// <summary>
 	/// Interaction logic for VideoConversation.xaml
 	/// </summary>
-	public partial class VideoConversationView : UserControl
+	public partial class ConversationView : UserControl
 	{
-		public VideoConversationViewModel ViewModel { get; set; }
+		public ConversationViewModel ViewModel { get; set; }
 
 
-		public VideoConversationView()
+		public ConversationView()
 		{
 			InitializeComponent();
 		}
 
 		public void OnNavigateTo(object args)
 		{
-			ViewModel = new VideoConversationViewModel();
+			ViewModel = new ConversationViewModel();
 			DataContext = ViewModel;
 			ViewModel.OnNavigateTo(args);
 		}

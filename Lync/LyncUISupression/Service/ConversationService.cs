@@ -128,7 +128,7 @@ namespace Lync.Service
 			if (_currentLyncConversation == null)
 			{
 				addedByThisProcess = false;
-				_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
+			//	_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
 			}
 
 			_log.Debug("OnConversationManagerConversationAdded  addedByThisProcess:{0}", addedByThisProcess);

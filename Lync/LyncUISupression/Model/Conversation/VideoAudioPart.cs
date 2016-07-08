@@ -12,10 +12,10 @@ using System.Windows.Controls;
 
 namespace Lync.Model
 {
-	public class VideoAudioConversation : LyncConversation
+	public class VideoAudioPart : ConversationPart
 	{
 
-		private ILog _log = LogManager.GetLog(typeof(VideoAudioConversation));
+		private ILog _log = LogManager.GetLog(typeof(VideoAudioPart));
 
 		private string _sipUriOfRealPerson;
 
@@ -75,19 +75,13 @@ namespace Lync.Model
 		}
 
 
-		public VideoAudioConversation()
+		public VideoAudioPart()
 		{
-			Type = ConversationType.Audio;
-		}
-
-		public void Init(string sipUriOfRealPerson)
-		{
-			_sipUriOfRealPerson = sipUriOfRealPerson;
-			//CreateConversation();
 		}
 
 
-		protected override void HandleAddedInternal()
+
+		internal override void HandleAddedInternal()
 		{
 			//saves the AVModality, AudioChannel and VideoChannel, just for the sake of readability
 			_avModality = (AVModality)Conversation.Modalities[ModalityTypes.AudioVideo];
@@ -119,7 +113,7 @@ namespace Lync.Model
 		}
 
 
-		protected override void CloseInternal()
+		internal override void CloseInternal()
 		{
 			//subscribes to modality action availability events (all audio button except DTMF)
 			_avModality.ActionAvailabilityChanged -= OnAvModalityActionAvailabilityChanged;
@@ -230,10 +224,9 @@ namespace Lync.Model
 					//wire up to action availability events to know when the channel is ready to be started.
 					//videoChannel.StateChanged += OnVideoChannelStateChanged;
 					//videoChannel.ActionAvailabilityChanged += OnVideoChannelActionAvailabilityChanged;
-					if (Type == ConversationType.Video)
-					{
-						StartVideo();
-					}
+
+					StartVideo();
+
 				}
 			}
 			catch (Exception ex)
@@ -489,7 +482,7 @@ namespace Lync.Model
 
 		#region Participant
 
-		protected override void ConversationParticipantAddedInternal(Participant participant)
+		internal override void ConversationParticipantAddedInternal(Participant participant)
 		{
 
 			var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
@@ -553,7 +546,7 @@ namespace Lync.Model
 
 		}
 
-		protected override void ConversationParticipantRemovedInternal(Participant participant)
+		internal override void ConversationParticipantRemovedInternal(Participant participant)
 		{
 
 			var model = ParticipantVideoModels.Where(p => p.Id == participant.Contact.Uri).SingleOrDefault();

@@ -27,36 +27,17 @@ using System.Threading;
 
 namespace Lync.Model
 {
-    internal struct ControlDimensions
-    {
-        /// <summary>
-        /// Form and panel starting dimensions 
-        /// </summary>
-        internal int _originalFormWidth;
-        internal int _originalFormHeight;
-        internal int _horizontalMargin;
-        internal int _verticalMargin;
-        internal int _originalPanelWidth;
-        internal int _originalPanelHeight;
 
-    }
-    public partial class ApplicationSharingConversation : LyncConversation
-    {
+    public partial class ApplicationSharingPart : ConversationPart
+	{
 
         #region class field declarations
 
-        private ILog _log = LogManager.GetLog(typeof(ApplicationSharingConversation));
+        private ILog _log = LogManager.GetLog(typeof(ApplicationSharingPart));
 
 
-        /// <summary>
-        /// Dimensions of the parent form and container control that
-        /// will dock the application sharing view
-        /// </summary>
-        /// 
-        ControlDimensions _windowSize;
 
-
-        private string _sipUriOfRealPerson;
+ 
         /// <summary>
         /// A Contact instance representing the participant selected to be granted control of a resource
         /// </summary>
@@ -112,19 +93,14 @@ namespace Lync.Model
 
         #endregion
 
-        public ApplicationSharingConversation()
+        public ApplicationSharingPart()
         {
 
         }
 
-        public void Init(string sipUriOfRealPerson)
-        {
-            _sipUriOfRealPerson = sipUriOfRealPerson;
-            //CreateConversation();
-        }
 
 
-        protected override void CloseInternal()
+		internal override void CloseInternal()
         {
 
             if (_sharingModality != null)
@@ -157,7 +133,7 @@ namespace Lync.Model
 
 
 
-        protected override void HandleAddedInternal()
+		internal override void HandleAddedInternal()
         {
 
             _log.Debug("HandleAddedInternal");
@@ -203,20 +179,11 @@ namespace Lync.Model
                     }
                 }, null);
             }
-            AddParticipant();
 
             base.HandleAddedInternal();
         }
 
 
-        protected void AddParticipant()
-        {
-            var contact = ContactService.GetContactByUri(_sipUriOfRealPerson);
-            if (contact != null)
-            {
-                Conversation.AddParticipant(contact);
-            }
-        }
 
 
         #region Conversation event handlers
@@ -227,7 +194,7 @@ namespace Lync.Model
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ConversationParticipantAddedInternal(Participant participant)
+        internal override void ConversationParticipantAddedInternal(Participant participant)
         {
             base.ConversationParticipantAddedInternal(participant);
 
@@ -295,7 +262,7 @@ namespace Lync.Model
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected override void ConversationParticipantRemovedInternal(Participant participant)
+        internal override void ConversationParticipantRemovedInternal(Participant participant)
         {
 
             //get the application sharing modality of the removed participant out of the class modalty dicitonary

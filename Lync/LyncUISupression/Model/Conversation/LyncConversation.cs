@@ -71,17 +71,58 @@ namespace Lync.Model
 		public Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
 
 
+
+		#region Part
+
+		private List<ConversationPart> _conversationParts = new List<ConversationPart>();
+
+		private ApplicationSharingPart _applicationSharingPart;
+		public ApplicationSharingPart ApplicationSharingPart
+		{
+			get
+			{
+				return _applicationSharingPart;
+			}
+			set
+			{
+				_applicationSharingPart = value;
+			}
+		}
+
+		private VideoAudioPart _videoAudioPart;
+		public VideoAudioPart VideoAudioPart
+		{
+			get
+			{
+				return _videoAudioPart;
+			}
+			set
+			{
+				_videoAudioPart = value;
+			}
+		}
+
+		#endregion
+
+
 		public LyncConversation()
 		{
 			ContactService = ContactService.Instance;
 			ConversationService = ConversationService.Instance;
 			Participants = new List<Participant>();
+			VideoAudioPart = new VideoAudioPart();
+			ApplicationSharingPart = new ApplicationSharingPart();
+			_conversationParts.Add(VideoAudioPart);
+			_conversationParts.Add(ApplicationSharingPart);
+		
+
 		}
 
 		public void CreateConversation()
 		{
 			ConversationService.AddConversation(this);
 		}
+
 
 		public void HandleAdded()
 		{
@@ -101,16 +142,9 @@ namespace Lync.Model
 			Conversation.ActionAvailabilityChanged += OnConversationActionAvailabilityChanged;
 			Conversation.PropertyChanged += OnConversationPropertyChanged;
 
-
-			HandleAddedInternal();
+			InitPart();
+			InvokePartHandleAdded();
 		}
-
-		protected virtual void HandleAddedInternal()
-		{
-
-		}
-
-
 
 		/// <summary>
 		/// Ends the conversation if the user closes the window.
@@ -129,7 +163,7 @@ namespace Lync.Model
 			Conversation.ParticipantRemoved -= OnConversationParticipantRemoved;
 			Conversation.ActionAvailabilityChanged -= OnConversationActionAvailabilityChanged;
 
-			CloseInternal();
+			InvokePartClose();
 
 			//if the conversation is active, will end it
 			if (Conversation.State != ConversationState.Terminated)
@@ -161,11 +195,37 @@ namespace Lync.Model
 			Conversation = null;
 		}
 
-		protected virtual void CloseInternal()
-		{
 
+		private void OnConversationParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
+		{
+			RunAtUI
+				(() =>
+				{
+					var newPart = e.Participant;
+					Participants.Add(newPart);
+					_log.Debug("OnConversationParticipantAdded  uri:{0}", newPart.Contact.Uri);
+					InvokePartConversationParticipantAdded(e.Participant);
+				}
+				);
 		}
 
+		private void OnConversationParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs e)
+		{
+			RunAtUI
+				(() =>
+				{
+
+					var removePart = Participants.Where(p => p.Equals(e.Participant)).SingleOrDefault();
+					if (removePart != null)
+					{
+						Participants.Remove(removePart);
+					}
+					InvokePartConversationParticipantRemoved(removePart);
+
+					_log.Debug("OnConversationParticipantRemoved  uri:{0}", removePart.Contact.Uri);
+				}
+				);
+		}
 
 		private void OnConversationPropertyChanged(object sender, ConversationPropertyChangedEventArgs e)
 		{
@@ -198,50 +258,6 @@ namespace Lync.Model
 
 		}
 
-
-		private void OnConversationParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
-		{
-			RunAtUI
-				(() =>
-					{
-						var newPart = e.Participant;
-						Participants.Add(newPart);
-						_log.Debug("OnConversationParticipantAdded  uri:{0}", newPart.Contact.Uri);
-						ConversationParticipantAddedInternal(e.Participant);
-					}
-				);
-		}
-
-		protected virtual void ConversationParticipantAddedInternal(Participant participant)
-		{
-
-		}
-
-		private void OnConversationParticipantRemoved(object sender, ParticipantCollectionChangedEventArgs e)
-		{
-			RunAtUI
-				(() =>
-					{
-
-						var removePart = Participants.Where(p => p.Equals(e.Participant)).SingleOrDefault();
-						if (removePart != null)
-						{
-							Participants.Remove(removePart);
-						}
-						ConversationParticipantRemovedInternal(removePart);
-
-						_log.Debug("OnConversationParticipantRemoved  uri:{0}", removePart.Contact.Uri);
-					}
-				);
-		}
-
-
-
-		protected virtual void ConversationParticipantRemovedInternal(Participant participant)
-		{
-
-		}
-
 		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
 		{
 			_log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
@@ -268,8 +284,6 @@ namespace Lync.Model
 					}
 			);
 		}
-
-
 
 		/// <summary>
 		/// Returns the meet-now meeting access key as a string
@@ -365,6 +379,53 @@ namespace Lync.Model
 		}
 
 
+		#region parts method
+
+		private void InitPart()
+		{
+			foreach (var part in _conversationParts)
+			{
+				part.LyncConversation = this;
+				part.ContactService = ContactService;
+				part.Repository = Repository;
+				part.Conversation = Conversation;
+			}
+		}
+
+		private void InvokePartHandleAdded()
+		{
+			foreach (var part in _conversationParts)
+			{
+				part.HandleAddedInternal();
+			}
+		}
+
+		private void InvokePartClose()
+		{
+			foreach (var part in _conversationParts)
+			{
+				part.CloseInternal();
+			}
+		}
+
+		private void InvokePartConversationParticipantAdded(Participant participant)
+		{
+			foreach (var part in _conversationParts)
+			{
+				part.ConversationParticipantAddedInternal(participant);
+			}
+		}
+
+		private void InvokePartConversationParticipantRemoved(Participant participant)
+		{
+			foreach (var part in _conversationParts)
+			{
+				part.ConversationParticipantRemovedInternal(participant);
+			}
+		}
+
+
+		#endregion
 
 	}
 
