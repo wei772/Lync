@@ -1,4 +1,5 @@
-﻿using Lync.Enum;
+﻿using GalaSoft.MvvmLight.Command;
+using Lync.Enum;
 using Lync.Repository;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
@@ -16,9 +17,6 @@ namespace Lync.Model
 	{
 
 		private ILog _log = LogManager.GetLog(typeof(VideoAudioPart));
-
-		private string _sipUriOfRealPerson;
-
 
 		private AudioChannel _audioChannel;
 		private VideoChannel _videoChannel;
@@ -75,6 +73,51 @@ namespace Lync.Model
 		}
 
 
+		private bool _canStartVideo;
+
+		public bool CanStartVideo
+		{
+			get
+			{
+				return _canStartVideo;
+			}
+			set
+			{
+				Set("CanStartVideo", ref _canStartVideo, value);
+			}
+		}
+
+		private bool _canStartAudio;
+
+		public bool CanStartAudio
+		{
+			get
+			{
+				return _canStartAudio;
+			}
+			set
+			{
+				Set("CanStartAudio", ref _canStartAudio, value);
+			}
+		}
+
+		private RelayCommand _startVideoCommand;
+
+		public RelayCommand StartVideoCommand
+		{
+			get
+			{
+				return _startVideoCommand;
+			}
+			set
+			{
+				Set("StartVideoCommand", ref _startVideoCommand, value);
+			}
+		}
+
+
+
+
 		public VideoAudioPart()
 		{
 		}
@@ -109,7 +152,6 @@ namespace Lync.Model
 			_videoChannel.StateChanged += OnVideoChannelStateChanged;
 
 
-			AddParticipant();
 		}
 
 
@@ -136,14 +178,6 @@ namespace Lync.Model
 			_videoChannel.StateChanged -= OnVideoChannelStateChanged;
 		}
 
-		protected void AddParticipant()
-		{
-			var contact = ContactService.GetContactByUri(_sipUriOfRealPerson);
-			if (contact != null)
-			{
-				Conversation.AddParticipant(contact);
-			}
-		}
 
 
 		#region Modality

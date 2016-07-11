@@ -128,6 +128,21 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		}
 
 
+
+		private Command _createConversationCommand;
+
+		public ICommand CreateConversationCommand
+		{
+			get
+			{
+				if (_createConversationCommand == null)
+					_createConversationCommand = new Command { Execute = CreateConversation };
+				return _createConversationCommand;
+			}
+		}
+
+
+
 		private Command _joinConversationCommand;
 
 		public ICommand JoinConversationCommand
@@ -167,6 +182,18 @@ namespace SuperSimpleLyncKiosk.ViewModels
 			window.Show();
 		}
 
+
+		private void CreateConversation(object obj)
+		{
+			var share = new LyncConversation();
+			share.SipUriOfRealPerson = SipUriOfRealPerson;
+			ConversationService.Instance.AddConversation(share);
+			var videoView = new ConversationView();
+			videoView.OnNavigateTo(share);
+			var window = new Window();
+			window.Content = videoView;
+			window.Show();
+		}
 
 
 		private void JoinConversation(object obj)

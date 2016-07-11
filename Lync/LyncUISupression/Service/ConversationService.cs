@@ -77,7 +77,7 @@ namespace Lync.Service
         }
 
 
-        internal void AddConversation(LyncConversation lyncConversation)
+		public void AddConversation(LyncConversation lyncConversation)
 		{
 			if (_currentLyncConversation != null)
 			{
@@ -137,6 +137,7 @@ namespace Lync.Service
 			{
 				_currentLyncConversation.Conversation = conversation;
 				_currentLyncConversation.HandleAdded();
+
 			}
 			else
 			{

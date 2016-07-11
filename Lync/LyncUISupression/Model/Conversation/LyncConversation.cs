@@ -102,6 +102,8 @@ namespace Lync.Model
 			}
 		}
 
+
+
 		#endregion
 
 
@@ -114,7 +116,7 @@ namespace Lync.Model
 			ApplicationSharingPart = new ApplicationSharingPart();
 			_conversationParts.Add(VideoAudioPart);
 			_conversationParts.Add(ApplicationSharingPart);
-		
+
 
 		}
 
@@ -144,7 +146,28 @@ namespace Lync.Model
 
 			InitPart();
 			InvokePartHandleAdded();
+
+			AddParticipant();
 		}
+
+
+		public string SipUriOfRealPerson { get; set; }
+
+		public void AddParticipant()
+		{
+			if (string.IsNullOrEmpty(SipUriOfRealPerson))
+			{
+				return;
+			}
+
+			var contact = ContactService.GetContactByUri(SipUriOfRealPerson);
+			if (contact != null)
+			{
+				Conversation.AddParticipant(contact);
+			}
+		}
+
+
 
 		/// <summary>
 		/// Ends the conversation if the user closes the window.
