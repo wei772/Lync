@@ -101,6 +101,39 @@ namespace Lync.Model
 			}
 		}
 
+
+		private bool _isMute;
+
+		public bool IsMute
+		{
+			get
+			{
+				return _isMute;
+			}
+			set
+			{
+				Set("IsMute", ref _isMute, value);
+			}
+		}
+
+
+		private RelayCommand _changeMuteCommand;
+
+		public RelayCommand ChangeMuteCommand
+		{
+			get
+			{
+				return _changeMuteCommand ?? (_changeMuteCommand = new RelayCommand
+					(() =>
+					{
+						ChangeMute();
+					})
+				);
+			}
+		}
+
+
+
 		private RelayCommand _startVideoCommand;
 
 		public RelayCommand StartVideoCommand
@@ -114,7 +147,6 @@ namespace Lync.Model
 					})
 				);
 			}
-
 		}
 
 
@@ -200,6 +232,20 @@ namespace Lync.Model
 
 
 		#region Modality
+
+
+		private void ChangeMute()
+		{
+			var ismute =(bool) _avModality.Properties[ModalityProperty.AVModalityAudioCaptureMute];
+			_avModality.BeginSetProperty(
+				ModalityProperty.AVModalityAudioCaptureMute
+				,!ismute
+				,(am)=> { _avModality.EndSetProperty(am); }
+				, _avModality
+				);
+		}
+
+
 		private void OnModalityEndConnect(IAsyncResult ar)
 		{
 			Object[] asyncState = (Object[])ar.AsyncState;

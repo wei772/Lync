@@ -42,6 +42,13 @@
 			Grid.ColumnSpan="2"
 			>
 			<StackPanel Orientation="Horizontal">
+
+				<Button  x:Name="changeMute"
+					Command="{Binding SkypeConversation.VideoAudioPart.ChangeMuteCommand}"
+					Content="Change Mute"	
+						 />
+				
+				
 				<Button  x:Name="startVideo"
 					Command="{Binding SkypeConversation.VideoAudioPart.StartVideoCommand}"
 					Content="Start Video"	
