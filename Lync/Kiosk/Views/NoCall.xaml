@@ -82,7 +82,6 @@
 						Command="{Binding StartConversationCommand}"
 						/>
 
-
 					<Button 
 						Content="Create Conversation"
 						Height="36"

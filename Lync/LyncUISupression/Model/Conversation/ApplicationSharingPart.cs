@@ -138,9 +138,30 @@ namespace Lync.Model
 							)
 					);
 			}
-
 		}
 
+
+		private RelayCommand _stopSharingCommand;
+
+		public RelayCommand StopSharingCommand
+		{
+			get
+			{
+				return _stopSharingCommand ??
+					(_stopSharingCommand =
+						new RelayCommand(
+							() =>
+							{
+								StopSharing();
+							}
+							)
+					);
+			}
+		}
+
+		public Action<ApplicationSharingView> ShowApplicationSharingView { get; set; }
+
+		public Action StopApplicationSharingView { get; set; }
 
 		#endregion
 
@@ -461,6 +482,10 @@ namespace Lync.Model
 					if (thisModality.View != null)
 					{
 						SharingView = thisModality.View;
+						if (ShowApplicationSharingView != null)
+						{
+							ShowApplicationSharingView(SharingView);
+						}
 						//   this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Hide sharing stage" });
 					}
 					else
@@ -475,6 +500,10 @@ namespace Lync.Model
 					{
 					}
 
+					if (StopApplicationSharingView != null)
+					{
+						StopApplicationSharingView();
+					}
 				}
 
 			});

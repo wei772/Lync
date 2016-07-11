@@ -1,4 +1,5 @@
 ﻿using BlueOfficeSkype.ViewModel;
+using Lync.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Lync.Model.Conversation.Sharing;
 
 namespace BlueOfficeSkype.View
 {
@@ -22,6 +24,7 @@ namespace BlueOfficeSkype.View
 	{
 		public ConversationViewModel ViewModel { get; set; }
 
+		private LyncConversation _lyncConversation;
 
 		public ConversationView()
 		{
@@ -30,10 +33,26 @@ namespace BlueOfficeSkype.View
 
 		public void OnNavigateTo(object args)
 		{
+			_lyncConversation = args as LyncConversation;
+			_lyncConversation.ApplicationSharingPart.ShowApplicationSharingView = ShowApplicationSharingView;
+			_lyncConversation.ApplicationSharingPart.StopApplicationSharingView = StopApplicationSharingView;
+
 			ViewModel = new ConversationViewModel();
 			DataContext = ViewModel;
 			ViewModel.OnNavigateTo(args);
+
 		}
 
+		private void StopApplicationSharingView()
+		{
+			showSharingDesktopPartView.Visibility = Visibility.Collapsed;
+			showSharingDesktopPartView.DataContext = null;
+		}
+
+		private void ShowApplicationSharingView(ApplicationSharingView obj)
+		{
+			showSharingDesktopPartView.Visibility = Visibility.Visible;
+			showSharingDesktopPartView.DataContext = ViewModel;
+		}
 	}
 }

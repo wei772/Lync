@@ -118,6 +118,23 @@ namespace Lync.Model
 		}
 
 
+		private RelayCommand _stopVideoCommand;
+
+		public RelayCommand StopVideoCommand
+		{
+			get
+			{
+				return _stopVideoCommand ?? (_stopVideoCommand = new RelayCommand
+					(() =>
+					{
+						StopVideo();
+					})
+				);
+			}
+
+		}
+
+
 
 
 		public VideoAudioPart()
