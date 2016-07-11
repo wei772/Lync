@@ -107,12 +107,14 @@ namespace Lync.Model
 		{
 			get
 			{
-				return _startVideoCommand;
+				return _startVideoCommand ?? (_startVideoCommand = new RelayCommand
+					(() =>
+					{
+						StartVideo();
+					})
+				);
 			}
-			set
-			{
-				Set("StartVideoCommand", ref _startVideoCommand, value);
-			}
+
 		}
 
 
@@ -259,7 +261,7 @@ namespace Lync.Model
 					//videoChannel.StateChanged += OnVideoChannelStateChanged;
 					//videoChannel.ActionAvailabilityChanged += OnVideoChannelActionAvailabilityChanged;
 
-					StartVideo();
+
 
 				}
 			}

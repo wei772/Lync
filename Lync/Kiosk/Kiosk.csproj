@@ -270,9 +270,9 @@
       <Project>{9960a915-a5a8-4c65-98e4-d32ce947b6fc}</Project>
       <Name>BlueOfficeLync</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LyncUISupression\Lync.csproj">
+    <ProjectReference Include="..\LyncUISupression\LyncUISupression.csproj">
       <Project>{9fb97656-d74f-4ebe-9a98-58ff3492ac93}</Project>
-      <Name>Lync</Name>
+      <Name>LyncUISupression</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

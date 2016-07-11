@@ -53,7 +53,7 @@ namespace Lync.Service
         {
             var id = meetingUrl.Split('/').Last();
 
-            return string.Format("sip:tonyxia@o365ms.com;gruu;opaque=app:conf:focus:id:{0}?",id);
+            return string.Format("sip:jrtonyxia@o365ms.com;gruu;opaque=app:conf:focus:id:{0}?",id);
         }
         public void CreateConversationUseExternalUrl(string url, LyncConversation lyncConversation)
         {

@@ -81,7 +81,14 @@
 						Height="36"
 						Command="{Binding StartConversationCommand}"
 						/>
-					
+
+
+					<Button 
+						Content="Create Conversation"
+						Height="36"
+						Command="{Binding CreateConversationCommand}"
+						/>
+
 				</StackPanel>
 
 			</Grid>

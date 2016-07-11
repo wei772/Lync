@@ -37,7 +37,7 @@
 						 />
 
 				<Button  x:Name="startSharingDesktop"
-					Command="{Binding SkypeConversation.VideoAudioPart.StartSharingDesktopCommand}"
+					Command="{Binding SkypeConversation.ApplicationSharingPart.StartSharingDesktopCommand}"
 					Content="start SharingDesktop"	
 						 />
 			</StackPanel>
