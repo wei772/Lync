@@ -101,20 +101,75 @@ namespace Lync.Model
 			}
 		}
 
+
+		private bool _isMute;
+
+		public bool IsMute
+		{
+			get
+			{
+				return _isMute;
+			}
+			set
+			{
+				Set("IsMute", ref _isMute, value);
+			}
+		}
+
+
+		private RelayCommand _changeMuteCommand;
+
+		public RelayCommand ChangeMuteCommand
+		{
+			get
+			{
+				return _changeMuteCommand ?? (_changeMuteCommand = new RelayCommand
+					(() =>
+					{
+						ChangeMute();
+					})
+				);
+			}
+		}
+
+
+
 		private RelayCommand _startVideoCommand;
 
 		public RelayCommand StartVideoCommand
 		{
 			get
 			{
-				return _startVideoCommand;
-			}
-			set
-			{
-				Set("StartVideoCommand", ref _startVideoCommand, value);
+				return _startVideoCommand ?? (_startVideoCommand = new RelayCommand
+					(() =>
+					{
+						StartVideo();
+					})
+				);
 			}
 		}
 
+
+		private RelayCommand _stopVideoCommand;
+
+		public RelayCommand StopVideoCommand
+		{
+			get
+			{
+				return _stopVideoCommand ?? (_stopVideoCommand = new RelayCommand
+					(() =>
+					{
+						StopVideo();
+					})
+				);
+			}
+
+		}
+
+
+		public Action ShowVideoPartView { get; set; }
+
+		public Action HideVideoPartView { get; set; }
 
 
 
@@ -151,6 +206,10 @@ namespace Lync.Model
 			//subscribes to the video channel state changes so that the video feed can be presented
 			_videoChannel.StateChanged += OnVideoChannelStateChanged;
 
+			//foreach (var item in Conversation.Participants)
+			//{
+			//	InitParticipant(item);
+			//}
 
 		}
 
@@ -181,6 +240,20 @@ namespace Lync.Model
 
 
 		#region Modality
+
+
+		private void ChangeMute()
+		{
+			var ismute = (bool)_avModality.Properties[ModalityProperty.AVModalityAudioCaptureMute];
+			_avModality.BeginSetProperty(
+				ModalityProperty.AVModalityAudioCaptureMute
+				, !ismute
+				, (am) => { _avModality.EndSetProperty(am); }
+				, _avModality
+				);
+		}
+
+
 		private void OnModalityEndConnect(IAsyncResult ar)
 		{
 			Object[] asyncState = (Object[])ar.AsyncState;
@@ -259,7 +332,7 @@ namespace Lync.Model
 					//videoChannel.StateChanged += OnVideoChannelStateChanged;
 					//videoChannel.ActionAvailabilityChanged += OnVideoChannelActionAvailabilityChanged;
 
-					StartVideo();
+
 
 				}
 			}
@@ -385,6 +458,7 @@ namespace Lync.Model
 				  || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 			   {
 				   LocalParticipantVideoModel.View = _videoChannel.CaptureVideoWindow;
+				   ShowVideoPartView?.Invoke();
 				   //presents the video in the panel
 				   //  ShowVideo(panelOutgoingVideo, _videoChannel.CaptureVideoWindow);
 			   }
@@ -516,9 +590,8 @@ namespace Lync.Model
 
 		#region Participant
 
-		internal override void ConversationParticipantAddedInternal(Participant participant)
+		private void InitParticipant(Participant participant)
 		{
-
 			var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
 			partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
 			partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
@@ -577,7 +650,11 @@ namespace Lync.Model
 
 
 			}
+		}
 
+		internal override void ConversationParticipantAddedInternal(Participant participant)
+		{
+			InitParticipant(participant);
 		}
 
 		internal override void ConversationParticipantRemovedInternal(Participant participant)
@@ -635,7 +712,11 @@ namespace Lync.Model
 				{
 					Repository.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow, false);
 
+					ShowVideoPartView?.Invoke();
+
 					SetParticipantVideoWindow(channel, _videoChannel.RenderVideoWindow);
+
+				
 				}
 
 

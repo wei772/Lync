@@ -25,6 +25,7 @@ namespace BlueOfficeSkype.ViewModel
 
 		public void OnNavigateTo(object args)
 		{
+			SkypeConversation = args as LyncConversation;
 		}
 	}
 }

@@ -24,22 +24,56 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
+		<Grid x:Name="contentPanel"
+			Grid.Row="0"
+			Grid.Column="0"
+			Grid.ColumnSpan="4">
 
-		<Grid x:Name="CommandPanel"
+			<local:ShowSharingDesktopPartView x:Name="showSharingDesktopPartView"
+				Visibility="Collapsed"
+				/>
+			
+			<local:VideoPartView x:Name="showVideoPartView"
+				Visibility="Collapsed"
+				/>
+
+		</Grid>
+
+		<Grid x:Name="commandPanel"
 			Grid.Row="2"
 			Grid.Column="1"
 			Grid.ColumnSpan="2"
 			>
 			<StackPanel Orientation="Horizontal">
+
+				<Button  x:Name="changeMute"
+					Command="{Binding SkypeConversation.VideoAudioPart.ChangeMuteCommand}"
+					Content="Change Mute"	
+						 />
+				
+				
 				<Button  x:Name="startVideo"
 					Command="{Binding SkypeConversation.VideoAudioPart.StartVideoCommand}"
 					Content="Start Video"	
 						 />
 
+				<Button  x:Name="stopVideo"
+					Command="{Binding SkypeConversation.VideoAudioPart.StopVideoCommand}"
+					Content="Stop Video"	
+						 />
+
+
 				<Button  x:Name="startSharingDesktop"
-					Command="{Binding SkypeConversation.VideoAudioPart.StartSharingDesktopCommand}"
+					Command="{Binding SkypeConversation.ApplicationSharingPart.StartSharingDesktopCommand}"
 					Content="start SharingDesktop"	
 						 />
+
+
+				<Button  x:Name="stopSharing"
+					Command="{Binding SkypeConversation.ApplicationSharingPart.StopSharingCommand}"
+					Content="Stop Sharing"	
+						 />
+
 			</StackPanel>
 		</Grid>
 	</Grid>

@@ -136,9 +136,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LyncUISupression\Lync.csproj">
+    <ProjectReference Include="..\LyncUISupression\LyncUISupression.csproj">
       <Project>{9fb97656-d74f-4ebe-9a98-58ff3492ac93}</Project>
-      <Name>Lync</Name>
+      <Name>LyncUISupression</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

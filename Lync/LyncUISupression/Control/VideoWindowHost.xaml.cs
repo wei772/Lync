@@ -209,8 +209,10 @@ namespace Lync.Control
 
 
 
-			//Win32 constants:                  WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS;
-			const long lEnableWindowStyles = 0x40000000L | 0x02000000L | 0x04000000L;
+
+
+			//Win32 constants:                  WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS|	WS_VISIBLE;
+			const long lEnableWindowStyles = 0x40000000L | 0x02000000L | 0x04000000L | 0x10000000L;
 			//Win32 constants:                   WS_POPUP| WS_CAPTION | WS_SIZEBOX
 			const long lDisableWindowStyles = 0x80000000 | 0x00C00000 | 0x00040000L;
 			const int OATRUE = -1;
@@ -232,16 +234,16 @@ namespace Lync.Control
 
 			try
 			{
-
 				videoWindow.Owner = videoPanel.Handle.ToInt32();
 
 				SetWindowPosition(videoWindow);
 
 				//WindowStyle的文章太多，出错就是在这里，默认0不错。
-
+				//videoWindow.WindowStyle = 0;
 				videoWindow.WindowStyle = (int)_windowStyle;
 
 				videoWindow.Visible = OATRUE;
+
 
 			}
 			catch (Exception exception)

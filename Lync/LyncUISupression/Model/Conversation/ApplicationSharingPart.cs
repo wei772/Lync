@@ -138,9 +138,30 @@ namespace Lync.Model
 							)
 					);
 			}
-
 		}
 
+
+		private RelayCommand _stopSharingCommand;
+
+		public RelayCommand StopSharingCommand
+		{
+			get
+			{
+				return _stopSharingCommand ??
+					(_stopSharingCommand =
+						new RelayCommand(
+							() =>
+							{
+								StopSharing();
+							}
+							)
+					);
+			}
+		}
+
+		public Action<ApplicationSharingView> ShowApplicationSharingView { get; set; }
+
+		public Action HideApplicationSharingView { get; set; }
 
 		#endregion
 
@@ -232,20 +253,21 @@ namespace Lync.Model
 			}
 
 			base.HandleAddedInternal();
+
+
+			//foreach (var item in Conversation.Participants)
+			//{
+			//	InitParticipant(item);
+			//}
 		}
+
 
 
 
 
 		#region Conversation event handlers
 
-
-		/// <summary>
-		/// Handles the participant added event. Registers for events on the application sharing modality for the 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		internal override void ConversationParticipantAddedInternal(Participant participant)
+		private void InitParticipant(Participant participant)
 		{
 			base.ConversationParticipantAddedInternal(participant);
 
@@ -291,7 +313,18 @@ namespace Lync.Model
 			{
 				_log.ErrorException("argument exception: ", ae);
 			}
+		}
 
+
+
+		/// <summary>
+		/// Handles the participant added event. Registers for events on the application sharing modality for the 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		internal override void ConversationParticipantAddedInternal(Participant participant)
+		{
+			InitParticipant(participant);
 		}
 
 
@@ -461,6 +494,10 @@ namespace Lync.Model
 					if (thisModality.View != null)
 					{
 						SharingView = thisModality.View;
+						if (ShowApplicationSharingView != null)
+						{
+							ShowApplicationSharingView(SharingView);
+						}
 						//   this.Invoke(new ChangeButtonTextDelegate(ChangeButtonText), new object[] { Disconnect_Button, "Hide sharing stage" });
 					}
 					else
@@ -475,6 +512,10 @@ namespace Lync.Model
 					{
 					}
 
+					if (HideApplicationSharingView != null)
+					{
+						HideApplicationSharingView();
+					}
 				}
 
 			});

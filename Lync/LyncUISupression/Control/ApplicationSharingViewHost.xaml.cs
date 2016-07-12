@@ -52,11 +52,18 @@ namespace Lync.Control
 
         private void OnApplicaionViewPanelLayout(object sender, System.Windows.Forms.LayoutEventArgs e)
         {
-            //Microsoft.Lync.Model.LyncClientException
-            if (View != null)
-            {
-                View.SyncRectangle();
-            }
+			//Microsoft.Lync.Model.LyncClientException
+			try
+			{
+				if (View != null)
+				{
+					View.SyncRectangle();
+				}
+			}
+			catch (Exception exp)
+			{
+				_log.ErrorException("OnApplicaionViewPanelLayout", exp);
+			}
         }
 
         #endregion
