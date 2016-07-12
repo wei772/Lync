@@ -601,10 +601,9 @@ namespace Lync.Model
 
 			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
 
-			if (_avModality.CanInvoke(ModalityAction.Connect))
-			{
-				Connect();
-			}
+
+
+
 
 			if (participant.IsSelf)
 			{
@@ -623,7 +622,10 @@ namespace Lync.Model
 
 			else
 			{
-
+				if (_avModality.CanInvoke(ModalityAction.Connect))
+				{
+					Connect();
+				}
 
 				var partModel = new ParticipantVideoModel()
 				{
@@ -716,7 +718,7 @@ namespace Lync.Model
 
 					SetParticipantVideoWindow(channel, _videoChannel.RenderVideoWindow);
 
-				
+
 				}
 
 
@@ -766,8 +768,8 @@ namespace Lync.Model
 			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
 			if (model != null)
 			{
-				RemoteConnectParticipantVideoModel = model;
 				model.View = window;
+				RemoteConnectParticipantVideoModel = model;
 			}
 		}
 
