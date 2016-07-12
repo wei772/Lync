@@ -158,11 +158,11 @@ namespace Lync.Control
 		{
 			var thisControl = (VideoWindowHost)sender;
 			var videoWindow = (VideoWindow)args.NewValue;
-			var oldVideo = (VideoWindow)args.OldValue;
-			if (oldVideo != null)
-			{
-				thisControl.videoPanel.Controls.Clear();
-			}
+			//var oldVideo = (VideoWindow)args.OldValue;
+			//if (oldVideo != null)
+			//{
+			//	thisControl.videoPanel.Controls.Clear();
+			//}
 
 			if (videoWindow != null)
 			{
