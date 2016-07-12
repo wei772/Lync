@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlueOfficeSkype.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,19 @@ using System.Windows.Shapes;
 namespace BlueOfficeSkype.View
 {
 	/// <summary>
-	/// Interaction logic for ShareFileConversationView.xaml
+	/// Interaction logic for VideoConversation.xaml
 	/// </summary>
-	public partial class ShareFileConversationView : UserControl
+	public partial class VideoPartView : UserControl
 	{
-		public ShareFileConversationView()
+		public ConversationViewModel ViewModel { get; set; }
+
+
+		public VideoPartView()
 		{
 			InitializeComponent();
 		}
+
+
+
 	}
 }

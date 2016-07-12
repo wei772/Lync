@@ -43,41 +43,55 @@ namespace Lync.Service
 		}
 
 
-        private ConversationService()
+		private ConversationService()
 		{
 			_lyncService = LyncService.Instance;
 
 		}
 
-        private string GetConferenceUrl(string meetingUrl)
-        {
-            var id = meetingUrl.Split('/').Last();
+		private string GetConferenceUrl(string meetingUrl)
+		{
+			var id = meetingUrl.Split('/').Last();
 
-            return string.Format("sip:tonyxia@o365ms.com;gruu;opaque=app:conf:focus:id:{0}?",id);
-        }
-        public void CreateConversationUseExternalUrl(string url, LyncConversation lyncConversation)
-        {
-       
-            if (_currentLyncConversation != null)
-            {
-                _currentLyncConversation.Close();
-            }
-            _currentLyncConversation = lyncConversation;
+			return string.Format("sip:jrtonyxia@o365ms.com;gruu;opaque=app:conf:focus:id:{0}?", id);
+		}
+		public void CreateConversationUseExternalUrl(string url, LyncConversation lyncConversation)
+		{
 
-            ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
-            ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
-            _currentLyncConversation = lyncConversation;
+			if (_currentLyncConversation != null)
+			{
+				_currentLyncConversation.Close();
+			}
+			_currentLyncConversation = lyncConversation;
 
-            var conferUrl = GetConferenceUrl(url);
+			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
+			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
+			_currentLyncConversation = lyncConversation;
 
-            _log.Info("ConferenceUrl:{0}  ExternalUrl:{1}", conferUrl,url);
+			var conferUrl = GetConferenceUrl(url);
 
-            var conversation = ConversationManager.JoinConference(conferUrl);
-            conversation.StateChanged += OnConversationStateChanged;
-        }
+			_log.Info("ConferenceUrl:{0}  ExternalUrl:{1}", conferUrl, url);
 
 
-        internal void AddConversation(LyncConversation lyncConversation)
+			var existConversations = ConversationManager.Conversations;
+
+			foreach (var existConversation in existConversations)
+			{
+				_log.Debug((string)existConversation.Properties[ConversationProperty.ConferencingUri]);
+				if ((string)existConversation.Properties[ConversationProperty.ConferencingUri] + "?" == conferUrl)
+				{
+					existConversation.End();
+				}
+			}
+
+			var conversation = ConversationManager.JoinConference(conferUrl);
+
+
+			conversation.StateChanged += OnConversationStateChanged;
+		}
+
+
+		public void AddConversation(LyncConversation lyncConversation)
 		{
 			if (_currentLyncConversation != null)
 			{
@@ -88,10 +102,10 @@ namespace Lync.Service
 			ConversationManager.ConversationAdded += OnConversationManagerConversationAdded;
 			ConversationManager.ConversationRemoved += OnConversationManagerConversationRemoved;
 
-            var conversation = ConversationManager.AddConversation();
-            conversation.StateChanged += OnConversationStateChanged;
-       
-        }
+			var conversation = ConversationManager.AddConversation();
+			conversation.StateChanged += OnConversationStateChanged;
+
+		}
 
 		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
 		{
@@ -105,11 +119,11 @@ namespace Lync.Service
 		{
 			if (_currentLyncConversation != null)
 			{
-			//	_currentLyncConversation.Close();
+				//	_currentLyncConversation.Close();
 			}
 		}
 
-		private void OnConversationManagerConversationAdded(object sender, ConversationManagerEventArgs e)
+		private void ConversationManagerConversationAdded(Conversation newConversation)
 		{
 			Boolean addedByThisProcess = true;
 
@@ -124,11 +138,11 @@ namespace Lync.Service
 				_log.Error("ConversationAdded", ex);
 			}
 
-			var conversation = e.Conversation;
+			var conversation = newConversation;
 			if (_currentLyncConversation == null)
 			{
 				addedByThisProcess = false;
-				_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
+				//	_currentLyncConversation = ConversationFactory.CreateLyncConversation(conversation);
 			}
 
 			_log.Debug("OnConversationManagerConversationAdded  addedByThisProcess:{0}", addedByThisProcess);
@@ -137,12 +151,17 @@ namespace Lync.Service
 			{
 				_currentLyncConversation.Conversation = conversation;
 				_currentLyncConversation.HandleAdded();
+
 			}
 			else
 			{
 				_log.Debug("OnConversationManagerConversationAdded  none conversationType");
 			}
+		}
 
+		private void OnConversationManagerConversationAdded(object sender, ConversationManagerEventArgs e)
+		{
+			ConversationManagerConversationAdded(e.Conversation);
 		}
 
 		public void Close()

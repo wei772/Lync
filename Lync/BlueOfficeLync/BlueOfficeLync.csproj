@@ -95,24 +95,16 @@
     <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BlueOfficeSkypeService.cs" />
-    <Compile Include="ViewModel\Conversation\AudioConversationViewModel.cs" />
-    <Compile Include="ViewModel\Conversation\ConversationViewModelBase.cs" />
-    <Compile Include="ViewModel\Conversation\ConversationViewModelFactory.cs" />
-    <Compile Include="ViewModel\Conversation\ShareDesktopConversationViewModel.cs" />
-    <Compile Include="ViewModel\Conversation\ShareFileConversationViewModel.cs" />
-    <Compile Include="ViewModel\Conversation\VideoConversationViewModel.cs" />
+    <Compile Include="ViewModel\ConversationViewModel.cs" />
     <Compile Include="ViewModel\ParticipantViewModel.cs" />
-    <Compile Include="View\Conversation\AudioConversationView.xaml.cs">
-      <DependentUpon>AudioConversationView.xaml</DependentUpon>
+    <Compile Include="View\Conversation\ShowSharingDesktopPartView.xaml.cs">
+      <DependentUpon>ShowSharingDesktopPartView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Conversation\ShareDesktopConversationView.xaml.cs">
-      <DependentUpon>ShareDesktopConversationView.xaml</DependentUpon>
+    <Compile Include="View\Conversation\ConversationView.xaml.cs">
+      <DependentUpon>ConversationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Conversation\ShareFileConversationView.xaml.cs">
-      <DependentUpon>ShareFileConversationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Conversation\VideoConversationView.xaml.cs">
-      <DependentUpon>VideoConversationView.xaml</DependentUpon>
+    <Compile Include="View\Conversation\VideoPartView.xaml.cs">
+      <DependentUpon>VideoPartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VideoParticipantView.xaml.cs">
       <DependentUpon>VideoParticipantView.xaml</DependentUpon>
@@ -122,19 +114,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\Conversation\AudioConversationView.xaml">
+    <Page Include="View\Conversation\ShowSharingDesktopPartView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Conversation\ShareDesktopConversationView.xaml">
+    <Page Include="View\Conversation\ConversationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Conversation\ShareFileConversationView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Conversation\VideoConversationView.xaml">
+    <Page Include="View\Conversation\VideoPartView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -148,9 +136,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LyncUISupression\Lync.csproj">
+    <ProjectReference Include="..\LyncUISupression\LyncUISupression.csproj">
       <Project>{9fb97656-d74f-4ebe-9a98-58ff3492ac93}</Project>
-      <Name>Lync</Name>
+      <Name>LyncUISupression</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

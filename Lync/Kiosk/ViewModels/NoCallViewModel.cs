@@ -26,11 +26,11 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		#region Fields
 
 
-		private bool subscribingToInformationUpdates = false;
+	
 
 		private string SipUriOfRealPerson = Properties.Settings.Default.sipEmailAddress;
 
-		private VideoAudioConversation _audioConversation;
+
 
 		#endregion
 
@@ -115,87 +115,45 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		#region Commands
 
 
-		private Command _startAudioCommand;
+		private Command _startConversationCommand;
 
-		public ICommand StartAudioCommand
+		public ICommand StartConversationCommand
 		{
 			get
 			{
-				if (this._startAudioCommand == null)
-					this._startAudioCommand = new Command { Execute = StartAudio };
-				return this._startAudioCommand;
-			}
-		}
-
-
-		private Command _startVideoCommand;
-
-		public ICommand StartVideoCommand
-		{
-			get
-			{
-				if (this._startVideoCommand == null)
-					this._startVideoCommand = new Command { Execute = StartVideo };
-				return this._startVideoCommand;
+				if (_startConversationCommand == null)
+					_startConversationCommand = new Command { Execute = StartConversation };
+				return _startConversationCommand;
 			}
 		}
 
 
 
-		private Command _shareResourceCommand;
+		private Command _createConversationCommand;
 
-		public ICommand ShareResourceCommand
+		public ICommand CreateConversationCommand
 		{
 			get
 			{
-				if (this._shareResourceCommand == null)
-					this._shareResourceCommand = new Command { Execute = ShareResource };
-				return this._shareResourceCommand;
-			}
-		}
-
-
-		private Command _sharePPTCommand;
-
-		public ICommand SharePPTCommand
-		{
-			get
-			{
-				if (this._sharePPTCommand == null)
-					this._sharePPTCommand = new Command { Execute = SharePPT };
-				return this._sharePPTCommand;
+				if (_createConversationCommand == null)
+					_createConversationCommand = new Command { Execute = CreateConversation };
+				return _createConversationCommand;
 			}
 		}
 
 
 
-		private Command _joinVideoCommand;
+		private Command _joinConversationCommand;
 
-		public ICommand JoinVideoCommand
+		public ICommand JoinConversationCommand
 		{
 			get
 			{
-				if (this._joinVideoCommand == null)
-					this._joinVideoCommand = new Command { Execute = JoinVideo };
-				return this._joinVideoCommand;
+				if (_joinConversationCommand == null)
+					_joinConversationCommand = new Command { Execute = JoinConversation };
+				return _joinConversationCommand;
 			}
 		}
-
-
-		private Command _joinShareViewCommand;
-
-		public ICommand JoinShareViewCommand
-		{
-			get
-			{
-				if (this._joinShareViewCommand == null)
-					this._joinShareViewCommand = new Command { Execute = JoinShareView };
-				return this._joinShareViewCommand;
-			}
-		}
-
-
-
 
 		#endregion
 
@@ -206,105 +164,18 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		}
 
 
-		private void StartAudio(object obj)
-		{
-
-			var service = new BlueOfficeSkypeService();
-			service.GetSkypeMeeting(StartAudioSkypeMeetingHander);
-
-			//var audio = new AudioConversation();
-			//audio.Init(SipUriOfRealPerson);
-			//audio.CreateConversation();
-
-			//var share = new ShareResourceConversation();
-			//share.Init(SipUriOfRealPerson);
-			//share.CreateConversation();
-		}
-
-		private void StartAudioSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
-		{
-			//var audio = new AudioConversation();
-			//audio.Init(SipUriOfRealPerson);
-			//audio.ExternalId = result.TalkId;
-
-
-			var share = new VideoAudioConversation();
-			share.Type = ConversationType.Audio;
-			// share.Init(SipUriOfRealPerson);
-			share.ExternalId = result.TalkId;
-
-			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
-		}
-
-
-		private void StartVideo(object obj)
+		private void StartConversation(object obj)
 		{
 			var service = new BlueOfficeSkypeService();
-			service.GetSkypeMeeting(StartVideoSkypeMeetingHander);
+			service.GetSkypeMeeting(StartSkypeMeetingHander);
 		}
 
-		private void StartVideoSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
+		private void StartSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
 		{
-			var share = new VideoAudioConversation();
-			share.Type = ConversationType.Video;
-			// share.Init(SipUriOfRealPerson);
-			share.ExternalId = result.TalkId;
-
-			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
-
-			var videoView = new VideoConversationView();
-			videoView.OnNavigateTo(share);
-			var window = new Window();
-			window.Content = videoView;
-			window.Show();
-		}
-
-		private void ShareResource(object obj)
-		{
-			var service = new BlueOfficeSkypeService();
-			service.GetSkypeMeeting(ShareResourceSkypeMeetingHander);
-		}
-
-		private void ShareResourceSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
-		{
-			var share = new ApplicationSharingConversation();
-			share.ExternalId = result.TalkId;
-
-			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
-
-			//var shareView = new ShareDesktopConversationView();
-			//shareView.OnNavigateTo(share);
-			//var window = new Window();
-			//window.Content = shareView;
-			//window.Show();
-
-		}
-
-
-		private void SharePPT(object obj)
-		{
-			var service = new BlueOfficeSkypeService();
-			service.GetSkypeMeeting(SharePPTSkypeMeetingHander);
-		}
-
-		private void SharePPTSkypeMeetingHander(bool sus, GetSkypeMeetingResult result)
-		{
-			var share = new ContentSharingConversation();
+			var share = new LyncConversation();
 			share.ExternalId = result.TalkId;
 			ConversationService.Instance.CreateConversationUseExternalUrl(result.Url, share);
-		}
-
-
-		private void JoinVideo(object obj)
-		{
-			var share = new VideoAudioConversation();
-			share.Type = ConversationType.Video;
-			// share.Init(SipUriOfRealPerson);
-			//share.ExternalId = result.TalkId;
-
-			ConversationService.Instance.CreateConversationUseExternalUrl(MeetUrl, share);
-
-			var videoView = new VideoConversationView();
+			var videoView = new ConversationView();
 			videoView.OnNavigateTo(share);
 			var window = new Window();
 			window.Content = videoView;
@@ -312,22 +183,31 @@ namespace SuperSimpleLyncKiosk.ViewModels
 		}
 
 
-		private void JoinShareView(object obj)
+		private void CreateConversation(object obj)
 		{
-			var share = new ApplicationSharingConversation();
+			var share = new LyncConversation();
+			share.SipUriOfRealPerson = SipUriOfRealPerson;
+			ConversationService.Instance.AddConversation(share);
+			var videoView = new ConversationView();
+			videoView.OnNavigateTo(share);
+			var window = new Window();
+			window.Content = videoView;
+			window.Show();
+		}
+
+
+		private void JoinConversation(object obj)
+		{
+			var share = new LyncConversation();
 
 			ConversationService.Instance.CreateConversationUseExternalUrl(MeetUrl, share);
-
-			var shareView = new ShareDesktopConversationView();
-			shareView.OnNavigateTo(share);
+			var videoView = new ConversationView();
+			videoView.OnNavigateTo(share);
 			var window = new Window();
-			window.Content = shareView;
+			window.Content = videoView;
 			window.Show();
 		}
 
 	}
-
-
-
 
 }

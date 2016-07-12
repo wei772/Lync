@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BlueOfficeSkype.ViewModel
 {
-	public class ConversationViewModelBase : ObservableObject
+	public class ConversationViewModel : ObservableObject
 	{
 		private LyncConversation _skypeConversation;
 
@@ -21,6 +21,11 @@ namespace BlueOfficeSkype.ViewModel
 			{
 				Set("SkypeConversation", ref _skypeConversation, value);
 			}
+		}
+
+		public void OnNavigateTo(object args)
+		{
+			SkypeConversation = args as LyncConversation;
 		}
 	}
 }

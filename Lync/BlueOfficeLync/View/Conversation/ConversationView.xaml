@@ -1,0 +1,80 @@
+﻿<UserControl
+	x:Class="BlueOfficeSkype.View.ConversationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:BlueOfficeSkype.View"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="300">
+
+	<UserControl.Resources>
+
+	</UserControl.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid x:Name="contentPanel"
+			Grid.Row="0"
+			Grid.Column="0"
+			Grid.ColumnSpan="4">
+
+			<local:ShowSharingDesktopPartView x:Name="showSharingDesktopPartView"
+				Visibility="Collapsed"
+				/>
+			
+			<local:VideoPartView x:Name="showVideoPartView"
+				Visibility="Collapsed"
+				/>
+
+		</Grid>
+
+		<Grid x:Name="commandPanel"
+			Grid.Row="2"
+			Grid.Column="1"
+			Grid.ColumnSpan="2"
+			>
+			<StackPanel Orientation="Horizontal">
+
+				<Button  x:Name="changeMute"
+					Command="{Binding SkypeConversation.VideoAudioPart.ChangeMuteCommand}"
+					Content="Change Mute"	
+						 />
+				
+				
+				<Button  x:Name="startVideo"
+					Command="{Binding SkypeConversation.VideoAudioPart.StartVideoCommand}"
+					Content="Start Video"	
+						 />
+
+				<Button  x:Name="stopVideo"
+					Command="{Binding SkypeConversation.VideoAudioPart.StopVideoCommand}"
+					Content="Stop Video"	
+						 />
+
+
+				<Button  x:Name="startSharingDesktop"
+					Command="{Binding SkypeConversation.ApplicationSharingPart.StartSharingDesktopCommand}"
+					Content="start SharingDesktop"	
+						 />
+
+
+				<Button  x:Name="stopSharing"
+					Command="{Binding SkypeConversation.ApplicationSharingPart.StopSharingCommand}"
+					Content="Stop Sharing"	
+						 />
+
+			</StackPanel>
+		</Grid>
+	</Grid>
+</UserControl>
