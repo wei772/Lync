@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Lync.Model.Conversation;
+using BlueOfficeSkype.Model;
 
 namespace BlueOfficeSkype.ViewModel
 {
@@ -32,7 +33,7 @@ namespace BlueOfficeSkype.ViewModel
 
 		private ParticipantItem CreateParticipantModel(Participant arg)
 		{
-			var part = new ParticipantViewModel();
+			var part = new ParticipantModel();
 			part.Participant = arg;
 			return part;
 		}

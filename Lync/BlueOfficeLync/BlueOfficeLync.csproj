@@ -91,12 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Service\GetSkypeMeetingResult.cs" />
-    <Compile Include="Model\SkypeConversationModel.cs" />
-    <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BlueOfficeSkypeService.cs" />
     <Compile Include="ViewModel\ConversationViewModel.cs" />
-    <Compile Include="ViewModel\ParticipantViewModel.cs" />
+    <Compile Include="Model\ParticipantModel.cs" />
     <Compile Include="View\Conversation\ShowSharingDesktopPartView.xaml.cs">
       <DependentUpon>ShowSharingDesktopPartView.xaml</DependentUpon>
     </Compile>
