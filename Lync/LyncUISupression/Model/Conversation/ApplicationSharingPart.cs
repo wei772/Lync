@@ -43,17 +43,6 @@ namespace Lync.Model
 		Contact _resourceControllingContact;
 
 		/// <summary>
-		/// Dictionary of all contacts selected from the multi-select enabled contact list on UI
-		/// </summary>
-		Dictionary<string, Contact> _selectedContacts = new Dictionary<string, Contact>();
-
-		/// <summary>
-		/// Collection of all participants application sharing modalities, keyed by Contact.Uri.
-		/// See _controllingContact class field...
-		/// </summary>
-		Dictionary<string, ApplicationSharingModality> _participantSharingModalities = new Dictionary<string, ApplicationSharingModality>();
-
-		/// <summary>
 		/// The Application sharing modality of the conversation itself
 		/// </summary>
 		ApplicationSharingModality _sharingModality;
@@ -186,20 +175,9 @@ namespace Lync.Model
 
 			}
 
-			//Unregister for the application sharing events on each and every participant in the terminated 
-			//conversation
-			foreach (string contactUri in _selectedContacts.Keys)
-			{
-				if (_participantSharingModalities.ContainsKey(contactUri))
-				{
-					ApplicationSharingModality participantSharingModality = (ApplicationSharingModality)_participantSharingModalities[contactUri];
-					participantSharingModality.ActionAvailabilityChanged -= OnSharingModalityActionAvailabilityChanged;
-				}
-			}
 
 			_resourceControllingContact = null;
 			_sharingModality = null;
-			_participantSharingModalities.Clear();
 
 		}
 
@@ -272,7 +250,8 @@ namespace Lync.Model
 			base.ConversationParticipantAddedInternal(participant);
 
 			ApplicationSharingModality participantSharingModality = (ApplicationSharingModality)participant.Participant.Modalities[ModalityTypes.ApplicationSharing];
-			_participantSharingModalities.Add(participant.Participant.Contact.Uri, participantSharingModality);
+
+			participant.ApplicationSharingModality = participantSharingModality;
 
 			//register for important events on the application sharing modality of the new participant.
 			participantSharingModality.ActionAvailabilityChanged += OnParticipantSharingModalityActionAvailabilityChanged;
@@ -338,13 +317,11 @@ namespace Lync.Model
 		{
 
 			//get the application sharing modality of the removed participant out of the class modalty dicitonary
-			ApplicationSharingModality removedModality = _participantSharingModalities[participant.Participant.Contact.Uri];
+			ApplicationSharingModality removedModality = participant.ApplicationSharingModality;
 
 			//Un-register for modality events on this participant's application sharing modality.
 			removedModality.ActionAvailabilityChanged -= OnSharingModalityActionAvailabilityChanged;
 
-			//Remove the modality from the dictionary.
-			_participantSharingModalities.Remove(participant.Participant.Contact.Uri);
 		}
 		#endregion
 
@@ -652,7 +629,7 @@ namespace Lync.Model
 
 			//_selectedContact is set to the Contact object of the participant who requested control of the resource. 
 			//see the _sharingModality_ControlRequestReceived method in the application sharing modality event handlers region.
-			ApplicationSharingModality sharingModality = (ApplicationSharingModality)_participantSharingModalities[_resourceControllingContact.Uri];
+			ApplicationSharingModality sharingModality = ParticipantCollection.GetItem(_resourceControllingContact.Uri).ApplicationSharingModality;
 
 			//If the requesting participant application sharing modality is available and the AcceptSharingControlRequest action can be invoked
 			if (sharingModality != null && sharingModality.CanInvoke(ModalityAction.AcceptSharingControlRequest))
@@ -673,7 +650,7 @@ namespace Lync.Model
 		{
 			//_selectedContact is set to the Contact object of the participant who requested control of the resource. 
 			//see the _sharingModality_ControlRequestReceived method in the application sharing modality event handlers region.
-			ApplicationSharingModality sharingModality = (ApplicationSharingModality)_participantSharingModalities[_resourceControllingContact.Uri];
+			ApplicationSharingModality sharingModality = ParticipantCollection.GetItem(_resourceControllingContact.Uri).ApplicationSharingModality;
 			if (sharingModality != null && sharingModality.CanInvoke(ModalityAction.DeclineSharingControlRequest))
 			{
 				sharingModality.BeginDeclineControlRequest((ar) => { sharingModality.EndDeclineControlRequest(ar); }, null);
@@ -694,7 +671,7 @@ namespace Lync.Model
 			//Get the sharing modality of the participant which the local user has selected to control the locally owned resource.
 			try
 			{
-				ApplicationSharingModality sharingModality = (ApplicationSharingModality)_participantSharingModalities["TODO"];
+				ApplicationSharingModality sharingModality = (ApplicationSharingModality)ParticipantCollection.GetItem("TODO").ApplicationSharingModality;
 
 				//If the application sharing modality is available and the resource can still be granted then grant
 				//control of the resource.
@@ -774,7 +751,7 @@ namespace Lync.Model
 			{
 				return;
 			}
-			ApplicationSharingModality sharingModality = (ApplicationSharingModality)_participantSharingModalities[_resourceControllingContact.Uri];
+			ApplicationSharingModality sharingModality = ParticipantCollection.GetItem(_resourceControllingContact.Uri).ApplicationSharingModality;
 			if (sharingModality != null && sharingModality.CanInvoke(ModalityAction.RevokeSharingControl))
 			{
 				sharingModality.BeginRevokeControl((ar) =>

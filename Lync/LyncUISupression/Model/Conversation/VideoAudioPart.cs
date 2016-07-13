@@ -86,21 +86,6 @@ namespace Lync.Model
 		}
 
 
-		private bool _isMute;
-
-		public bool IsMute
-		{
-			get
-			{
-				return _isMute;
-			}
-			set
-			{
-				Set("IsMute", ref _isMute, value);
-			}
-		}
-
-
 		private RelayCommand _changeMuteCommand;
 
 		public RelayCommand ChangeMuteCommand

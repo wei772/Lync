@@ -7,5 +7,24 @@
     xmlns:local="clr-namespace:BlueOfficeSkype.View"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
+	<UserControl.Resources>
+		<DataTemplate x:Key="ParticipantDataTemplate">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding DisplayName}"/>
+				<TextBlock Text=" IsMute: "/>
+				<TextBlock Text="{Binding IsMute}"/>
+				<TextBlock Text=" IsPresenter: "/>
+				<TextBlock Text="{Binding IsPresenter}"/>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.Resources>
 
+	<Grid>
+		<ItemsControl
+			ItemsSource="{Binding SkypeConversation.ParticipantCollection.ParticipantItems}"
+			ItemTemplate="{StaticResource ParticipantDataTemplate}"
+			>
+
+		</ItemsControl>
+	</Grid>
 </UserControl>

@@ -102,5 +102,15 @@ namespace Lync.Model
 			}
 			return item;
 		}
+
+		internal ParticipantItem GetItem(string id)
+		{
+			var item = ParticipantItems.Where(p => p.Id == id).SingleOrDefault();
+			if (item == null)
+			{
+				return null;
+			}
+			return item;
+		}
 	}
 }
