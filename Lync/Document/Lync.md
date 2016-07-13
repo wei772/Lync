@@ -25,3 +25,6 @@ that has no federation relationship with the actual conference server.
 5. Video是否支持多个participate? 目前看是不支持的。
 
 6. 需要安装Skype for bussiness 2016，才能正常使用分享桌面的功能。
+
+
+7. 显示RenderWideoWindow的怪问题！难道是手机能显示PC Video,PC 才能正常显示手机的 Video。

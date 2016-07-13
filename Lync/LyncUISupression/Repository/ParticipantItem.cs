@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lync.Model
+namespace Lync.Repository
 {
-	public class ParticipantVideoModel : ObservableObject
+	public class ParticipantItem : ObservableObject
 	{
 		public string Id { get; set; }
 
@@ -63,6 +63,21 @@ namespace Lync.Model
 		public int VideoChannelKey { get; set; }
 
 		public Participant Participant { get; set; }
+
+
+		public VideoWindow CaptureVideoWindow { get; set; }
+
+		public int CaptureVideoWindowOriginWidth { get; set; }
+
+		public int CaptureVideoWindowOriginHeight { get; set; }
+
+
+		public VideoWindow RenderVideoWindow { get; set; }
+
+		public int RenderVideoWindowOriginWidth { get; set; }
+
+		public int RenderVideoWindowOriginHeight { get; set; }
+
 
 		public bool IsMatch(VideoChannel channel)
 		{

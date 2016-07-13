@@ -24,28 +24,13 @@ namespace Lync.Model
 		private AVModality _avModality;
 
 
-		private ObservableCollection<ParticipantVideoModel> _participantVideoModels = new ObservableCollection<ParticipantVideoModel>();
-
-		public ObservableCollection<ParticipantVideoModel> ParticipantVideoModels
-		{
-			get
-			{
-				return _participantVideoModels;
-			}
-			set
-			{
-				Set("ParticipantVideoModels", ref _participantVideoModels, value);
-			}
-		}
-
-
 
 		/// <summary>
 		/// The Application sharing modality of the local participant.
 		/// </summary>
-		private ParticipantVideoModel _localParticipantVideoModel;
+		private ParticipantItem _localParticipantVideoModel;
 
-		public ParticipantVideoModel LocalParticipantVideoModel
+		public ParticipantItem LocalParticipantVideoModel
 		{
 			get
 			{
@@ -58,9 +43,9 @@ namespace Lync.Model
 		}
 
 
-		private ParticipantVideoModel _remoteConnectParticipantVideoModel;
+		private ParticipantItem _remoteConnectParticipantVideoModel;
 
-		public ParticipantVideoModel RemoteConnectParticipantVideoModel
+		public ParticipantItem RemoteConnectParticipantVideoModel
 		{
 			get
 			{
@@ -603,13 +588,11 @@ namespace Lync.Model
 
 
 
-
-
 			if (participant.IsSelf)
 			{
 				var localpPartAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
 
-				LocalParticipantVideoModel = new ParticipantVideoModel()
+				LocalParticipantVideoModel = new ParticipantItem()
 				{
 					Modality = partAVModality,
 					Id = participant.Contact.Uri,
@@ -618,6 +601,8 @@ namespace Lync.Model
 					DisplayName = displayName,
 				};
 
+
+				Repository.AddParticipantItem(LocalParticipantVideoModel);
 			}
 
 			else
@@ -627,7 +612,8 @@ namespace Lync.Model
 					Connect();
 				}
 
-				var partModel = new ParticipantVideoModel()
+
+				var partItem = new ParticipantItem()
 				{
 					Modality = partAVModality,
 					Id = participant.Contact.Uri,
@@ -636,19 +622,7 @@ namespace Lync.Model
 					DisplayName = displayName,
 				};
 
-
-				ParticipantVideoModels.Add(partModel);
-
-				var partItem = new VideoParticipantItem()
-				{
-					Modality = partAVModality,
-					Id = participant.Contact.Uri,
-					VideoChannel = partVideoChannel,
-					Participant = participant,
-					DisplayName = displayName,
-				};
-
-				Repository.AddVideoParticipantItem(partItem);
+				Repository.AddParticipantItem(partItem);
 
 
 			}
@@ -662,7 +636,7 @@ namespace Lync.Model
 		internal override void ConversationParticipantRemovedInternal(Participant participant)
 		{
 
-			var model = ParticipantVideoModels.Where(p => p.Id == participant.Contact.Uri).SingleOrDefault();
+			var model = Repository.Remove(participant.Contact.Uri);
 			//get the application sharing modality of the removed participant out of the class modalty dicitonary
 			AVModality removedModality = model.Modality;
 
@@ -670,8 +644,6 @@ namespace Lync.Model
 			removedModality.ActionAvailabilityChanged -= OnParticipantActionAvailabilityChanged;
 			removedModality.ModalityStateChanged -= OnParticipantModalityStateChanged;
 
-			//Remove the modality from the dictionary.
-			ParticipantVideoModels.Remove(model);
 		}
 
 
@@ -765,8 +737,8 @@ namespace Lync.Model
 
 		private void SetParticipantVideoWindow(VideoChannel channel, VideoWindow window)
 		{
-			var model = ParticipantVideoModels.Where(p => p.IsMatch(channel)).SingleOrDefault();
-			if (model != null)
+			var model = Repository.GetItem(channel);
+			if (model != null&&model!=LocalParticipantVideoModel)
 			{
 				model.View = window;
 				RemoteConnectParticipantVideoModel = model;
