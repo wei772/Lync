@@ -105,6 +105,9 @@ namespace Lync.Model
 			set
 			{
 				_participant = value;
+
+				IsPresenter = _participant.Properties[ParticipantProperty.IsPresenter] != null ? (bool)_participant.Properties[ParticipantProperty.IsPresenter] : false;
+				IsMute = _participant.IsMuted;
 				Participant.IsMutedChanged += OnIsMutedChanged;
 				Participant.PropertyChanged += OnPropertyChanged;
 			}

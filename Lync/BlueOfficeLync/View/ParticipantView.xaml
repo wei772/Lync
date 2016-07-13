@@ -9,22 +9,26 @@
     d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.Resources>
 		<DataTemplate x:Key="ParticipantDataTemplate">
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="{Binding DisplayName}"/>
-				<TextBlock Text=" IsMute: "/>
-				<TextBlock Text="{Binding IsMute}"/>
-				<TextBlock Text=" IsPresenter: "/>
-				<TextBlock Text="{Binding IsPresenter}"/>
-			</StackPanel>
+			<Grid>
+				<Grid Margin="12 12 0 0">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding DisplayName}"/>
+						<TextBlock Text=" IsMute: "/>
+						<TextBlock Text="{Binding IsMute}"/>
+						<TextBlock Text=" IsPresenter: "/>
+						<TextBlock Text="{Binding IsPresenter}"/>
+					</StackPanel>
+				</Grid>
+			</Grid>
 		</DataTemplate>
 	</UserControl.Resources>
 
 	<Grid>
-		<ItemsControl
+		<ListView
 			ItemsSource="{Binding SkypeConversation.ParticipantCollection.ParticipantItems}"
 			ItemTemplate="{StaticResource ParticipantDataTemplate}"
 			>
 
-		</ItemsControl>
+		</ListView>
 	</Grid>
 </UserControl>
