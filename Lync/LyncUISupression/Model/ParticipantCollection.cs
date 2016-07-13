@@ -6,9 +6,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Lync.Repository
+namespace Lync.Model
 {
-	public class ConversationRepository : ObservableObject
+	public class ParticipantCollection : ObservableObject
 	{
 		private ObservableCollection<ParticipantItem> _participantItems;
 
@@ -24,28 +24,28 @@ namespace Lync.Repository
 			}
 		}
 
-		private static ConversationRepository _instance;
+		private static ParticipantCollection _instance;
 
-		public static ConversationRepository Instance
+		public static ParticipantCollection Instance
 		{
 			get
 			{
 				if (_instance == null)
 				{
-					_instance = new ConversationRepository();
+					_instance = new ParticipantCollection();
 				}
 				return _instance;
 			}
 		}
 
-		private ConversationRepository()
+		private ParticipantCollection()
 		{
 			ParticipantItems = new ObservableCollection<ParticipantItem>();
 		}
 
-		public void AddParticipantItem(ParticipantItem videoParticipantItem)
+		public void AddItem(ParticipantItem participantItem)
 		{
-			ParticipantItems.Add(videoParticipantItem);
+			ParticipantItems.Add(participantItem);
 		}
 
 

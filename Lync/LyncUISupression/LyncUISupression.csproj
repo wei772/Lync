@@ -116,8 +116,8 @@
     <Compile Include="Model\Conversation\LyncConversation.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\ConversationRepository.cs" />
-    <Compile Include="Repository\ParticipantItem.cs" />
+    <Compile Include="Model\ParticipantCollection.cs" />
+    <Compile Include="Model\ParticipantItem.cs" />
     <Compile Include="Service\ContactService.cs" />
     <Compile Include="Service\ConversationService.cs" />
     <Compile Include="Service\LyncService.cs" />

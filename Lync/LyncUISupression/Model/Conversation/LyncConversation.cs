@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
 using Lync.Enum;
-using Lync.Repository;
 using Lync.Service;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
@@ -27,16 +26,6 @@ namespace Lync.Model
 		public string ExternalUrl { get; set; }
 		public Guid ExternalId { get; set; }
 
-		private List<Participant> _participants;
-		public List<Participant> Participants
-		{
-			get { return _participants; }
-			set
-			{
-				Set("Participants", ref _participants, value);
-			}
-
-		}
 
 		private bool _isCanAddParticipant;
 		public bool IsCanAddParticipant
@@ -66,7 +55,18 @@ namespace Lync.Model
 			}
 		}
 
-		protected ConversationRepository Repository { get; set; }
+		private ParticipantCollection _participantCollection;
+		public ParticipantCollection ParticipantCollection
+		{
+			get
+			{
+				return _participantCollection;
+			}
+			set
+			{
+				Set("ParticipantCollection", ref _participantCollection, value);
+			}
+		}
 
 		public Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
 
@@ -102,7 +102,7 @@ namespace Lync.Model
 			}
 		}
 
-
+		public Func<Participant, ParticipantItem> CreateParticipantModel { get; set; }
 
 		#endregion
 
@@ -111,7 +111,6 @@ namespace Lync.Model
 		{
 			ContactService = ContactService.Instance;
 			ConversationService = ConversationService.Instance;
-			Participants = new List<Participant>();
 			VideoAudioPart = new VideoAudioPart();
 			ApplicationSharingPart = new ApplicationSharingPart();
 			_conversationParts.Add(VideoAudioPart);
@@ -128,14 +127,10 @@ namespace Lync.Model
 
 		public void HandleAdded()
 		{
-			Repository = ConversationRepository.Instance;
-			Repository.Clear();
+			ParticipantCollection = ParticipantCollection.Instance;
+			ParticipantCollection.Clear();
 
-			//registers for participant events
-			foreach (var participant in Conversation.Participants)
-			{
-				Participants.Add(participant);
-			}
+	
 			Conversation.ParticipantAdded += OnConversationParticipantAdded;
 			Conversation.ParticipantRemoved += OnConversationParticipantRemoved;
 			Conversation.StateChanged += OnConversationStateChanged;
@@ -225,9 +220,10 @@ namespace Lync.Model
 				(() =>
 				{
 					var newPart = e.Participant;
-					Participants.Add(newPart);
+					var newModel = CreateAndInitParticipant(newPart);
+					ParticipantCollection.AddItem(newModel);
 					_log.Debug("OnConversationParticipantAdded  uri:{0}", newPart.Contact.Uri);
-					InvokePartConversationParticipantAdded(e.Participant);
+					InvokePartConversationParticipantAdded(newModel);
 				}
 				);
 		}
@@ -238,14 +234,11 @@ namespace Lync.Model
 				(() =>
 				{
 
-					var removePart = Participants.Where(p => p.Equals(e.Participant)).SingleOrDefault();
-					if (removePart != null)
-					{
-						Participants.Remove(removePart);
-					}
+					var removePart = ParticipantCollection.Remove(e.Participant.Contact.Uri);
+
 					InvokePartConversationParticipantRemoved(removePart);
 
-					_log.Debug("OnConversationParticipantRemoved  uri:{0}", removePart.Contact.Uri);
+					_log.Debug("OnConversationParticipantRemoved  uri:{0}", removePart.Participant.Contact.Uri);
 				}
 				);
 		}
@@ -410,7 +403,7 @@ namespace Lync.Model
 			{
 				part.LyncConversation = this;
 				part.ContactService = ContactService;
-				part.Repository = Repository;
+				part.ParticipantCollection = ParticipantCollection;
 				part.Conversation = Conversation;
 			}
 		}
@@ -431,7 +424,7 @@ namespace Lync.Model
 			}
 		}
 
-		private void InvokePartConversationParticipantAdded(Participant participant)
+		private void InvokePartConversationParticipantAdded(ParticipantItem participant)
 		{
 			foreach (var part in _conversationParts)
 			{
@@ -439,7 +432,7 @@ namespace Lync.Model
 			}
 		}
 
-		private void InvokePartConversationParticipantRemoved(Participant participant)
+		private void InvokePartConversationParticipantRemoved(ParticipantItem participant)
 		{
 			foreach (var part in _conversationParts)
 			{
@@ -447,6 +440,15 @@ namespace Lync.Model
 			}
 		}
 
+		private ParticipantItem CreateAndInitParticipant(Participant participant)
+		{
+			var part = CreateParticipantModel(participant);
+			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
+			part.DisplayName = displayName;
+			part.Id = participant.Contact.Uri;
+
+			return part;
+		}
 
 		#endregion
 

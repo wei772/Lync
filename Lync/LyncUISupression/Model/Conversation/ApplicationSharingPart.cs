@@ -267,12 +267,12 @@ namespace Lync.Model
 
 		#region Conversation event handlers
 
-		private void InitParticipant(Participant participant)
+		private void InitParticipant(ParticipantItem participant)
 		{
 			base.ConversationParticipantAddedInternal(participant);
 
-			ApplicationSharingModality participantSharingModality = (ApplicationSharingModality)participant.Modalities[ModalityTypes.ApplicationSharing];
-			_participantSharingModalities.Add(participant.Contact.Uri, participantSharingModality);
+			ApplicationSharingModality participantSharingModality = (ApplicationSharingModality)participant.Participant.Modalities[ModalityTypes.ApplicationSharing];
+			_participantSharingModalities.Add(participant.Participant.Contact.Uri, participantSharingModality);
 
 			//register for important events on the application sharing modality of the new participant.
 			participantSharingModality.ActionAvailabilityChanged += OnParticipantSharingModalityActionAvailabilityChanged;
@@ -283,21 +283,21 @@ namespace Lync.Model
 			{
 
 				//Is this added participant the local user?
-				if (participant.IsSelf)
+				if (participant.Participant.IsSelf)
 				{
 					//Store the application sharing modality of the local user so that
 					//the user can request or release control of a remotely owned and shared resource.
-					_LocalParticipantSharingModality = (ApplicationSharingModality)participant.Modalities[ModalityTypes.ApplicationSharing];
+					_LocalParticipantSharingModality = (ApplicationSharingModality)participant.Participant.Modalities[ModalityTypes.ApplicationSharing];
 
 					//Enable or disable the Start Resource Sharing button according to the role of the local participant.
 					//Roles can be Presenter or Attendee.
 
-					if (participant.Properties[ParticipantProperty.IsPresenter] != null)
+					if (participant.Participant.Properties[ParticipantProperty.IsPresenter] != null)
 					{
 
 					}
 					//Register for the particpant property changed event to be notified when the role of the local user changes.
-					participant.PropertyChanged += OnParticipantPropertyChanged;
+					participant.Participant.PropertyChanged += OnParticipantPropertyChanged;
 
 
 				}
@@ -322,7 +322,7 @@ namespace Lync.Model
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		internal override void ConversationParticipantAddedInternal(Participant participant)
+		internal override void ConversationParticipantAddedInternal(ParticipantItem participant)
 		{
 			InitParticipant(participant);
 		}
@@ -334,17 +334,17 @@ namespace Lync.Model
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		internal override void ConversationParticipantRemovedInternal(Participant participant)
+		internal override void ConversationParticipantRemovedInternal(ParticipantItem participant)
 		{
 
 			//get the application sharing modality of the removed participant out of the class modalty dicitonary
-			ApplicationSharingModality removedModality = _participantSharingModalities[participant.Contact.Uri];
+			ApplicationSharingModality removedModality = _participantSharingModalities[participant.Participant.Contact.Uri];
 
 			//Un-register for modality events on this participant's application sharing modality.
 			removedModality.ActionAvailabilityChanged -= OnSharingModalityActionAvailabilityChanged;
 
 			//Remove the modality from the dictionary.
-			_participantSharingModalities.Remove(participant.Contact.Uri);
+			_participantSharingModalities.Remove(participant.Participant.Contact.Uri);
 		}
 		#endregion
 

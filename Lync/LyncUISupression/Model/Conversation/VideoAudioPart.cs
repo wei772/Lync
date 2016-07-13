@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Lync.Enum;
-using Lync.Repository;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
@@ -575,34 +574,26 @@ namespace Lync.Model
 
 		#region Participant
 
-		private void InitParticipant(Participant participant)
+		private void InitParticipant(ParticipantItem participant)
 		{
-			var partAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+			var partAVModality = (AVModality)participant.Participant.Modalities[ModalityTypes.AudioVideo];
 			partAVModality.ActionAvailabilityChanged += OnParticipantActionAvailabilityChanged;
 			partAVModality.ModalityStateChanged += OnParticipantModalityStateChanged;
 
 			var partVideoChannel = partAVModality.VideoChannel;
 			partVideoChannel.StateChanged += OnParticipantVideoChannelStateChanged;
 
-			var displayName = (string)participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
 
-
-
-			if (participant.IsSelf)
+			if (participant.Participant.IsSelf)
 			{
-				var localpPartAVModality = (AVModality)participant.Modalities[ModalityTypes.AudioVideo];
+				var localpPartAVModality = (AVModality)participant.Participant.Modalities[ModalityTypes.AudioVideo];
 
-				LocalParticipantVideoModel = new ParticipantItem()
-				{
-					Modality = partAVModality,
-					Id = participant.Contact.Uri,
-					VideoChannel = partVideoChannel,
-					Participant = participant,
-					DisplayName = displayName,
-				};
+				participant.Modality = partAVModality;
+				participant.VideoChannel = partVideoChannel;
 
 
-				Repository.AddParticipantItem(LocalParticipantVideoModel);
+				LocalParticipantVideoModel = participant;
+
 			}
 
 			else
@@ -612,33 +603,22 @@ namespace Lync.Model
 					Connect();
 				}
 
-
-				var partItem = new ParticipantItem()
-				{
-					Modality = partAVModality,
-					Id = participant.Contact.Uri,
-					VideoChannel = partVideoChannel,
-					Participant = participant,
-					DisplayName = displayName,
-				};
-
-				Repository.AddParticipantItem(partItem);
-
+				participant.Modality = partAVModality;
+				participant.VideoChannel = partVideoChannel;
 
 			}
 		}
 
-		internal override void ConversationParticipantAddedInternal(Participant participant)
+		internal override void ConversationParticipantAddedInternal(ParticipantItem participant)
 		{
 			InitParticipant(participant);
 		}
 
-		internal override void ConversationParticipantRemovedInternal(Participant participant)
+		internal override void ConversationParticipantRemovedInternal(ParticipantItem participant)
 		{
 
-			var model = Repository.Remove(participant.Contact.Uri);
 			//get the application sharing modality of the removed participant out of the class modalty dicitonary
-			AVModality removedModality = model.Modality;
+			AVModality removedModality = participant.Modality;
 
 			//Un-register for modality events on this participant's application sharing modality.
 			removedModality.ActionAvailabilityChanged -= OnParticipantActionAvailabilityChanged;
@@ -665,7 +645,7 @@ namespace Lync.Model
 				if ((e.NewState == ChannelState.Send
 				   || e.NewState == ChannelState.SendReceive) && _videoChannel.CaptureVideoWindow != null)
 				{
-					Repository.UpdateVideoWindow(channel, _videoChannel.CaptureVideoWindow, true);
+					ParticipantCollection.UpdateVideoWindow(channel, _videoChannel.CaptureVideoWindow, true);
 					//SetParticipantVideoWindow(channel, _videoChannel.CaptureVideoWindow);
 				}
 
@@ -684,7 +664,7 @@ namespace Lync.Model
 				if (
 					e.NewState == ChannelState.SendReceive && _videoChannel.RenderVideoWindow != null)
 				{
-					Repository.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow, false);
+					ParticipantCollection.UpdateVideoWindow(channel, _videoChannel.RenderVideoWindow, false);
 
 					ShowVideoPartView?.Invoke();
 
@@ -737,7 +717,7 @@ namespace Lync.Model
 
 		private void SetParticipantVideoWindow(VideoChannel channel, VideoWindow window)
 		{
-			var model = Repository.GetItem(channel);
+			var model = ParticipantCollection.GetItem(channel);
 			if (model != null&&model!=LocalParticipantVideoModel)
 			{
 				model.View = window;

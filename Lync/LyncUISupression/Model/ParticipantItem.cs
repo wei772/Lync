@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lync.Repository
+namespace Lync.Model
 {
 	public class ParticipantItem : ObservableObject
 	{
+		private ILog _log = LogManager.GetLog(typeof(ParticipantItem));
+
 		public string Id { get; set; }
 
 		private string _displayName;
@@ -62,7 +64,20 @@ namespace Lync.Repository
 
 		public int VideoChannelKey { get; set; }
 
-		public Participant Participant { get; set; }
+
+		private Participant _participant;
+		public Participant Participant
+		{
+
+			get { return _participant; }
+			set
+			{
+				_participant = value;
+				Participant.IsMutedChanged += OnIsMutedChanged;
+				Participant.PropertyChanged += OnPropertyChanged;
+			}
+		}
+
 
 
 		public VideoWindow CaptureVideoWindow { get; set; }
@@ -83,5 +98,16 @@ namespace Lync.Repository
 		{
 			return channel.GetHashCode() == VideoChannel.GetHashCode();
 		}
+
+		private void OnPropertyChanged(object sender, ParticipantPropertyChangedEventArgs e)
+		{
+			_log.Debug("OnPropertyChanged  DisplayName:{2}  Type:{0}  Value:{1}", e.Property,e.Value,DisplayName);
+		}
+
+		private void OnIsMutedChanged(object sender, MutedChangedEventArgs e)
+		{
+			_log.Debug("OnIsMutedChanged DisplayName:{1}  IsMuted:{0}  ", e.IsMuted,DisplayName);
+		}
+
 	}
 }

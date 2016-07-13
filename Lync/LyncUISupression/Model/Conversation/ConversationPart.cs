@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
-using Lync.Repository;
 using Lync.Service;
 using Microsoft.Lync.Model.Conversation;
 using System;
@@ -18,7 +17,7 @@ namespace Lync.Model
 
 		internal ContactService ContactService { get; set; }
 
-		internal ConversationRepository Repository { get; set; }
+		internal ParticipantCollection ParticipantCollection { get; set; }
 
 
 		protected Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
@@ -34,12 +33,12 @@ namespace Lync.Model
 
 		}
 
-		internal virtual void ConversationParticipantAddedInternal(Participant participant)
+		internal virtual void ConversationParticipantAddedInternal(ParticipantItem participant)
 		{
 
 		}
 
-		internal virtual void ConversationParticipantRemovedInternal(Participant participant)
+		internal virtual void ConversationParticipantRemovedInternal(ParticipantItem participant)
 		{
 
 		}
