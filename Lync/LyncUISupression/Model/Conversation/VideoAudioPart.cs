@@ -573,7 +573,7 @@ namespace Lync.Model
 			{
 				var localpPartAVModality = (AVModality)participant.Participant.Modalities[ModalityTypes.AudioVideo];
 
-				participant.Modality = partAVModality;
+				participant.AVModality = partAVModality;
 				participant.VideoChannel = partVideoChannel;
 
 
@@ -588,7 +588,7 @@ namespace Lync.Model
 					Connect();
 				}
 
-				participant.Modality = partAVModality;
+				participant.AVModality = partAVModality;
 				participant.VideoChannel = partVideoChannel;
 
 			}
@@ -603,7 +603,7 @@ namespace Lync.Model
 		{
 
 			//get the application sharing modality of the removed participant out of the class modalty dicitonary
-			AVModality removedModality = participant.Modality;
+			AVModality removedModality = participant.AVModality;
 
 			//Un-register for modality events on this participant's application sharing modality.
 			removedModality.ActionAvailabilityChanged -= OnParticipantActionAvailabilityChanged;

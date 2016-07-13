@@ -88,7 +88,7 @@ namespace Lync.Model
 		}
 
 
-		public AVModality Modality { get; set; }
+		public AVModality AVModality { get; set; }
 
 		public VideoChannel VideoChannel { get; set; }
 
