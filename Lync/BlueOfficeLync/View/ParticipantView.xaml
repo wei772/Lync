@@ -18,7 +18,7 @@
                         <MenuItem  
 							Header="移除参与人"
 							Command="{Binding 
-										Path=PlacementTarget.Tag.DataContext.RemoveParticipantCommand, 
+										Path=PlacementTarget.Tag.DataContext.SkypeConversation.RemoveParticipantCommand, 
 										RelativeSource={RelativeSource  AncestorType=ContextMenu}}"
                             CommandParameter="{Binding}"
 							/>

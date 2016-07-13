@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using Lync.Enum;
 using Lync.Service;
@@ -70,7 +71,28 @@ namespace Lync.Model
 
 		public Action<Action> RunAtUI = DispatcherHelper.CheckBeginInvokeOnUI;
 
+		private RelayCommand<ParticipantItem> _removeParticipantCommand;
 
+		public RelayCommand<ParticipantItem> RemoveParticipantCommand
+		{
+			get
+			{
+				return _removeParticipantCommand ??
+					(_removeParticipantCommand = new RelayCommand<ParticipantItem>(
+						(part) =>
+							{
+								if (part != null)
+								{
+									if (Conversation.CanInvoke(ConversationAction.RemoveParticipant))
+									{
+										Conversation.RemoveParticipant(part.Participant);
+									}
+								}
+							}
+						)
+					);
+			}
+		}
 
 		#region Part
 
@@ -130,7 +152,7 @@ namespace Lync.Model
 			ParticipantCollection = ParticipantCollection.Instance;
 			ParticipantCollection.Clear();
 
-	
+
 			Conversation.ParticipantAdded += OnConversationParticipantAdded;
 			Conversation.ParticipantRemoved += OnConversationParticipantRemoved;
 			Conversation.StateChanged += OnConversationStateChanged;

@@ -218,25 +218,7 @@ namespace Lync.Model
 			// such as Viewing->Sharing, Requesting Control->Controlling.
 			_sharingModality.ParticipationStateChanged += OnSharingModalityParticipationStateChanged;
 
-
-			if (((Modality)Conversation.Modalities[ModalityTypes.InstantMessage]).CanInvoke(ModalityAction.SendInstantMessage))
-			{
-				((InstantMessageModality)Conversation.Modalities[ModalityTypes.InstantMessage]).BeginSendMessage("hi", (ar) =>
-				{
-					if (((InstantMessageModality)Conversation.Modalities[ModalityTypes.InstantMessage]).CanInvoke(ModalityAction.SendInstantMessage))
-					{
-						((InstantMessageModality)Conversation.Modalities[ModalityTypes.InstantMessage]).EndSendMessage(ar);
-					}
-				}, null);
-			}
-
 			base.HandleAddedInternal();
-
-
-			//foreach (var item in Conversation.Participants)
-			//{
-			//	InitParticipant(item);
-			//}
 		}
 
 

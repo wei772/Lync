@@ -80,6 +80,16 @@ namespace Lync.Model
 			ParticipantItems.Clear();
 		}
 
+
+		internal ParticipantItem Remove(ParticipantItem participant)
+		{
+			ParticipantItems.Remove(participant);
+
+			return participant;
+
+		}
+
+
 		internal ParticipantItem Remove(string uri)
 		{
 			var removeItem = ParticipantItems.Where(p => p.Id == uri).SingleOrDefault();
