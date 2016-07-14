@@ -23,7 +23,15 @@
                             CommandParameter="{Binding}"
 							Visibility="{Binding CanRemovedVisible}"
 							/>
-                    </ContextMenu>
+
+						<MenuItem  
+							Header="改变静音"
+							Command="{Binding 
+										Path=PlacementTarget.Tag.DataContext.SkypeConversation.ChangeMuteCommand, 
+										RelativeSource={RelativeSource  AncestorType=ContextMenu}}"
+                            CommandParameter="{Binding}"
+							/>
+					</ContextMenu>
                 </Grid.ContextMenu>
 
                 <Grid Margin="12 12 0 0">

@@ -25,6 +25,21 @@ namespace Lync.Model
 			}
 		}
 
+
+		private ParticipantItem _currentParticipantItem;
+
+		public ParticipantItem CurrentParticipantItem
+		{
+			get
+			{
+				return _currentParticipantItem;
+			}
+			set
+			{
+				Set("CurrentParticipantItem", ref _currentParticipantItem, value);
+			}
+		}
+
 		private static ParticipantCollection _instance;
 
 		public static ParticipantCollection Instance
@@ -47,6 +62,10 @@ namespace Lync.Model
 		public void AddItem(ParticipantItem participantItem)
 		{
 			ParticipantItems.Add(participantItem);
+			if (participantItem.Participant.IsSelf)
+			{
+				CurrentParticipantItem = participantItem;
+			}
 		}
 
 

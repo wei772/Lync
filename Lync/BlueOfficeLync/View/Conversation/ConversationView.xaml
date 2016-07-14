@@ -57,7 +57,9 @@
 			<StackPanel Orientation="Horizontal">
 
 				<Button  x:Name="changeMute"
-					Command="{Binding SkypeConversation.VideoAudioPart.ChangeMuteCommand}"
+					Command="{Binding SkypeConversation.ChangeMuteCommand}"
+					CommandParameter="{Binding SkypeConversation.ParticipantCollection.CurrentParticipantItem}"		 
+				
 					Content="Change Mute"	
 						 />
 

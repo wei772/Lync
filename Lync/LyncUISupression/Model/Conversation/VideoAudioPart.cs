@@ -86,20 +86,7 @@ namespace Lync.Model
 		}
 
 
-		private RelayCommand _changeMuteCommand;
 
-		public RelayCommand ChangeMuteCommand
-		{
-			get
-			{
-				return _changeMuteCommand ?? (_changeMuteCommand = new RelayCommand
-					(() =>
-					{
-						ChangeMute();
-					})
-				);
-			}
-		}
 
 
 
@@ -211,16 +198,7 @@ namespace Lync.Model
 		#region Modality
 
 
-		private void ChangeMute()
-		{
-			var ismute = (bool)_avModality.Properties[ModalityProperty.AVModalityAudioCaptureMute];
-			_avModality.BeginSetProperty(
-				ModalityProperty.AVModalityAudioCaptureMute
-				, !ismute
-				, (am) => { _avModality.EndSetProperty(am); }
-				, _avModality
-				);
-		}
+	
 
 
 		private void OnModalityEndConnect(IAsyncResult ar)

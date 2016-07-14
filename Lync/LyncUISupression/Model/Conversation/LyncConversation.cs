@@ -5,6 +5,7 @@ using Lync.Enum;
 using Lync.Service;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
+using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -97,6 +98,22 @@ namespace Lync.Model
 					);
 			}
 		}
+
+		private RelayCommand<ParticipantItem> _changeMuteCommand;
+
+		public RelayCommand<ParticipantItem> ChangeMuteCommand
+		{
+			get
+			{
+				return _changeMuteCommand ?? (_changeMuteCommand = new RelayCommand<ParticipantItem>
+					((part) =>
+					{
+						ChangeMute(part);
+					})
+				);
+			}
+		}
+
 
 		#region Part
 
@@ -302,7 +319,11 @@ namespace Lync.Model
 
 		private void OnConversationStateChanged(object sender, ConversationStateChangedEventArgs e)
 		{
-			_log.Debug("OnConversationStateChanged  NewState:{0}", e.NewState.ToString());
+			_log.Debug
+				("OnConversationStateChanged  NewState:{0} StatusCode:{1}"
+					, e.NewState.ToString()
+					, e.StatusCode
+				);
 		}
 
 		private void OnConversationActionAvailabilityChanged(object sender, ConversationActionAvailabilityEventArgs e)
@@ -423,6 +444,36 @@ namespace Lync.Model
 					"Exception on ConferenceAccessInformation changed " + lce.Message);
 			}
 			return returnValue;
+		}
+
+
+		private void ChangeMute(ParticipantItem participantItem)
+		{
+			var participant = participantItem.Participant;
+
+			var ismute = participantItem.IsMute;
+			//avModality.BeginSetProperty(
+			//	ModalityProperty.AVModalityAudioCaptureMute
+			//	, !ismute
+			//	, (am) => { avModality.EndSetProperty(am); }
+			//	, avModality
+			//	);
+			try
+			{
+				if (participant.CanBeMuted())
+				{
+					participant.BeginSetMute(
+						!ismute
+						, (pa) => { participant.EndSetMute(pa); }
+						, participant
+						);
+				}
+			}
+			catch (Exception exp)
+			{
+				_log.ErrorException("ChangeMute", exp);
+			}
+
 		}
 
 
