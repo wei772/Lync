@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Lync.Model
 {
@@ -86,6 +87,38 @@ namespace Lync.Model
 				Set("IsPresenter", ref _isPresenter, value);
 			}
 		}
+
+
+
+		private bool _canRemoved;
+
+		public bool CanRemoved
+		{
+			get
+			{
+				return _canRemoved;
+			}
+			set
+			{
+				Set("CanRemoved", ref _canRemoved, value);
+				CanRemovedVisible =(value? Visibility.Visible : Visibility.Collapsed);
+			}
+		}
+
+		private Visibility _canRemovedVisible;
+
+		public Visibility CanRemovedVisible
+		{
+			get
+			{
+				return _canRemovedVisible;
+			}
+			set
+			{
+				Set("CanRemovedVisible", ref _canRemovedVisible, value);
+			}
+		}
+
 
 
 		public AVModality AVModality { get; set; }

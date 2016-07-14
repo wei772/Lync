@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,28 @@ namespace Lync.Model
 				}
 			}
 		}
+
+
+		public void UpdateCanRemoveParticipant(bool canRemoveParticipant)
+		{
+			foreach (var participant in ParticipantItems)
+			{
+				participant.CanRemoved = canRemoveParticipant;
+
+				if (participant.Participant.IsSelf)
+				{
+					participant.CanRemoved = false;
+				}
+				//else if (participant.Participant.Properties[ParticipantProperty.IsLeader] != null
+				//			&& (bool)participant.Participant.Properties[ParticipantProperty.IsLeader]
+				//		)
+				//{
+				//	participant.CanRemoved = false;
+				//}
+			}
+
+		}
+
 
 		public void Clear()
 		{

@@ -83,9 +83,13 @@ namespace Lync.Model
 							{
 								if (part != null)
 								{
-									if (Conversation.CanInvoke(ConversationAction.RemoveParticipant))
+									try
 									{
 										Conversation.RemoveParticipant(part.Participant);
+									}
+									catch (Exception exp)
+									{
+										_log.ErrorException("Remove Participant", exp);
 									}
 								}
 							}
@@ -315,10 +319,15 @@ namespace Lync.Model
 								break;
 
 							case ConversationAction.RemoveParticipant:
-								IsCanRemoveParticipant = e.IsAvailable;
+								ParticipantCollection.UpdateCanRemoveParticipant(Conversation.CanInvoke(ConversationAction.RemoveParticipant));
+								_log.Debug("OnConversationActionAvailabilityChanged  CanRemove:{0}"
+									, Conversation.CanInvoke(ConversationAction.RemoveParticipant));
 								break;
 						}
-						_log.Debug("OnConversationActionAvailabilityChanged  Action: {0}", e.Action.ToString());
+						_log.Debug("OnConversationActionAvailabilityChanged  Send:{2} Action: {0}  IsAvailable:{1} "
+							, e.Action.ToString()
+							, e.IsAvailable
+							, sender);
 					}
 			);
 		}

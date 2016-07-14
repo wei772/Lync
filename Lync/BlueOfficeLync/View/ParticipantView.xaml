@@ -21,6 +21,7 @@
 										Path=PlacementTarget.Tag.DataContext.SkypeConversation.RemoveParticipantCommand, 
 										RelativeSource={RelativeSource  AncestorType=ContextMenu}}"
                             CommandParameter="{Binding}"
+							Visibility="{Binding CanRemovedVisible}"
 							/>
                     </ContextMenu>
                 </Grid.ContextMenu>
